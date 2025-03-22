@@ -131,9 +131,9 @@ start_date, end_date =  get_next_weekend()
 for key in climbing_locations.keys():
     location = climbing_locations[key]['location']
     min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
-    climbing_locations[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))
-    climbing_locations[key]['Rain']=str(int(rain))
-    climbing_locations[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))
+    climbing_locations[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
+    climbing_locations[key]['Rain']=str(int(rain))+" mm"
+    climbing_locations[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
     
 def get_duration(location):
     zagreb = "15.957378573800682,45.789809813280925"
@@ -187,5 +187,5 @@ def createTable():
 createTable()
 
 html = soup.prettify("utf-8")
-with open("index_test.html", "wb") as file:
+with open("index.html", "wb") as file:
     file.write(html)
