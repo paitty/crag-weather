@@ -48,8 +48,8 @@ def get_next_weekend():
     """
     d = now
     t = timedelta((7 + 5 - d.weekday()) % 7)
-    start = (d+t).replace(hour=7, minute=0, second=0, microsecond=0)
-    end = start+timedelta(hours=36)
+    start = (d+t).replace(hour=0, minute=0, second=0, microsecond=0)
+    end = start+timedelta(hours=48)
     return start, end
 
 start, end = get_next_weekend()
@@ -115,7 +115,11 @@ def add_weather(location, start_date, end_date):
         if datetime_object.replace(tzinfo=None)>start_date:
             temperature = weather['properties']['timeseries'][i]['data']['instant']['details']['air_temperature']
             wind = weather['properties']['timeseries'][i]['data']['instant']['details']['wind_speed']
-            add_rain= weather['properties']['timeseries'][i]['data']['next_1_hours']['details']['precipitation_amount']
+            if 'next_1_hours' in weather['properties']['timeseries'][i]['data']:
+                add_rain= weather['properties']['timeseries'][i]['data']['next_1_hours']['details']['precipitation_amount']
+            else:
+                #TODO check if we dont miss anything like that
+                add_rain= weather['properties']['timeseries'][i]['data']['next_6_hours']['details']['precipitation_amount']
             min_temp = min(min_temp, temperature)
             max_temp = max(max_temp, temperature)
             min_wind = min(min_wind, wind)
@@ -127,20 +131,21 @@ def add_weather(location, start_date, end_date):
     return min_temp, max_temp, rain, min_wind, max_wind
 
 start_date, end_date =  get_next_weekend()
-
+climbing_weather = {}
 for key in climbing_locations.keys():
     location = climbing_locations[key]['location']
     min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
-    climbing_locations[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
-    climbing_locations[key]['Rain']=str(int(rain))+" mm"
-    climbing_locations[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
+    climbing_weather[key]={}
+    climbing_weather[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
+    climbing_weather[key]['Rain']=str(int(rain))+" mm"
+    climbing_weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
     
 def get_duration(location):
     zagreb = "15.957378573800682,45.789809813280925"
     destination = str(location[1])+","+str(location[0])
     url = "http://router.project-osrm.org/table/v1/driving/"+zagreb+";"+destination
     r= requests.get(url)
-    duration = str(int(r.json()['durations'][0][1]/60))
+    duration = r.json()['durations'][0][1]/60
     return duration
 
 def createTable():
@@ -179,9 +184,17 @@ def createTable():
                 new_tag.append(new_link)
             elif col == 'Distance':
                 #TODO find better way to store distance
-                new_tag.string=get_duration(climbing_locations[key]['location'])+" min"
+                if 'Distance' in climbing_locations[key].keys():
+                    distance=climbing_locations[key]['Distance']
+                else:
+                    distance = get_duration(climbing_locations[key]['location'])
+                    climbing_locations[key]['Distance'] = distance
+                    with open('climbing-locations.json', 'w') as f:
+                        json_pretty = json.dumps(climbing_locations, indent=2)
+                        f.write(json_pretty)
+                new_tag.string=str(int(int(distance)/10)*10)+" min"
             else:
-                new_tag.string=climbing_locations[key][col]
+                new_tag.string=climbing_weather[key][col]
             last_line.append(new_tag)
 
 createTable()
