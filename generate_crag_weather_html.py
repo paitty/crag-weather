@@ -53,8 +53,6 @@ def get_next_weekend():
     end = start+timedelta(hours=48)
     return start, end
 
-start, end = get_next_weekend()
-
 def get_next_weekend_short():
     """
     @startdate: given date, in format '2013-05-25'
@@ -65,37 +63,6 @@ def get_next_weekend_short():
     t2=t1+timedelta(days = 1)
     weekend = (d + t1).strftime('%d')+"-"+(d + t2).strftime('%d/%m/%Y')
     return weekend
-
-header_next_weekend = get_next_weekend_short()
-
-HTML_DOC = """<!DOCTYPE html>
-<html>
-<head>
-	<style type="text/css">
-		.myTable { background-color:#eee;border-collapse:collapse; }
-
-		.myTable td, .myTable th { padding:5px;border:1px solid #000; }
-	</style>
-	<title>Crag Weather</title>
-</head>
-<body>
-
-	<h1>Idemo penjati u *Damelju*!</h1>
-
-	<p>Vikend """+header_next_weekend+"""
-	<br>
-	Updated on """+header_now_date_time+"""
-	<br>
-	Based on yr.no API
-	</p>
-
-	</body>
-	</html>
-
-            """
-
-
-soup = BeautifulSoup(HTML_DOC, "html.parser")
 
 def add_weather(location, start_date, end_date):
     #example call
@@ -131,16 +98,6 @@ def add_weather(location, start_date, end_date):
         i=i+1
     return min_temp, max_temp, rain, min_wind, max_wind
 
-start_date, end_date =  get_next_weekend()
-climbing_weather = {}
-for key in climbing_locations.keys():
-    location = climbing_locations[key]['location']
-    min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
-    climbing_weather[key]={}
-    climbing_weather[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
-    climbing_weather[key]['Rain']=str(int(rain))+" mm"
-    climbing_weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
-    
 def get_duration(location):
     zagreb = "15.957378573800682,45.789809813280925"
     destination = str(location[1])+","+str(location[0])
@@ -155,7 +112,7 @@ def createTable():
     soup.html.body.append(new_table)
     display_table = soup.html.body.find_all("table")[-1]
     
-    table_names=['Crag','Temp','Rain','Wind','Distance','Yr.no','Windy.com'] #['Crag','Temp','Rain','Wind','Distance','Yr.no','Windy.com']
+    table_names=['Crag','Temp','Rain','Wind','Distance','Yr.no','Windy.com']
     new_header = soup.new_tag("tr")
     display_table.append(new_header)
     for col in table_names:
@@ -163,7 +120,7 @@ def createTable():
         new_column_header.string=col
         display_table.tr.append(new_column_header)
 
-    for key in climbing_locations.keys():
+    for key in crag_score_sorted:
         new_line = soup.new_tag("tr")
         display_table.append(new_line)
         last_line=display_table.find_all("tr")[-1]
@@ -195,8 +152,65 @@ def createTable():
                         f.write(json_pretty)
                 new_tag.string=str(int(int(distance)/10)*10)+" min"
             else:
+                if col+'_style' in climbing_weather[key].keys():
+                    new_tag.attrs['style']="font-weight:bold"
                 new_tag.string=climbing_weather[key][col]
             last_line.append(new_tag)
+
+start, end = get_next_weekend()
+
+start_date, end_date =  get_next_weekend()
+climbing_weather = {}
+for key in climbing_locations.keys():
+    location = climbing_locations[key]['location']
+    min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
+    climbing_weather[key]={}
+    climbing_weather[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
+    climbing_weather[key]['Rain']=str(int(rain))+" mm"
+    if rain>5:
+        climbing_weather[key]['Rain_style']='bold'
+    climbing_weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
+    if (min_wind+max_wind)/2>5:
+        climbing_weather[key]['Wind_style']='bold'
+    climbing_weather[key]['Score'] = climbing_locations[key]['Distance']
+    if rain > 5:
+        climbing_weather[key]['Score']+=200
+    if min_wind > 5:
+        climbing_weather[key]['Score']+=200
+
+test = sorted(climbing_weather.items(), key=lambda x: x[1]['Score'])
+crag_score_sorted=[]
+for i in range(len(test)):
+    crag_score_sorted.append(test[i][0])
+
+header_next_weekend = get_next_weekend_short()
+
+HTML_DOC = """<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		.myTable { background-color:#eee;border-collapse:collapse; }
+
+		.myTable td, .myTable th { padding:5px;border:1px solid #000; }
+	</style>
+	<title>Crag Weather</title>
+</head>
+<body>
+
+	<h1>Idemo penjati u """+crag_score_sorted[0]+"""!</h1>
+
+	<p>Vikend """+header_next_weekend+"""
+	<br>
+	Updated on """+header_now_date_time+"""
+	<br>
+	Based on yr.no API
+	</p>
+
+	</body>
+	</html>
+
+            """
+soup = BeautifulSoup(HTML_DOC, "html.parser")
 
 createTable()
 
