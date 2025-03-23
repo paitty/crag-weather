@@ -200,5 +200,5 @@ def createTable():
 createTable()
 
 html = soup.prettify("utf-8")
-with open("index.html", "wb") as file:
+with open("build_outputs_folder/index.html", "wb") as file:
     file.write(html)
