@@ -30,7 +30,8 @@ for location in climbing_locations.keys():
 now = datetime.now()
 
 # dd/mm/YY H:M:S
-header_now_date_time = now.strftime("%d/%m/%Y %H:%M:%S")
+now2 = now + timedelta(hours=1)
+header_now_date_time = now2.strftime("%d/%m/%Y %H:%M:%S")
 
 def get_next_weekday(startdate, weekday):
     """
@@ -200,5 +201,5 @@ def createTable():
 createTable()
 
 html = soup.prettify("utf-8")
-with open("index.html", "wb") as file:
+with open("build_outputs_folder/index.html", "wb") as file:
     file.write(html)
