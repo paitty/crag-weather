@@ -64,6 +64,17 @@ def get_next_weekend_short():
     weekend = (d + t1).strftime('%d')+"-"+(d + t2).strftime('%d/%m/%Y')
     return weekend
 
+def get_distance(key):
+    if 'Distance' in climbing_locations[key].keys():
+        distance=climbing_locations[key]['Distance']
+    else:
+        distance = get_duration(climbing_locations[key]['location'])
+        climbing_locations[key]['Distance'] = distance
+        with open('climbing-locations.json', 'w') as f:
+            json_pretty = json.dumps(climbing_locations, indent=2)
+            f.write(json_pretty)
+    return distance
+
 def add_weather(location, start_date, end_date):
     #example call
     #https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=45.434&lon=15.188
@@ -142,14 +153,7 @@ def createTable():
                 new_tag.append(new_link)
             elif col == 'Distance':
                 #TODO find better way to store distance
-                if 'Distance' in climbing_locations[key].keys():
-                    distance=climbing_locations[key]['Distance']
-                else:
-                    distance = get_duration(climbing_locations[key]['location'])
-                    climbing_locations[key]['Distance'] = distance
-                    with open('climbing-locations.json', 'w') as f:
-                        json_pretty = json.dumps(climbing_locations, indent=2)
-                        f.write(json_pretty)
+                distance = get_distance(key)
                 new_tag.string=str(int(int(distance)/10)*10)+" min"
             else:
                 if col+'_style' in climbing_weather[key].keys():
@@ -161,6 +165,7 @@ start, end = get_next_weekend()
 
 start_date, end_date =  get_next_weekend()
 climbing_weather = {}
+
 for key in climbing_locations.keys():
     location = climbing_locations[key]['location']
     min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
@@ -172,7 +177,7 @@ for key in climbing_locations.keys():
     climbing_weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
     if (min_wind+max_wind)/2>5:
         climbing_weather[key]['Wind_style']='bold'
-    climbing_weather[key]['Score'] = climbing_locations[key]['Distance']
+    climbing_weather[key]['Score'] = get_distance(key)
     if rain > 5:
         climbing_weather[key]['Score']+=200
     if min_wind > 5:
@@ -204,7 +209,9 @@ HTML_DOC = """<!DOCTYPE html>
 	Updated on """+header_now_date_time+"""
 	<br>
 	Based on yr.no API
-	</p>
+	<br>
+    Score = Distance + 200 x (if rain > 5 mm) + 200 x (if avg wind > 5 m/s)
+    </p>
 
 	</body>
 	</html>
