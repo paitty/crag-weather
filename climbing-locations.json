@@ -11,7 +11,8 @@
       44.30403029180178,
       15.471336205027894
     ],
-    "Distance": 183.82999999999998
+    "Distance": 183.82999999999998,
+    "type": "multipitch"
   },
   "Rovinj": {
     "location": [
@@ -25,7 +26,8 @@
       45.37352756801779,
       14.557990179576809
     ],
-    "Distance": 114.18833333333333
+    "Distance": 114.18833333333333,
+    "type": "multipitch"
   },
   "Kalnik": {
     "location": [
@@ -60,41 +62,47 @@
       43.45035941570747,
       16.696190988140245
     ],
-    "Distance": 282.0316666666667
+    "Distance": 282.0316666666667,
+    "type": "multipitch"
   },
   "Obli Kuk": {
     "location": [
       44.24458577133782,
       15.803868545148426
     ],
-    "Distance": 168.82333333333332
+    "Distance": 168.82333333333332,
+    "type": "multipitch"
   },
   "Aspergus Direkt": {
     "location": [
       45.21515172850713,
       14.713420522318547
     ],
-    "Distance": 129.01333333333335
+    "Distance": 129.01333333333335,
+    "type": "multipitch"
   },
   "Dabarski Kukovi": {
     "location": [
       44.54688291148274,
       15.161116490631262
     ],
-    "Distance": 163.85166666666666
+    "Distance": 163.85166666666666,
+    "type": "multipitch"
   },
   "Strogir": {
     "location": [
       44.709371673827576,
       14.931604432719622
     ],
-    "Distance": 164.57999999999998
+    "Distance": 164.57999999999998,
+    "type": "multipitch"
   },
   "Vela Draga": {
     "location": [
       45.31581239894506,
       14.167332503041193
     ],
-    "Distance": 139.525
+    "Distance": 139.525,
+    "type": "multipitch"
   }
 }

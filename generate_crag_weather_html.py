@@ -120,9 +120,10 @@ def get_duration(location):
 def createTable():
     new_table=soup.new_tag("table")
     new_table.attrs['class']='myTable'
+    new_table.attrs['id']='myTable2'
     soup.html.body.append(new_table)
     display_table = soup.html.body.find_all("table")[-1]
-    
+
     table_names=['Crag','Temp','Rain','Wind','Distance','Yr.no','Windy.com']
     new_header = soup.new_tag("tr")
     display_table.append(new_header)
@@ -133,6 +134,8 @@ def createTable():
 
     for key in crag_score_sorted:
         new_line = soup.new_tag("tr")
+        if 'type' in climbing_locations[key].keys():
+            new_line.attrs['type']=climbing_locations[key]['type']
         display_table.append(new_line)
         last_line=display_table.find_all("tr")[-1]
         for col in table_names:
@@ -178,10 +181,8 @@ for key in climbing_locations.keys():
     if (min_wind+max_wind)/2>5:
         climbing_weather[key]['Wind_style']='bold'
     climbing_weather[key]['Score'] = get_distance(key)
-    if rain > 5:
-        climbing_weather[key]['Score']+=200
-    if min_wind > 5:
-        climbing_weather[key]['Score']+=200
+    climbing_weather[key]['Score']+=10*rain
+    climbing_weather[key]['Score']+=20*(min_wind+max_wind)/2
 
 test = sorted(climbing_weather.items(), key=lambda x: x[1]['Score'])
 crag_score_sorted=[]
@@ -199,24 +200,46 @@ HTML_DOC = """<!DOCTYPE html>
 		.myTable td, .myTable th { padding:5px;border:1px solid #000; }
 	</style>
 	<title>Crag Weather</title>
+    <script>
+        function searchTable() {
+            let table = document.getElementById('myTable2');
+            let rows = table.getElementsByTagName('tr');
+            let hideClosed = document.getElementById('hideClosedCheckbox').checked;
+
+            for (let i = 1; i < rows.length; i++) {  // Start from 1 to skip the header
+                let type = rows[i].getAttribute('type');
+                let hideRow = false;
+
+                // Check if any of the cells in the row contains the word "Closed"
+                if (type != 'multipitch') {
+                    hideRow = true;
+                }
+                rows[i].style.display = 'none';
+                // If the checkbox is checked, hide rows containing "Closed"
+                if (hideRow && hideClosed) {
+                    rows[i].style.display = 'none';
+                } else {
+                    rows[i].style.display = '';
+                }
+            }
+        }
+    </script>
 </head>
 <body>
-
 	<h1>Idemo penjati u """+crag_score_sorted[0]+"""!</h1>
-
 	<p>Vikend """+header_next_weekend+"""
 	<br>
-	Updated on """+header_now_date_time+"""
+	Azurirana na """+header_now_date_time+"""
 	<br>
-	Based on yr.no API
+	Na temelju yr.no API
 	<br>
-    Score = Distance + 200 x (if rain > 5 mm) + 200 x (if avg wind > 5 m/s)
+    Ocjena = Distance + 10 x rain + 20 x avg wind
     </p>
+    Prikazi samo dugi smjerovi <input type="checkbox" id="hideClosedCheckbox" onchange="searchTable()">
+</body>
+</html>
 
-	</body>
-	</html>
-
-            """
+"""
 soup = BeautifulSoup(HTML_DOC, "html.parser")
 
 createTable()
