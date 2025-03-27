@@ -104,5 +104,12 @@
     ],
     "Distance": 139.525,
     "type": "multipitch"
+  },
+  "Portafortuna": {
+    "location": [
+      45.01845813203996,
+      14.679828452494796
+    ],
+    "Distance": 152.37666666666667
   }
 }
