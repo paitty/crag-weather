@@ -37,6 +37,7 @@ jobs:
           path: build_outputs_folder/
       - name: commit
         uses: actions/checkout@v3
+      - name: add content
         run: |
           date > generated.txt
           git config user.name github-actions
