@@ -49,8 +49,8 @@ def get_next_weekend():
     """
     d = now
     t = timedelta((7 + 5 - d.weekday()) % 7)
-    start = (d+t).replace(hour=0, minute=0, second=0, microsecond=0)
-    end = start+timedelta(hours=48)
+    start = (d+t).replace(hour=6, minute=0, second=0, microsecond=0)
+    end = start+timedelta(hours=36)
     return start, end
 
 def get_next_weekend_short():
@@ -91,7 +91,7 @@ def add_weather(location, start_date, end_date):
     while True:
         #TODO check if the datetime is our time
         datetime_object = datetime.fromisoformat(weather['properties']['timeseries'][i]['time'])
-        if datetime_object.replace(tzinfo=None)>start_date:
+        if datetime_object.replace(tzinfo=None)>=start_date:
             temperature = weather['properties']['timeseries'][i]['data']['instant']['details']['air_temperature']
             wind = weather['properties']['timeseries'][i]['data']['instant']['details']['wind_speed']
             if 'next_1_hours' in weather['properties']['timeseries'][i]['data']:
@@ -99,12 +99,19 @@ def add_weather(location, start_date, end_date):
             else:
                 #TODO check if we dont miss anything like that
                 add_rain= weather['properties']['timeseries'][i]['data']['next_6_hours']['details']['precipitation_amount']
+            #if location[0] == 44.30403029180178:
+            #    print(datetime_object.replace(tzinfo=None))
+            #    if 'next_1_hours' in weather['properties']['timeseries'][i]['data']:
+            #        print(weather['properties']['timeseries'][i]['data']['next_1_hours']['details']['precipitation_amount'])
+            #    else:
+            #        #TODO check if we dont miss anything like that
+            #        print(weather['properties']['timeseries'][i]['data']['next_6_hours']['details']['precipitation_amount'])
             min_temp = min(min_temp, temperature)
             max_temp = max(max_temp, temperature)
             min_wind = min(min_wind, wind)
             max_wind = max(max_wind, wind)
             rain = rain + add_rain
-        if datetime_object.replace(tzinfo=None)>end_date:
+        if datetime_object.replace(tzinfo=None)>=end_date:
             break
         i=i+1
     return min_temp, max_temp, rain, min_wind, max_wind
@@ -164,7 +171,7 @@ def createTable():
                 new_tag.string=climbing_weather[key][col]
             last_line.append(new_tag)
 
-start, end = get_next_weekend()
+#start, end = get_next_weekend()
 
 start_date, end_date =  get_next_weekend()
 climbing_weather = {}
