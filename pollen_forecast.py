@@ -26,7 +26,12 @@ for soup3 in soup.find_all('div'):
         if soup3.get("class")[0] == "peludHolder":
             for soup2 in soup3.find_all('div'):
                 if soup2.get("class")[0] == "peludKategorija":
-                    print(soup2.text.strip())
+                    break
+            for soup1 in soup3.find_all('span'):
+                if soup1.get("class"):
+                    if soup1.get("class")[0] == "peludStupacOcitanje":
+                        break
+            print(soup2.text.strip()+": "+soup1.text.strip())
 
 
 pass
