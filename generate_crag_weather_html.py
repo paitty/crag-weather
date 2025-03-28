@@ -190,6 +190,10 @@ for key in climbing_locations.keys():
     climbing_weather[key]['Score'] = get_distance(key)
     climbing_weather[key]['Score']+=10*rain
     climbing_weather[key]['Score']+=20*(min_wind+max_wind)/2
+    
+with open('climbing-weather.json', 'w') as f:
+    json_pretty = json.dumps(climbing_weather, indent=2)
+    f.write(json_pretty)
 
 test = sorted(climbing_weather.items(), key=lambda x: x[1]['Score'])
 crag_score_sorted=[]
