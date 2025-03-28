@@ -30,6 +30,12 @@ jobs:
       - name: execute py script
         run: |
           python generate_crag_weather_html.py
+          date > generated.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "generated"
+          git push
       - name: Upload static files as artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
@@ -37,14 +43,6 @@ jobs:
           path: build_outputs_folder/
       - name: commit
         uses: actions/checkout@v3
-      - name: add content
-        run: |
-          date > generated.txt
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add .
-          git commit -m "generated"
-          git push
 
   # Deployment job
   deploy:
