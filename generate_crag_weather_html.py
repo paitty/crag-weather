@@ -64,6 +64,14 @@ def get_next_weekend_short():
     weekend = (d + t1).strftime('%d')+"-"+(d + t2).strftime('%d/%m/%Y')
     return weekend
 
+def get_duration(location):
+    zagreb = "15.957378573800682,45.789809813280925"
+    destination = str(location[1])+","+str(location[0])
+    url = "http://router.project-osrm.org/table/v1/driving/"+zagreb+";"+destination
+    r= requests.get(url)
+    duration = r.json()['durations'][0][1]/60
+    return duration
+
 def get_distance(key):
     if 'Distance' in climbing_locations[key].keys():
         distance=climbing_locations[key]['Distance']
@@ -115,14 +123,6 @@ def add_weather(location, start_date, end_date):
             break
         i=i+1
     return min_temp, max_temp, rain, min_wind, max_wind
-
-def get_duration(location):
-    zagreb = "15.957378573800682,45.789809813280925"
-    destination = str(location[1])+","+str(location[0])
-    url = "http://router.project-osrm.org/table/v1/driving/"+zagreb+";"+destination
-    r= requests.get(url)
-    duration = r.json()['durations'][0][1]/60
-    return duration
 
 def createTable():
     new_table=soup.new_tag("table")
@@ -176,12 +176,14 @@ def createTable():
 start_date, end_date =  get_next_weekend()
 climbing_weather = {}
 
+
+    
 for key in climbing_locations.keys():
     location = climbing_locations[key]['location']
     min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
     climbing_weather[key]={}
     climbing_weather[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
-    climbing_weather[key]['Rain']=str(int(rain))+" mm"
+    climbing_weather[key]['Rain']=int(rain)
     if rain>5:
         climbing_weather[key]['Rain_style']='bold'
     climbing_weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
@@ -190,10 +192,21 @@ for key in climbing_locations.keys():
     climbing_weather[key]['Score'] = get_distance(key)
     climbing_weather[key]['Score']+=10*rain
     climbing_weather[key]['Score']+=20*(min_wind+max_wind)/2
-    
+
+with open('climbing-weather.json') as f:
+    old_climbing_weather = json.load(f)
+
 with open('climbing-weather.json', 'w') as f:
     json_pretty = json.dumps(climbing_weather, indent=2)
     f.write(json_pretty)
+
+for key in climbing_locations.keys():
+    rain = climbing_weather[key]['Rain']
+    diff_rain = rain-old_climbing_weather[key]['Rain']
+    str_diff_rain = str(diff_rain)
+    if diff_rain>0:
+        str_diff_rain = "+"+str_diff_rain
+    climbing_weather[key]['Rain']=str(int(rain))+" mm ("+str_diff_rain+")"
 
 test = sorted(climbing_weather.items(), key=lambda x: x[1]['Score'])
 crag_score_sorted=[]
@@ -238,19 +251,20 @@ HTML_DOC = """<!DOCTYPE html>
 </head>
 <body>
 	<h1>Idemo penjati u """+crag_score_sorted[0]+"""!</h1>
-	<p>Vikend """+header_next_weekend+"""
-	<br>
-	Azurirana na """+header_now_date_time+"""
-	<br>
-	Na temelju yr.no API
-	<br>
-    Ocjena = Distance + 10 x rain + 20 x avg wind
+    <p>
+        Vikend """+header_next_weekend+"""
+        <br>
+        Azurirana na """+header_now_date_time+"""
+        <br>
+        Na temelju yr.no API
+        <br>
+        Ocjena = Distance + 10 x rain + 20 x avg wind
     </p>
     Prikazi samo dugi smjerovi <input type="checkbox" id="hideClosedCheckbox" onchange="searchTable()">
 </body>
 </html>
-
 """
+
 soup = BeautifulSoup(HTML_DOC, "html.parser")
 
 createTable()
