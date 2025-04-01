@@ -131,7 +131,7 @@ def createTable():
     soup.html.body.append(new_table)
     display_table = soup.html.body.find_all("table")[-1]
 
-    table_names=['Crag','Temp','Rain','Wind','Distance','Yr.no','Windy.com']
+    table_names=['Crag','Status','Temp','Rain','Wind','Distance','Yr.no','Windy.com']
     new_header = soup.new_tag("tr")
     display_table.append(new_header)
     for col in table_names:
@@ -165,6 +165,15 @@ def createTable():
                 #TODO find better way to store distance
                 distance = get_distance(key)
                 new_tag.string=str(int(int(distance)/10)*10)+" min"
+            elif col == 'Status':
+                new_img=soup.new_tag('img')
+                new_img.attrs['src'] = 'check-mark.png'
+                new_img.attrs['width'] = 20
+                if 'Wind_style' in climbing_weather[key].keys():
+                    new_img.attrs['src'] = 'wind-leaf.png'                  
+                if 'Rain_style' in climbing_weather[key].keys():
+                    new_img.attrs['src'] = 'cloud-with-rain.png'
+                new_tag.append(new_img)
             else:
                 if col+'_style' in climbing_weather[key].keys():
                     new_tag.attrs['style']="font-weight:bold"
