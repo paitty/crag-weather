@@ -42,15 +42,19 @@ def get_next_weekday(startdate, weekday):
     t = timedelta((7 + weekday - d.weekday()) % 7)
     return (d + t).strftime('%Y-%m-%d')
 
-def get_next_weekend():
+def get_next_weekend(day,duration):
     """
     @startdate: given date, in format '2013-05-25'
     @weekday: week day as a integer, between 0 (Monday) to 6 (Sunday)
     """
+    if day=='Saturday':
+        day_num = 5
+    if day=='Sunday':
+        day_num = 6
     d = now
-    t = timedelta((7 + 5 - d.weekday()) % 7)
+    t = timedelta((7 + day_num - d.weekday()) % 7)
     start = (d+t).replace(hour=6, minute=0, second=0, microsecond=0)
-    end = start+timedelta(hours=36)
+    end = start+timedelta(hours=duration)
     return start, end
 
 def get_next_weekend_short():
@@ -131,7 +135,7 @@ def createTable():
     soup.html.body.append(new_table)
     display_table = soup.html.body.find_all("table")[-1]
 
-    table_names=['Crag','Status','Temp','Rain','Wind','Distance','Yr.no','Windy.com']
+    table_names=['Crag','Saturday','Sunday','Temp','Rain','Wind','Distance','Yr.no','Windy.com']
     new_header = soup.new_tag("tr")
     display_table.append(new_header)
     for col in table_names:
@@ -165,13 +169,22 @@ def createTable():
                 #TODO find better way to store distance
                 distance = get_distance(key)
                 new_tag.string=str(int(int(distance)/10)*10)+" min"
-            elif col == 'Status':
+            elif col == 'Saturday':
                 new_img=soup.new_tag('img')
                 new_img.attrs['src'] = 'check-mark.png'
                 new_img.attrs['width'] = 20
-                if 'Wind_style' in climbing_weather[key].keys():
+                if 'Wind_style' in climbing_day['Saturday'][key].keys():
                     new_img.attrs['src'] = 'wind-leaf.png'                  
-                if 'Rain_style' in climbing_weather[key].keys():
+                if 'Rain_style' in climbing_day['Saturday'][key].keys():
+                    new_img.attrs['src'] = 'cloud-with-rain.png'
+                new_tag.append(new_img)
+            elif col == 'Sunday':
+                new_img=soup.new_tag('img')
+                new_img.attrs['src'] = 'check-mark.png'
+                new_img.attrs['width'] = 20
+                if 'Wind_style' in climbing_day['Sunday'][key].keys():
+                    new_img.attrs['src'] = 'wind-leaf.png'                  
+                if 'Rain_style' in climbing_day['Sunday'][key].keys():
                     new_img.attrs['src'] = 'cloud-with-rain.png'
                 new_tag.append(new_img)
             else:
@@ -182,11 +195,9 @@ def createTable():
 
 #start, end = get_next_weekend()
 
-start_date, end_date =  get_next_weekend()
+start_date, end_date =  get_next_weekend('Saturday',36)
 climbing_weather = {}
 
-
-    
 for key in climbing_locations.keys():
     location = climbing_locations[key]['location']
     min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
@@ -201,6 +212,19 @@ for key in climbing_locations.keys():
     climbing_weather[key]['Score'] = get_distance(key)
     climbing_weather[key]['Score']+=10*rain
     climbing_weather[key]['Score']+=20*(min_wind+max_wind)/2
+
+climbing_day={}
+for day in ['Saturday','Sunday']:
+    climbing_day[day]={}
+    for key in climbing_locations.keys():
+        location = climbing_locations[key]['location']
+        day_start_date, day_end_date = get_next_weekend(day,12)
+        min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, day_start_date, day_end_date)
+        climbing_day[day][key]={}
+        if rain>5:
+            climbing_day[day][key]['Rain_style']='bold'
+        if (min_wind+max_wind)/2>5:
+            climbing_day[day][key]['Wind_style']='bold'
 
 with open('climbing-weather.json') as f:
     old_climbing_weather = json.load(f)
