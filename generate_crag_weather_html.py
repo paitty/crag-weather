@@ -300,13 +300,45 @@ HTML_DOC = """<!DOCTYPE html>
 
 soup = BeautifulSoup(HTML_DOC, "html.parser")
 
-createTable()
+#createTable()
 
 html = soup.prettify("utf-8")
 with open("build_outputs_folder/index.html", "wb") as file:
     file.write(html)
 
+### POLLEN PART ###
 
+def createPollenTable():
+    new_table=soup.new_tag("table")
+    new_table.attrs['class']='myTable'
+    new_table.attrs['id']='myTable2'
+    soup.html.body.append(new_table)
+    display_table = soup.html.body.find_all("table")[-1]
+
+    table_names=list(pollen_table.keys())
+    table_names.insert(0,'date')
+    new_header = soup.new_tag("tr")
+    display_table.append(new_header)
+    for col in table_names:
+        new_column_header = soup.new_tag("th")
+        new_column_header.string=col
+        display_table.tr.append(new_column_header)
+
+    for date in pollen_table[list(pollen_table.keys())[0]].keys():
+        new_line = soup.new_tag("tr")
+        display_table.append(new_line)
+        last_line=display_table.find_all("tr")[-1]
+        for col in table_names:
+            if col == "date":
+                new_tag=soup.new_tag('td')
+                new_tag.string=date
+            else:
+                new_tag=soup.new_tag('td')
+                if date in pollen_table[col].keys():
+                    new_tag.string=pollen_table[col][date]
+                else:
+                    new_tag.string=""
+            last_line.append(new_tag)
 
 headers = {'Accept':	'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Encoding':	'gzip, deflate, br, zstd',
@@ -329,8 +361,6 @@ soup = BeautifulSoup(r.content,"html.parser")
 
 #now2 = now2 + timedelta(days=-1)
 today_date = now2.strftime("%d/%m/%Y")
-
-
 
 pollen_table={}
 
@@ -357,5 +387,31 @@ with open('pollen-table.json', 'w') as f:
     json_pretty = json.dumps(pollen_table, indent=2)
     f.write(json_pretty)
 
-pass
 
+pass
+HTML_DOC = """<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		.myTable { background-color:#eee;border-collapse:collapse; }
+
+		.myTable td, .myTable th { padding:5px;border:1px solid #000; }
+	</style>
+	<title>Pollen in Zagreb</title>
+</head>
+<body>
+    <p>
+        Na temelju <a href="https://www.plivazdravlje.hr/alergije/prognoza/1/zagreb.html"> Pliva</a>
+    </p>
+    <br>
+</body>
+</html>
+"""
+
+soup = BeautifulSoup(HTML_DOC, "html.parser")
+
+createPollenTable()
+
+html = soup.prettify("utf-8")
+with open("build_outputs_folder/pollen.html", "wb") as file:
+    file.write(html)
