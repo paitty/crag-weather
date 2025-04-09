@@ -300,7 +300,7 @@ HTML_DOC = """<!DOCTYPE html>
 
 soup = BeautifulSoup(HTML_DOC, "html.parser")
 
-#createTable()
+createTable()
 
 html = soup.prettify("utf-8")
 with open("build_outputs_folder/index.html", "wb") as file:
