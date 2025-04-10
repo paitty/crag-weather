@@ -335,7 +335,7 @@ def createPollenTable():
             else:
                 new_tag=soup.new_tag('td')
                 if date in pollen_table[col].keys():
-                    new_tag.string=pollen_table[col][date]
+                    new_tag.string=pollen_table[col][date].replace(".",",")
                 else:
                     new_tag.string=""
             last_line.append(new_tag)
