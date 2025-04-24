@@ -30,7 +30,7 @@ for location in climbing_locations.keys():
 now = datetime.now()
 
 # dd/mm/YY H:M:S
-now2 = now + timedelta(hours=1)
+now2 = now + timedelta(hours=2)
 header_now_date_time = now2.strftime("%d/%m/%Y %H:%M:%S")
 
 def get_next_weekday(startdate, weekday):
