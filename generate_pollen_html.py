@@ -2,8 +2,6 @@ import json
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta
 import requests
-import numpy
-
 
 def generate_pollen_table():
     def createPollenTable():
@@ -15,6 +13,7 @@ def generate_pollen_table():
 
         table_names=list(pollen_table.keys())
         table_names.insert(0,'date')
+        table_names.insert(len(table_names),'sum')
         new_header = soup.new_tag("tr")
         display_table.append(new_header)
         for col in table_names:
@@ -48,6 +47,14 @@ def generate_pollen_table():
                 if col == "date":
                     new_tag=soup.new_tag('td')
                     new_tag.string=date
+                elif col == "sum":
+                    sum = 0
+                    for tree in pollen_table.keys():
+                        if date in pollen_table[tree].keys():
+                            sum=sum+float(pollen_table[tree][date])
+                    new_tag=soup.new_tag('td')
+                    formatted_sum ="{:.1f}".format(sum)
+                    new_tag.string=str(formatted_sum).replace(".",",")
                 else:
                     new_tag=soup.new_tag('td')
                     if date in pollen_table[col].keys():
