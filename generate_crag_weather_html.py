@@ -204,7 +204,7 @@ for key in climbing_locations.keys():
     climbing_weather[key]={}
     climbing_weather[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
     climbing_weather[key]['Rain']=int(rain)
-    if rain>3:
+    if rain>6:
         climbing_weather[key]['Rain_style']='bold'
     climbing_weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
     if (min_wind+max_wind)/2>5:
@@ -221,7 +221,7 @@ for day in ['Saturday','Sunday']:
         day_start_date, day_end_date = get_next_weekend(day,12)
         min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, day_start_date, day_end_date)
         climbing_day[day][key]={}
-        if rain>5:
+        if rain>3:
             climbing_day[day][key]['Rain_style']='bold'
         if (min_wind+max_wind)/2>5:
             climbing_day[day][key]['Wind_style']='bold'
