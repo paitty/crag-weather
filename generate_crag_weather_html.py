@@ -235,7 +235,9 @@ with open('climbing-weather.json', 'w') as f:
 
 for key in climbing_locations.keys():
     rain = climbing_weather[key]['Rain']
-    diff_rain = rain-old_climbing_weather[key]['Rain']
+    diff_rain = 0
+    if key in old_climbing_weather.keys():
+    	diff_rain = rain-old_climbing_weather[key]['Rain']
     str_diff_rain = str(diff_rain)
     if diff_rain>0:
         str_diff_rain = "+"+str_diff_rain
