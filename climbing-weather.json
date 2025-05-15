@@ -2,6 +2,7 @@
   "Damelj": {
     "Temp": "6-17\u00b0",
     "Rain": 3,
+    "Rain_style": "bold",
     "Wind": "1-3 m/s",
     "Score": 145.70499999999998
   },
