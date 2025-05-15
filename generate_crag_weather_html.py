@@ -204,7 +204,7 @@ for key in climbing_locations.keys():
     climbing_weather[key]={}
     climbing_weather[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
     climbing_weather[key]['Rain']=int(rain)
-    if rain>5:
+    if rain>3:
         climbing_weather[key]['Rain_style']='bold'
     climbing_weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
     if (min_wind+max_wind)/2>5:
