@@ -186,13 +186,9 @@ def generate_pollen_table():
     <body>
         <p>
             Na temelju <a href="https://www.plivazdravlje.hr/alergije/prognoza/1/zagreb.html"> Pliva</a>
-        </p>
-        <br>
-        <p>
+            <br>
             <a href="pollen.html">Pollen table</a>
-        </p>
-        <br>
-        <p>
+            <br>
             <a href="pollen_prediction.html">Pollen prediction table</a>
         </p>
         <br>
@@ -210,6 +206,30 @@ def generate_pollen_table():
     
     soup = BeautifulSoup(HTML_DOC, "html.parser")
 
+
+    day_names = ['Today', 'Tomorrow', 'Overmorrow']
+    for i in range(3):
+        tomorrow_string = day_names[i]+" - High: "
+        for tree in prediction_table.keys():
+            if prediction_table[tree][today_date][i]=='p-visoka':
+                tomorrow_string=tomorrow_string+tree+' '
+        
+        tomorrow_string = tomorrow_string + '- Medium: '
+        for tree in prediction_table.keys():
+            if prediction_table[tree][today_date][i]=='p-umjerena':
+                tomorrow_string=tomorrow_string+tree+' '
+
+        tomorrow_string = tomorrow_string + '- Low: '
+        for tree in prediction_table.keys():
+            if prediction_table[tree][today_date][i]=='p-niska':
+                tomorrow_string=tomorrow_string+tree+' '
+        
+        new_paragraph=soup.new_tag("p")
+        new_paragraph.string=tomorrow_string
+        soup.html.body.append(new_paragraph)
+
+
+    
     for tree in prediction_table.keys():
         new_paragraph=soup.new_tag("p")
         new_paragraph.string=tree
