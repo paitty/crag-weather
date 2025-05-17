@@ -31,7 +31,14 @@ for soup3 in soup.find_all('div'):
                 if soup1.get("class"):
                     if soup1.get("class")[0] == "peludStupacOcitanje":
                         break
+
             print(soup2.text.strip()+": "+soup1.text.strip())
+            prediction = []
+            for soup6 in soup3.find_all('embed'):
+                if soup6.get('src'):
+                    if int(soup6.get('width'))>20:
+                        prediction = prediction + [soup6.get('src').split('/')[5].split('.')[0]]
+            print(prediction)
 
 
 pass

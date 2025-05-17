@@ -1,0 +1,37 @@
+{
+  "Borovi": {
+    "17/05/2025": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
+    ]
+  },
+  "Trave": {
+    "17/05/2025": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
+    ]
+  },
+  "Koprive": {
+    "17/05/2025": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
+    ]
+  },
+  "Hrast": {
+    "17/05/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ]
+  },
+  "Trputac": {
+    "17/05/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ]
+  }
+}

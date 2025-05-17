@@ -63,6 +63,48 @@ def generate_pollen_table():
                         new_tag.string=""
                 last_line.append(new_tag)
 
+    def createPredictionTable(tree):
+        new_table=soup.new_tag("table")
+        new_table.attrs['class']='myTable'
+        new_table.attrs['id']='myTable2'
+        soup.html.body.append(new_table)
+        display_table = soup.html.body.find_all("table")[-1]
+
+        col_names = ['D','D+1','D+2']
+        table_names=['date']+col_names
+
+        new_header = soup.new_tag("tr")
+        display_table.append(new_header)
+        for col in table_names:
+            new_column_header = soup.new_tag("th")
+            new_column_header.string=col
+            display_table.tr.append(new_column_header)
+
+        date_list=prediction_table[tree].keys()
+        
+        for date in date_list:
+            new_line = soup.new_tag("tr")
+            display_table.append(new_line)
+            last_line=display_table.find_all("tr")[-1]
+            for col in table_names:
+                if col == "date":
+                    new_tag=soup.new_tag('td')
+                    new_tag.string=date
+                else:
+                    new_tag=soup.new_tag('td')
+                    new_tag.string=convert_level(prediction_table[tree][date][col_names.index(col)])
+                last_line.append(new_tag)
+    
+    def convert_level(input):
+        output = input
+        if input == 'p-umjerena':
+            output = 'Med'
+        elif input == 'p-visoka':
+            output = 'High'
+        elif input == 'p-niska':
+            output = 'Low'
+        return output
+    
     headers = {'Accept':	'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Encoding':	'gzip, deflate, br, zstd',
         'Accept-Language':	'en-US,fr;q=0.8,hr;q=0.5,en;q=0.3',
@@ -88,9 +130,13 @@ def generate_pollen_table():
     today_date = now.strftime("%d/%m/%Y")
 
     pollen_table={}
+    prediction_table={}
 
     with open('pollen-table.json') as f:
         pollen_table = json.load(f)
+    
+    with open('pollen-prediction-table.json') as f:
+        prediction_table = json.load(f)
 
     for soup3 in soup.find_all('div'):
         #print(soup3.get("class"))
@@ -107,9 +153,22 @@ def generate_pollen_table():
                     pollen_table[soup2.text.strip()]={}
                 pollen_table[soup2.text.strip()][today_date] = soup1.text.strip()
                 print(soup2.text.strip()+": "+soup1.text.strip())
+                prediction = []
+                for soup6 in soup3.find_all('embed'):
+                    if soup6.get('src'):
+                        if int(soup6.get('width'))>20:
+                            prediction = prediction + [soup6.get('src').split('/')[5].split('.')[0]]
+                if soup2.text.strip() not in prediction_table.keys():
+                    prediction_table[soup2.text.strip()]={}
+                prediction_table[soup2.text.strip()][today_date] = prediction
+                print(prediction)
 
     with open('pollen-table.json', 'w') as f:
         json_pretty = json.dumps(pollen_table, indent=2)
+        f.write(json_pretty)
+
+    with open('pollen-prediction-table.json', 'w') as f:
+        json_pretty = json.dumps(prediction_table, indent=2)
         f.write(json_pretty)
 
 
@@ -129,6 +188,14 @@ def generate_pollen_table():
             Na temelju <a href="https://www.plivazdravlje.hr/alergije/prognoza/1/zagreb.html"> Pliva</a>
         </p>
         <br>
+        <p>
+            <a href="pollen.html">Pollen table</a>
+        </p>
+        <br>
+        <p>
+            <a href="pollen_prediction.html">Pollen prediction table</a>
+        </p>
+        <br>
     </body>
     </html>
     """
@@ -139,6 +206,18 @@ def generate_pollen_table():
 
     html = soup.prettify("utf-8")
     with open("build_outputs_folder/pollen.html", "wb") as file:
+        file.write(html)
+    
+    soup = BeautifulSoup(HTML_DOC, "html.parser")
+
+    for tree in prediction_table.keys():
+        new_paragraph=soup.new_tag("p")
+        new_paragraph.string=tree
+        soup.html.body.append(new_paragraph)
+        createPredictionTable(tree)
+
+    html = soup.prettify("utf-8")
+    with open("build_outputs_folder/pollen_prediction.html", "wb") as file:
         file.write(html)
 
 if __name__ == "__main__":
