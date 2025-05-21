@@ -19,6 +19,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "21/05/2025": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Trave": {
@@ -38,6 +43,11 @@
       "p-visoka"
     ],
     "20/05/2025": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
+    ],
+    "21/05/2025": [
       "p-visoka",
       "p-visoka",
       "p-visoka"
@@ -63,6 +73,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "21/05/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "Hrast": {
@@ -85,6 +100,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "21/05/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "Trputac": {
@@ -104,6 +124,11 @@
       "p-niska"
     ],
     "20/05/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "21/05/2025": [
       "p-niska",
       "p-niska",
       "p-niska"
