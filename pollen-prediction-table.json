@@ -29,6 +29,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "23/05/2025": [
+      "p-niska",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Trave": {
@@ -61,6 +66,11 @@
       "p-visoka",
       "p-visoka",
       "p-visoka"
+    ],
+    "23/05/2025": [
+      "p-umjerena",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Koprive": {
@@ -90,6 +100,11 @@
       "p-niska"
     ],
     "22/05/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "23/05/2025": [
       "p-niska",
       "p-niska",
       "p-niska"
@@ -154,6 +169,11 @@
       "p-niska"
     ],
     "22/05/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "23/05/2025": [
       "p-niska",
       "p-niska",
       "p-niska"

@@ -211,18 +211,21 @@ def generate_pollen_table():
     for i in range(3):
         tomorrow_string = day_names[i]+" - High: "
         for tree in prediction_table.keys():
-            if prediction_table[tree][today_date][i]=='p-visoka':
-                tomorrow_string=tomorrow_string+tree+' '
+            if today_date in prediction_table[tree].keys():
+                if prediction_table[tree][today_date][i]=='p-visoka':
+                    tomorrow_string=tomorrow_string+tree+' '
         
         tomorrow_string = tomorrow_string + '- Medium: '
         for tree in prediction_table.keys():
-            if prediction_table[tree][today_date][i]=='p-umjerena':
-                tomorrow_string=tomorrow_string+tree+' '
+            if today_date in prediction_table[tree].keys():
+                if prediction_table[tree][today_date][i]=='p-umjerena':
+                    tomorrow_string=tomorrow_string+tree+' '
 
         tomorrow_string = tomorrow_string + '- Low: '
         for tree in prediction_table.keys():
-            if prediction_table[tree][today_date][i]=='p-niska':
-                tomorrow_string=tomorrow_string+tree+' '
+            if today_date in prediction_table[tree].keys():
+                if prediction_table[tree][today_date][i]=='p-niska':
+                    tomorrow_string=tomorrow_string+tree+' '
         
         new_paragraph=soup.new_tag("p")
         new_paragraph.string=tomorrow_string
