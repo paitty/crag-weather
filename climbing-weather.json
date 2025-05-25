@@ -1,104 +1,107 @@
 {
   "Damelj": {
-    "Temp": "10-19\u00b0",
-    "Rain": 0,
+    "Temp": "15-21\u00b0",
+    "Rain": 1,
     "Wind": "0-1 m/s",
-    "Score": 90.705
+    "Score": 106.705
   },
   "Armesko": {
-    "Temp": "12-20\u00b0",
-    "Rain": 0,
+    "Temp": "13-20\u00b0",
+    "Rain": 5,
     "Wind": "0-1 m/s",
-    "Score": 84.63333333333333
+    "Score": 136.63333333333333
   },
   "Luknja": {
-    "Temp": "12-21\u00b0",
-    "Rain": 0,
+    "Temp": "14-22\u00b0",
+    "Rain": 9,
+    "Rain_style": "bold",
     "Wind": "0-1 m/s",
-    "Score": 96.60666666666665
+    "Score": 185.60666666666665
   },
   "Paklenica": {
-    "Temp": "12-20\u00b0",
-    "Rain": 0,
+    "Temp": "15-23\u00b0",
+    "Rain": 2,
     "Wind": "0-2 m/s",
-    "Score": 217.82999999999998
+    "Score": 233.82999999999998
   },
   "Rovinj": {
-    "Temp": "17-21\u00b0",
+    "Temp": "19-23\u00b0",
     "Rain": 0,
     "Wind": "0-4 m/s",
-    "Score": 240.595
+    "Score": 250.595
   },
   "Kamenjak": {
-    "Temp": "8-17\u00b0",
-    "Rain": 0,
-    "Wind": "0-2 m/s",
-    "Score": 153.18833333333333
+    "Temp": "13-20\u00b0",
+    "Rain": 2,
+    "Wind": "0-1 m/s",
+    "Score": 158.18833333333333
   },
   "Kalnik": {
-    "Temp": "12-18\u00b0",
-    "Rain": 0,
-    "Wind": "0-5 m/s",
-    "Score": 134.67666666666668
+    "Temp": "12-21\u00b0",
+    "Rain": 7,
+    "Rain_style": "bold",
+    "Wind": "0-1 m/s",
+    "Score": 165.67666666666668
   },
   "Okic": {
-    "Temp": "13-20\u00b0",
-    "Rain": 0,
+    "Temp": "13-21\u00b0",
+    "Rain": 9,
+    "Rain_style": "bold",
     "Wind": "0-1 m/s",
-    "Score": 58.27833333333333
+    "Score": 153.2783333333333
   },
   "Vela Pesa": {
-    "Temp": "7-15\u00b0",
-    "Rain": 0,
-    "Wind": "0-2 m/s",
-    "Score": 175.64666666666665
+    "Temp": "12-19\u00b0",
+    "Rain": 4,
+    "Wind": "0-1 m/s",
+    "Score": 209.64666666666665
   },
   "Kompanj": {
-    "Temp": "10-19\u00b0",
-    "Rain": 0,
-    "Wind": "0-3 m/s",
-    "Score": 191.89666666666665
+    "Temp": "14-22\u00b0",
+    "Rain": 4,
+    "Wind": "0-1 m/s",
+    "Score": 219.89666666666665
   },
   "Omis": {
-    "Temp": "9-19\u00b0",
+    "Temp": "13-24\u00b0",
     "Rain": 0,
-    "Wind": "0-4 m/s",
-    "Score": 331.0316666666667
+    "Wind": "0-2 m/s",
+    "Score": 308.0316666666667
   },
   "Obli Kuk": {
-    "Temp": "4-18\u00b0",
-    "Rain": 0,
-    "Wind": "0-4 m/s",
-    "Score": 212.82333333333332
+    "Temp": "10-21\u00b0",
+    "Rain": 2,
+    "Wind": "0-1 m/s",
+    "Score": 213.82333333333332
   },
   "Klamarusa": {
-    "Temp": "10-18\u00b0",
-    "Rain": 0,
+    "Temp": "14-21\u00b0",
+    "Rain": 3,
     "Wind": "0-2 m/s",
-    "Score": 158.01333333333335
+    "Score": 186.01333333333335
   },
   "Dabarski Kukovi": {
-    "Temp": "6-14\u00b0",
-    "Rain": 0,
-    "Wind": "0-2 m/s",
-    "Score": 193.85166666666666
+    "Temp": "9-18\u00b0",
+    "Rain": 3,
+    "Wind": "0-1 m/s",
+    "Score": 226.85166666666666
   },
   "Strogir": {
-    "Temp": "13-18\u00b0",
-    "Rain": 0,
+    "Temp": "16-21\u00b0",
+    "Rain": 3,
     "Wind": "0-2 m/s",
-    "Score": 203.57999999999998
+    "Score": 227.57999999999998
   },
   "Vela Draga": {
-    "Temp": "11-19\u00b0",
-    "Rain": 0,
+    "Temp": "15-21\u00b0",
+    "Rain": 3,
     "Wind": "0-2 m/s",
-    "Score": 168.525
+    "Score": 200.525
   },
   "Portafortuna": {
-    "Temp": "14-17\u00b0",
-    "Rain": 0,
-    "Wind": "0-3 m/s",
-    "Score": 188.37666666666667
+    "Temp": "15-19\u00b0",
+    "Rain": 1,
+    "Wind": "0-2 m/s",
+    "Score": 203.37666666666667
   }
 }
