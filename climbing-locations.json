@@ -79,7 +79,7 @@
     "Distance": 282.0316666666667,
     "type": "multipitch"
   },
-  "Obli Kuk": {
+  "Obli Kuk (Prezid)": {
     "location": [
       44.24458577133782,
       15.803868545148426
@@ -102,6 +102,13 @@
     ],
     "Distance": 163.85166666666666,
     "type": "multipitch"
+  },
+  "Zlarin": {
+    "location": [
+      43.685094081020814,
+      15.840036775632049
+    ],
+    "Distance": 225.46166666666667
   },
   "Strogir": {
     "location": [

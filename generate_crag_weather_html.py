@@ -53,7 +53,7 @@ def get_next_weekend(day,duration):
         day_num = 6
     d = now
     t = timedelta((7 + day_num - d.weekday()) % 7)
-    start = (d+t).replace(hour=6, minute=0, second=0, microsecond=0)
+    start = (d+t).replace(hour=0, minute=0, second=0, microsecond=0)
     end = start+timedelta(hours=duration)
     return start, end
 
@@ -135,7 +135,7 @@ def createTable():
     soup.html.body.append(new_table)
     display_table = soup.html.body.find_all("table")[-1]
 
-    table_names=['Crag','Saturday','Sunday','Temp','Rain','Wind','Distance','Yr.no','Windy.com']
+    table_names=['Crag','Saturday','Sunday','Temp','Rain','Wind','Distance','Yr.no','Windy','plezanje.net','theCrag','Maps','Waze']
     new_header = soup.new_tag("tr")
     display_table.append(new_header)
     for col in table_names:
@@ -155,20 +155,50 @@ def createTable():
                 new_tag.string=key
             elif col == 'Yr.no':
                 new_link=soup.new_tag('a')
-                new_link.string='link'
+                new_link.string='Yr.no'
                 new_link.attrs['href'] = 'https://www.yr.no/en/forecast/daily-table/'+str(climbing_locations[key]['location'][0])[:6]+", "+str(climbing_locations[key]['location'][1])[:6]
                 new_link.attrs['target'] = '_blank'
                 new_tag.append(new_link)
-            elif col == 'Windy.com':
+            elif col == 'Windy':
                 new_link=soup.new_tag('a')
-                new_link.string='link'
+                new_link.string='Windy'
                 new_link.attrs['href'] = 'https://www.windy.com/'+str(climbing_locations[key]['location'][0])[:6]+"/"+str(climbing_locations[key]['location'][1])[:6]
                 new_link.attrs['target'] = '_blank'
                 new_tag.append(new_link)
+            elif col == 'plezanje.net':
+                new_link=soup.new_tag('a')
+                new_link.string='plezanje.net'
+                new_link.attrs['href'] = 'https://plezanje.net/plezalisce/'+key.replace('(','').replace(')','').replace(' ','-').lower()
+                new_link.attrs['target'] = '_blank'
+                new_tag.append(new_link)
+            elif col == 'theCrag':
+                new_link=soup.new_tag('a')
+                new_link.string='theCrag'
+                new_link.attrs['href'] = 'https://www.thecrag.com/fr/grimper/world/search?only=areas&S='+key
+                new_link.attrs['target'] = '_blank'
+                new_tag.append(new_link)
+            elif col == 'Maps':
+                new_link=soup.new_tag('a')
+                new_link.string='Maps'
+                new_link.attrs['href'] = 'https://www.google.com/maps/place/'+str(climbing_locations[key]['location'][0])[:6]+","+str(climbing_locations[key]['location'][1])[:6]
+                new_link.attrs['target'] = '_blank'
+                new_tag.append(new_link)
+            elif col == 'Waze':
+                new_link=soup.new_tag('a')
+                new_link.string='Waze'
+                new_link.attrs['href'] = 'waze://?ll='+str(climbing_locations[key]['location'][0])[:6]+","+str(climbing_locations[key]['location'][1])[:6]
+                new_link.attrs['target'] = '_blank'
+                new_tag.append(new_link)    
             elif col == 'Distance':
                 #TODO find better way to store distance
                 distance = get_distance(key)
-                new_tag.string=str(int(int(distance)/10)*10)+" min"
+                total_minutes=int(int(distance)/10)*10
+                minutes=total_minutes%60
+                hours=(total_minutes-minutes)/60
+                if hours == 0:
+                    new_tag.string=str(minutes)+" min"
+                else:
+                    new_tag.string=str(int(hours))+"h"+str(minutes)+"m"
             elif col == 'Saturday':
                 new_img=soup.new_tag('img')
                 new_img.attrs['src'] = 'check-mark.png'
@@ -195,7 +225,7 @@ def createTable():
 
 #start, end = get_next_weekend()
 
-start_date, end_date =  get_next_weekend('Saturday',36)
+start_date, end_date =  get_next_weekend('Saturday',48)
 climbing_weather = {}
 
 for key in climbing_locations.keys():
@@ -218,7 +248,7 @@ for day in ['Saturday','Sunday']:
     climbing_day[day]={}
     for key in climbing_locations.keys():
         location = climbing_locations[key]['location']
-        day_start_date, day_end_date = get_next_weekend(day,12)
+        day_start_date, day_end_date = get_next_weekend(day,24)
         min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, day_start_date, day_end_date)
         climbing_day[day][key]={}
         if rain>3:
@@ -238,7 +268,7 @@ for key in climbing_locations.keys():
     diff_rain = 0
     if key in old_climbing_weather.keys():
     	diff_rain = rain-old_climbing_weather[key]['Rain']
-    str_diff_rain = str(diff_rain)
+    str_diff_rain=str(diff_rain)
     if diff_rain>0:
         str_diff_rain = "+"+str_diff_rain
     climbing_weather[key]['Rain']=str(int(rain))+" mm ("+str_diff_rain+")"
