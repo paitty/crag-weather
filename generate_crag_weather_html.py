@@ -149,6 +149,9 @@ def createTable():
             new_line.attrs['type']=climbing_locations[key]['type']
         display_table.append(new_line)
         last_line=display_table.find_all("tr")[-1]
+        destination = 'location'
+        if 'parking' in climbing_locations[key].key():
+            destination = 'parking'
         for col in table_names:
             new_tag=soup.new_tag('td')
             if col == 'Crag':
@@ -180,13 +183,13 @@ def createTable():
             elif col == 'Maps':
                 new_link=soup.new_tag('a')
                 new_link.string='Maps'
-                new_link.attrs['href'] = 'https://www.google.com/maps/place/'+str(climbing_locations[key]['location'][0])[:6]+","+str(climbing_locations[key]['location'][1])[:6]
+                new_link.attrs['href'] = 'https://www.google.com/maps/place/'+str(climbing_locations[key][destination][0])[:6]+","+str(climbing_locations[key][destination][1])[:6]
                 new_link.attrs['target'] = '_blank'
                 new_tag.append(new_link)
             elif col == 'Waze':
                 new_link=soup.new_tag('a')
                 new_link.string='Waze'
-                new_link.attrs['href'] = 'waze://?ll='+str(climbing_locations[key]['location'][0])[:6]+","+str(climbing_locations[key]['location'][1])[:6]
+                new_link.attrs['href'] = 'waze://?ll='+str(climbing_locations[key][destination][0])[:6]+","+str(climbing_locations[key][destination][1])[:6]
                 new_link.attrs['target'] = '_blank'
                 new_tag.append(new_link)    
             elif col == 'Distance':
