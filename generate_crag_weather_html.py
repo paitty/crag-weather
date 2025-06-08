@@ -150,7 +150,7 @@ def createTable():
         display_table.append(new_line)
         last_line=display_table.find_all("tr")[-1]
         destination = 'location'
-        if 'parking' in climbing_locations[key].key():
+        if 'parking' in climbing_locations[key].keys():
             destination = 'parking'
         for col in table_names:
             new_tag=soup.new_tag('td')
