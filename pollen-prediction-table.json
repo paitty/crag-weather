@@ -139,6 +139,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "14/06/2025": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Trave": {
@@ -278,6 +283,11 @@
       "p-visoka"
     ],
     "13/06/2025": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
+    ],
+    "14/06/2025": [
       "p-visoka",
       "p-visoka",
       "p-visoka"
@@ -421,6 +431,11 @@
     ],
     "13/06/2025": [
       "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
+    ],
+    "14/06/2025": [
+      "p-visoka",
       "p-umjerena",
       "p-umjerena"
     ]
@@ -597,6 +612,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "14/06/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "Lipa": {
@@ -674,6 +694,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "14/06/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "Vrba": {
@@ -728,6 +753,13 @@
       "p-umjerena"
     ],
     "13/06/2025": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
+    ]
+  },
+  "Pitomi kesten": {
+    "14/06/2025": [
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
