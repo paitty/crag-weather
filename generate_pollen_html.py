@@ -58,6 +58,13 @@ def generate_pollen_table():
                 else:
                     new_tag=soup.new_tag('td')
                     if date in pollen_table[col].keys():
+                        value = float(pollen_table[col][date])
+                        if value<2.0:
+                            new_tag['bgcolor']='green'
+                        elif value < 6.0:
+                            new_tag['bgcolor']='orange'
+                        else:
+                            new_tag['bgcolor']='red'
                         new_tag.string=pollen_table[col][date].replace(".",",")
                     else:
                         new_tag.string=""
