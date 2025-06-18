@@ -177,7 +177,7 @@ def createTable():
             elif col == 'theCrag':
                 new_link=soup.new_tag('a')
                 new_link.string='theCrag'
-                new_link.attrs['href'] = 'https://www.thecrag.com/fr/grimper/world/search?only=areas&S='+key
+                new_link.attrs['href'] = 'https://www.thecrag.com/en/climbing/world/search?only=areas&S='+key
                 new_link.attrs['target'] = '_blank'
                 new_tag.append(new_link)
             elif col == 'Maps':
