@@ -69,6 +69,14 @@ def generate_pollen_table():
                     else:
                         new_tag.string=""
                 last_line.append(new_tag)
+        
+        new_line = soup.new_tag("tr")
+        display_table.append(new_line)
+        last_line=display_table.find_all("tr")[-1]
+        for col in table_names:
+            new_column_header = soup.new_tag("th")
+            new_column_header.string=col
+            last_line.append(new_column_header)
 
     def createPredictionTable(tree):
         new_table=soup.new_tag("table")
