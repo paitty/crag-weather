@@ -207,7 +207,7 @@ def createTable():
                 new_img.attrs['src'] = 'check-mark.png'
                 new_img.attrs['width'] = 20
                 if 'Temp_style' in climbing_day[col][key].keys():
-                    new_img.attrs['src'] = 'hot.png'                  
+                    new_img.attrs['src'] = 'hot.PNG'                  
                 if 'Wind_style' in climbing_day[col][key].keys():
                     new_img.attrs['src'] = 'wind-leaf.png'                  
                 if 'Rain_style' in climbing_day[col][key].keys():
