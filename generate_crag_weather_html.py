@@ -202,22 +202,15 @@ def createTable():
                     new_tag.string=str(minutes)+" min"
                 else:
                     new_tag.string=str(int(hours))+"h"+str(minutes)+"m"
-            elif col == 'Saturday':
+            elif col == 'Sunday' or col == 'Saturday':
                 new_img=soup.new_tag('img')
                 new_img.attrs['src'] = 'check-mark.png'
                 new_img.attrs['width'] = 20
-                if 'Wind_style' in climbing_day['Saturday'][key].keys():
+                if 'Temp_style' in climbing_day[col][key].keys():
+                    new_img.attrs['src'] = 'hot.png'                  
+                if 'Wind_style' in climbing_day[col][key].keys():
                     new_img.attrs['src'] = 'wind-leaf.png'                  
-                if 'Rain_style' in climbing_day['Saturday'][key].keys():
-                    new_img.attrs['src'] = 'cloud-with-rain.png'
-                new_tag.append(new_img)
-            elif col == 'Sunday':
-                new_img=soup.new_tag('img')
-                new_img.attrs['src'] = 'check-mark.png'
-                new_img.attrs['width'] = 20
-                if 'Wind_style' in climbing_day['Sunday'][key].keys():
-                    new_img.attrs['src'] = 'wind-leaf.png'                  
-                if 'Rain_style' in climbing_day['Sunday'][key].keys():
+                if 'Rain_style' in climbing_day[col][key].keys():
                     new_img.attrs['src'] = 'cloud-with-rain.png'
                 new_tag.append(new_img)
             else:
@@ -258,6 +251,8 @@ for day in ['Saturday','Sunday']:
             climbing_day[day][key]['Rain_style']='bold'
         if (min_wind+max_wind)/2>5:
             climbing_day[day][key]['Wind_style']='bold'
+        if (max_temp+min_temp)>50:
+            climbing_day[day][key]['Temp_style']='bold'
 
 with open('climbing-weather.json') as f:
     old_climbing_weather = json.load(f)
