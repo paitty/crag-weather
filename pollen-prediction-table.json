@@ -224,6 +224,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "02/07/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "Trave": {
@@ -456,6 +461,11 @@
       "p-visoka",
       "p-visoka",
       "p-visoka"
+    ],
+    "02/07/2025": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Koprive": {
@@ -685,6 +695,11 @@
       "p-visoka"
     ],
     "01/07/2025": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
+    ],
+    "02/07/2025": [
       "p-visoka",
       "p-visoka",
       "p-visoka"
@@ -950,6 +965,11 @@
     ],
     "01/07/2025": [
       "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "02/07/2025": [
+      "p-umjerena",
       "p-niska",
       "p-niska"
     ]
@@ -1238,6 +1258,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "02/07/2025": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "\u010cempresi": {
@@ -1272,6 +1297,11 @@
       "p-niska"
     ],
     "01/07/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "02/07/2025": [
       "p-niska",
       "p-niska",
       "p-niska"
