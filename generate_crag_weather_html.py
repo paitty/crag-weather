@@ -23,8 +23,8 @@ headers = {'Accept':	'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;
 with open('climbing-locations.json') as f:
     climbing_locations = json.load(f)
 
-for location in climbing_locations.keys():
-    print(location)
+#for location in climbing_locations.keys():
+#    print(location)
 
 # datetime object containing current date and time
 now = datetime.now()
@@ -42,20 +42,36 @@ def get_next_weekday(startdate, weekday):
     t = timedelta((7 + weekday - d.weekday()) % 7)
     return (d + t).strftime('%Y-%m-%d')
 
-def get_next_weekend(day,duration):
+def get_next_day(day,duration):
     """
     @startdate: given date, in format '2013-05-25'
     @weekday: week day as a integer, between 0 (Monday) to 6 (Sunday)
     """
+    if day=='Monday':
+        day_num = 0
+    if day=='Tuesday':
+        day_num = 1
+    if day=='Wednesday':
+        day_num = 2
+    if day=='Thursday':
+        day_num = 3
+    if day=='Friday':
+        day_num = 4
     if day=='Saturday':
         day_num = 5
     if day=='Sunday':
         day_num = 6
     d = now
     t = timedelta((7 + day_num - d.weekday()) % 7)
+
     start = (d+t).replace(hour=0, minute=0, second=0, microsecond=0)
     end = start+timedelta(hours=duration)
     return start, end
+
+days_of_a_week = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+days_of_the_week = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+for i in range(7):
+    days_of_the_week[i] = days_of_a_week[(now.weekday()+i)%7]
 
 def get_next_weekend_short():
     """
@@ -135,7 +151,7 @@ def createTable():
     soup.html.body.append(new_table)
     display_table = soup.html.body.find_all("table")[-1]
 
-    table_names=['Crag','Saturday','Sunday','Temp','Rain','Wind','Distance','Yr.no','Windy','plezanje.net','theCrag','Maps','Waze']
+    table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Distance','Yr.no','Windy','plezanje.net','theCrag','Maps','Waze']
     new_header = soup.new_tag("tr")
     display_table.append(new_header)
     for col in table_names:
@@ -202,7 +218,7 @@ def createTable():
                     new_tag.string=str(minutes)+" min"
                 else:
                     new_tag.string=str(int(hours))+"h"+str(minutes)+"m"
-            elif col == 'Sunday' or col == 'Saturday':
+            elif col in days_of_the_week:
                 new_img=soup.new_tag('img')
                 new_img.attrs['src'] = 'check-mark.png'
                 new_img.attrs['width'] = 20
@@ -221,7 +237,7 @@ def createTable():
 
 #start, end = get_next_weekend()
 
-start_date, end_date =  get_next_weekend('Saturday',48)
+start_date, end_date =  get_next_day('Saturday',48)
 climbing_weather = {}
 
 for key in climbing_locations.keys():
@@ -240,11 +256,11 @@ for key in climbing_locations.keys():
     climbing_weather[key]['Score']+=20*(min_wind+max_wind)/2
 
 climbing_day={}
-for day in ['Saturday','Sunday']:
+for day in days_of_the_week:
     climbing_day[day]={}
+    day_start_date, day_end_date = get_next_day(day,24)
     for key in climbing_locations.keys():
         location = climbing_locations[key]['location']
-        day_start_date, day_end_date = get_next_weekend(day,24)
         min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, day_start_date, day_end_date)
         climbing_day[day][key]={}
         if rain>3:
@@ -283,7 +299,7 @@ HTML_DOC = """<!DOCTYPE html>
 <head>
 	<style type="text/css">
 		.myTable { background-color:#eee;border-collapse:collapse; }
-
+        .myTable tr:nth-child(2n) {background-color:#ccc;}
 		.myTable td, .myTable th { padding:5px;border:1px solid #000; }
 	</style>
 	<title>Crag Weather</title>
