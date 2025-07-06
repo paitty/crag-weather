@@ -228,6 +228,8 @@ def createTable():
                     new_img.attrs['src'] = 'wind-leaf.png'                  
                 if 'Rain_style' in climbing_day[col][key].keys():
                     new_img.attrs['src'] = 'cloud-with-rain.png'
+                if col in ['Saturday','Sunday']:
+                    new_tag.attrs['style']="background-color:#bbb;"
                 new_tag.append(new_img)
             else:
                 if col+'_style' in climbing_weather[key].keys():
