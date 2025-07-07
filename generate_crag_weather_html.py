@@ -47,19 +47,19 @@ def get_next_day(day,duration):
     @startdate: given date, in format '2013-05-25'
     @weekday: week day as a integer, between 0 (Monday) to 6 (Sunday)
     """
-    if day=='Monday':
+    if day=='Mon':
         day_num = 0
-    if day=='Tuesday':
+    if day=='Tue':
         day_num = 1
-    if day=='Wednesday':
+    if day=='Wed':
         day_num = 2
-    if day=='Thursday':
+    if day=='Thu':
         day_num = 3
-    if day=='Friday':
+    if day=='Fri':
         day_num = 4
-    if day=='Saturday':
+    if day=='Sat':
         day_num = 5
-    if day=='Sunday':
+    if day=='Sun':
         day_num = 6
     d = now
     t = timedelta((7 + day_num - d.weekday()) % 7)
@@ -68,7 +68,7 @@ def get_next_day(day,duration):
     end = start+timedelta(hours=duration)
     return start, end
 
-days_of_a_week = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+days_of_a_week = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
 days_of_the_week = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
 for i in range(7):
     days_of_the_week[i] = days_of_a_week[(now.weekday()+i)%7]
@@ -228,7 +228,7 @@ def createTable():
                     new_img.attrs['src'] = 'wind-leaf.png'                  
                 if 'Rain_style' in climbing_day[col][key].keys():
                     new_img.attrs['src'] = 'cloud-with-rain.png'
-                if col in ['Saturday','Sunday']:
+                if col in ['Sat','Sun']:
                     new_tag.attrs['style']="background-color:#bbb;"
                 new_tag.append(new_img)
             else:
@@ -239,7 +239,7 @@ def createTable():
 
 #start, end = get_next_weekend()
 
-start_date, end_date =  get_next_day('Saturday',48)
+start_date, end_date =  get_next_day('Sat',48)
 climbing_weather = {}
 
 for key in climbing_locations.keys():
