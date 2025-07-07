@@ -493,9 +493,9 @@
       "p-visoka"
     ],
     "07/07/2025": [
-      "p-visoka",
-      "p-visoka",
-      "p-visoka"
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Koprive": {
@@ -755,9 +755,9 @@
       "p-visoka"
     ],
     "07/07/2025": [
-      "p-visoka",
-      "p-visoka",
-      "p-visoka"
+      "p-niska",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Hrast": {
@@ -1049,7 +1049,7 @@
       "p-niska"
     ],
     "07/07/2025": [
-      "p-umjerena",
+      "p-niska",
       "p-niska",
       "p-niska"
     ]
