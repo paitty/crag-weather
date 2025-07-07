@@ -1,117 +1,120 @@
 {
   "Damelj": {
-    "Temp": "13-27\u00b0",
-    "Rain": 3,
+    "Temp": "15-26\u00b0",
+    "Rain": 2,
     "Wind": "0-2 m/s",
-    "Score": 129.70499999999998
+    "Score": 122.70500000000001
   },
   "Armesko": {
-    "Temp": "14-24\u00b0",
-    "Rain": 0,
+    "Temp": "15-24\u00b0",
+    "Rain": 5,
     "Wind": "0-3 m/s",
-    "Score": 102.63333333333333
+    "Score": 140.63333333333335
   },
   "Golubinjak": {
-    "Temp": "13-22\u00b0",
-    "Rain": 0,
-    "Wind": "0-3 m/s",
-    "Score": 134.67166666666668
+    "Temp": "11-20\u00b0",
+    "Rain": 1,
+    "Wind": "0-5 m/s",
+    "Score": 156.67166666666668
   },
   "Luknja": {
-    "Temp": "16-26\u00b0",
-    "Rain": 2,
+    "Temp": "15-25\u00b0",
+    "Rain": 10,
+    "Rain_style": "bold",
     "Wind": "0-1 m/s",
-    "Score": 117.60666666666665
+    "Score": 193.60666666666665
   },
   "Paklenica": {
     "Temp": "17-26\u00b0",
     "Rain": 0,
-    "Wind": "0-3 m/s",
-    "Score": 222.82999999999998
+    "Wind": "0-2 m/s",
+    "Score": 214.82999999999998
   },
   "Rovinj": {
-    "Temp": "21-26\u00b0",
-    "Rain": 0,
-    "Wind": "0-4 m/s",
-    "Score": 242.595
+    "Temp": "21-25\u00b0",
+    "Rain": 3,
+    "Wind": "1-6 m/s",
+    "Score": 303.595
   },
   "Kamenjak": {
-    "Temp": "12-22\u00b0",
-    "Rain": 1,
+    "Temp": "12-20\u00b0",
+    "Rain": 4,
     "Wind": "0-3 m/s",
-    "Score": 165.18833333333333
+    "Score": 207.18833333333333
   },
   "Kalnik": {
-    "Temp": "14-26\u00b0",
-    "Rain": 0,
-    "Wind": "0-2 m/s",
-    "Score": 98.67666666666668
+    "Temp": "13-25\u00b0",
+    "Rain": 1,
+    "Wind": "0-4 m/s",
+    "Score": 132.67666666666668
   },
   "Okic": {
-    "Temp": "15-27\u00b0",
+    "Temp": "15-26\u00b0",
     "Rain": 1,
-    "Wind": "0-2 m/s",
-    "Score": 71.27833333333334
+    "Wind": "0-3 m/s",
+    "Score": 84.27833333333334
   },
   "Vela Pesa": {
-    "Temp": "11-21\u00b0",
-    "Rain": 0,
-    "Wind": "0-2 m/s",
-    "Score": 182.64666666666665
-  },
-  "Kompanj": {
-    "Temp": "14-24\u00b0",
-    "Rain": 3,
-    "Wind": "0-2 m/s",
-    "Score": 215.89666666666665
-  },
-  "Omis": {
-    "Temp": "14-28\u00b0",
-    "Rain": 0,
-    "Wind": "0-3 m/s",
-    "Score": 319.0316666666667
-  },
-  "Obli Kuk (Prezid)": {
-    "Temp": "9-24\u00b0",
-    "Rain": 0,
-    "Wind": "0-3 m/s",
-    "Score": 202.82333333333332
-  },
-  "Klamarusa": {
-    "Temp": "13-23\u00b0",
-    "Rain": 4,
-    "Wind": "0-1 m/s",
-    "Score": 196.01333333333335
-  },
-  "Dabarski Kukovi": {
-    "Temp": "12-23\u00b0",
-    "Rain": 0,
-    "Wind": "0-2 m/s",
-    "Score": 199.85166666666666
-  },
-  "Zlarin": {
-    "Temp": "21-29\u00b0",
-    "Rain": 0,
-    "Wind": "1-8 m/s",
-    "Score": 317.4616666666667
-  },
-  "Strogir": {
-    "Temp": "17-24\u00b0",
-    "Rain": 0,
-    "Wind": "0-3 m/s",
-    "Score": 201.57999999999998
-  },
-  "Vela Draga": {
-    "Temp": "15-24\u00b0",
+    "Temp": "11-19\u00b0",
     "Rain": 5,
     "Wind": "0-2 m/s",
-    "Score": 224.525
+    "Score": 232.64666666666665
   },
-  "Portafortuna": {
-    "Temp": "18-23\u00b0",
-    "Rain": 12,
+  "Kompanj": {
+    "Temp": "13-22\u00b0",
+    "Rain": 7,
+    "Rain_style": "bold",
+    "Wind": "0-3 m/s",
+    "Score": 268.89666666666665
+  },
+  "Omis": {
+    "Temp": "15-29\u00b0",
+    "Rain": 0,
+    "Wind": "0-3 m/s",
+    "Score": 320.0316666666667
+  },
+  "Obli Kuk (Prezid)": {
+    "Temp": "10-24\u00b0",
+    "Rain": 0,
+    "Wind": "0-3 m/s",
+    "Score": 207.82333333333332
+  },
+  "Klamarusa": {
+    "Temp": "13-21\u00b0",
+    "Rain": 6,
+    "Rain_style": "bold",
+    "Wind": "0-3 m/s",
+    "Score": 234.01333333333335
+  },
+  "Dabarski Kukovi": {
+    "Temp": "12-21\u00b0",
+    "Rain": 0,
+    "Wind": "0-3 m/s",
+    "Score": 198.85166666666666
+  },
+  "Zlarin": {
+    "Temp": "20-29\u00b0",
+    "Rain": 0,
+    "Wind": "0-6 m/s",
+    "Score": 292.4616666666667
+  },
+  "Strogir": {
+    "Temp": "17-23\u00b0",
+    "Rain": 0,
+    "Wind": "1-4 m/s",
+    "Score": 216.57999999999998
+  },
+  "Vela Draga": {
+    "Temp": "15-23\u00b0",
+    "Rain": 22,
     "Rain_style": "bold",
     "Wind": "0-2 m/s",
-    "Score": 308.37666666666667
+    "Score": 390.525
+  },
+  "Portafortuna": {
+    "Temp": "18-22\u00b0",
+    "Rain": 1,
+    "Wind": "0-6 m/s",
+    "Score": 233.37666666666667
   }
 }
