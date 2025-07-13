@@ -521,6 +521,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "13/07/2025": [
+      "p-niska",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Koprive": {
@@ -805,6 +810,11 @@
       "p-umjerena"
     ],
     "12/07/2025": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
+    ],
+    "13/07/2025": [
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
@@ -1125,6 +1135,11 @@
     ],
     "12/07/2025": [
       "p-umjerena",
+      "p-niska",
+      "p-niska"
+    ],
+    "13/07/2025": [
+      "p-niska",
       "p-niska",
       "p-niska"
     ]
@@ -1468,6 +1483,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "13/07/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "\u010cempresi": {
@@ -1557,6 +1577,11 @@
       "p-niska"
     ],
     "12/07/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "13/07/2025": [
       "p-niska",
       "p-niska",
       "p-niska"
