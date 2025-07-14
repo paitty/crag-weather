@@ -5,6 +5,18 @@
     "Wind": "0-3 m/s",
     "Score": 104.705
   },
+  "Kotecnik": {
+    "Temp": "14-29\u00b0",
+    "Rain": 0,
+    "Wind": "0-3 m/s",
+    "Score": 149.04
+  },
+  "Maltatal": {
+    "Temp": "11-23\u00b0",
+    "Rain": 2,
+    "Wind": "0-2 m/s",
+    "Score": 258.55
+  },
   "Armesko": {
     "Temp": "16-30\u00b0",
     "Rain": 0,
