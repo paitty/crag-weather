@@ -13,10 +13,12 @@
     ],
     "Distance": 111.03999999999999
   },
-      "Triglav, north wall":{
+  "Triglav, north wall": {
     "location": [
-      46.384787,13.834237
-    ]
+      46.384787,
+      13.834237
+    ],
+    "Distance": 159.27833333333334
   },
   "Maltatal": {
     "location": [
