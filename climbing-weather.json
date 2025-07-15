@@ -18,6 +18,12 @@
     "Wind": "0-2 m/s",
     "Score": 374.55
   },
+  "Buncove skale": {
+    "Temp": "16-25\u00b0",
+    "Rain": 4,
+    "Wind": "0-2 m/s",
+    "Score": 181.40333333333334
+  },
   "Armesko": {
     "Temp": "17-30\u00b0",
     "Rain": 0,
@@ -46,6 +52,7 @@
     "Temp": "22-29\u00b0",
     "Rain": 0,
     "Wind": "1-6 m/s",
+    "Temp_style": "bold",
     "Score": 271.595
   },
   "Kamenjak": {
@@ -106,6 +113,7 @@
     "Temp": "22-31\u00b0",
     "Rain": 0,
     "Wind": "1-5 m/s",
+    "Temp_style": "bold",
     "Score": 294.4616666666667
   },
   "Strogir": {

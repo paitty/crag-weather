@@ -2,6 +2,9 @@ import json
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta
 import requests
+import folium
+import pandas as pd
+import folium.plugins as plugins
 
 headers = {'Accept':	'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Encoding':	'gzip, deflate, br, zstd',
@@ -253,6 +256,8 @@ for key in climbing_locations.keys():
     climbing_weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
     if (min_wind+max_wind)/2>5:
         climbing_weather[key]['Wind_style']='bold'
+    if (min_temp+max_temp)>50:
+        climbing_weather[key]['Temp_style']='bold'
     climbing_weather[key]['Score'] = get_distance(key)
     climbing_weather[key]['Score']+=10*rain
     climbing_weather[key]['Score']+=20*(min_wind+max_wind)/2
@@ -350,9 +355,67 @@ soup = BeautifulSoup(HTML_DOC, "html.parser")
 
 createTable()
 
+HTML_end = """   <br> <div class="container">
+<iframe id="iframe1" name="iframe1" frameborder="0"  
+     src="detail_footprint.html" width="800" height="500"></iframe>
+     </div>  """
+
+soup1 = BeautifulSoup(HTML_end, "html.parser")
+
+soup.body.append(soup1)
+
 html = soup.prettify("utf-8")
 with open("build_outputs_folder/index.html", "wb") as file:
     file.write(html)
+
+def add_categorical_legend(folium_map, title, colors, labels):
+    return folium_map
+
+def display_cities_on_map(html_filename):
+
+    #headers={'User-Agent': 'Mozilla/5.0'}
+
+    latitudes =[]
+    longitudes =[]
+    weather = []
+    links = []
+    for key in climbing_locations.keys():
+        latitudes.append(str(climbing_locations[key]['location'][0])[:6])
+        longitudes.append(str(climbing_locations[key]['location'][1])[:6])
+        icon_color ="#004506" #green
+        if 'Temp_style' in climbing_weather[key].keys():
+            icon_color ="#D60A0A" #red               
+        if 'Wind_style' in climbing_weather[key].keys():
+            icon_color ="#525252" #grey                 
+        if 'Rain_style' in climbing_weather[key].keys():
+            icon_color ="#0D00C8" #blue
+        weather.append(icon_color)
+        yr_link = 'https://www.yr.no/en/forecast/daily-table/'+str(climbing_locations[key]['location'][0])[:6]+", "+str(climbing_locations[key]['location'][1])[:6]
+        link = '<a href="'+yr_link+'" target=”_blank”>'+key+'</a>'
+        links.append(link)
+    
+    df = pd.DataFrame({'Properties':links,
+                        'Latitude':latitudes,
+                        'Longitude':longitudes,
+                        'Weather':weather})
+
+    m = folium.Map(location=[45.37789272618172, 15.445964471005263], tiles="OpenStreetMap", zoom_start=7)
+
+    for i in range(0,len(df)):
+        point_location=[df.iloc[i]['Latitude'], df.iloc[i]['Longitude']]
+        icon_color = df.iloc[i]['Weather']
+        #print(df.iloc[i]['Properties'])
+        folium.Marker(
+        location=point_location,
+        icon=plugins.BeautifyIcon(icon="arrow-down", icon_shape="marker", border_color=icon_color, text_color=icon_color),
+        popup=df.iloc[i]['Properties'],
+        ).add_to(m)
+    m = add_categorical_legend(m, 'Distance to Rovinj:',
+                             colors = ['#004506',"#D60A0A","#525252", "#0D00C8"],
+                           labels = ['All good', 'Hot', 'Windy', 'Rainy'])
+    m.save(html_filename)
+
+display_cities_on_map('build_outputs_folder/detail_footprint.html')
 
 import generate_pollen_html
 
