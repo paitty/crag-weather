@@ -531,6 +531,11 @@
       "p-niska",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "15/07/2025": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Koprive": {
@@ -825,6 +830,11 @@
       "p-umjerena"
     ],
     "14/07/2025": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
+    ],
+    "15/07/2025": [
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
@@ -1155,6 +1165,11 @@
     ],
     "14/07/2025": [
       "p-umjerena",
+      "p-niska",
+      "p-niska"
+    ],
+    "15/07/2025": [
+      "p-niska",
       "p-niska",
       "p-niska"
     ]
@@ -1508,6 +1523,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "15/07/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "\u010cempresi": {
@@ -1610,10 +1630,20 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "15/07/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "Ambrozija": {
     "14/07/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "15/07/2025": [
       "p-niska",
       "p-niska",
       "p-niska"
