@@ -1,160 +1,160 @@
 {
   "Damelj": {
-    "Temp": "15-22\u00b0",
-    "Rain": 24,
-    "Rain_style": "bold",
-    "Wind": "0-2 m/s",
-    "Score": 337.705
-  },
-  "Kotecnik": {
-    "Temp": "13-20\u00b0",
-    "Rain": 41,
-    "Rain_style": "bold",
-    "Wind": "0-2 m/s",
-    "Score": 553.04
-  },
-  "Triglav, north wall": {
-    "Temp": "2-6\u00b0",
-    "Rain": 17,
-    "Rain_style": "bold",
-    "Wind": "0-2 m/s",
-    "Score": 367.27833333333336
-  },
-  "Maltatal": {
-    "Temp": "10-18\u00b0",
-    "Rain": 14,
-    "Rain_style": "bold",
-    "Wind": "0-2 m/s",
-    "Score": 372.55
-  },
-  "Buncove skale": {
-    "Temp": "13-19\u00b0",
-    "Rain": 20,
-    "Rain_style": "bold",
-    "Wind": "0-2 m/s",
-    "Score": 342.4033333333333
-  },
-  "Armesko": {
-    "Temp": "14-22\u00b0",
-    "Rain": 17,
-    "Rain_style": "bold",
-    "Wind": "1-2 m/s",
-    "Score": 266.6333333333333
-  },
-  "Golubinjak": {
-    "Temp": "12-18\u00b0",
-    "Rain": 27,
-    "Rain_style": "bold",
-    "Wind": "0-3 m/s",
-    "Score": 401.6716666666667
-  },
-  "Luknja": {
-    "Temp": "16-22\u00b0",
-    "Rain": 40,
-    "Rain_style": "bold",
-    "Wind": "0-1 m/s",
-    "Score": 499.60666666666657
-  },
-  "Paklenica": {
-    "Temp": "19-25\u00b0",
-    "Rain": 4,
-    "Wind": "0-3 m/s",
-    "Score": 265.83
-  },
-  "Rovinj": {
-    "Temp": "20-24\u00b0",
-    "Rain": 7,
-    "Rain_style": "bold",
-    "Wind": "0-6 m/s",
-    "Score": 334.59499999999997
-  },
-  "Kamenjak": {
-    "Temp": "13-20\u00b0",
-    "Rain": 32,
+    "Temp": "14-23\u00b0",
+    "Rain": 25,
     "Rain_style": "bold",
     "Wind": "0-4 m/s",
-    "Score": 484.18833333333333
+    "Score": 368.705
   },
-  "Kalnik": {
-    "Temp": "15-22\u00b0",
-    "Rain": 13,
+  "Kotecnik": {
+    "Temp": "13-21\u00b0",
+    "Rain": 23,
+    "Rain_style": "bold",
+    "Wind": "0-3 m/s",
+    "Score": 381.04
+  },
+  "Triglav, north wall": {
+    "Temp": "0-8\u00b0",
+    "Rain": 23,
+    "Rain_style": "bold",
+    "Wind": "0-3 m/s",
+    "Score": 425.27833333333336
+  },
+  "Maltatal": {
+    "Temp": "9-17\u00b0",
+    "Rain": 24,
+    "Rain_style": "bold",
+    "Wind": "0-3 m/s",
+    "Score": 485.55
+  },
+  "Buncove skale": {
+    "Temp": "14-19\u00b0",
+    "Rain": 21,
+    "Rain_style": "bold",
+    "Wind": "0-3 m/s",
+    "Score": 354.4033333333333
+  },
+  "Armesko": {
+    "Temp": "13-23\u00b0",
+    "Rain": 18,
+    "Rain_style": "bold",
+    "Wind": "0-3 m/s",
+    "Score": 270.6333333333333
+  },
+  "Golubinjak": {
+    "Temp": "11-20\u00b0",
+    "Rain": 11,
     "Rain_style": "bold",
     "Wind": "1-4 m/s",
-    "Score": 259.6766666666667
+    "Score": 259.6716666666667
+  },
+  "Luknja": {
+    "Temp": "15-22\u00b0",
+    "Rain": 8,
+    "Rain_style": "bold",
+    "Wind": "0-2 m/s",
+    "Score": 185.60666666666668
+  },
+  "Paklenica": {
+    "Temp": "17-27\u00b0",
+    "Rain": 11,
+    "Rain_style": "bold",
+    "Wind": "0-3 m/s",
+    "Score": 333.83
+  },
+  "Rovinj": {
+    "Temp": "19-25\u00b0",
+    "Rain": 33,
+    "Rain_style": "bold",
+    "Wind": "1-7 m/s",
+    "Score": 623.595
+  },
+  "Kamenjak": {
+    "Temp": "12-21\u00b0",
+    "Rain": 19,
+    "Rain_style": "bold",
+    "Wind": "1-4 m/s",
+    "Score": 369.18833333333333
+  },
+  "Kalnik": {
+    "Temp": "14-23\u00b0",
+    "Rain": 8,
+    "Rain_style": "bold",
+    "Wind": "1-4 m/s",
+    "Score": 211.67666666666668
   },
   "Okic": {
-    "Temp": "16-23\u00b0",
-    "Rain": 34,
-    "Rain_style": "bold",
-    "Wind": "0-2 m/s",
-    "Score": 415.2783333333333
-  },
-  "Vela Pesa": {
-    "Temp": "12-19\u00b0",
-    "Rain": 30,
-    "Rain_style": "bold",
-    "Wind": "0-3 m/s",
-    "Score": 493.6466666666667
-  },
-  "Kompanj": {
-    "Temp": "13-22\u00b0",
+    "Temp": "15-24\u00b0",
     "Rain": 15,
     "Rain_style": "bold",
-    "Wind": "0-2 m/s",
-    "Score": 339.89666666666665
+    "Wind": "0-3 m/s",
+    "Score": 230.27833333333334
+  },
+  "Vela Pesa": {
+    "Temp": "11-19\u00b0",
+    "Rain": 11,
+    "Rain_style": "bold",
+    "Wind": "1-6 m/s",
+    "Score": 341.64666666666665
+  },
+  "Kompanj": {
+    "Temp": "12-20\u00b0",
+    "Rain": 29,
+    "Rain_style": "bold",
+    "Wind": "1-4 m/s",
+    "Score": 495.8966666666666
   },
   "Omis": {
-    "Temp": "17-28\u00b0",
+    "Temp": "16-28\u00b0",
     "Rain": 0,
     "Wind": "0-3 m/s",
-    "Score": 329.0316666666667
+    "Score": 333.0316666666667
   },
   "Obli Kuk (Prezid)": {
-    "Temp": "14-24\u00b0",
-    "Rain": 10,
-    "Rain_style": "bold",
-    "Wind": "0-3 m/s",
-    "Score": 308.8233333333333
+    "Temp": "13-25\u00b0",
+    "Rain": 3,
+    "Wind": "0-4 m/s",
+    "Score": 249.82333333333332
   },
   "Klamarusa": {
-    "Temp": "16-22\u00b0",
-    "Rain": 12,
+    "Temp": "13-23\u00b0",
+    "Rain": 11,
     "Rain_style": "bold",
-    "Wind": "0-3 m/s",
-    "Score": 295.0133333333334
+    "Wind": "0-5 m/s",
+    "Score": 302.0133333333333
   },
   "Dabarski Kukovi": {
-    "Temp": "13-21\u00b0",
-    "Rain": 7,
+    "Temp": "12-22\u00b0",
+    "Rain": 6,
     "Rain_style": "bold",
-    "Wind": "0-3 m/s",
-    "Score": 279.8516666666667
+    "Wind": "0-4 m/s",
+    "Score": 281.85166666666663
   },
   "Zlarin": {
-    "Temp": "20-28\u00b0",
+    "Temp": "20-27\u00b0",
     "Rain": 0,
-    "Wind": "1-6 m/s",
-    "Score": 317.4616666666667
+    "Wind": "0-7 m/s",
+    "Score": 309.4616666666667
   },
   "Strogir": {
-    "Temp": "17-23\u00b0",
-    "Rain": 13,
+    "Temp": "16-23\u00b0",
+    "Rain": 10,
     "Rain_style": "bold",
-    "Wind": "0-3 m/s",
-    "Score": 334.58000000000004
+    "Wind": "0-6 m/s",
+    "Score": 328.5799999999999
   },
   "Vela Draga": {
     "Temp": "14-21\u00b0",
-    "Rain": 10,
-    "Rain_style": "bold",
-    "Wind": "0-3 m/s",
-    "Score": 285.52500000000003
-  },
-  "Portafortuna": {
-    "Temp": "18-21\u00b0",
-    "Rain": 12,
+    "Rain": 31,
     "Rain_style": "bold",
     "Wind": "0-6 m/s",
-    "Score": 348.37666666666667
+    "Score": 536.525
+  },
+  "Portafortuna": {
+    "Temp": "17-23\u00b0",
+    "Rain": 27,
+    "Rain_style": "bold",
+    "Wind": "0-7 m/s",
+    "Score": 505.37666666666667
   }
 }
