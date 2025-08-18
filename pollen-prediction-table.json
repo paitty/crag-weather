@@ -701,6 +701,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "18/08/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "Koprive": {
@@ -1166,6 +1171,11 @@
     ],
     "17/08/2025": [
       "p-niska",
+      "p-visoka",
+      "p-visoka"
+    ],
+    "18/08/2025": [
+      "p-visoka",
       "p-visoka",
       "p-visoka"
     ]
@@ -1664,6 +1674,11 @@
       "p-umjerena"
     ],
     "17/08/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "18/08/2025": [
       "p-niska",
       "p-niska",
       "p-niska"
@@ -2367,6 +2382,11 @@
       "p-niska",
       "p-visoka",
       "p-visoka"
+    ],
+    "18/08/2025": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Pelin": {
@@ -2426,6 +2446,11 @@
       "p-niska"
     ],
     "17/08/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "18/08/2025": [
       "p-niska",
       "p-niska",
       "p-niska"
