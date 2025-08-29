@@ -2,6 +2,9 @@ import json
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta
 import requests
+import folium
+import folium.plugins as plugins
+import pandas as pd
 
 def generate_pollen_table():
     def createPollenTable():
@@ -167,7 +170,7 @@ def generate_pollen_table():
                 if soup2.text.strip() not in pollen_table.keys():
                     pollen_table[soup2.text.strip()]={}
                 pollen_table[soup2.text.strip()][today_date] = soup1.text.strip()
-                print(soup2.text.strip()+": "+soup1.text.strip())
+                #print(soup2.text.strip()+": "+soup1.text.strip())
                 prediction = []
                 for soup6 in soup3.find_all('embed'):
                     if soup6.get('src'):
@@ -176,7 +179,7 @@ def generate_pollen_table():
                 if soup2.text.strip() not in prediction_table.keys():
                     prediction_table[soup2.text.strip()]={}
                 prediction_table[soup2.text.strip()][today_date] = prediction
-                print(prediction)
+                #print(prediction)
 
     with open('pollen-table.json', 'w') as f:
         json_pretty = json.dumps(pollen_table, indent=2)
@@ -221,7 +224,6 @@ def generate_pollen_table():
     
     soup = BeautifulSoup(HTML_DOC, "html.parser")
 
-
     day_names = ['Today', 'Tomorrow', 'Overmorrow']
     for i in range(3):
         tomorrow_string = day_names[i]+" - High: "
@@ -246,8 +248,6 @@ def generate_pollen_table():
         new_paragraph.string=tomorrow_string
         soup.html.body.append(new_paragraph)
 
-
-    
     for tree in prediction_table.keys():
         new_paragraph=soup.new_tag("p")
         new_paragraph.string=tree
@@ -258,6 +258,111 @@ def generate_pollen_table():
     with open("build_outputs_folder/pollen_prediction.html", "wb") as file:
         file.write(html)
 
+    with open('pollen_locations.json') as f:
+        pollen_locations = json.load(f)
+
+    def get_lat_lon(city):      
+        url='https://nominatim.openstreetmap.org/search?q='+city+'&format=jsonv2'
+        r= requests.get(url, headers=headers)
+        if r.json() == []:
+            url='https://nominatim.openstreetmap.org/search.php?q='+city.split()[0]+'&format=jsonv2'
+            r= requests.get(url, headers=headers)
+        lat = r.json()[0]['lat']
+        lon = r.json()[0]['lon']
+        return lat, lon
+
+    def check_pollen(location_number):
+        #example call
+        #https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=45.434&lon=15.188
+        url = "https://www.plivazdravlje.hr/alergije/prognoza/"+str(location_number)
+        r = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
+        soup = BeautifulSoup(r.content,"html.parser")
+        city = "nothing"
+        pollen_value = "-"
+        for soup3 in soup.find_all('div'):
+            #print(soup3.get("class"))
+            if soup3.get("class"):
+                if soup3.get("class")[0] == "peludPrognozaNaslov1":
+                    city = soup3.text.strip()
+                if soup3.get("class")[0] == "peludHolder":
+                    for soup2 in soup3.find_all('div'):
+                        if soup2.get("class")[0] == "peludKategorija":
+                            break
+                    for soup1 in soup3.find_all('span'):
+                        if soup1.get("class"):
+                            if soup1.get("class")[0] == "peludStupacOcitanje":
+                                break
+                    if soup2.text.strip()== 'Ambrozija':
+                        pollen_value = soup1.text.strip()
+                        break
+        print(city+": "+pollen_value)
+        return city, pollen_value
+
+    pollen_table = {}
+    for i in range(1,25):
+        city, value = check_pollen(i)
+        if city != 'nothing':
+            if city not in pollen_locations.keys():
+                pollen_locations[city]={}
+                lat, lon = get_lat_lon(city)
+                pollen_locations[city]['location']=[lat, lon]
+                pollen_locations[city]['number']=str(i)
+            pollen_table[city]=value
+
+    with open('pollen_locations.json', 'w') as f:
+        json_pretty = json.dumps(pollen_locations, indent=2)
+        f.write(json_pretty)
+
+    def display_cities_on_map(html_filename):
+        latitudes =[]
+        longitudes =[]
+        pollen_color = []
+        pollen_value = []
+        links = []
+        for key in pollen_locations.keys():
+            latitudes.append(str(pollen_locations[key]['location'][0])[:6])
+            longitudes.append(str(pollen_locations[key]['location'][1])[:6])
+            location_number = pollen_locations[key]['number']
+            value = pollen_table[key]
+            if value == '-':
+                icon_color ="#6B6B6B" #grey
+                pollen_value.append(value)
+            else:
+                value = float(value)
+                if value<2.0:
+                    icon_color ="#2C01D5" #blue 
+                elif value < 6.0:
+                    icon_color ="#FF7327" #orange 
+                else:
+                    icon_color ="#D60A0A" #red 
+                pollen_value.append(min(9,int(value)))
+            
+            pollen_color.append(icon_color)
+
+            Pliva_link = "https://www.plivazdravlje.hr/alergije/prognoza/"+str(location_number)
+            link = '<a href="'+Pliva_link+'" target=”_blank”>'+key+'</a>'
+            links.append(link)
+        
+        df = pd.DataFrame({'Pollen_Links':links,
+                            'Latitude':latitudes,
+                            'Longitude':longitudes,
+                            'Pollen_Color':pollen_color,
+                            'Pollen_Values': pollen_value})
+
+        m = folium.Map(location=[44.67789272618172, 15.945964471005263], tiles="OpenStreetMap", zoom_start=7)
+
+        for i in range(0,len(df)):
+            point_location=[df.iloc[i]['Latitude'], df.iloc[i]['Longitude']]
+            icon_color = df.iloc[i]['Pollen_Color']
+            #print(df.iloc[i]['Properties'])
+            folium.Marker(
+            location=point_location,
+            icon=plugins.BeautifyIcon(icon=df.iloc[i]['Pollen_Values'], icon_shape="marker", border_color=icon_color, text_color=icon_color),
+            popup=df.iloc[i]['Pollen_Links'],
+            ).add_to(m)
+        m.save(html_filename)
+
+    display_cities_on_map('build_outputs_folder/ambrozija_map.html')
 if __name__ == "__main__":
     print("This is a different version of the module.py file.")
     generate_pollen_table()
