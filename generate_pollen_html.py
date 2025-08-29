@@ -263,6 +263,9 @@ def generate_pollen_table():
     with open('pollen_locations.json') as f:
         pollen_locations = json.load(f)
 
+    with open('ambrozija-table.json') as f:
+        ampbrozija_table = json.load(f)
+
     def get_lat_lon(city):      
         url='https://nominatim.openstreetmap.org/search?q='+city+'&format=jsonv2'
         r= requests.get(url, headers=headers)
@@ -297,6 +300,9 @@ def generate_pollen_table():
                     if soup2.text.strip()== 'Ambrozija':
                         pollen_value = soup1.text.strip()
                         break
+        if city not in ampbrozija_table.keys():
+            ampbrozija_table[city]={}
+        ampbrozija_table[city][today_date] = pollen_value
         print(city+": "+pollen_value)
         return city, pollen_value
 
@@ -313,6 +319,10 @@ def generate_pollen_table():
 
     with open('pollen_locations.json', 'w') as f:
         json_pretty = json.dumps(pollen_locations, indent=2)
+        f.write(json_pretty)
+    
+    with open('ambrozija-table.json', 'w') as f:
+        json_pretty = json.dumps(ampbrozija_table, indent=2)
         f.write(json_pretty)
 
     def display_cities_on_map(html_filename):

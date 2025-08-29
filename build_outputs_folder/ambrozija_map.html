@@ -3,6 +3,14 @@
 <head>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -17,7 +25,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_401e1eb64e7e46a05a007088f90bc054 {
+                #map_9bf90eadc54293cada407b32cc6a6ea4 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -26,29 +34,6 @@
                 }
                 .leaflet-container { font-size: 1rem; }
             </style>
-
-            <style>html, body {
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-            </style>
-
-            <style>#map {
-                position:absolute;
-                top:0;
-                bottom:0;
-                right:0;
-                left:0;
-                }
-            </style>
-
-            <script>
-                L_NO_TOUCH = false;
-                L_DISABLE_3D = false;
-            </script>
-
         
     <script src="https://cdn.jsdelivr.net/gh/marslan390/BeautifyMarker/leaflet-beautify-marker-icon.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marslan390/BeautifyMarker/leaflet-beautify-marker-icon.min.css"/>
@@ -56,14 +41,14 @@
 <body>
     
     
-            <div class="folium-map" id="map_401e1eb64e7e46a05a007088f90bc054" ></div>
+            <div class="folium-map" id="map_9bf90eadc54293cada407b32cc6a6ea4" ></div>
         
 </body>
 <script>
     
     
-            var map_401e1eb64e7e46a05a007088f90bc054 = L.map(
-                "map_401e1eb64e7e46a05a007088f90bc054",
+            var map_9bf90eadc54293cada407b32cc6a6ea4 = L.map(
+                "map_9bf90eadc54293cada407b32cc6a6ea4",
                 {
                     center: [44.67789272618172, 15.945964471005263],
                     crs: L.CRS.EPSG3857,
@@ -80,7 +65,7 @@
 
         
     
-            var tile_layer_8050d7a5f98cc9a02cd50ce17ea3d3d6 = L.tileLayer(
+            var tile_layer_97ff83f7fbfeced47b77462102d7a1d4 = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -97,17 +82,17 @@
             );
         
     
-            tile_layer_8050d7a5f98cc9a02cd50ce17ea3d3d6.addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            tile_layer_97ff83f7fbfeced47b77462102d7a1d4.addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var marker_0a669b44793ef6498783b2d44d9ed911 = L.marker(
+            var marker_5bf12c5d62b6f27a58a49fed16d60350 = L.marker(
                 [45.813, 15.977],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_4f8718bf40c44bc8448b12b5ff095651 = new L.BeautifyIcon.icon(
+            var beautify_icon_6b59355cd0d759b388c986f72742a5cd = new L.BeautifyIcon.icon(
                 {
   "icon": 7,
   "iconShape": "marker",
@@ -120,37 +105,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_0a669b44793ef6498783b2d44d9ed911.setIcon(beautify_icon_4f8718bf40c44bc8448b12b5ff095651);
+            marker_5bf12c5d62b6f27a58a49fed16d60350.setIcon(beautify_icon_6b59355cd0d759b388c986f72742a5cd);
         
     
-        var popup_f44b029e6b5c8816dd7a7538fac66606 = L.popup({
+        var popup_665f789134e280548af43d4277ed6fdb = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_ef4005a191f67495306446d28d0482a8 = $(`<div id="html_ef4005a191f67495306446d28d0482a8" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/1" target=”_blank”>Zagreb</a></div>`)[0];
-                popup_f44b029e6b5c8816dd7a7538fac66606.setContent(html_ef4005a191f67495306446d28d0482a8);
+                var html_3d66ca8ef4cc1425bd6337ba1f1a1ed1 = $(`<div id="html_3d66ca8ef4cc1425bd6337ba1f1a1ed1" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/1" target=”_blank”>Zagreb</a></div>`)[0];
+                popup_665f789134e280548af43d4277ed6fdb.setContent(html_3d66ca8ef4cc1425bd6337ba1f1a1ed1);
             
         
 
-        marker_0a669b44793ef6498783b2d44d9ed911.bindPopup(popup_f44b029e6b5c8816dd7a7538fac66606)
+        marker_5bf12c5d62b6f27a58a49fed16d60350.bindPopup(popup_665f789134e280548af43d4277ed6fdb)
         ;
 
         
     
     
-                marker_0a669b44793ef6498783b2d44d9ed911.setIcon(beautify_icon_4f8718bf40c44bc8448b12b5ff095651);
-            
-    
-            var marker_139ce18ae461b36391ea1e12731c402e = L.marker(
+            var marker_b805dc2aada1a726812a3f83744875c2 = L.marker(
                 [45.898, 16.842],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_2170291e7491c9e8b88536d99fc60605 = new L.BeautifyIcon.icon(
+            var beautify_icon_d92dd791fb3587ff1635f2337a43dc57 = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -163,37 +145,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_139ce18ae461b36391ea1e12731c402e.setIcon(beautify_icon_2170291e7491c9e8b88536d99fc60605);
+            marker_b805dc2aada1a726812a3f83744875c2.setIcon(beautify_icon_d92dd791fb3587ff1635f2337a43dc57);
         
     
-        var popup_1f7299098146f6709bbe11a7c53e7ecc = L.popup({
+        var popup_faa344af6f1033bdbb5d8a723677dbb8 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_1591256940bad27172c0a994ce3853e5 = $(`<div id="html_1591256940bad27172c0a994ce3853e5" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/2" target=”_blank”>Bjelovar</a></div>`)[0];
-                popup_1f7299098146f6709bbe11a7c53e7ecc.setContent(html_1591256940bad27172c0a994ce3853e5);
+                var html_d789214826544c32a0157fde724acd0f = $(`<div id="html_d789214826544c32a0157fde724acd0f" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/2" target=”_blank”>Bjelovar</a></div>`)[0];
+                popup_faa344af6f1033bdbb5d8a723677dbb8.setContent(html_d789214826544c32a0157fde724acd0f);
             
         
 
-        marker_139ce18ae461b36391ea1e12731c402e.bindPopup(popup_1f7299098146f6709bbe11a7c53e7ecc)
+        marker_b805dc2aada1a726812a3f83744875c2.bindPopup(popup_faa344af6f1033bdbb5d8a723677dbb8)
         ;
 
         
     
     
-                marker_139ce18ae461b36391ea1e12731c402e.setIcon(beautify_icon_2170291e7491c9e8b88536d99fc60605);
-            
-    
-            var marker_3655bd765a4d30334cb535b6bec03f35 = L.marker(
+            var marker_7cde2927bb9c4264cd065de08dc5a652 = L.marker(
                 [46.307, 16.337],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_d2415ffd54f83a0af5480cd09d77fa8b = new L.BeautifyIcon.icon(
+            var beautify_icon_ce3055a096c309c2c54cc7527ab0b491 = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -206,37 +185,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_3655bd765a4d30334cb535b6bec03f35.setIcon(beautify_icon_d2415ffd54f83a0af5480cd09d77fa8b);
+            marker_7cde2927bb9c4264cd065de08dc5a652.setIcon(beautify_icon_ce3055a096c309c2c54cc7527ab0b491);
         
     
-        var popup_29ef808271054cd0618d3a786f6938bc = L.popup({
+        var popup_b1382c6f9a3eebea9cddb04bdf2d3a35 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_b86a06a19aa3c669ce1b3be8023d5cad = $(`<div id="html_b86a06a19aa3c669ce1b3be8023d5cad" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/3" target=”_blank”>Varaždin</a></div>`)[0];
-                popup_29ef808271054cd0618d3a786f6938bc.setContent(html_b86a06a19aa3c669ce1b3be8023d5cad);
+                var html_40b1b0c30629fe2d4cfa119c60388594 = $(`<div id="html_40b1b0c30629fe2d4cfa119c60388594" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/3" target=”_blank”>Varaždin</a></div>`)[0];
+                popup_b1382c6f9a3eebea9cddb04bdf2d3a35.setContent(html_40b1b0c30629fe2d4cfa119c60388594);
             
         
 
-        marker_3655bd765a4d30334cb535b6bec03f35.bindPopup(popup_29ef808271054cd0618d3a786f6938bc)
+        marker_7cde2927bb9c4264cd065de08dc5a652.bindPopup(popup_b1382c6f9a3eebea9cddb04bdf2d3a35)
         ;
 
         
     
     
-                marker_3655bd765a4d30334cb535b6bec03f35.setIcon(beautify_icon_d2415ffd54f83a0af5480cd09d77fa8b);
-            
-    
-            var marker_33e2f04932359ea512e2be7d79afb49c = L.marker(
+            var marker_aae9c59ead2fc46511a2bed3243a67ec = L.marker(
                 [45.489, 15.548],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_3c058a019d3df666ca399546a96a8b3f = new L.BeautifyIcon.icon(
+            var beautify_icon_b7522057c9f9037b0059421edaa978b4 = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -249,37 +225,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_33e2f04932359ea512e2be7d79afb49c.setIcon(beautify_icon_3c058a019d3df666ca399546a96a8b3f);
+            marker_aae9c59ead2fc46511a2bed3243a67ec.setIcon(beautify_icon_b7522057c9f9037b0059421edaa978b4);
         
     
-        var popup_d640f04e346e3b996318da5d3d528605 = L.popup({
+        var popup_24ebc705aed6cc3aeeb5a23082addecb = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_fbec119e7c1067c2bc43c1d676411248 = $(`<div id="html_fbec119e7c1067c2bc43c1d676411248" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/4" target=”_blank”>Karlovac</a></div>`)[0];
-                popup_d640f04e346e3b996318da5d3d528605.setContent(html_fbec119e7c1067c2bc43c1d676411248);
+                var html_d0443bfc9895e1bf0cc1037e4e6c12ff = $(`<div id="html_d0443bfc9895e1bf0cc1037e4e6c12ff" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/4" target=”_blank”>Karlovac</a></div>`)[0];
+                popup_24ebc705aed6cc3aeeb5a23082addecb.setContent(html_d0443bfc9895e1bf0cc1037e4e6c12ff);
             
         
 
-        marker_33e2f04932359ea512e2be7d79afb49c.bindPopup(popup_d640f04e346e3b996318da5d3d528605)
+        marker_aae9c59ead2fc46511a2bed3243a67ec.bindPopup(popup_24ebc705aed6cc3aeeb5a23082addecb)
         ;
 
         
     
     
-                marker_33e2f04932359ea512e2be7d79afb49c.setIcon(beautify_icon_3c058a019d3df666ca399546a96a8b3f);
-            
-    
-            var marker_822aeb510ef2452c0bde255b50f9f12f = L.marker(
+            var marker_ef722d6bed7038c8a433afbd5f9c4586 = L.marker(
                 [45.489, 16.374],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_a107e743c615c0e897d6451e08a31602 = new L.BeautifyIcon.icon(
+            var beautify_icon_c2496ba1fb63f196fc5d618085192c11 = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -292,37 +265,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_822aeb510ef2452c0bde255b50f9f12f.setIcon(beautify_icon_a107e743c615c0e897d6451e08a31602);
+            marker_ef722d6bed7038c8a433afbd5f9c4586.setIcon(beautify_icon_c2496ba1fb63f196fc5d618085192c11);
         
     
-        var popup_aa364c4b2c8413d5e57c5730d010a211 = L.popup({
+        var popup_2d1a7f0cc3ceb9bb3b63824ccaac1f03 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_a192dfc46b86a3c7505176a9c74e4d7b = $(`<div id="html_a192dfc46b86a3c7505176a9c74e4d7b" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/5" target=”_blank”>Sisak</a></div>`)[0];
-                popup_aa364c4b2c8413d5e57c5730d010a211.setContent(html_a192dfc46b86a3c7505176a9c74e4d7b);
+                var html_41d73b3ce4c9e71e84b74770bd72cee2 = $(`<div id="html_41d73b3ce4c9e71e84b74770bd72cee2" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/5" target=”_blank”>Sisak</a></div>`)[0];
+                popup_2d1a7f0cc3ceb9bb3b63824ccaac1f03.setContent(html_41d73b3ce4c9e71e84b74770bd72cee2);
             
         
 
-        marker_822aeb510ef2452c0bde255b50f9f12f.bindPopup(popup_aa364c4b2c8413d5e57c5730d010a211)
+        marker_ef722d6bed7038c8a433afbd5f9c4586.bindPopup(popup_2d1a7f0cc3ceb9bb3b63824ccaac1f03)
         ;
 
         
     
     
-                marker_822aeb510ef2452c0bde255b50f9f12f.setIcon(beautify_icon_a107e743c615c0e897d6451e08a31602);
-            
-    
-            var marker_f92ccd81a1de40b3912a9cd7d392f96a = L.marker(
+            var marker_1e23131f9f5f2fdff1f106085223c2eb = L.marker(
                 [45.483, 16.775],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_82c473e7e9e2f21a214fa078a84b0a46 = new L.BeautifyIcon.icon(
+            var beautify_icon_5b5d7b9bc010ff9af1bf36a4c4a797e4 = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -335,37 +305,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_f92ccd81a1de40b3912a9cd7d392f96a.setIcon(beautify_icon_82c473e7e9e2f21a214fa078a84b0a46);
+            marker_1e23131f9f5f2fdff1f106085223c2eb.setIcon(beautify_icon_5b5d7b9bc010ff9af1bf36a4c4a797e4);
         
     
-        var popup_fe4ded38240bf69892677bd556038958 = L.popup({
+        var popup_5fe7ad2e71788b11c7f15e1fc37be22c = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_96319a294c55396d4fb3835f7d5e84ed = $(`<div id="html_96319a294c55396d4fb3835f7d5e84ed" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/6" target=”_blank”>Kutina</a></div>`)[0];
-                popup_fe4ded38240bf69892677bd556038958.setContent(html_96319a294c55396d4fb3835f7d5e84ed);
+                var html_e29a178d1b3f885cea588eaf1ffb51f7 = $(`<div id="html_e29a178d1b3f885cea588eaf1ffb51f7" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/6" target=”_blank”>Kutina</a></div>`)[0];
+                popup_5fe7ad2e71788b11c7f15e1fc37be22c.setContent(html_e29a178d1b3f885cea588eaf1ffb51f7);
             
         
 
-        marker_f92ccd81a1de40b3912a9cd7d392f96a.bindPopup(popup_fe4ded38240bf69892677bd556038958)
+        marker_1e23131f9f5f2fdff1f106085223c2eb.bindPopup(popup_5fe7ad2e71788b11c7f15e1fc37be22c)
         ;
 
         
     
     
-                marker_f92ccd81a1de40b3912a9cd7d392f96a.setIcon(beautify_icon_82c473e7e9e2f21a214fa078a84b0a46);
-            
-    
-            var marker_87bfa70f66653719b8f4e67b80dcff45 = L.marker(
+            var marker_942bbad20d3c7493c53a964654890a8f = L.marker(
                 [45.554, 18.695],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_a14cae5dba67ccee122fcccf9d966930 = new L.BeautifyIcon.icon(
+            var beautify_icon_25673b1e0ca388592faae0d1fcfbe152 = new L.BeautifyIcon.icon(
                 {
   "icon": 9,
   "iconShape": "marker",
@@ -378,37 +345,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_87bfa70f66653719b8f4e67b80dcff45.setIcon(beautify_icon_a14cae5dba67ccee122fcccf9d966930);
+            marker_942bbad20d3c7493c53a964654890a8f.setIcon(beautify_icon_25673b1e0ca388592faae0d1fcfbe152);
         
     
-        var popup_947ed3002c7ecda683977a5af8d885bd = L.popup({
+        var popup_1b3014d7ad6a62a31ed1b03ceb1c258e = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_5b1c50372c7d4a293b60ced295817a80 = $(`<div id="html_5b1c50372c7d4a293b60ced295817a80" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/7" target=”_blank”>Osijek</a></div>`)[0];
-                popup_947ed3002c7ecda683977a5af8d885bd.setContent(html_5b1c50372c7d4a293b60ced295817a80);
+                var html_0046dcd4ef93f4def4235dff61f6b43a = $(`<div id="html_0046dcd4ef93f4def4235dff61f6b43a" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/7" target=”_blank”>Osijek</a></div>`)[0];
+                popup_1b3014d7ad6a62a31ed1b03ceb1c258e.setContent(html_0046dcd4ef93f4def4235dff61f6b43a);
             
         
 
-        marker_87bfa70f66653719b8f4e67b80dcff45.bindPopup(popup_947ed3002c7ecda683977a5af8d885bd)
+        marker_942bbad20d3c7493c53a964654890a8f.bindPopup(popup_1b3014d7ad6a62a31ed1b03ceb1c258e)
         ;
 
         
     
     
-                marker_87bfa70f66653719b8f4e67b80dcff45.setIcon(beautify_icon_a14cae5dba67ccee122fcccf9d966930);
-            
-    
-            var marker_d700f8bc808988940ec4a3854efa6335 = L.marker(
+            var marker_c452b5d19f715beedb6dd222b5bb0591 = L.marker(
                 [45.49, 18.093],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_8761f16755e9a49d3d0291a02f8f6324 = new L.BeautifyIcon.icon(
+            var beautify_icon_cbafdd0a293823ce4fcb768fe6e0cd2e = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -421,37 +385,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_d700f8bc808988940ec4a3854efa6335.setIcon(beautify_icon_8761f16755e9a49d3d0291a02f8f6324);
+            marker_c452b5d19f715beedb6dd222b5bb0591.setIcon(beautify_icon_cbafdd0a293823ce4fcb768fe6e0cd2e);
         
     
-        var popup_2735c596778239752497c7e195ee123a = L.popup({
+        var popup_5e1b5d39da0f268cbd792a9b56495c27 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_cff96798fafce52c3e1b752b5b018713 = $(`<div id="html_cff96798fafce52c3e1b752b5b018713" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/8" target=”_blank”>Našice</a></div>`)[0];
-                popup_2735c596778239752497c7e195ee123a.setContent(html_cff96798fafce52c3e1b752b5b018713);
+                var html_66004bd37ac26de3f238150e90fa6d24 = $(`<div id="html_66004bd37ac26de3f238150e90fa6d24" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/8" target=”_blank”>Našice</a></div>`)[0];
+                popup_5e1b5d39da0f268cbd792a9b56495c27.setContent(html_66004bd37ac26de3f238150e90fa6d24);
             
         
 
-        marker_d700f8bc808988940ec4a3854efa6335.bindPopup(popup_2735c596778239752497c7e195ee123a)
+        marker_c452b5d19f715beedb6dd222b5bb0591.bindPopup(popup_5e1b5d39da0f268cbd792a9b56495c27)
         ;
 
         
     
     
-                marker_d700f8bc808988940ec4a3854efa6335.setIcon(beautify_icon_8761f16755e9a49d3d0291a02f8f6324);
-            
-    
-            var marker_f4591d6313dfd610985baa60c54bbd48 = L.marker(
+            var marker_d2cd8899062367a356c68eb7ad3beee0 = L.marker(
                 [45.308, 18.411],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_808df008b14a9ab0c28441b9a5df465f = new L.BeautifyIcon.icon(
+            var beautify_icon_9047d027bf331a67610d05899d779ea8 = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -464,37 +425,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_f4591d6313dfd610985baa60c54bbd48.setIcon(beautify_icon_808df008b14a9ab0c28441b9a5df465f);
+            marker_d2cd8899062367a356c68eb7ad3beee0.setIcon(beautify_icon_9047d027bf331a67610d05899d779ea8);
         
     
-        var popup_4dff984e31df4ca2213472f66d4d05f5 = L.popup({
+        var popup_e31f86eabd562512127c5215a1725afc = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_21bb1ea66dd8a6547ab1d85b5ffc4479 = $(`<div id="html_21bb1ea66dd8a6547ab1d85b5ffc4479" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/9" target=”_blank”>Đakovo</a></div>`)[0];
-                popup_4dff984e31df4ca2213472f66d4d05f5.setContent(html_21bb1ea66dd8a6547ab1d85b5ffc4479);
+                var html_38337d5a0dcdfe68d176f2639b07580c = $(`<div id="html_38337d5a0dcdfe68d176f2639b07580c" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/9" target=”_blank”>Đakovo</a></div>`)[0];
+                popup_e31f86eabd562512127c5215a1725afc.setContent(html_38337d5a0dcdfe68d176f2639b07580c);
             
         
 
-        marker_f4591d6313dfd610985baa60c54bbd48.bindPopup(popup_4dff984e31df4ca2213472f66d4d05f5)
+        marker_d2cd8899062367a356c68eb7ad3beee0.bindPopup(popup_e31f86eabd562512127c5215a1725afc)
         ;
 
         
     
     
-                marker_f4591d6313dfd610985baa60c54bbd48.setIcon(beautify_icon_808df008b14a9ab0c28441b9a5df465f);
-            
-    
-            var marker_b73d761800262137cef02d9d311f93aa = L.marker(
+            var marker_61aa92c0a2afe6a1d72838c74dd490d4 = L.marker(
                 [45.769, 18.605],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_4485b44f74975d9314f9d6d81af3aea5 = new L.BeautifyIcon.icon(
+            var beautify_icon_6a4c711c9fd11c17999b2a033947c0ca = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -507,37 +465,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_b73d761800262137cef02d9d311f93aa.setIcon(beautify_icon_4485b44f74975d9314f9d6d81af3aea5);
+            marker_61aa92c0a2afe6a1d72838c74dd490d4.setIcon(beautify_icon_6a4c711c9fd11c17999b2a033947c0ca);
         
     
-        var popup_59c4d08f22dfe7268e55ba22a69816c8 = L.popup({
+        var popup_b5614137eae42093bd44ab01f2ae0c17 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_5a525d23a83729a325d47c46edac20c8 = $(`<div id="html_5a525d23a83729a325d47c46edac20c8" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/10" target=”_blank”>Beli Manastir</a></div>`)[0];
-                popup_59c4d08f22dfe7268e55ba22a69816c8.setContent(html_5a525d23a83729a325d47c46edac20c8);
+                var html_f47ed7b68c481d6f219d2814bc150078 = $(`<div id="html_f47ed7b68c481d6f219d2814bc150078" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/10" target=”_blank”>Beli Manastir</a></div>`)[0];
+                popup_b5614137eae42093bd44ab01f2ae0c17.setContent(html_f47ed7b68c481d6f219d2814bc150078);
             
         
 
-        marker_b73d761800262137cef02d9d311f93aa.bindPopup(popup_59c4d08f22dfe7268e55ba22a69816c8)
+        marker_61aa92c0a2afe6a1d72838c74dd490d4.bindPopup(popup_b5614137eae42093bd44ab01f2ae0c17)
         ;
 
         
     
     
-                marker_b73d761800262137cef02d9d311f93aa.setIcon(beautify_icon_4485b44f74975d9314f9d6d81af3aea5);
-            
-    
-            var marker_90fee0a5d3afa321747f120e100dcfe3 = L.marker(
+            var marker_b05bc10fc986f3399ef7153955bbff83 = L.marker(
                 [45.833, 17.385],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_2110879c9a5b588fe5d4021af015e42d = new L.BeautifyIcon.icon(
+            var beautify_icon_fb3a038a5e847a8ddc7c96ef596480df = new L.BeautifyIcon.icon(
                 {
   "icon": 9,
   "iconShape": "marker",
@@ -550,37 +505,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_90fee0a5d3afa321747f120e100dcfe3.setIcon(beautify_icon_2110879c9a5b588fe5d4021af015e42d);
+            marker_b05bc10fc986f3399ef7153955bbff83.setIcon(beautify_icon_fb3a038a5e847a8ddc7c96ef596480df);
         
     
-        var popup_c249927935381919cad31a9a49c868f7 = L.popup({
+        var popup_f13f1b6ba1cdc06ae6f814bdb45714d3 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_234916b860cdc2ab32cdffcffcafcc76 = $(`<div id="html_234916b860cdc2ab32cdffcffcafcc76" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/11" target=”_blank”>Virovitica</a></div>`)[0];
-                popup_c249927935381919cad31a9a49c868f7.setContent(html_234916b860cdc2ab32cdffcffcafcc76);
+                var html_fbada985ff0b273b832bf0f9434e597c = $(`<div id="html_fbada985ff0b273b832bf0f9434e597c" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/11" target=”_blank”>Virovitica</a></div>`)[0];
+                popup_f13f1b6ba1cdc06ae6f814bdb45714d3.setContent(html_fbada985ff0b273b832bf0f9434e597c);
             
         
 
-        marker_90fee0a5d3afa321747f120e100dcfe3.bindPopup(popup_c249927935381919cad31a9a49c868f7)
+        marker_b05bc10fc986f3399ef7153955bbff83.bindPopup(popup_f13f1b6ba1cdc06ae6f814bdb45714d3)
         ;
 
         
     
     
-                marker_90fee0a5d3afa321747f120e100dcfe3.setIcon(beautify_icon_2110879c9a5b588fe5d4021af015e42d);
-            
-    
-            var marker_bf1e20f052cf98126e256e7ba444adc1 = L.marker(
+            var marker_246c95912c27d2f48d90209ce3cc6180 = L.marker(
                 [44.429, 24.363],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_3231ff3dc5d2cb639664ae940122e6f3 = new L.BeautifyIcon.icon(
+            var beautify_icon_000ce8ae6a3ef480d04de80200c7a338 = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -593,37 +545,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_bf1e20f052cf98126e256e7ba444adc1.setIcon(beautify_icon_3231ff3dc5d2cb639664ae940122e6f3);
+            marker_246c95912c27d2f48d90209ce3cc6180.setIcon(beautify_icon_000ce8ae6a3ef480d04de80200c7a338);
         
     
-        var popup_dab937145ded2380259fb73c3f3c91ba = L.popup({
+        var popup_e255c1d34507edaf26747ae89512606a = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_2ab229b0083be1ae0182e4f6c6316bac = $(`<div id="html_2ab229b0083be1ae0182e4f6c6316bac" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/12" target=”_blank”>Slatina</a></div>`)[0];
-                popup_dab937145ded2380259fb73c3f3c91ba.setContent(html_2ab229b0083be1ae0182e4f6c6316bac);
+                var html_2298fe3f1f0c7d33d2f9692159be312d = $(`<div id="html_2298fe3f1f0c7d33d2f9692159be312d" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/12" target=”_blank”>Slatina</a></div>`)[0];
+                popup_e255c1d34507edaf26747ae89512606a.setContent(html_2298fe3f1f0c7d33d2f9692159be312d);
             
         
 
-        marker_bf1e20f052cf98126e256e7ba444adc1.bindPopup(popup_dab937145ded2380259fb73c3f3c91ba)
+        marker_246c95912c27d2f48d90209ce3cc6180.bindPopup(popup_e255c1d34507edaf26747ae89512606a)
         ;
 
         
     
     
-                marker_bf1e20f052cf98126e256e7ba444adc1.setIcon(beautify_icon_3231ff3dc5d2cb639664ae940122e6f3);
-            
-    
-            var marker_5f1d1c191f24b5367930c8d7bef62341 = L.marker(
+            var marker_6eddc27386c14ff2efb2ef8b766d26f5 = L.marker(
                 [45.166, 18.012],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_dc899e26d2856a2d686f3080b71173ee = new L.BeautifyIcon.icon(
+            var beautify_icon_125d43c318a0472b0f511badb25ecb13 = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -636,37 +585,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_5f1d1c191f24b5367930c8d7bef62341.setIcon(beautify_icon_dc899e26d2856a2d686f3080b71173ee);
+            marker_6eddc27386c14ff2efb2ef8b766d26f5.setIcon(beautify_icon_125d43c318a0472b0f511badb25ecb13);
         
     
-        var popup_36a52dc30508c31c5ba2eea44c08431f = L.popup({
+        var popup_03e6ef5bbd041e71bdc0b3f776d79717 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_37fff7c3c755652aaaec93fbf66d2543 = $(`<div id="html_37fff7c3c755652aaaec93fbf66d2543" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/13" target=”_blank”>Slavonski Brod</a></div>`)[0];
-                popup_36a52dc30508c31c5ba2eea44c08431f.setContent(html_37fff7c3c755652aaaec93fbf66d2543);
+                var html_5d3def689a47995cabe7a61091ddaff2 = $(`<div id="html_5d3def689a47995cabe7a61091ddaff2" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/13" target=”_blank”>Slavonski Brod</a></div>`)[0];
+                popup_03e6ef5bbd041e71bdc0b3f776d79717.setContent(html_5d3def689a47995cabe7a61091ddaff2);
             
         
 
-        marker_5f1d1c191f24b5367930c8d7bef62341.bindPopup(popup_36a52dc30508c31c5ba2eea44c08431f)
+        marker_6eddc27386c14ff2efb2ef8b766d26f5.bindPopup(popup_03e6ef5bbd041e71bdc0b3f776d79717)
         ;
 
         
     
     
-                marker_5f1d1c191f24b5367930c8d7bef62341.setIcon(beautify_icon_dc899e26d2856a2d686f3080b71173ee);
-            
-    
-            var marker_625416b25e467c4967b8622c4066bfe0 = L.marker(
+            var marker_5811074eb46f6f83ae7681e7f3dfbeaf = L.marker(
                 [45.326, 14.442],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_3c926df11e8de07c199c328cf19e2c18 = new L.BeautifyIcon.icon(
+            var beautify_icon_6c0c7a20db74845f3c8443daab5d18e8 = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -679,37 +625,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_625416b25e467c4967b8622c4066bfe0.setIcon(beautify_icon_3c926df11e8de07c199c328cf19e2c18);
+            marker_5811074eb46f6f83ae7681e7f3dfbeaf.setIcon(beautify_icon_6c0c7a20db74845f3c8443daab5d18e8);
         
     
-        var popup_3f17342535e65e24241185959f236373 = L.popup({
+        var popup_805b342cc36aa496afd6d7af9e938cad = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_797d83a92a36ad27a23128b312a00a0a = $(`<div id="html_797d83a92a36ad27a23128b312a00a0a" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/14" target=”_blank”>Rijeka</a></div>`)[0];
-                popup_3f17342535e65e24241185959f236373.setContent(html_797d83a92a36ad27a23128b312a00a0a);
+                var html_ef75b22de44c6bffd4ba449d7d77a7c0 = $(`<div id="html_ef75b22de44c6bffd4ba449d7d77a7c0" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/14" target=”_blank”>Rijeka</a></div>`)[0];
+                popup_805b342cc36aa496afd6d7af9e938cad.setContent(html_ef75b22de44c6bffd4ba449d7d77a7c0);
             
         
 
-        marker_625416b25e467c4967b8622c4066bfe0.bindPopup(popup_3f17342535e65e24241185959f236373)
+        marker_5811074eb46f6f83ae7681e7f3dfbeaf.bindPopup(popup_805b342cc36aa496afd6d7af9e938cad)
         ;
 
         
     
     
-                marker_625416b25e467c4967b8622c4066bfe0.setIcon(beautify_icon_3c926df11e8de07c199c328cf19e2c18);
-            
-    
-            var marker_f4bcd0a5cbc2eb2425ef0bed28b9c63c = L.marker(
+            var marker_7276f438265d5d0e2baf13685e8a51d6 = L.marker(
                 [44.116, 15.235],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_a87606dcfafb3b8b635a28fd32e095f6 = new L.BeautifyIcon.icon(
+            var beautify_icon_87a0119f903a8b26738471b185a94791 = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -722,37 +665,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_f4bcd0a5cbc2eb2425ef0bed28b9c63c.setIcon(beautify_icon_a87606dcfafb3b8b635a28fd32e095f6);
+            marker_7276f438265d5d0e2baf13685e8a51d6.setIcon(beautify_icon_87a0119f903a8b26738471b185a94791);
         
     
-        var popup_24a7c53e1e118a15aeeb520754f6a2c6 = L.popup({
+        var popup_9bfeb8389469e996249a7c2380886783 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_357776ae5684b737fa120d08142ba01e = $(`<div id="html_357776ae5684b737fa120d08142ba01e" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/15" target=”_blank”>Zadar</a></div>`)[0];
-                popup_24a7c53e1e118a15aeeb520754f6a2c6.setContent(html_357776ae5684b737fa120d08142ba01e);
+                var html_84b3d30acd53b351be8fd3b7919c9f3e = $(`<div id="html_84b3d30acd53b351be8fd3b7919c9f3e" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/15" target=”_blank”>Zadar</a></div>`)[0];
+                popup_9bfeb8389469e996249a7c2380886783.setContent(html_84b3d30acd53b351be8fd3b7919c9f3e);
             
         
 
-        marker_f4bcd0a5cbc2eb2425ef0bed28b9c63c.bindPopup(popup_24a7c53e1e118a15aeeb520754f6a2c6)
+        marker_7276f438265d5d0e2baf13685e8a51d6.bindPopup(popup_9bfeb8389469e996249a7c2380886783)
         ;
 
         
     
     
-                marker_f4bcd0a5cbc2eb2425ef0bed28b9c63c.setIcon(beautify_icon_a87606dcfafb3b8b635a28fd32e095f6);
-            
-    
-            var marker_95d28718e124c8277dcc8ecec7138a6a = L.marker(
+            var marker_bb03a55aa85d99dff41e402336608c42 = L.marker(
                 [43.511, 16.439],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_aec3d07e04ee84777b1469fbf82537aa = new L.BeautifyIcon.icon(
+            var beautify_icon_03724b5e19af4d90026adbee60a6d0fc = new L.BeautifyIcon.icon(
                 {
   "icon": 0,
   "iconShape": "marker",
@@ -765,37 +705,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_95d28718e124c8277dcc8ecec7138a6a.setIcon(beautify_icon_aec3d07e04ee84777b1469fbf82537aa);
+            marker_bb03a55aa85d99dff41e402336608c42.setIcon(beautify_icon_03724b5e19af4d90026adbee60a6d0fc);
         
     
-        var popup_3c54ee6a80be1c2602926be846a27ca5 = L.popup({
+        var popup_93d26d7012177007d6a368bcbc0a828d = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_3a01ccd4bb9b7459a85a367041a325e4 = $(`<div id="html_3a01ccd4bb9b7459a85a367041a325e4" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/16" target=”_blank”>Split</a></div>`)[0];
-                popup_3c54ee6a80be1c2602926be846a27ca5.setContent(html_3a01ccd4bb9b7459a85a367041a325e4);
+                var html_72dff7ad558628807d8d07768f2ff866 = $(`<div id="html_72dff7ad558628807d8d07768f2ff866" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/16" target=”_blank”>Split</a></div>`)[0];
+                popup_93d26d7012177007d6a368bcbc0a828d.setContent(html_72dff7ad558628807d8d07768f2ff866);
             
         
 
-        marker_95d28718e124c8277dcc8ecec7138a6a.bindPopup(popup_3c54ee6a80be1c2602926be846a27ca5)
+        marker_bb03a55aa85d99dff41e402336608c42.bindPopup(popup_93d26d7012177007d6a368bcbc0a828d)
         ;
 
         
     
     
-                marker_95d28718e124c8277dcc8ecec7138a6a.setIcon(beautify_icon_aec3d07e04ee84777b1469fbf82537aa);
-            
-    
-            var marker_9bb0d08ad05f325f9c7954916881ca1f = L.marker(
+            var marker_83da4e1e76dbec3ec7d6ded6cf584861 = L.marker(
                 [42.649, 18.093],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_b867c8558f1f6c6edd3127b8e2c4173c = new L.BeautifyIcon.icon(
+            var beautify_icon_bc2f1e1bf64f9b37047b74bfcb8c86cb = new L.BeautifyIcon.icon(
                 {
   "icon": 0,
   "iconShape": "marker",
@@ -808,37 +745,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_9bb0d08ad05f325f9c7954916881ca1f.setIcon(beautify_icon_b867c8558f1f6c6edd3127b8e2c4173c);
+            marker_83da4e1e76dbec3ec7d6ded6cf584861.setIcon(beautify_icon_bc2f1e1bf64f9b37047b74bfcb8c86cb);
         
     
-        var popup_2442bb74d12f9b9cfa833bf41bc755ff = L.popup({
+        var popup_9ab1625f332a9c4645f88ca71676d3aa = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_a0c966bcf5e87d8bd4f709994c193c7e = $(`<div id="html_a0c966bcf5e87d8bd4f709994c193c7e" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/17" target=”_blank”>Dubrovnik</a></div>`)[0];
-                popup_2442bb74d12f9b9cfa833bf41bc755ff.setContent(html_a0c966bcf5e87d8bd4f709994c193c7e);
+                var html_1f7ad800b6af42e067b5b0a259d1043d = $(`<div id="html_1f7ad800b6af42e067b5b0a259d1043d" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/17" target=”_blank”>Dubrovnik</a></div>`)[0];
+                popup_9ab1625f332a9c4645f88ca71676d3aa.setContent(html_1f7ad800b6af42e067b5b0a259d1043d);
             
         
 
-        marker_9bb0d08ad05f325f9c7954916881ca1f.bindPopup(popup_2442bb74d12f9b9cfa833bf41bc755ff)
+        marker_83da4e1e76dbec3ec7d6ded6cf584861.bindPopup(popup_9ab1625f332a9c4645f88ca71676d3aa)
         ;
 
         
     
     
-                marker_9bb0d08ad05f325f9c7954916881ca1f.setIcon(beautify_icon_b867c8558f1f6c6edd3127b8e2c4173c);
-            
-    
-            var marker_3efdacc9e901da3cd2c2bdb2cf58b16c = L.marker(
+            var marker_0144ee1ec971cb2d842a25b973ccff61 = L.marker(
                 [43.053, 17.649],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_c122ec6d2ccc964e48206115758a0c1d = new L.BeautifyIcon.icon(
+            var beautify_icon_5fd17bc5fb10bef3e4c6629bf23b0488 = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -851,37 +785,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_3efdacc9e901da3cd2c2bdb2cf58b16c.setIcon(beautify_icon_c122ec6d2ccc964e48206115758a0c1d);
+            marker_0144ee1ec971cb2d842a25b973ccff61.setIcon(beautify_icon_5fd17bc5fb10bef3e4c6629bf23b0488);
         
     
-        var popup_8e360562cbd3081a4ea776f07577c9a4 = L.popup({
+        var popup_c0ffe50bc9cbff4d49eba7b39aa2794e = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_be6ad3fd224c7ec07c2ac0d81b1ce43e = $(`<div id="html_be6ad3fd224c7ec07c2ac0d81b1ce43e" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/18" target=”_blank”>Metković</a></div>`)[0];
-                popup_8e360562cbd3081a4ea776f07577c9a4.setContent(html_be6ad3fd224c7ec07c2ac0d81b1ce43e);
+                var html_8fa0fe96f72692ed5193a99d02d99c84 = $(`<div id="html_8fa0fe96f72692ed5193a99d02d99c84" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/18" target=”_blank”>Metković</a></div>`)[0];
+                popup_c0ffe50bc9cbff4d49eba7b39aa2794e.setContent(html_8fa0fe96f72692ed5193a99d02d99c84);
             
         
 
-        marker_3efdacc9e901da3cd2c2bdb2cf58b16c.bindPopup(popup_8e360562cbd3081a4ea776f07577c9a4)
+        marker_0144ee1ec971cb2d842a25b973ccff61.bindPopup(popup_c0ffe50bc9cbff4d49eba7b39aa2794e)
         ;
 
         
     
     
-                marker_3efdacc9e901da3cd2c2bdb2cf58b16c.setIcon(beautify_icon_c122ec6d2ccc964e48206115758a0c1d);
-            
-    
-            var marker_f03aed7cec75435030be381e2a82bb27 = L.marker(
+            var marker_cae350a41e636c9a8bcd592e20192106 = L.marker(
                 [44.87, 13.845],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_74130198c0a647fdd1d833712c6581ab = new L.BeautifyIcon.icon(
+            var beautify_icon_0cd01258e7c4ed44ffe03fab56a80c51 = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -894,37 +825,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_f03aed7cec75435030be381e2a82bb27.setIcon(beautify_icon_74130198c0a647fdd1d833712c6581ab);
+            marker_cae350a41e636c9a8bcd592e20192106.setIcon(beautify_icon_0cd01258e7c4ed44ffe03fab56a80c51);
         
     
-        var popup_140a21fb295dbaff64f996edfe1bcb03 = L.popup({
+        var popup_29ed7e382e8ba141f3d240df515f74da = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_3a88e2d0ed0f8eb64d0993c3c0027ba8 = $(`<div id="html_3a88e2d0ed0f8eb64d0993c3c0027ba8" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/20" target=”_blank”>Pula</a></div>`)[0];
-                popup_140a21fb295dbaff64f996edfe1bcb03.setContent(html_3a88e2d0ed0f8eb64d0993c3c0027ba8);
+                var html_664609bc180c9155b888f5f7a1733248 = $(`<div id="html_664609bc180c9155b888f5f7a1733248" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/20" target=”_blank”>Pula</a></div>`)[0];
+                popup_29ed7e382e8ba141f3d240df515f74da.setContent(html_664609bc180c9155b888f5f7a1733248);
             
         
 
-        marker_f03aed7cec75435030be381e2a82bb27.bindPopup(popup_140a21fb295dbaff64f996edfe1bcb03)
+        marker_cae350a41e636c9a8bcd592e20192106.bindPopup(popup_29ed7e382e8ba141f3d240df515f74da)
         ;
 
         
     
     
-                marker_f03aed7cec75435030be381e2a82bb27.setIcon(beautify_icon_74130198c0a647fdd1d833712c6581ab);
-            
-    
-            var marker_3cafe7cc00dd18c00331b100bdd63797 = L.marker(
+            var marker_2627497b8276325abb1f0dd670673acb = L.marker(
                 [43.734, 15.894],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_560d26bb4a42b75052be3929eb4f8b46 = new L.BeautifyIcon.icon(
+            var beautify_icon_ba0db76fe7bb6faaf32c218d4047bcff = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -937,37 +865,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_3cafe7cc00dd18c00331b100bdd63797.setIcon(beautify_icon_560d26bb4a42b75052be3929eb4f8b46);
+            marker_2627497b8276325abb1f0dd670673acb.setIcon(beautify_icon_ba0db76fe7bb6faaf32c218d4047bcff);
         
     
-        var popup_9268772393bc92f3e5c837366aa042dd = L.popup({
+        var popup_3267f0f400aaef7da3fd2a49ba2b2d15 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_a2e2744f43a13e5af54ba0c535b73f57 = $(`<div id="html_a2e2744f43a13e5af54ba0c535b73f57" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/21" target=”_blank”>Šibenik</a></div>`)[0];
-                popup_9268772393bc92f3e5c837366aa042dd.setContent(html_a2e2744f43a13e5af54ba0c535b73f57);
+                var html_9f6668019911587d7f10c083221e00a1 = $(`<div id="html_9f6668019911587d7f10c083221e00a1" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/21" target=”_blank”>Šibenik</a></div>`)[0];
+                popup_3267f0f400aaef7da3fd2a49ba2b2d15.setContent(html_9f6668019911587d7f10c083221e00a1);
             
         
 
-        marker_3cafe7cc00dd18c00331b100bdd63797.bindPopup(popup_9268772393bc92f3e5c837366aa042dd)
+        marker_2627497b8276325abb1f0dd670673acb.bindPopup(popup_3267f0f400aaef7da3fd2a49ba2b2d15)
         ;
 
         
     
     
-                marker_3cafe7cc00dd18c00331b100bdd63797.setIcon(beautify_icon_560d26bb4a42b75052be3929eb4f8b46);
-            
-    
-            var marker_b6b501a12fab71ad0bbf976d39203969 = L.marker(
+            var marker_21e6268641df68d244dea60a1362dcbf = L.marker(
                 [45.239, 13.936],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_a647783f6c571629f3b5bd139fc06604 = new L.BeautifyIcon.icon(
+            var beautify_icon_8f4e3e6f469455377fe5e603843e27b2 = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -980,37 +905,34 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_b6b501a12fab71ad0bbf976d39203969.setIcon(beautify_icon_a647783f6c571629f3b5bd139fc06604);
+            marker_21e6268641df68d244dea60a1362dcbf.setIcon(beautify_icon_8f4e3e6f469455377fe5e603843e27b2);
         
     
-        var popup_5a5b279e412c64423539ed10416a21a8 = L.popup({
+        var popup_06771d348c97b5d3f918f1c8e72ca30c = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_103182d609d751d2b1b2b4c17a2ceb87 = $(`<div id="html_103182d609d751d2b1b2b4c17a2ceb87" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/23" target=”_blank”>Pazin</a></div>`)[0];
-                popup_5a5b279e412c64423539ed10416a21a8.setContent(html_103182d609d751d2b1b2b4c17a2ceb87);
+                var html_3b1957fd916276eaf0a57ac321f3e472 = $(`<div id="html_3b1957fd916276eaf0a57ac321f3e472" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/23" target=”_blank”>Pazin</a></div>`)[0];
+                popup_06771d348c97b5d3f918f1c8e72ca30c.setContent(html_3b1957fd916276eaf0a57ac321f3e472);
             
         
 
-        marker_b6b501a12fab71ad0bbf976d39203969.bindPopup(popup_5a5b279e412c64423539ed10416a21a8)
+        marker_21e6268641df68d244dea60a1362dcbf.bindPopup(popup_06771d348c97b5d3f918f1c8e72ca30c)
         ;
 
         
     
     
-                marker_b6b501a12fab71ad0bbf976d39203969.setIcon(beautify_icon_a647783f6c571629f3b5bd139fc06604);
-            
-    
-            var marker_1d32478e02a1f46b7c6efff113414dea = L.marker(
+            var marker_d4a328c32d9a79a865daf1c5bbf61094 = L.marker(
                 [45.091, 14.123],
                 {
 }
-            ).addTo(map_401e1eb64e7e46a05a007088f90bc054);
+            ).addTo(map_9bf90eadc54293cada407b32cc6a6ea4);
         
     
-            var beautify_icon_8501186b28c777cd5215b03faf57311e = new L.BeautifyIcon.icon(
+            var beautify_icon_0b1a9501e50c6d5141185ad25747a9b0 = new L.BeautifyIcon.icon(
                 {
   "icon": "-",
   "iconShape": "marker",
@@ -1023,27 +945,24 @@
   "isAlphaNumericIcon": false,
 }
             )
-            marker_1d32478e02a1f46b7c6efff113414dea.setIcon(beautify_icon_8501186b28c777cd5215b03faf57311e);
+            marker_d4a328c32d9a79a865daf1c5bbf61094.setIcon(beautify_icon_0b1a9501e50c6d5141185ad25747a9b0);
         
     
-        var popup_714714b397e96c3f48d4e22bcb94a879 = L.popup({
+        var popup_99cbc5ebd480ea2ccf1260be5c2cbf1b = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_426837781aae85fad6a1bfaaa4f1ca0d = $(`<div id="html_426837781aae85fad6a1bfaaa4f1ca0d" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/24" target=”_blank”>Labin</a></div>`)[0];
-                popup_714714b397e96c3f48d4e22bcb94a879.setContent(html_426837781aae85fad6a1bfaaa4f1ca0d);
+                var html_d8c9781d3a399fedc21088554e57216b = $(`<div id="html_d8c9781d3a399fedc21088554e57216b" style="width: 100.0%; height: 100.0%;"><a href="https://www.plivazdravlje.hr/alergije/prognoza/24" target=”_blank”>Labin</a></div>`)[0];
+                popup_99cbc5ebd480ea2ccf1260be5c2cbf1b.setContent(html_d8c9781d3a399fedc21088554e57216b);
             
         
 
-        marker_1d32478e02a1f46b7c6efff113414dea.bindPopup(popup_714714b397e96c3f48d4e22bcb94a879)
+        marker_d4a328c32d9a79a865daf1c5bbf61094.bindPopup(popup_99cbc5ebd480ea2ccf1260be5c2cbf1b)
         ;
 
         
     
-    
-                marker_1d32478e02a1f46b7c6efff113414dea.setIcon(beautify_icon_8501186b28c777cd5215b03faf57311e);
-            
 </script>
 </html>
