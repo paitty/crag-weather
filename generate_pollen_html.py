@@ -208,6 +208,8 @@ def generate_pollen_table():
             <a href="pollen.html">Pollen table</a>
             <br>
             <a href="pollen_prediction.html">Pollen prediction table</a>
+            <br>
+            <a href="ambrozija_map.html">Ambrozija map</a>
         </p>
         <br>
     </body>
