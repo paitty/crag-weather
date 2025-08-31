@@ -766,6 +766,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "31/08/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "Koprive": {
@@ -1295,6 +1300,11 @@
       "p-visoka"
     ],
     "30/08/2025": [
+      "p-umjerena",
+      "p-visoka",
+      "p-visoka"
+    ],
+    "31/08/2025": [
       "p-umjerena",
       "p-visoka",
       "p-visoka"
@@ -1859,6 +1869,11 @@
       "p-niska"
     ],
     "30/08/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "31/08/2025": [
       "p-niska",
       "p-niska",
       "p-niska"
@@ -2627,6 +2642,11 @@
       "p-visoka",
       "p-visoka",
       "p-visoka"
+    ],
+    "31/08/2025": [
+      "p-umjerena",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Pelin": {
@@ -2754,6 +2774,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "31/08/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "Loboda": {
@@ -2808,6 +2833,11 @@
       "p-niska"
     ],
     "30/08/2025": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "31/08/2025": [
       "p-niska",
       "p-niska",
       "p-niska"
