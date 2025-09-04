@@ -6,6 +6,12 @@
     ],
     "Distance": 66.705
   },
+  "Klek": {
+    "location": [
+      45.257039272969976, 15.144628291121766
+    ],
+    "type": "multipitch"
+  },
   "Kotecnik": {
     "location": [
       46.20201515126367,
