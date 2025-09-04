@@ -8,9 +8,11 @@
   },
   "Klek": {
     "location": [
-      45.257039272969976, 15.144628291121766
+      45.257039272969976,
+      15.144628291121766
     ],
-    "type": "multipitch"
+    "type": "multipitch",
+    "Distance": 99.02833333333334
   },
   "Kotecnik": {
     "location": [
