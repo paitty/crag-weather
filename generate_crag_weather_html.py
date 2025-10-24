@@ -6,36 +6,6 @@ import folium
 import pandas as pd
 import folium.plugins as plugins
 
-headers = {'Accept':	'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-    'Accept-Encoding':	'gzip, deflate, br, zstd',
-    'Accept-Language':	'en-US,fr;q=0.8,hr;q=0.5,en;q=0.3',
-    'Connection':	'keep-alive',
-    'DNT':	'1',
-    'Host':	'api.met.no',
-    'Priority':	'u=0, i',
-    'Sec-Fetch-Dest':	'document',
-    'Sec-Fetch-Mode':	'navigate',
-    'Sec-Fetch-Site':	'none',
-    'Sec-Fetch-User':	'?1',
-    'Sec-GPC':	'1',
-    'sitename': 'https://github.com/paitty/crag-weather.git',
-    'Upgrade-Insecure-Requests':	'1',
-    'User-Agent':	'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:135.0) Gecko/20100101 Firefox/135.0'}
-
-
-with open('climbing-locations.json') as f:
-    climbing_locations = json.load(f)
-
-#for location in climbing_locations.keys():
-#    print(location)
-
-# datetime object containing current date and time
-now = datetime.now()
-
-# dd/mm/YY H:M:S
-now2 = now + timedelta(hours=2)
-header_now_date_time = now2.strftime("%d/%m/%Y %H:%M:%S")
-
 def get_next_weekday(startdate, weekday):
     """
     @startdate: given date, in format '2013-05-25'
@@ -64,24 +34,28 @@ def get_next_day(day,duration):
         day_num = 5
     if day=='Sun':
         day_num = 6
-    d = now
+    d = datetime.now()
     t = timedelta((7 + day_num - d.weekday()) % 7)
 
     start = (d+t).replace(hour=0, minute=0, second=0, microsecond=0)
     end = start+timedelta(hours=duration)
     return start, end
 
-days_of_a_week = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
-days_of_the_week = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
-for i in range(7):
-    days_of_the_week[i] = days_of_a_week[(now.weekday()+i)%7]
+def days_of_week_from_today():
+    # datetime object containing current date and time
+    now = datetime.now()
+    days_of_a_week = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+    days_of_the_week = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+    for i in range(7):
+        days_of_the_week[i] = days_of_a_week[(now.weekday()+i)%7]
+    return days_of_the_week
 
 def get_next_weekend_short():
     """
     @startdate: given date, in format '2013-05-25'
     @weekday: week day as a integer, between 0 (Monday) to 6 (Sunday)
     """
-    d = now
+    d = datetime.now()
     t1 = timedelta((7 + 5 - d.weekday()) % 7)
     t2=t1+timedelta(days = 1)
     weekend = (d + t1).strftime('%d')+"-"+(d + t2).strftime('%d/%m/%Y')
@@ -107,6 +81,23 @@ def get_distance(key):
     return distance
 
 def add_weather(location, start_date, end_date):
+
+    headers = {'Accept':	'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Encoding':	'gzip, deflate, br, zstd',
+    'Accept-Language':	'en-US,fr;q=0.8,hr;q=0.5,en;q=0.3',
+    'Connection':	'keep-alive',
+    'DNT':	'1',
+    'Host':	'api.met.no',
+    'Priority':	'u=0, i',
+    'Sec-Fetch-Dest':	'document',
+    'Sec-Fetch-Mode':	'navigate',
+    'Sec-Fetch-Site':	'none',
+    'Sec-Fetch-User':	'?1',
+    'Sec-GPC':	'1',
+    'sitename': 'https://github.com/paitty/crag-weather.git',
+    'Upgrade-Insecure-Requests':	'1',
+    'User-Agent':	'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:135.0) Gecko/20100101 Firefox/135.0'}
+
     #example call
     #https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=45.434&lon=15.188
     url = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat="+str(location[0])[:6]+"&lon="+str(location[1])[:6]
@@ -148,6 +139,8 @@ def add_weather(location, start_date, end_date):
     return min_temp, max_temp, rain, min_wind, max_wind
 
 def createTable():
+    days_of_the_week = days_of_week_from_today()
+
     new_table=soup.new_tag("table")
     new_table.attrs['class']='myTable'
     new_table.attrs['id']='myTable2'
@@ -225,11 +218,11 @@ def createTable():
                 new_img=soup.new_tag('img')
                 new_img.attrs['src'] = 'check-mark.png'
                 new_img.attrs['width'] = 20
-                if 'Temp_style' in climbing_day[col][key].keys():
+                if 'Temp_style' in climbing_day_style[col][key].keys():
                     new_img.attrs['src'] = 'hot.PNG'                  
-                if 'Wind_style' in climbing_day[col][key].keys():
+                if 'Wind_style' in climbing_day_style[col][key].keys():
                     new_img.attrs['src'] = 'wind-leaf.png'                  
-                if 'Rain_style' in climbing_day[col][key].keys():
+                if 'Rain_style' in climbing_day_style[col][key].keys():
                     new_img.attrs['src'] = 'cloud-with-rain.png'
                 if col in ['Sat','Sun']:
                     new_tag.attrs['style']="background-color:#bbb;"
@@ -237,138 +230,175 @@ def createTable():
             else:
                 if col+'_style' in climbing_weather[key].keys():
                     new_tag.attrs['style']="font-weight:bold"
-                new_tag.string=climbing_weather[key][col]
+                new_tag.string=str(climbing_weather[key][col])
             last_line.append(new_tag)
 
-#start, end = get_next_weekend()
-
-start_date, end_date =  get_next_day('Sat',48)
-climbing_weather = {}
-
-for key in climbing_locations.keys():
-    location = climbing_locations[key]['location']
-    min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
-    climbing_weather[key]={}
-    climbing_weather[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
-    climbing_weather[key]['Rain']=int(rain)
-    if rain>6:
-        climbing_weather[key]['Rain_style']='bold'
-    climbing_weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
-    if (min_wind+max_wind)/2>5:
-        climbing_weather[key]['Wind_style']='bold'
-    if (min_temp+max_temp)>50:
-        climbing_weather[key]['Temp_style']='bold'
-    climbing_weather[key]['Score'] = get_distance(key)
-    climbing_weather[key]['Score']+=10*rain
-    climbing_weather[key]['Score']+=20*(min_wind+max_wind)/2
-
-climbing_day={}
-for day in days_of_the_week:
-    climbing_day[day]={}
-    day_start_date, day_end_date = get_next_day(day,24)
+def create_climbing_weather():
+    start_date, end_date =  get_next_day('Sat',48)
+    climbing_weather = {}
+    
     for key in climbing_locations.keys():
         location = climbing_locations[key]['location']
-        min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, day_start_date, day_end_date)
-        climbing_day[day][key]={}
-        if rain>3:
-            climbing_day[day][key]['Rain_style']='bold'
+        min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
+        climbing_weather[key]={}
+        climbing_weather[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
+        climbing_weather[key]['Rain']=str(int(rain))+" mm"
+        if rain>6:
+            climbing_weather[key]['Rain_style']='bold'
+        climbing_weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
         if (min_wind+max_wind)/2>5:
-            climbing_day[day][key]['Wind_style']='bold'
-        if (max_temp+min_temp)>50:
-            climbing_day[day][key]['Temp_style']='bold'
+            climbing_weather[key]['Wind_style']='bold'
+        if (min_temp+max_temp)>50:
+            climbing_weather[key]['Temp_style']='bold'
+        climbing_weather[key]['Score'] = get_distance(key)
+        climbing_weather[key]['Score']+=10*rain
+        climbing_weather[key]['Score']+=20*(min_wind+max_wind)/2
+    return climbing_weather
 
-with open('climbing-weather.json') as f:
-    old_climbing_weather = json.load(f)
+def create_climbing_day_style():
+    climbing_day_style = {}
+    for day in days_of_week_from_today():
+        climbing_day_style[day]={}
+        day_start_date, day_end_date = get_next_day(day,24)
+        for key in climbing_locations.keys():
+            location = climbing_locations[key]['location']
+            min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, day_start_date, day_end_date)
+            climbing_day_style[day][key]={}
+            if rain>3:
+                climbing_day_style[day][key]['Rain_style']='bold'
+            if (min_wind+max_wind)/2>5:
+                climbing_day_style[day][key]['Wind_style']='bold'
+            if (max_temp+min_temp)>50:
+                climbing_day_style[day][key]['Temp_style']='bold'
+    return climbing_day_style
 
-with open('climbing-weather.json', 'w') as f:
-    json_pretty = json.dumps(climbing_weather, indent=2)
-    f.write(json_pretty)
+def add_diff_in_weather():
+    #get old climbing weather
+    with open('climbing-weather.json') as f:
+        old_climbing_weather = json.load(f)
 
-for key in climbing_locations.keys():
-    rain = climbing_weather[key]['Rain']
-    diff_rain = 0
-    if key in old_climbing_weather.keys():
-    	diff_rain = rain-old_climbing_weather[key]['Rain']
-    str_diff_rain=str(diff_rain)
-    if diff_rain>0:
-        str_diff_rain = "+"+str_diff_rain
-    climbing_weather[key]['Rain']=str(int(rain))+" mm ("+str_diff_rain+")"
+    #store new climbing weather to become old climbing weather next time
+    with open('climbing-weather.json', 'w') as f:
+        json_pretty = json.dumps(climbing_weather, indent=2)
+        f.write(json_pretty)
 
-test = sorted(climbing_weather.items(), key=lambda x: x[1]['Score'])
-crag_score_sorted=[]
-for i in range(len(test)):
-    crag_score_sorted.append(test[i][0])
+    #compute rain difference between old and new climbing weather
+    for key in climbing_locations.keys():
+        rain = int(climbing_weather[key]['Rain'][:-3])
+        diff_rain = 0
+        str_diff_rain = "0"
+        if key in old_climbing_weather.keys():
+            diff_rain = rain-int(old_climbing_weather[key]['Rain'][:-3])
+        str_diff_rain=str(diff_rain)
+        if diff_rain>0:
+            str_diff_rain = "+"+str_diff_rain
+        climbing_weather[key]['Rain']=str(int(rain))+" mm ("+str_diff_rain+")"
 
-header_next_weekend = get_next_weekend_short()
-
-HTML_DOC = """<!DOCTYPE html>
-<html>
-<head>
-	<style type="text/css">
-		.myTable { background-color:#eee;border-collapse:collapse; }
-        .myTable tr:nth-child(2n) {background-color:#ccc;}
-		.myTable td, .myTable th { padding:5px;border:1px solid #000; }
-	</style>
-	<title>Crag Weather</title>
-    <script>
-        function searchTable() {
-            let table = document.getElementById('myTable2');
-            let rows = table.getElementsByTagName('tr');
-            let hideClosed = document.getElementById('hideClosedCheckbox').checked;
-
-            for (let i = 1; i < rows.length; i++) {  // Start from 1 to skip the header
-                let type = rows[i].getAttribute('type');
-                let hideRow = false;
-
-                // Check if any of the cells in the row contains the word "Closed"
-                if (type != 'multipitch') {
-                    hideRow = true;
-                }
-                rows[i].style.display = 'none';
-                // If the checkbox is checked, hide rows containing "Closed"
-                if (hideRow && hideClosed) {
-                    rows[i].style.display = 'none';
-                } else {
-                    rows[i].style.display = '';
-                }
-            }
-        }
-    </script>
-</head>
-<body>
-	<h1>Idemo penjati u """+crag_score_sorted[0]+"""!</h1>
-    <p>
-        Vikend """+header_next_weekend+"""
-        <br>
-        Azurirana na """+header_now_date_time+"""
-        <br>
-        Na temelju yr.no API
-        <br>
-        Ocjena = Distance + 10 x rain + 20 x avg wind
-    </p>
-    Prikazi samo dugi smjerovi <input type="checkbox" id="hideClosedCheckbox" onchange="searchTable()">
-</body>
-</html>
-"""
-
-soup = BeautifulSoup(HTML_DOC, "html.parser")
-
-createTable()
-
-HTML_end = """   <br> <div class="container">
-<iframe id="iframe1" name="iframe1" frameborder="0"  
-     src="detail_footprint.html" width="800" height="500"></iframe>
-     </div>  """
-
-soup1 = BeautifulSoup(HTML_end, "html.parser")
-
-soup.body.append(soup1)
-
-html = soup.prettify("utf-8")
-with open("build_outputs_folder/index.html", "wb") as file:
-    file.write(html)
+def sort_by_crag_score():
+    test = sorted(climbing_weather.items(), key=lambda x: x[1]['Score'])
+    crag_score_sorted=[]
+    for i in range(len(test)):
+        crag_score_sorted.append(test[i][0])
+    return crag_score_sorted
 
 def add_categorical_legend(folium_map, title, colors, labels):
+    if len(colors) != len(labels):
+        raise ValueError("colors and labels must have the same length.")
+
+    color_by_label = dict(zip(labels, colors))
+    
+    legend_categories = ""     
+    for label, color in color_by_label.items():
+        legend_categories += f"<li><span style='background:{color}'></span>{label}</li>"
+        
+    legend_html = f"""
+    <div id='maplegend' class='maplegend'>
+      <div class='legend-title'>{title}</div>
+      <div class='legend-scale'>
+        <ul class='legend-labels'>
+        {legend_categories}
+        </ul>
+      </div>
+    </div>
+    """
+    script = f"""
+        <script type="text/javascript">
+        var oneTimeExecution = (function() {{
+                    var executed = false;
+                    return function() {{
+                        if (!executed) {{
+                             var checkExist = setInterval(function() {{
+                                       if ((document.getElementsByClassName('leaflet-top leaflet-right').length) || (!executed)) {{
+                                          document.getElementsByClassName('leaflet-top leaflet-right')[0].style.display = "flex"
+                                          document.getElementsByClassName('leaflet-top leaflet-right')[0].style.flexDirection = "column"
+                                          document.getElementsByClassName('leaflet-top leaflet-right')[0].innerHTML += `{legend_html}`;
+                                          clearInterval(checkExist);
+                                          executed = true;
+                                       }}
+                                    }}, 100);
+                        }}
+                    }};
+                }})();
+        oneTimeExecution()
+        </script>
+      """
+   
+
+    css = """
+
+    <style type='text/css'>
+      .maplegend {
+        z-index:9999;
+        float:right;
+        background-color: rgba(255, 255, 255, 1);
+        border-radius: 5px;
+        border: 2px solid #bbb;
+        padding: 10px;
+        font-size:12px;
+        positon: relative;
+      }
+      .maplegend .legend-title {
+        text-align: left;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 90%;
+        }
+      .maplegend .legend-scale ul {
+        margin: 0;
+        margin-bottom: 5px;
+        padding: 0;
+        float: left;
+        list-style: none;
+        }
+      .maplegend .legend-scale ul li {
+        font-size: 80%;
+        list-style: none;
+        margin-left: 0;
+        line-height: 18px;
+        margin-bottom: 2px;
+        }
+      .maplegend ul.legend-labels li span {
+        display: block;
+        float: left;
+        height: 16px;
+        width: 30px;
+        margin-right: 5px;
+        margin-left: 0;
+        border: 0px solid #ccc;
+        }
+      .maplegend .legend-source {
+        font-size: 80%;
+        color: #777;
+        clear: both;
+        }
+      .maplegend a {
+        color: #777;
+        }
+    </style>
+    """
+
+    folium_map.get_root().header.add_child(folium.Element(script + css))
+
     return folium_map
 
 def display_cities_on_map(html_filename):
@@ -410,10 +440,95 @@ def display_cities_on_map(html_filename):
         icon=plugins.BeautifyIcon(icon="arrow-down", icon_shape="marker", border_color=icon_color, text_color=icon_color),
         popup=df.iloc[i]['Properties'],
         ).add_to(m)
-    m = add_categorical_legend(m, 'Distance to Rovinj:',
-                             colors = ['#004506',"#D60A0A","#525252", "#0D00C8"],
-                           labels = ['All good', 'Hot', 'Windy', 'Rainy'])
+    
+    #add legend
+    #m = add_categorical_legend(m, 'Distance to Rovinj:',
+    #                         colors = ['#004506',"#D60A0A","#525252", "#0D00C8"],
+    #                       labels = ['All good', 'Hot', 'Windy', 'Rainy'])
     m.save(html_filename)
+
+with open('climbing-locations.json') as f:
+    climbing_locations = json.load(f)
+  
+climbing_weather = create_climbing_weather()
+
+climbing_day_style = create_climbing_day_style()
+
+#add_diff_in_weather()
+
+crag_score_sorted = sort_by_crag_score()
+
+# dd/mm/YY H:M:S
+now2 = datetime.now() + timedelta(hours=2)
+header_now_date_time = now2.strftime("%d/%m/%Y %H:%M:%S")
+header_next_weekend = get_next_weekend_short()
+
+HTML_header = f"""<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		.myTable {{ background-color:#eee;border-collapse:collapse; }}
+        .myTable tr:nth-child(2n) {{background-color:#ccc;}}
+		.myTable td, .myTable th {{ padding:5px;border:1px solid #000; }}
+	</style>
+	<title>Crag Weather</title>
+    <script>
+        function searchTable() {{
+            let table = document.getElementById('myTable2');
+            let rows = table.getElementsByTagName('tr');
+            let hideClosed = document.getElementById('hideClosedCheckbox').checked;
+
+            for (let i = 1; i < rows.length; i++) {{  // Start from 1 to skip the header
+                let type = rows[i].getAttribute('type');
+                let hideRow = false;
+
+                // Check if any of the cells in the row contains the word "Closed"
+                if (type != 'multipitch') {{
+                    hideRow = true;
+                }}
+                rows[i].style.display = 'none';
+                // If the checkbox is checked, hide rows containing "Closed"
+                if (hideRow && hideClosed) {{
+                    rows[i].style.display = 'none';
+                }} else {{
+                    rows[i].style.display = '';
+                }}
+            }}
+        }}
+    </script>
+</head>
+<body>
+	<h1>Idemo penjati u {crag_score_sorted[0]}!</h1>
+    <p>
+        Vikend {header_next_weekend}
+        <br>
+        Azurirana na {header_now_date_time}
+        <br>
+        Na temelju yr.no API
+        <br>
+        Ocjena = Distance + 10 x rain + 20 x avg wind
+    </p>
+    Prikazi samo dugi smjerovi <input type="checkbox" id="hideClosedCheckbox" onchange="searchTable()">
+</body>
+</html>
+"""
+
+soup = BeautifulSoup(HTML_header, "html.parser")
+
+createTable()
+
+HTML_footer = """   <br> <div class="container">
+<iframe id="iframe1" name="iframe1" frameborder="0"  
+     src="detail_footprint.html" width="800" height="500"></iframe>
+     </div>  """
+
+soup_footer = BeautifulSoup(HTML_footer, "html.parser")
+
+soup.body.append(soup_footer)
+
+html = soup.prettify("utf-8")
+with open("build_outputs_folder/index.html", "wb") as file:
+    file.write(html)
 
 display_cities_on_map('build_outputs_folder/detail_footprint.html')
 
