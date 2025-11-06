@@ -70,13 +70,13 @@ def get_duration(location):
     return duration
 
 def get_distance(key):
-    if 'Distance' in climbing_locations[key].keys():
-        distance=climbing_locations[key]['Distance']
+    if 'Distance' in locations[key].keys():
+        distance=locations[key]['Distance']
     else:
-        distance = get_duration(climbing_locations[key]['location'])
-        climbing_locations[key]['Distance'] = distance
-        with open('climbing-locations.json', 'w') as f:
-            json_pretty = json.dumps(climbing_locations, indent=2)
+        distance = get_duration(locations[key]['location'])
+        locations[key]['Distance'] = distance
+        with open(location_file, 'w') as f:
+            json_pretty = json.dumps(locations, indent=2)
             f.write(json_pretty)
     return distance
 
@@ -102,7 +102,7 @@ def add_weather(location, start_date, end_date):
     #https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=45.434&lon=15.188
     url = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat="+str(location[0])[:6]+"&lon="+str(location[1])[:6]
     r= requests.get(url, headers=headers)
-    weather=r.json()
+    yr_weather=r.json()
     i=0
     min_temp = 100
     max_temp = -100
@@ -112,22 +112,22 @@ def add_weather(location, start_date, end_date):
 
     while True:
         #TODO check if the datetime is our time
-        datetime_object = datetime.fromisoformat(weather['properties']['timeseries'][i]['time'])
+        datetime_object = datetime.fromisoformat(yr_weather['properties']['timeseries'][i]['time'])
         if datetime_object.replace(tzinfo=None)>=start_date:
-            temperature = weather['properties']['timeseries'][i]['data']['instant']['details']['air_temperature']
-            wind = weather['properties']['timeseries'][i]['data']['instant']['details']['wind_speed']
-            if 'next_1_hours' in weather['properties']['timeseries'][i]['data']:
-                add_rain= weather['properties']['timeseries'][i]['data']['next_1_hours']['details']['precipitation_amount']
+            temperature = yr_weather['properties']['timeseries'][i]['data']['instant']['details']['air_temperature']
+            wind = yr_weather['properties']['timeseries'][i]['data']['instant']['details']['wind_speed']
+            if 'next_1_hours' in yr_weather['properties']['timeseries'][i]['data']:
+                add_rain= yr_weather['properties']['timeseries'][i]['data']['next_1_hours']['details']['precipitation_amount']
             else:
                 #TODO check if we dont miss anything like that
-                add_rain= weather['properties']['timeseries'][i]['data']['next_6_hours']['details']['precipitation_amount']
+                add_rain= yr_weather['properties']['timeseries'][i]['data']['next_6_hours']['details']['precipitation_amount']
             #if location[0] == 44.30403029180178:
             #    print(datetime_object.replace(tzinfo=None))
-            #    if 'next_1_hours' in weather['properties']['timeseries'][i]['data']:
-            #        print(weather['properties']['timeseries'][i]['data']['next_1_hours']['details']['precipitation_amount'])
+            #    if 'next_1_hours' in yr_weather['properties']['timeseries'][i]['data']:
+            #        print(yr_weather['properties']['timeseries'][i]['data']['next_1_hours']['details']['precipitation_amount'])
             #    else:
             #        #TODO check if we dont miss anything like that
-            #        print(weather['properties']['timeseries'][i]['data']['next_6_hours']['details']['precipitation_amount'])
+            #        print(yr_weather['properties']['timeseries'][i]['data']['next_6_hours']['details']['precipitation_amount'])
             min_temp = min(min_temp, temperature)
             max_temp = max(max_temp, temperature)
             min_wind = min(min_wind, wind)
@@ -138,6 +138,63 @@ def add_weather(location, start_date, end_date):
         i=i+1
     return min_temp, max_temp, rain, min_wind, max_wind
 
+
+    headers = {'Accept':	'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Encoding':	'gzip, deflate, br, zstd',
+    'Accept-Language':	'en-US,fr;q=0.8,hr;q=0.5,en;q=0.3',
+    'Connection':	'keep-alive',
+    'DNT':	'1',
+    'Host':	'api.met.no',
+    'Priority':	'u=0, i',
+    'Sec-Fetch-Dest':	'document',
+    'Sec-Fetch-Mode':	'navigate',
+    'Sec-Fetch-Site':	'none',
+    'Sec-Fetch-User':	'?1',
+    'Sec-GPC':	'1',
+    'sitename': 'https://github.com/paitty/crag-weather.git',
+    'Upgrade-Insecure-Requests':	'1',
+    'User-Agent':	'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:135.0) Gecko/20100101 Firefox/135.0'}
+
+    #example call
+    #https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=45.434&lon=15.188
+    url = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat="+str(location[0])[:6]+"&lon="+str(location[1])[:6]
+    r= requests.get(url, headers=headers)
+    yr_weather=r.json()
+    i=0
+    min_temp = 100
+    max_temp = -100
+    rain = 0
+    min_wind =100
+    max_wind = -100
+
+    while True:
+        #TODO check if the datetime is our time
+        datetime_object = datetime.fromisoformat(yr_weather['properties']['timeseries'][i]['time'])
+        if datetime_object.replace(tzinfo=None)>=start_date:
+            temperature = yr_weather['properties']['timeseries'][i]['data']['instant']['details']['air_temperature']
+            wind = yr_weather['properties']['timeseries'][i]['data']['instant']['details']['wind_speed']
+            if 'next_1_hours' in yr_weather['properties']['timeseries'][i]['data']:
+                add_rain= yr_weather['properties']['timeseries'][i]['data']['next_1_hours']['details']['precipitation_amount']
+            else:
+                #TODO check if we dont miss anything like that
+                add_rain= yr_weather['properties']['timeseries'][i]['data']['next_6_hours']['details']['precipitation_amount']
+            #if location[0] == 44.30403029180178:
+            #    print(datetime_object.replace(tzinfo=None))
+            #    if 'next_1_hours' in yr_weather['properties']['timeseries'][i]['data']:
+            #        print(yr_weather['properties']['timeseries'][i]['data']['next_1_hours']['details']['precipitation_amount'])
+            #    else:
+            #        #TODO check if we dont miss anything like that
+            #        print(yr_weather['properties']['timeseries'][i]['data']['next_6_hours']['details']['precipitation_amount'])
+            min_temp = min(min_temp, temperature)
+            max_temp = max(max_temp, temperature)
+            min_wind = min(min_wind, wind)
+            max_wind = max(max_wind, wind)
+            rain = rain + add_rain
+        if datetime_object.replace(tzinfo=None)>=end_date:
+            break
+        i=i+1
+    return snow_height
+
 def createTable():
     days_of_the_week = days_of_week_from_today()
 
@@ -147,7 +204,13 @@ def createTable():
     soup.html.body.append(new_table)
     display_table = soup.html.body.find_all("table")[-1]
 
-    table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Distance','Yr.no','Windy','plezanje.net','theCrag','Maps','Waze']
+    if type_activity=='climbing':
+        table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Distance','Yr.no','Windy','plezanje.net','Bergfex','theCrag','Maps','Waze']
+    elif type_activity=='skiing':
+        table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Distance','Yr.no','Windy','Bergfex','Maps','Waze']
+    
+    
+    
     new_header = soup.new_tag("tr")
     display_table.append(new_header)
     for col in table_names:
@@ -155,14 +218,14 @@ def createTable():
         new_column_header.string=col
         display_table.tr.append(new_column_header)
 
-    for key in crag_score_sorted:
+    for key in sorted_by_score:
         new_line = soup.new_tag("tr")
-        if 'type' in climbing_locations[key].keys():
-            new_line.attrs['type']=climbing_locations[key]['type']
+        if 'type' in locations[key].keys():
+            new_line.attrs['type']=locations[key]['type']
         display_table.append(new_line)
         last_line=display_table.find_all("tr")[-1]
         destination = 'location'
-        if 'parking' in climbing_locations[key].keys():
+        if 'parking' in locations[key].keys():
             destination = 'parking'
         for col in table_names:
             new_tag=soup.new_tag('td')
@@ -171,19 +234,25 @@ def createTable():
             elif col == 'Yr.no':
                 new_link=soup.new_tag('a')
                 new_link.string='Yr.no'
-                new_link.attrs['href'] = 'https://www.yr.no/en/forecast/daily-table/'+str(climbing_locations[key]['location'][0])[:6]+", "+str(climbing_locations[key]['location'][1])[:6]
+                new_link.attrs['href'] = 'https://www.yr.no/en/forecast/daily-table/'+str(locations[key]['location'][0])[:6]+", "+str(locations[key]['location'][1])[:6]
                 new_link.attrs['target'] = '_blank'
                 new_tag.append(new_link)
             elif col == 'Windy':
                 new_link=soup.new_tag('a')
                 new_link.string='Windy'
-                new_link.attrs['href'] = 'https://www.windy.com/'+str(climbing_locations[key]['location'][0])[:6]+"/"+str(climbing_locations[key]['location'][1])[:6]
+                new_link.attrs['href'] = 'https://www.windy.com/'+str(locations[key]['location'][0])[:6]+"/"+str(locations[key]['location'][1])[:6]
                 new_link.attrs['target'] = '_blank'
                 new_tag.append(new_link)
             elif col == 'plezanje.net':
                 new_link=soup.new_tag('a')
                 new_link.string='plezanje.net'
                 new_link.attrs['href'] = 'https://plezanje.net/plezalisce/'+key.replace('(','').replace(')','').replace(' ','-').lower()
+                new_link.attrs['target'] = '_blank'
+                new_tag.append(new_link)
+            elif col == 'Bergfex':
+                new_link=soup.new_tag('a')
+                new_link.string='bergfex'
+                new_link.attrs['href'] = 'https://www.bergfex.com/'+key.replace('(','').replace(')','').replace(' ','-').lower()
                 new_link.attrs['target'] = '_blank'
                 new_tag.append(new_link)
             elif col == 'theCrag':
@@ -195,13 +264,13 @@ def createTable():
             elif col == 'Maps':
                 new_link=soup.new_tag('a')
                 new_link.string='Maps'
-                new_link.attrs['href'] = 'https://www.google.com/maps/place/'+str(climbing_locations[key][destination][0])[:6]+","+str(climbing_locations[key][destination][1])[:6]
+                new_link.attrs['href'] = 'https://www.google.com/maps/place/'+str(locations[key][destination][0])[:6]+","+str(locations[key][destination][1])[:6]
                 new_link.attrs['target'] = '_blank'
                 new_tag.append(new_link)
             elif col == 'Waze':
                 new_link=soup.new_tag('a')
                 new_link.string='Waze'
-                new_link.attrs['href'] = 'waze://?ll='+str(climbing_locations[key][destination][0])[:6]+","+str(climbing_locations[key][destination][1])[:6]
+                new_link.attrs['href'] = 'waze://?ll='+str(locations[key][destination][0])[:6]+","+str(locations[key][destination][1])[:6]
                 new_link.attrs['target'] = '_blank'
                 new_tag.append(new_link)    
             elif col == 'Distance':
@@ -228,40 +297,40 @@ def createTable():
                     new_tag.attrs['style']="background-color:#bbb;"
                 new_tag.append(new_img)
             else:
-                if col+'_style' in climbing_weather[key].keys():
+                if col+'_style' in weather[key].keys():
                     new_tag.attrs['style']="font-weight:bold"
-                new_tag.string=str(climbing_weather[key][col])
+                new_tag.string=str(weather[key][col])
             last_line.append(new_tag)
 
-def create_climbing_weather():
+def create_weather():
     start_date, end_date =  get_next_day('Sat',48)
-    climbing_weather = {}
+    weather = {}
     
-    for key in climbing_locations.keys():
-        location = climbing_locations[key]['location']
+    for key in locations.keys():
+        location = locations[key]['location']
         min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
-        climbing_weather[key]={}
-        climbing_weather[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
-        climbing_weather[key]['Rain']=str(int(rain))+" mm"
+        weather[key]={}
+        weather[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
+        weather[key]['Rain']=str(int(rain))+" mm"
         if rain>6:
-            climbing_weather[key]['Rain_style']='bold'
-        climbing_weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
+            weather[key]['Rain_style']='bold'
+        weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
         if (min_wind+max_wind)/2>5:
-            climbing_weather[key]['Wind_style']='bold'
+            weather[key]['Wind_style']='bold'
         if (min_temp+max_temp)>50:
-            climbing_weather[key]['Temp_style']='bold'
-        climbing_weather[key]['Score'] = get_distance(key)
-        climbing_weather[key]['Score']+=10*rain
-        climbing_weather[key]['Score']+=20*(min_wind+max_wind)/2
-    return climbing_weather
+            weather[key]['Temp_style']='bold'
+        weather[key]['Score'] = get_distance(key)
+        weather[key]['Score']+=10*rain
+        weather[key]['Score']+=20*(min_wind+max_wind)/2
+    return weather
 
-def create_climbing_day_style():
+def create_day_style():
     climbing_day_style = {}
     for day in days_of_week_from_today():
         climbing_day_style[day]={}
         day_start_date, day_end_date = get_next_day(day,24)
-        for key in climbing_locations.keys():
-            location = climbing_locations[key]['location']
+        for key in locations.keys():
+            location = locations[key]['location']
             min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, day_start_date, day_end_date)
             climbing_day_style[day][key]={}
             if rain>3:
@@ -274,32 +343,32 @@ def create_climbing_day_style():
 
 def add_diff_in_weather():
     #get old climbing weather
-    with open('climbing-weather.json') as f:
-        old_climbing_weather = json.load(f)
+    with open(type_activity+'-weather.json') as f:
+        old_weather = json.load(f)
 
     #store new climbing weather to become old climbing weather next time
-    with open('climbing-weather.json', 'w') as f:
-        json_pretty = json.dumps(climbing_weather, indent=2)
+    with open(type_activity+'-weather.json', 'w') as f:
+        json_pretty = json.dumps(weather, indent=2)
         f.write(json_pretty)
 
     #compute rain difference between old and new climbing weather
-    for key in climbing_locations.keys():
-        rain = int(climbing_weather[key]['Rain'][:-3])
+    for key in locations.keys():
+        rain = int(weather[key]['Rain'][:-3])
         diff_rain = 0
         str_diff_rain = "0"
-        if key in old_climbing_weather.keys():
-            diff_rain = rain-int(old_climbing_weather[key]['Rain'][:-3])
+        if key in old_weather.keys():
+            diff_rain = rain-int(old_weather[key]['Rain'][:-3])
         str_diff_rain=str(diff_rain)
         if diff_rain>0:
             str_diff_rain = "+"+str_diff_rain
-        climbing_weather[key]['Rain']=str(int(rain))+" mm ("+str_diff_rain+")"
+        weather[key]['Rain']=str(int(rain))+" mm ("+str_diff_rain+")"
 
-def sort_by_crag_score():
-    test = sorted(climbing_weather.items(), key=lambda x: x[1]['Score'])
-    crag_score_sorted=[]
+def sort_by_score():
+    test = sorted(weather.items(), key=lambda x: x[1]['Score'])
+    sorted_by_score=[]
     for i in range(len(test)):
-        crag_score_sorted.append(test[i][0])
-    return crag_score_sorted
+        sorted_by_score.append(test[i][0])
+    return sorted_by_score
 
 def add_categorical_legend(folium_map, title, colors, labels):
     if len(colors) != len(labels):
@@ -407,29 +476,34 @@ def display_cities_on_map(html_filename):
 
     latitudes =[]
     longitudes =[]
-    weather = []
+    weather_color = []
     links = []
-    for key in climbing_locations.keys():
-        latitudes.append(str(climbing_locations[key]['location'][0])[:6])
-        longitudes.append(str(climbing_locations[key]['location'][1])[:6])
+    for key in locations.keys():
+        latitudes.append(str(locations[key]['location'][0])[:6])
+        longitudes.append(str(locations[key]['location'][1])[:6])
         icon_color ="#004506" #green
-        if 'Temp_style' in climbing_weather[key].keys():
+        if 'Temp_style' in weather[key].keys():
             icon_color ="#D60A0A" #red               
-        if 'Wind_style' in climbing_weather[key].keys():
+        if 'Wind_style' in weather[key].keys():
             icon_color ="#525252" #grey                 
-        if 'Rain_style' in climbing_weather[key].keys():
+        if 'Rain_style' in weather[key].keys():
             icon_color ="#0D00C8" #blue
-        weather.append(icon_color)
-        yr_link = 'https://www.yr.no/en/forecast/daily-table/'+str(climbing_locations[key]['location'][0])[:6]+", "+str(climbing_locations[key]['location'][1])[:6]
+        weather_color.append(icon_color)
+        yr_link = 'https://www.yr.no/en/forecast/daily-table/'+str(locations[key]['location'][0])[:6]+", "+str(locations[key]['location'][1])[:6]
         link = '<a href="'+yr_link+'" target=”_blank”>'+key+'</a>'
         links.append(link)
     
     df = pd.DataFrame({'Properties':links,
                         'Latitude':latitudes,
                         'Longitude':longitudes,
-                        'Weather':weather})
+                        'Weather':weather_color})
 
-    m = folium.Map(location=[45.37789272618172, 15.445964471005263], tiles="OpenStreetMap", zoom_start=7)
+    if type_activity=='climbing':
+        center = [45.37789272618172, 15.445964471005263]
+    elif type_activity=='skiing':
+        center = [46.53811886433177, 14.907210304159063]
+    
+    m = folium.Map(location=center, tiles="OpenStreetMap", zoom_start=7)
 
     for i in range(0,len(df)):
         point_location=[df.iloc[i]['Latitude'], df.iloc[i]['Longitude']]
@@ -447,90 +521,101 @@ def display_cities_on_map(html_filename):
     #                       labels = ['All good', 'Hot', 'Windy', 'Rainy'])
     m.save(html_filename)
 
-with open('climbing-locations.json') as f:
-    climbing_locations = json.load(f)
-  
-climbing_weather = create_climbing_weather()
+type_activity = 'skiing'
+#type_activity = 'climbing'
 
-climbing_day_style = create_climbing_day_style()
+for type_activity in ['skiing', 'climbing']:
 
-#add_diff_in_weather()
+    location_file = type_activity+'-locations.json'
 
-crag_score_sorted = sort_by_crag_score()
+    with open(location_file) as f:
+        locations = json.load(f)
+    
+    weather = create_weather()
 
-# dd/mm/YY H:M:S
-now2 = datetime.now() + timedelta(hours=2)
-header_now_date_time = now2.strftime("%d/%m/%Y %H:%M:%S")
-header_next_weekend = get_next_weekend_short()
+    climbing_day_style = create_day_style()
 
-HTML_header = f"""<!DOCTYPE html>
-<html>
-<head>
-	<style type="text/css">
-		.myTable {{ background-color:#eee;border-collapse:collapse; }}
-        .myTable tr:nth-child(2n) {{background-color:#ccc;}}
-		.myTable td, .myTable th {{ padding:5px;border:1px solid #000; }}
-	</style>
-	<title>Crag Weather</title>
-    <script>
-        function searchTable() {{
-            let table = document.getElementById('myTable2');
-            let rows = table.getElementsByTagName('tr');
-            let hideClosed = document.getElementById('hideClosedCheckbox').checked;
+    #add_diff_in_weather()
 
-            for (let i = 1; i < rows.length; i++) {{  // Start from 1 to skip the header
-                let type = rows[i].getAttribute('type');
-                let hideRow = false;
+    sorted_by_score = sort_by_score()
 
-                // Check if any of the cells in the row contains the word "Closed"
-                if (type != 'multipitch') {{
-                    hideRow = true;
-                }}
-                rows[i].style.display = 'none';
-                // If the checkbox is checked, hide rows containing "Closed"
-                if (hideRow && hideClosed) {{
+    # dd/mm/YY H:M:S
+    now2 = datetime.now() + timedelta(hours=2)
+    header_now_date_time = now2.strftime("%d/%m/%Y %H:%M:%S")
+    header_next_weekend = get_next_weekend_short()
+
+    HTML_header = f"""<!DOCTYPE html>
+    <html>
+    <head>
+        <style type="text/css">
+            .myTable {{ background-color:#eee;border-collapse:collapse; }}
+            .myTable tr:nth-child(2n) {{background-color:#ccc;}}
+            .myTable td, .myTable th {{ padding:5px;border:1px solid #000; }}
+        </style>
+        <title>Crag Weather</title>
+        <script>
+            function searchTable() {{
+                let table = document.getElementById('myTable2');
+                let rows = table.getElementsByTagName('tr');
+                let hideClosed = document.getElementById('hideClosedCheckbox').checked;
+
+                for (let i = 1; i < rows.length; i++) {{  // Start from 1 to skip the header
+                    let type = rows[i].getAttribute('type');
+                    let hideRow = false;
+
+                    // Check if any of the cells in the row contains the word "Closed"
+                    if (type != 'multipitch') {{
+                        hideRow = true;
+                    }}
                     rows[i].style.display = 'none';
-                }} else {{
-                    rows[i].style.display = '';
+                    // If the checkbox is checked, hide rows containing "Closed"
+                    if (hideRow && hideClosed) {{
+                        rows[i].style.display = 'none';
+                    }} else {{
+                        rows[i].style.display = '';
+                    }}
                 }}
             }}
-        }}
-    </script>
-</head>
-<body>
-	<h1>Idemo penjati u {crag_score_sorted[0]}!</h1>
-    <p>
-        Vikend {header_next_weekend}
-        <br>
-        Azurirana na {header_now_date_time}
-        <br>
-        Na temelju yr.no API
-        <br>
-        Ocjena = Distance + 10 x rain + 20 x avg wind
-    </p>
-    Prikazi samo dugi smjerovi <input type="checkbox" id="hideClosedCheckbox" onchange="searchTable()">
-</body>
-</html>
-"""
+        </script>
+    </head>
+    <body>
+        <h1>Idemo {type_activity} u {sorted_by_score[0]}!</h1>
+        <p>
+            Vikend {header_next_weekend}
+            <br>
+            Azurirana na {header_now_date_time}
+            <br>
+            Na temelju yr.no API
+            <br>
+            Ocjena = Distance + 10 x rain + 20 x avg wind
+        </p>
+        Prikazi samo dugi smjerovi <input type="checkbox" id="hideClosedCheckbox" onchange="searchTable()">
+    </body>
+    </html>
+    """
 
-soup = BeautifulSoup(HTML_header, "html.parser")
+    soup = BeautifulSoup(HTML_header, "html.parser")
 
-createTable()
+    createTable()
 
-HTML_footer = """   <br> <div class="container">
-<iframe id="iframe1" name="iframe1" frameborder="0"  
-     src="detail_footprint.html" width="800" height="500"></iframe>
-     </div>  """
+    HTML_footer = """   <br> <div class="container">
+    <iframe id="iframe1" name="iframe1" frameborder="0"  
+        src=" """+type_activity+"""_detail_footprint.html" width="800" height="500"></iframe>
+        </div>  """
 
-soup_footer = BeautifulSoup(HTML_footer, "html.parser")
+    soup_footer = BeautifulSoup(HTML_footer, "html.parser")
 
-soup.body.append(soup_footer)
+    soup.body.append(soup_footer)
 
-html = soup.prettify("utf-8")
-with open("build_outputs_folder/index.html", "wb") as file:
-    file.write(html)
+    html = soup.prettify("utf-8")
+    if type_activity=='climbing':
+        with open("build_outputs_folder/index.html", "wb") as file:
+            file.write(html)
+    else:
+        with open("build_outputs_folder/"+type_activity+"_index.html", "wb") as file:
+            file.write(html)
 
-display_cities_on_map('build_outputs_folder/detail_footprint.html')
+    display_cities_on_map('build_outputs_folder/'+type_activity+'_detail_footprint.html')
 
 import generate_pollen_html
 
