@@ -138,62 +138,20 @@ def add_weather(location, start_date, end_date):
         i=i+1
     return min_temp, max_temp, rain, min_wind, max_wind
 
-
-    headers = {'Accept':	'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-    'Accept-Encoding':	'gzip, deflate, br, zstd',
-    'Accept-Language':	'en-US,fr;q=0.8,hr;q=0.5,en;q=0.3',
-    'Connection':	'keep-alive',
-    'DNT':	'1',
-    'Host':	'api.met.no',
-    'Priority':	'u=0, i',
-    'Sec-Fetch-Dest':	'document',
-    'Sec-Fetch-Mode':	'navigate',
-    'Sec-Fetch-Site':	'none',
-    'Sec-Fetch-User':	'?1',
-    'Sec-GPC':	'1',
-    'sitename': 'https://github.com/paitty/crag-weather.git',
-    'Upgrade-Insecure-Requests':	'1',
-    'User-Agent':	'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:135.0) Gecko/20100101 Firefox/135.0'}
-
-    #example call
-    #https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=45.434&lon=15.188
-    url = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat="+str(location[0])[:6]+"&lon="+str(location[1])[:6]
+def add_snow(location):
+    headers={'User-Agent': 'Mozilla/5.0'}
+    
+    url = 'https://www.bergfex.com/'+location.replace('(','').replace(')','').replace(' ','').lower()
     r= requests.get(url, headers=headers)
-    yr_weather=r.json()
-    i=0
-    min_temp = 100
-    max_temp = -100
-    rain = 0
-    min_wind =100
-    max_wind = -100
-
-    while True:
-        #TODO check if the datetime is our time
-        datetime_object = datetime.fromisoformat(yr_weather['properties']['timeseries'][i]['time'])
-        if datetime_object.replace(tzinfo=None)>=start_date:
-            temperature = yr_weather['properties']['timeseries'][i]['data']['instant']['details']['air_temperature']
-            wind = yr_weather['properties']['timeseries'][i]['data']['instant']['details']['wind_speed']
-            if 'next_1_hours' in yr_weather['properties']['timeseries'][i]['data']:
-                add_rain= yr_weather['properties']['timeseries'][i]['data']['next_1_hours']['details']['precipitation_amount']
-            else:
-                #TODO check if we dont miss anything like that
-                add_rain= yr_weather['properties']['timeseries'][i]['data']['next_6_hours']['details']['precipitation_amount']
-            #if location[0] == 44.30403029180178:
-            #    print(datetime_object.replace(tzinfo=None))
-            #    if 'next_1_hours' in yr_weather['properties']['timeseries'][i]['data']:
-            #        print(yr_weather['properties']['timeseries'][i]['data']['next_1_hours']['details']['precipitation_amount'])
-            #    else:
-            #        #TODO check if we dont miss anything like that
-            #        print(yr_weather['properties']['timeseries'][i]['data']['next_6_hours']['details']['precipitation_amount'])
-            min_temp = min(min_temp, temperature)
-            max_temp = max(max_temp, temperature)
-            min_wind = min(min_wind, wind)
-            max_wind = max(max_wind, wind)
-            rain = rain + add_rain
-        if datetime_object.replace(tzinfo=None)>=end_date:
-            break
-        i=i+1
-    return snow_height
+    soup = BeautifulSoup(r.text, "html.parser")
+    
+    snow_mountain='-'
+    snow_valley='-'
+    for snow_height_tag in soup.find_all("div", class_="tw-pl-4"):
+        if snow_height_tag.h3.text == 'Snow depth':
+            snow_mountain = snow_height_tag.div.find_all('span')[1].text
+            snow_valley = snow_height_tag.div.find_all('span')[3].text
+    return snow_mountain, snow_valley
 
 def createTable():
     days_of_the_week = days_of_week_from_today()
@@ -207,7 +165,7 @@ def createTable():
     if type_activity=='climbing':
         table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Distance','Yr.no','Windy','plezanje.net','Bergfex','theCrag','Maps','Waze']
     elif type_activity=='skiing':
-        table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Distance','Yr.no','Windy','Bergfex','Maps','Waze']
+        table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Snow_mountain','Snow_valley','Distance','Yr.no','Windy','Bergfex','Maps','Waze']
     
     
     
@@ -252,7 +210,7 @@ def createTable():
             elif col == 'Bergfex':
                 new_link=soup.new_tag('a')
                 new_link.string='bergfex'
-                new_link.attrs['href'] = 'https://www.bergfex.com/'+key.replace('(','').replace(')','').replace(' ','-').lower()
+                new_link.attrs['href'] = 'https://www.bergfex.com/'+key.replace('(','').replace(')','').replace(' ','').lower()
                 new_link.attrs['target'] = '_blank'
                 new_tag.append(new_link)
             elif col == 'theCrag':
@@ -309,9 +267,12 @@ def create_weather():
     for key in locations.keys():
         location = locations[key]['location']
         min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
+        snow_mountain, snow_valley = add_snow(key)
         weather[key]={}
         weather[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
         weather[key]['Rain']=str(int(rain))+" mm"
+        weather[key]['Snow_mountain']=snow_mountain
+        weather[key]['Snow_valley']=snow_valley
         if rain>6:
             weather[key]['Rain_style']='bold'
         weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
