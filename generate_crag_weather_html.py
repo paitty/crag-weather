@@ -147,11 +147,17 @@ def add_snow(location):
     
     snow_mountain=''
     snow_valley=''
+    opening_status='Unknown'
     for snow_height_tag in soup.find_all("div", class_="tw-pl-4"):
         if snow_height_tag.h3.text == 'Snow depth':
             snow_mountain = snow_height_tag.div.find_all('span')[1].text
             snow_valley = snow_height_tag.div.find_all('span')[3].text
-    return snow_mountain, snow_valley
+
+    for opening in soup.find_all("div", class_="tw-flex tw-justify-start tw-items-center tw-gap-3"):    
+       s= opening.div['x-bind']
+       opening_status = s.split("'")[1]
+    
+    return snow_mountain, snow_valley, opening_status
 
 def createTable():
     days_of_the_week = days_of_week_from_today()
@@ -165,7 +171,7 @@ def createTable():
     if type_activity=='climbing':
         table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Distance','Yr.no','Windy','plezanje.net','Bergfex','theCrag','Maps','Waze']
     elif type_activity=='skiing':
-        table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Snow_mountain','Snow_valley','Distance','Yr.no','Windy','Bergfex','Maps','Waze']
+        table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Snow_mountain','Snow_valley','Open','Distance','Yr.no','Windy','Bergfex','Maps','Waze']
     
     
     
@@ -267,12 +273,13 @@ def create_weather():
     for key in locations.keys():
         location = locations[key]['location']
         min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
-        snow_mountain, snow_valley = add_snow(key)
+        snow_mountain, snow_valley, open = add_snow(key)
         weather[key]={}
         weather[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
         weather[key]['Rain']=str(int(rain))+" mm"
         weather[key]['Snow_mountain']=snow_mountain
         weather[key]['Snow_valley']=snow_valley
+        weather[key]['Open']=open
         if rain>6:
             weather[key]['Rain_style']='bold'
         weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
