@@ -48,7 +48,7 @@
     ],
     "Distance": 211.75333333333336
   },
-  "Gerlitzen": {
+  "Gerlitzen-Alpe": {
     "location": [
       46.69399580052134,
       13.916246599890195
@@ -69,7 +69,7 @@
     ],
     "Distance": 125.82
   },
-  "Kranjska Gora": {
+  "Kranjska-Gora": {
     "location": [
       46.48463736279437,
       13.7797101146335
@@ -82,6 +82,11 @@
       14.5206859431647
     ],
     "Distance": 152.09666666666666
+  },
+  "Sljeme": {
+    "location": [
+      45.8988435233244, 15.946966578038898
+    ]
   },
   "Moelltaler Gletscher": {
     "location": [
