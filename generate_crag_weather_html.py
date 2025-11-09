@@ -147,7 +147,7 @@ def add_snow(location):
     
     snow_mountain=''
     snow_valley=''
-    opening_status='Unknown'
+    opening_status=''
     for snow_height_tag in soup.find_all("div", class_="tw-pl-4"):
         if snow_height_tag.h3.text == 'Snow depth':
             snow_mountain = snow_height_tag.div.find_all('span')[1].text
@@ -257,6 +257,8 @@ def createTable():
                     new_img.attrs['src'] = 'wind-leaf.png'                  
                 if 'Rain_style' in climbing_day_style[col][key].keys():
                     new_img.attrs['src'] = 'cloud-with-rain.png'
+                if 'Snow_style' in climbing_day_style[col][key].keys():
+                    new_img.attrs['src'] = 'snowflake.png'
                 if col in ['Sat','Sun']:
                     new_tag.attrs['style']="background-color:#bbb;"
                 new_tag.append(new_img)
@@ -307,6 +309,8 @@ def create_day_style():
                 climbing_day_style[day][key]['Wind_style']='bold'
             if (max_temp+min_temp)>50:
                 climbing_day_style[day][key]['Temp_style']='bold'
+            if max_temp<2 and rain>3:
+                climbing_day_style[day][key]['Snow_style']='bold'
     return climbing_day_style
 
 def add_diff_in_weather():
