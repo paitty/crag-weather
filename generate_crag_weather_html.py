@@ -145,8 +145,8 @@ def add_snow(location):
     r= requests.get(url, headers=headers)
     soup = BeautifulSoup(r.text, "html.parser")
     
-    snow_mountain='-'
-    snow_valley='-'
+    snow_mountain=''
+    snow_valley=''
     for snow_height_tag in soup.find_all("div", class_="tw-pl-4"):
         if snow_height_tag.h3.text == 'Snow depth':
             snow_mountain = snow_height_tag.div.find_all('span')[1].text
