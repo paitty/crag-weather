@@ -7,41 +7,41 @@
             .myTable td, .myTable th { padding:5px;border:1px solid #000; }
   </style>
   <title>
-   Crag Weather
+   Climbing Weather
   </title>
   <script>
-   function searchTable() {
+   function searchTable() {{
                 let table = document.getElementById('myTable2');
                 let rows = table.getElementsByTagName('tr');
                 let hideClosed = document.getElementById('hideClosedCheckbox').checked;
 
-                for (let i = 1; i < rows.length; i++) {  // Start from 1 to skip the header
+                for (let i = 1; i < rows.length; i++) {{  // Start from 1 to skip the header
                     let type = rows[i].getAttribute('type');
                     let hideRow = false;
 
                     // Check if any of the cells in the row contains the word "Closed"
-                    if (type != 'multipitch') {
+                    if (type != 'multipitch') {{
                         hideRow = true;
-                    }
+                    }}
                     rows[i].style.display = 'none';
                     // If the checkbox is checked, hide rows containing "Closed"
-                    if (hideRow && hideClosed) {
+                    if (hideRow && hideClosed) {{
                         rows[i].style.display = 'none';
-                    } else {
+                    }} else {{
                         rows[i].style.display = '';
-                    }
-                }
-            }
+                    }}
+                }}
+            }}
   </script>
  </head>
  <body>
   <h1>
-   Idemo climbing u Kalnik!
+   Idemo {type_activity} u {sorted_by_score[0]}!
   </h1>
   <p>
-   Vikend 15-16/11/2025
+   Vikend {header_next_weekend}
    <br/>
-   Azurirana na 10/11/2025 15:11:09
+   Azurirana na {header_now_date_time}
    <br/>
    Na temelju yr.no API
    <br/>
