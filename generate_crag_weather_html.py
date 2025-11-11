@@ -524,7 +524,7 @@ for type_activity in ['skiing', 'climbing']:
             .myTable tr:nth-child(2n) {{background-color:#ccc;}}
             .myTable td, .myTable th {{ padding:5px;border:1px solid #000; }}
         </style>
-        <title>"""+type_activity.capitalize()+""" Weather</title>
+        <title>{type_activity.capitalize()} Weather</title>
         <script>
             function searchTable() {{
                 let table = document.getElementById('myTable2');
