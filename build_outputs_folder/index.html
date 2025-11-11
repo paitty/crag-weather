@@ -10,38 +10,38 @@
    Climbing Weather
   </title>
   <script>
-   function searchTable() {{
+   function searchTable() {
                 let table = document.getElementById('myTable2');
                 let rows = table.getElementsByTagName('tr');
                 let hideClosed = document.getElementById('hideClosedCheckbox').checked;
 
-                for (let i = 1; i < rows.length; i++) {{  // Start from 1 to skip the header
+                for (let i = 1; i < rows.length; i++) {  // Start from 1 to skip the header
                     let type = rows[i].getAttribute('type');
                     let hideRow = false;
 
                     // Check if any of the cells in the row contains the word "Closed"
-                    if (type != 'multipitch') {{
+                    if (type != 'multipitch') {
                         hideRow = true;
-                    }}
+                    }
                     rows[i].style.display = 'none';
                     // If the checkbox is checked, hide rows containing "Closed"
-                    if (hideRow && hideClosed) {{
+                    if (hideRow && hideClosed) {
                         rows[i].style.display = 'none';
-                    }} else {{
+                    } else {
                         rows[i].style.display = '';
-                    }}
-                }}
-            }}
+                    }
+                }
+            }
   </script>
  </head>
  <body>
   <h1>
-   Idemo {type_activity} u {sorted_by_score[0]}!
+   Idemo climbing u Buncove skale!
   </h1>
   <p>
-   Vikend {header_next_weekend}
+   Vikend 15-16/11/2025
    <br/>
-   Azurirana na {header_now_date_time}
+   Azurirana na 11/11/2025 14:28:38
    <br/>
    Na temelju yr.no API
    <br/>
