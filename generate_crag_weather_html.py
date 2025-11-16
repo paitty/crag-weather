@@ -153,9 +153,21 @@ def add_snow(location):
             snow_mountain = snow_height_tag.div.find_all('span')[1].text
             snow_valley = snow_height_tag.div.find_all('span')[3].text
 
-    for opening in soup.find_all("div", class_="tw-flex tw-justify-start tw-items-center tw-gap-3"):    
-       s= opening.div['x-bind']
-       opening_status = s.split("'")[1]
+    for parent_div in soup.find_all('div', {'class': 'tw-flex tw-justify-start tw-items-center tw-gap-3'}):
+        s= parent_div.contents[1]['x-bind']
+        opening_status = s.split("'")[1]
+        if opening_status == 'Closed':
+            parent_div2 = parent_div.contents[3].find_all('div')
+            parent_div3 = parent_div2[1].find_all('span')
+            s= parent_div3[1].text
+            opening_status = s.split(" - ")[0]
+    
+    #for opening in soup.find_all("div", class_="tw-flex tw-justify-start tw-items-center tw-gap-3"):    
+    #   s= opening.div['x-bind']
+    #   opening_status = s.split("'")[1]
+    #   if opening_status not in ['Open']:
+    #       opening_status = "closed"
+
     
     return snow_mountain, snow_valley, opening_status
 
@@ -169,7 +181,7 @@ def createTable():
     display_table = soup.html.body.find_all("table")[-1]
 
     if type_activity=='climbing':
-        table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Distance','Yr.no','Windy','plezanje.net','Bergfex','theCrag','Maps','Waze']
+        table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Distance','Yr.no','Windy','plezanje.net','theCrag','Maps','Waze']
     elif type_activity=='skiing':
         table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Snow_mountain','Snow_valley','Open','Distance','Yr.no','Windy','Bergfex','Maps','Waze']
     
@@ -277,7 +289,7 @@ def create_weather():
         min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
         snow_mountain, snow_valley, open = add_snow(key)
         weather[key]={}
-        weather[key]['Temp']=str(int(min_temp))+"-"+str(int(max_temp))+"°"
+        weather[key]['Temp']=str(int(min_temp))+"/"+str(int(max_temp))+"°"
         weather[key]['Rain']=str(int(rain))+" mm"
         weather[key]['Snow_mountain']=snow_mountain
         weather[key]['Snow_valley']=snow_valley
