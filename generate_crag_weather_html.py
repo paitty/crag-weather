@@ -143,6 +143,7 @@ def add_snow(location):
     
     url = 'https://www.bergfex.com/'+location.replace('(','').replace(')','').replace(' ','').lower()
     r= requests.get(url, headers=headers)
+    print(r.text[:1000])
     soup = BeautifulSoup(r.text, "html.parser")
     
     snow_mountain=''
@@ -563,17 +564,17 @@ for type_activity in ['skiing', 'climbing']:
         </script>
     </head>
     <body>
-        <h1>Idemo {type_activity} u {sorted_by_score[0]}!</h1>
+        <h1>Let's go {type_activity} in {sorted_by_score[0]}!</h1>
         <p>
-            Vikend {header_next_weekend}
+            Weekend {header_next_weekend}
             <br>
-            Azurirana na {header_now_date_time}
+            Updated on {header_now_date_time}
             <br>
-            Na temelju yr.no API
+            Based on yr.no API
             <br>
-            Ocjena = Distance + 10 x rain + 20 x avg wind
+            Score = Distance + 10 x rain + 20 x avg wind
         </p>
-        Prikazi samo dugi smjerovi <input type="checkbox" id="hideClosedCheckbox" onchange="searchTable()">
+        Show only multi-pitch routes <input type="checkbox" id="hideClosedCheckbox" onchange="searchTable()">
     </body>
     </html>
     """
