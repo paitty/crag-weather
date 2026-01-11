@@ -139,37 +139,39 @@ def add_weather(location, start_date, end_date):
     return min_temp, max_temp, rain, min_wind, max_wind
 
 def add_snow(location):
-    headers={'User-Agent': 'Mozilla/5.0'}
-    
-    url = 'https://www.bergfex.com/'+location.replace('(','').replace(')','').replace(' ','').lower()
-    r= requests.get(url, headers=headers)
-    print(r.text[:1000])
-    soup = BeautifulSoup(r.text, "html.parser")
     
     snow_mountain=''
     snow_valley=''
     opening_status=''
-    for snow_height_tag in soup.find_all("div", class_="tw-pl-4"):
-        if snow_height_tag.h3.text == 'Snow depth':
-            snow_mountain = snow_height_tag.div.find_all('span')[1].text
-            snow_valley = snow_height_tag.div.find_all('span')[3].text
-
-    for parent_div in soup.find_all('div', {'class': 'tw-flex tw-justify-start tw-items-center tw-gap-3'}):
-        s= parent_div.contents[1]['x-bind']
-        opening_status = s.split("'")[1]
-        if opening_status == 'Closed':
-            parent_div2 = parent_div.contents[3].find_all('div')
-            parent_div3 = parent_div2[1].find_all('span')
-            s= parent_div3[1].text
-            opening_status = s.split(" - ")[0]
     
-    #for opening in soup.find_all("div", class_="tw-flex tw-justify-start tw-items-center tw-gap-3"):    
-    #   s= opening.div['x-bind']
-    #   opening_status = s.split("'")[1]
-    #   if opening_status not in ['Open']:
-    #       opening_status = "closed"
+    if type_activity == 'skiing':
+        headers={'User-Agent': 'Mozilla/5.0'}
+        
+        url = 'https://www.bergfex.com/'+location.replace('(','').replace(')','').replace(' ','').lower()
+        r= requests.get(url, headers=headers)
+        print(r.text[:1000])
+        soup = BeautifulSoup(r.text, "html.parser")
+        
+        for snow_height_tag in soup.find_all("div", class_="tw-pl-4"):
+            if snow_height_tag.h3.text == 'Snow depth':
+                snow_mountain = snow_height_tag.div.find_all('span')[1].text
+                snow_valley = snow_height_tag.div.find_all('span')[3].text
 
-    
+        for parent_div in soup.find_all('div', {'class': 'tw-flex tw-justify-start tw-items-center tw-gap-3'}):
+            s= parent_div.contents[1]['x-bind']
+            opening_status = s.split("'")[1]
+            if opening_status == 'Closed':
+                parent_div2 = parent_div.contents[3].find_all('div')
+                parent_div3 = parent_div2[1].find_all('span')
+                s= parent_div3[1].text
+                opening_status = s.split(" - ")[0]
+        
+        #for opening in soup.find_all("div", class_="tw-flex tw-justify-start tw-items-center tw-gap-3"):    
+        #   s= opening.div['x-bind']
+        #   opening_status = s.split("'")[1]
+        #   if opening_status not in ['Open']:
+        #       opening_status = "closed"
+
     return snow_mountain, snow_valley, opening_status
 
 def createTable():
