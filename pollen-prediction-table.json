@@ -3715,6 +3715,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "12/02/2026": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "Ambrozija": {
@@ -4813,6 +4818,11 @@
       "p-niska",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "12/02/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Joha": {
@@ -4880,6 +4890,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "12/02/2026": [
+      "p-niska",
+      "p-umjerena",
+      "p-umjerena"
     ]
   }
 }
