@@ -3750,6 +3750,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "19/02/2026": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "Ambrozija": {
@@ -4883,6 +4888,11 @@
       "p-visoka",
       "p-visoka",
       "p-visoka"
+    ],
+    "19/02/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Joha": {
@@ -4985,6 +4995,11 @@
       "p-visoka",
       "p-visoka",
       "p-visoka"
+    ],
+    "19/02/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Jasen": {
@@ -5001,6 +5016,11 @@
   },
   "Brijest": {
     "18/02/2026": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "19/02/2026": [
       "p-niska",
       "p-niska",
       "p-niska"
