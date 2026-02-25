@@ -3780,6 +3780,11 @@
       "p-visoka",
       "p-visoka",
       "p-visoka"
+    ],
+    "25/02/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Ambrozija": {
@@ -4943,6 +4948,11 @@
       "p-visoka",
       "p-visoka",
       "p-visoka"
+    ],
+    "25/02/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Joha": {
@@ -5075,6 +5085,11 @@
       "p-visoka",
       "p-visoka",
       "p-visoka"
+    ],
+    "25/02/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Jasen": {
@@ -5107,6 +5122,11 @@
       "p-umjerena",
       "p-niska",
       "p-niska"
+    ],
+    "25/02/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Brijest": {
@@ -5144,6 +5164,13 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ]
+  },
+  "Topola": {
+    "25/02/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   }
 }
