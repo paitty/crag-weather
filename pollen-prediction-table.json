@@ -3905,6 +3905,11 @@
       "p-visoka",
       "p-visoka",
       "p-visoka"
+    ],
+    "15/03/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Ambrozija": {
@@ -5158,6 +5163,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "15/03/2026": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "Joha": {
@@ -5380,6 +5390,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "15/03/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Jasen": {
@@ -5499,6 +5514,11 @@
       "p-umjerena"
     ],
     "14/03/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
+    ],
+    "15/03/2026": [
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
@@ -5631,6 +5651,11 @@
       "p-visoka",
       "p-visoka",
       "p-visoka"
+    ],
+    "15/03/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Breza": {
@@ -5648,6 +5673,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "15/03/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   }
 }
