@@ -3016,6 +3016,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "29/03/2026": [
+      "p-niska",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Pitomi kesten": {
@@ -4035,6 +4040,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "29/03/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Ambrozija": {
@@ -5977,6 +5987,11 @@
     "28/03/2026": [
       "p-umjerena",
       "p-umjerena",
+      "p-visoka"
+    ],
+    "29/03/2026": [
+      "p-visoka",
+      "p-visoka",
       "p-visoka"
     ]
   },
