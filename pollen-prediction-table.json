@@ -3026,6 +3026,11 @@
       "p-niska",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "31/03/2026": [
+      "p-niska",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Pitomi kesten": {
@@ -4052,6 +4057,11 @@
       "p-visoka"
     ],
     "30/03/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-visoka"
+    ],
+    "31/03/2026": [
       "p-umjerena",
       "p-umjerena",
       "p-visoka"
@@ -6005,6 +6015,11 @@
       "p-visoka"
     ],
     "30/03/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-visoka"
+    ],
+    "31/03/2026": [
       "p-umjerena",
       "p-umjerena",
       "p-visoka"
