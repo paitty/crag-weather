@@ -1371,6 +1371,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "03/04/2026": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "Koprive": {
@@ -3046,6 +3051,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "03/04/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Pitomi kesten": {
@@ -4090,6 +4100,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "03/04/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Ambrozija": {
@@ -5767,6 +5782,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "03/04/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Brijest": {
@@ -6068,6 +6088,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-visoka"
+    ],
+    "03/04/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Grab": {
@@ -6135,6 +6160,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-visoka"
+    ],
+    "03/04/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   }
 }
