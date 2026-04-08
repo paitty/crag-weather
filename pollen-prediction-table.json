@@ -1396,6 +1396,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "08/04/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Koprive": {
@@ -2192,6 +2197,11 @@
       "p-niska"
     ],
     "07/04/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
+    ],
+    "08/04/2026": [
       "p-visoka",
       "p-visoka",
       "p-visoka"
@@ -3098,6 +3108,11 @@
       "p-umjerena"
     ],
     "07/04/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
+    ],
+    "08/04/2026": [
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
@@ -4170,6 +4185,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "08/04/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Ambrozija": {
@@ -6193,6 +6213,11 @@
       "p-visoka",
       "p-visoka",
       "p-visoka"
+    ],
+    "08/04/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Grab": {
@@ -6284,6 +6309,11 @@
   },
   "Platana": {
     "07/04/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
+    ],
+    "08/04/2026": [
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
