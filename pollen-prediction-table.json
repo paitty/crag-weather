@@ -2173,6 +2173,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "10/04/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Hrast": {
@@ -4227,7 +4232,7 @@
       "p-umjerena"
     ],
     "10/04/2026": [
-      "p-visoka",
+      "p-umjerena",
       "p-umjerena",
       "p-umjerena"
     ]
@@ -6355,6 +6360,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "10/04/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Platana": {
