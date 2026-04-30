@@ -519,6 +519,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-visoka"
+    ],
+    "30/04/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Trave": {
@@ -1546,6 +1551,11 @@
       "p-niska",
       "p-umjerena",
       "p-visoka"
+    ],
+    "30/04/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Koprive": {
@@ -2408,6 +2418,11 @@
       "p-niska",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "30/04/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Hrast": {
@@ -2554,6 +2569,11 @@
     "29/04/2026": [
       "p-umjerena",
       "p-umjerena",
+      "p-visoka"
+    ],
+    "30/04/2026": [
+      "p-visoka",
+      "p-visoka",
       "p-visoka"
     ]
   },
@@ -6748,6 +6768,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-visoka"
+    ],
+    "30/04/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Grab": {
@@ -6935,6 +6960,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "30/04/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Platana": {
