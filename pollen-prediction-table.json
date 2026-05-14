@@ -589,6 +589,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "14/05/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Trave": {
@@ -1686,6 +1691,11 @@
       "p-umjerena",
       "p-visoka",
       "p-visoka"
+    ],
+    "14/05/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Koprive": {
@@ -2618,6 +2628,11 @@
       "p-niska",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "14/05/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Hrast": {
@@ -2833,6 +2848,11 @@
     ],
     "13/05/2026": [
       "p-niska",
+      "p-umjerena",
+      "p-umjerena"
+    ],
+    "14/05/2026": [
+      "p-umjerena",
       "p-umjerena",
       "p-umjerena"
     ]
@@ -7131,6 +7151,11 @@
     ],
     "13/05/2026": [
       "p-niska",
+      "p-umjerena",
+      "p-umjerena"
+    ],
+    "14/05/2026": [
+      "p-umjerena",
       "p-umjerena",
       "p-umjerena"
     ]
