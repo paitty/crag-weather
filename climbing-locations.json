@@ -8,8 +8,10 @@
   },
   "Podgorje": {
     "location": [
-      46.068380, 15.345210
-    ]
+      46.06838,
+      15.34521
+    ],
+    "Distance": 76.59166666666667
   },
   "Orlovska stena": {
     "location": [
