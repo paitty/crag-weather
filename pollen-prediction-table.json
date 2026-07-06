@@ -2086,6 +2086,11 @@
       "p-visoka",
       "p-visoka",
       "p-visoka"
+    ],
+    "06/07/2026": [
+      "p-visoka",
+      "p-visoka",
+      "p-visoka"
     ]
   },
   "Koprive": {
@@ -3283,6 +3288,11 @@
       "p-visoka",
       "p-visoka",
       "p-visoka"
+    ],
+    "06/07/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Hrast": {
@@ -4387,6 +4397,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "06/07/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Lipa": {
@@ -4646,6 +4661,11 @@
       "p-niska"
     ],
     "05/07/2026": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "06/07/2026": [
       "p-niska",
       "p-niska",
       "p-niska"
@@ -5133,6 +5153,11 @@
       "p-visoka",
       "p-visoka",
       "p-visoka"
+    ],
+    "06/07/2026": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "\u010cempresi": {
