@@ -2161,6 +2161,11 @@
       "p-umjerena",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "18/07/2026": [
+      "p-niska",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Koprive": {
@@ -3418,6 +3423,11 @@
       "p-visoka",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "18/07/2026": [
+      "p-niska",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Hrast": {
@@ -4579,6 +4589,11 @@
       "p-niska"
     ],
     "17/07/2026": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "18/07/2026": [
       "p-niska",
       "p-niska",
       "p-niska"
