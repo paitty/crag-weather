@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_b9cbccf0aead985b2765ffd96435bdf5 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/marslan390/BeautifyMarker/leaflet-beautify-marker-icon.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/marslan390/BeautifyMarker/leaflet-beautify-marker-icon.min.css"/>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_b9cbccf0aead985b2765ffd96435bdf5" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_b9cbccf0aead985b2765ffd96435bdf5 = L.map(
+                "map_b9cbccf0aead985b2765ffd96435bdf5",
+                {
+                    center: [46.53811886433177, 14.907210304159063],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 7,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_2515657d492b9b56dcf899967bb2d8da = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_2515657d492b9b56dcf899967bb2d8da.addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var marker_74cd7cecc1c04b861e0bda7bf38c758d = L.marker(
+                [45.308, 14.86],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_c6572eb2701dfefd07fa025fbbd80ed3 = new L.BeautifyIcon.icon(
+                {
+  "icon": "sun",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_74cd7cecc1c04b861e0bda7bf38c758d.setIcon(beautify_icon_c6572eb2701dfefd07fa025fbbd80ed3);
+        
+    
+        var popup_9673c47c7c8516b765266527864d2268 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8b8973197ce6d01c5c0893d72cd43d2d = $(`<div id="html_8b8973197ce6d01c5c0893d72cd43d2d" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/45.308, 14.860" target=”_blank”>Celimbasa</a></div>`)[0];
+                popup_9673c47c7c8516b765266527864d2268.setContent(html_8b8973197ce6d01c5c0893d72cd43d2d);
+            
+        
+
+        marker_74cd7cecc1c04b861e0bda7bf38c758d.bindPopup(popup_9673c47c7c8516b765266527864d2268)
+        ;
+
+        
+    
+    
+                marker_74cd7cecc1c04b861e0bda7bf38c758d.setIcon(beautify_icon_c6572eb2701dfefd07fa025fbbd80ed3);
+            
+    
+            var marker_8a47f2a5e30b93a876364929d72a7803 = L.marker(
+                [47.252, 13.547],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_394180fad7bf15f2223f6d86c72a8304 = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-rain",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_8a47f2a5e30b93a876364929d72a7803.setIcon(beautify_icon_394180fad7bf15f2223f6d86c72a8304);
+        
+    
+        var popup_14efeec0ee64a17e5b6fbb9282a1dd33 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_64e9fef7dba6ec3a3c496ca429286121 = $(`<div id="html_64e9fef7dba6ec3a3c496ca429286121" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/47.252, 13.547" target=”_blank”>Obertauern</a></div>`)[0];
+                popup_14efeec0ee64a17e5b6fbb9282a1dd33.setContent(html_64e9fef7dba6ec3a3c496ca429286121);
+            
+        
+
+        marker_8a47f2a5e30b93a876364929d72a7803.bindPopup(popup_14efeec0ee64a17e5b6fbb9282a1dd33)
+        ;
+
+        
+    
+    
+                marker_8a47f2a5e30b93a876364929d72a7803.setIcon(beautify_icon_394180fad7bf15f2223f6d86c72a8304);
+            
+    
+            var marker_c598e3c1c78fff87d285751e794171ea = L.marker(
+                [46.428, 14.233],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_9c6d9ae1c6ccf743756bd6f8a7834c42 = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-sun",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_c598e3c1c78fff87d285751e794171ea.setIcon(beautify_icon_9c6d9ae1c6ccf743756bd6f8a7834c42);
+        
+    
+        var popup_6006d5c9d20e575d534813e5ef63d1be = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a8a146fa208e28b6d9414b39cb43d3ad = $(`<div id="html_a8a146fa208e28b6d9414b39cb43d3ad" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.428, 14.233" target=”_blank”>Zelenica</a></div>`)[0];
+                popup_6006d5c9d20e575d534813e5ef63d1be.setContent(html_a8a146fa208e28b6d9414b39cb43d3ad);
+            
+        
+
+        marker_c598e3c1c78fff87d285751e794171ea.bindPopup(popup_6006d5c9d20e575d534813e5ef63d1be)
+        ;
+
+        
+    
+    
+                marker_c598e3c1c78fff87d285751e794171ea.setIcon(beautify_icon_9c6d9ae1c6ccf743756bd6f8a7834c42);
+            
+    
+            var marker_b637d09c042381d87dd66a1ab632ec4d = L.marker(
+                [46.566, 13.277],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_f114fb435dbd41daa244ffeb879d14a0 = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-sun",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_b637d09c042381d87dd66a1ab632ec4d.setIcon(beautify_icon_f114fb435dbd41daa244ffeb879d14a0);
+        
+    
+        var popup_d200484c3608f7f88a1e6f97eae3cafa = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f704cddb711d849407c13a6369345946 = $(`<div id="html_f704cddb711d849407c13a6369345946" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.566, 13.277" target=”_blank”>Nassfeld</a></div>`)[0];
+                popup_d200484c3608f7f88a1e6f97eae3cafa.setContent(html_f704cddb711d849407c13a6369345946);
+            
+        
+
+        marker_b637d09c042381d87dd66a1ab632ec4d.bindPopup(popup_d200484c3608f7f88a1e6f97eae3cafa)
+        ;
+
+        
+    
+    
+                marker_b637d09c042381d87dd66a1ab632ec4d.setIcon(beautify_icon_f114fb435dbd41daa244ffeb879d14a0);
+            
+    
+            var marker_3e44698ad1db8e74aeefbea5213c44ab = L.marker(
+                [46.533, 15.599],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_515293470e744ca13a0ee2d96fc18bb4 = new L.BeautifyIcon.icon(
+                {
+  "icon": "sun",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#D60A0A",
+  "textColor": "#D60A0A",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_3e44698ad1db8e74aeefbea5213c44ab.setIcon(beautify_icon_515293470e744ca13a0ee2d96fc18bb4);
+        
+    
+        var popup_c612ea5a7786d955d2b47b7623a6316f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_375a6661e42e1c565e9061fd88a4d73a = $(`<div id="html_375a6661e42e1c565e9061fd88a4d73a" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.533, 15.599" target=”_blank”>Mariborsko-Pohorje</a></div>`)[0];
+                popup_c612ea5a7786d955d2b47b7623a6316f.setContent(html_375a6661e42e1c565e9061fd88a4d73a);
+            
+        
+
+        marker_3e44698ad1db8e74aeefbea5213c44ab.bindPopup(popup_c612ea5a7786d955d2b47b7623a6316f)
+        ;
+
+        
+    
+    
+                marker_3e44698ad1db8e74aeefbea5213c44ab.setIcon(beautify_icon_515293470e744ca13a0ee2d96fc18bb4);
+            
+    
+            var marker_22f065626395f9d003a47ec267a834e3 = L.marker(
+                [46.746, 12.011],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_724419f9a1a4017b9f8e1b94f82085de = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-rain",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_22f065626395f9d003a47ec267a834e3.setIcon(beautify_icon_724419f9a1a4017b9f8e1b94f82085de);
+        
+    
+        var popup_c535a4319ee9fd6b633dbc27028fc738 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d68e7ae21c6858dfc956c50e8f39ed88 = $(`<div id="html_d68e7ae21c6858dfc956c50e8f39ed88" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.746, 12.011" target=”_blank”>Kronplatz</a></div>`)[0];
+                popup_c535a4319ee9fd6b633dbc27028fc738.setContent(html_d68e7ae21c6858dfc956c50e8f39ed88);
+            
+        
+
+        marker_22f065626395f9d003a47ec267a834e3.bindPopup(popup_c535a4319ee9fd6b633dbc27028fc738)
+        ;
+
+        
+    
+    
+                marker_22f065626395f9d003a47ec267a834e3.setIcon(beautify_icon_724419f9a1a4017b9f8e1b94f82085de);
+            
+    
+            var marker_28c41e584a0ecdce788956928dd1ba93 = L.marker(
+                [46.85, 10.705],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_0ed5178a5799e1adac9a58b5468c3b27 = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-rain",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_28c41e584a0ecdce788956928dd1ba93.setIcon(beautify_icon_0ed5178a5799e1adac9a58b5468c3b27);
+        
+    
+        var popup_4faa2ddd5fea50c229f96ece39e88086 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a48f4e2f5931f9f84aa63ed81fed128e = $(`<div id="html_a48f4e2f5931f9f84aa63ed81fed128e" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.850, 10.705" target=”_blank”>Kaunertal</a></div>`)[0];
+                popup_4faa2ddd5fea50c229f96ece39e88086.setContent(html_a48f4e2f5931f9f84aa63ed81fed128e);
+            
+        
+
+        marker_28c41e584a0ecdce788956928dd1ba93.bindPopup(popup_4faa2ddd5fea50c229f96ece39e88086)
+        ;
+
+        
+    
+    
+                marker_28c41e584a0ecdce788956928dd1ba93.setIcon(beautify_icon_0ed5178a5799e1adac9a58b5468c3b27);
+            
+    
+            var marker_a59930a4dae1de98219c458a0b136511 = L.marker(
+                [46.759, 13.458],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_98d9de17103b6e704b8836e71b8ce9b6 = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-sun",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_a59930a4dae1de98219c458a0b136511.setIcon(beautify_icon_98d9de17103b6e704b8836e71b8ce9b6);
+        
+    
+        var popup_e0de0f970c00e23628e5eb5063329c38 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f4d1651b8fba4c509d5eb63f9b1f561a = $(`<div id="html_f4d1651b8fba4c509d5eb63f9b1f561a" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.759, 13.458" target=”_blank”>Goldeck</a></div>`)[0];
+                popup_e0de0f970c00e23628e5eb5063329c38.setContent(html_f4d1651b8fba4c509d5eb63f9b1f561a);
+            
+        
+
+        marker_a59930a4dae1de98219c458a0b136511.bindPopup(popup_e0de0f970c00e23628e5eb5063329c38)
+        ;
+
+        
+    
+    
+                marker_a59930a4dae1de98219c458a0b136511.setIcon(beautify_icon_98d9de17103b6e704b8836e71b8ce9b6);
+            
+    
+            var marker_1a70e1fc0cc404d26ed0a7ad9a900951 = L.marker(
+                [47.058, 13.615],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_a8c42220b0d5fb33908e28d919a1e2c5 = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-rain",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_1a70e1fc0cc404d26ed0a7ad9a900951.setIcon(beautify_icon_a8c42220b0d5fb33908e28d919a1e2c5);
+        
+    
+        var popup_f4c80fc03a557b7b49148aba1c6207e5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8c4f799d3c776e48dd3d35a947e63278 = $(`<div id="html_8c4f799d3c776e48dd3d35a947e63278" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/47.058, 13.615" target=”_blank”>Katschberg</a></div>`)[0];
+                popup_f4c80fc03a557b7b49148aba1c6207e5.setContent(html_8c4f799d3c776e48dd3d35a947e63278);
+            
+        
+
+        marker_1a70e1fc0cc404d26ed0a7ad9a900951.bindPopup(popup_f4c80fc03a557b7b49148aba1c6207e5)
+        ;
+
+        
+    
+    
+                marker_1a70e1fc0cc404d26ed0a7ad9a900951.setIcon(beautify_icon_a8c42220b0d5fb33908e28d919a1e2c5);
+            
+    
+            var marker_40105d5b231cacc82952010e4a82785a = L.marker(
+                [46.812, 13.798],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_29aad037ce2b2faebbebad8f19fb5943 = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-sun",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_40105d5b231cacc82952010e4a82785a.setIcon(beautify_icon_29aad037ce2b2faebbebad8f19fb5943);
+        
+    
+        var popup_a82a505c0c4acf122fd418d1abd6dceb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7676d24c1ecb67f4b9330b8aa3505cf2 = $(`<div id="html_7676d24c1ecb67f4b9330b8aa3505cf2" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.812, 13.798" target=”_blank”>Bad Kleinkirchheim</a></div>`)[0];
+                popup_a82a505c0c4acf122fd418d1abd6dceb.setContent(html_7676d24c1ecb67f4b9330b8aa3505cf2);
+            
+        
+
+        marker_40105d5b231cacc82952010e4a82785a.bindPopup(popup_a82a505c0c4acf122fd418d1abd6dceb)
+        ;
+
+        
+    
+    
+                marker_40105d5b231cacc82952010e4a82785a.setIcon(beautify_icon_29aad037ce2b2faebbebad8f19fb5943);
+            
+    
+            var marker_2e36039782216861d16b09cb2526ff94 = L.marker(
+                [46.914, 13.875],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_123b7d9704519c08f0cb07a0e2f13862 = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-sun",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_2e36039782216861d16b09cb2526ff94.setIcon(beautify_icon_123b7d9704519c08f0cb07a0e2f13862);
+        
+    
+        var popup_47393a70e7c65c0c63f365824b322eed = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_372f6aa9060843fb4d09668b70c8d895 = $(`<div id="html_372f6aa9060843fb4d09668b70c8d895" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.914, 13.875" target=”_blank”>Turracher Hoehe</a></div>`)[0];
+                popup_47393a70e7c65c0c63f365824b322eed.setContent(html_372f6aa9060843fb4d09668b70c8d895);
+            
+        
+
+        marker_2e36039782216861d16b09cb2526ff94.bindPopup(popup_47393a70e7c65c0c63f365824b322eed)
+        ;
+
+        
+    
+    
+                marker_2e36039782216861d16b09cb2526ff94.setIcon(beautify_icon_123b7d9704519c08f0cb07a0e2f13862);
+            
+    
+            var marker_99bfa32cabbc282078994f43347568c8 = L.marker(
+                [46.693, 13.916],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_692cd5326cb55d121275fd3d5a234983 = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-sun",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_99bfa32cabbc282078994f43347568c8.setIcon(beautify_icon_692cd5326cb55d121275fd3d5a234983);
+        
+    
+        var popup_19520fade1d426183e3aebc66d97f50a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_982ec8556efa0a69e056cc7d47914b5e = $(`<div id="html_982ec8556efa0a69e056cc7d47914b5e" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.693, 13.916" target=”_blank”>Gerlitzen-Alpe</a></div>`)[0];
+                popup_19520fade1d426183e3aebc66d97f50a.setContent(html_982ec8556efa0a69e056cc7d47914b5e);
+            
+        
+
+        marker_99bfa32cabbc282078994f43347568c8.bindPopup(popup_19520fade1d426183e3aebc66d97f50a)
+        ;
+
+        
+    
+    
+                marker_99bfa32cabbc282078994f43347568c8.setIcon(beautify_icon_692cd5326cb55d121275fd3d5a234983);
+            
+    
+            var marker_9ff6846e51c143268b7f4977b0a4c8a7 = L.marker(
+                [46.263, 13.84],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_2e887835dfbcd4ec174210d98a4beeb2 = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-sun",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_9ff6846e51c143268b7f4977b0a4c8a7.setIcon(beautify_icon_2e887835dfbcd4ec174210d98a4beeb2);
+        
+    
+        var popup_4f13a42bc0873570123ae489802f8b07 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ca64d30b237982b1ca3de6ab75f89ee6 = $(`<div id="html_ca64d30b237982b1ca3de6ab75f89ee6" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.263, 13.840" target=”_blank”>Vogel</a></div>`)[0];
+                popup_4f13a42bc0873570123ae489802f8b07.setContent(html_ca64d30b237982b1ca3de6ab75f89ee6);
+            
+        
+
+        marker_9ff6846e51c143268b7f4977b0a4c8a7.bindPopup(popup_4f13a42bc0873570123ae489802f8b07)
+        ;
+
+        
+    
+    
+                marker_9ff6846e51c143268b7f4977b0a4c8a7.setIcon(beautify_icon_2e887835dfbcd4ec174210d98a4beeb2);
+            
+    
+            var marker_a8e57a378ee2cedb59548601f99a2161 = L.marker(
+                [46.454, 15.333],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_c4e8376c04254434143072de88433cae = new L.BeautifyIcon.icon(
+                {
+  "icon": "sun",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_a8e57a378ee2cedb59548601f99a2161.setIcon(beautify_icon_c4e8376c04254434143072de88433cae);
+        
+    
+        var popup_08154f217b40f7f7f429d01daf0eb7fb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fbe1bc4f91a5e7d5773d59391e89a41f = $(`<div id="html_fbe1bc4f91a5e7d5773d59391e89a41f" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.454, 15.333" target=”_blank”>Rogla</a></div>`)[0];
+                popup_08154f217b40f7f7f429d01daf0eb7fb.setContent(html_fbe1bc4f91a5e7d5773d59391e89a41f);
+            
+        
+
+        marker_a8e57a378ee2cedb59548601f99a2161.bindPopup(popup_08154f217b40f7f7f429d01daf0eb7fb)
+        ;
+
+        
+    
+    
+                marker_a8e57a378ee2cedb59548601f99a2161.setIcon(beautify_icon_c4e8376c04254434143072de88433cae);
+            
+    
+            var marker_26bc87aecae0103aa79afd6e26adf5e2 = L.marker(
+                [46.298, 14.642],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_3faf96744bd3f72228b205b8346d4ee3 = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-sun",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_26bc87aecae0103aa79afd6e26adf5e2.setIcon(beautify_icon_3faf96744bd3f72228b205b8346d4ee3);
+        
+    
+        var popup_1a96886008473400e76a9440ea051a0c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0634f843154a2712f9ea2412414793ac = $(`<div id="html_0634f843154a2712f9ea2412414793ac" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.298, 14.642" target=”_blank”>Velika Planina</a></div>`)[0];
+                popup_1a96886008473400e76a9440ea051a0c.setContent(html_0634f843154a2712f9ea2412414793ac);
+            
+        
+
+        marker_26bc87aecae0103aa79afd6e26adf5e2.bindPopup(popup_1a96886008473400e76a9440ea051a0c)
+        ;
+
+        
+    
+    
+                marker_26bc87aecae0103aa79afd6e26adf5e2.setIcon(beautify_icon_3faf96744bd3f72228b205b8346d4ee3);
+            
+    
+            var marker_b48523c55a43e0f8f90d8ab69a260e44 = L.marker(
+                [46.484, 13.779],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_7e45cbdfb078bbb900826b7a1c96ea4a = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-sun",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_b48523c55a43e0f8f90d8ab69a260e44.setIcon(beautify_icon_7e45cbdfb078bbb900826b7a1c96ea4a);
+        
+    
+        var popup_7dfa8d39d53f060147f393682179435c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_222b7260d21ad288d3298996f03eab66 = $(`<div id="html_222b7260d21ad288d3298996f03eab66" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.484, 13.779" target=”_blank”>Kranjska-Gora</a></div>`)[0];
+                popup_7dfa8d39d53f060147f393682179435c.setContent(html_222b7260d21ad288d3298996f03eab66);
+            
+        
+
+        marker_b48523c55a43e0f8f90d8ab69a260e44.bindPopup(popup_7dfa8d39d53f060147f393682179435c)
+        ;
+
+        
+    
+    
+                marker_b48523c55a43e0f8f90d8ab69a260e44.setIcon(beautify_icon_7e45cbdfb078bbb900826b7a1c96ea4a);
+            
+    
+            var marker_bb3ab18fbb8f885a129b5896e7cbc7e2 = L.marker(
+                [46.296, 14.52],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_eb12d9e32fd8bf80fd80fe55c5da8805 = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-sun",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_bb3ab18fbb8f885a129b5896e7cbc7e2.setIcon(beautify_icon_eb12d9e32fd8bf80fd80fe55c5da8805);
+        
+    
+        var popup_68b5054ed9fad79bf5cc62c7d75fcd96 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8a1f91c95ee9093f6d08e036c58ef61a = $(`<div id="html_8a1f91c95ee9093f6d08e036c58ef61a" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.296, 14.520" target=”_blank”>Krvavec</a></div>`)[0];
+                popup_68b5054ed9fad79bf5cc62c7d75fcd96.setContent(html_8a1f91c95ee9093f6d08e036c58ef61a);
+            
+        
+
+        marker_bb3ab18fbb8f885a129b5896e7cbc7e2.bindPopup(popup_68b5054ed9fad79bf5cc62c7d75fcd96)
+        ;
+
+        
+    
+    
+                marker_bb3ab18fbb8f885a129b5896e7cbc7e2.setIcon(beautify_icon_eb12d9e32fd8bf80fd80fe55c5da8805);
+            
+    
+            var marker_26e4419cba33ee61c0e916092509b7eb = L.marker(
+                [45.898, 15.946],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_10e4f0db8580ecec819a527cd11b2bfa = new L.BeautifyIcon.icon(
+                {
+  "icon": "sun",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_26e4419cba33ee61c0e916092509b7eb.setIcon(beautify_icon_10e4f0db8580ecec819a527cd11b2bfa);
+        
+    
+        var popup_3101c6152fc8f504546e94fc4b7dd1d5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_12b42a4a925173f954c48ece6b5d99a5 = $(`<div id="html_12b42a4a925173f954c48ece6b5d99a5" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/45.898, 15.946" target=”_blank”>Sljeme</a></div>`)[0];
+                popup_3101c6152fc8f504546e94fc4b7dd1d5.setContent(html_12b42a4a925173f954c48ece6b5d99a5);
+            
+        
+
+        marker_26e4419cba33ee61c0e916092509b7eb.bindPopup(popup_3101c6152fc8f504546e94fc4b7dd1d5)
+        ;
+
+        
+    
+    
+                marker_26e4419cba33ee61c0e916092509b7eb.setIcon(beautify_icon_10e4f0db8580ecec819a527cd11b2bfa);
+            
+    
+            var marker_94fb1ace9999f0f3f3a0552a43e5282a = L.marker(
+                [46.98, 13.051],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_128b75cefeeb41c0b66e96aff8da13f6 = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-rain",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#004506",
+  "textColor": "#004506",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_94fb1ace9999f0f3f3a0552a43e5282a.setIcon(beautify_icon_128b75cefeeb41c0b66e96aff8da13f6);
+        
+    
+        var popup_7769e09c52215c36bfe3f2bb9e4b4897 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fba49fcdb78a53f3dc3560024eb76f2b = $(`<div id="html_fba49fcdb78a53f3dc3560024eb76f2b" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.980, 13.051" target=”_blank”>Moelltaler Gletscher</a></div>`)[0];
+                popup_7769e09c52215c36bfe3f2bb9e4b4897.setContent(html_fba49fcdb78a53f3dc3560024eb76f2b);
+            
+        
+
+        marker_94fb1ace9999f0f3f3a0552a43e5282a.bindPopup(popup_7769e09c52215c36bfe3f2bb9e4b4897)
+        ;
+
+        
+    
+    
+                marker_94fb1ace9999f0f3f3a0552a43e5282a.setIcon(beautify_icon_128b75cefeeb41c0b66e96aff8da13f6);
+            
+    
+            var marker_ee98586a035f4131717b8433b6ff2649 = L.marker(
+                [45.289, 6.9148],
+                {
+}
+            ).addTo(map_b9cbccf0aead985b2765ffd96435bdf5);
+        
+    
+            var beautify_icon_81a204f7267be9d6db6fba6e3ba532e6 = new L.BeautifyIcon.icon(
+                {
+  "icon": "cloud-showers-heavy",
+  "iconShape": "marker",
+  "borderWidth": 3,
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
+  "backgroundColor": "#FFF",
+  "innerIconStyle": "",
+  "spin": false,
+  "isAlphaNumericIcon": false,
+}
+            )
+            marker_ee98586a035f4131717b8433b6ff2649.setIcon(beautify_icon_81a204f7267be9d6db6fba6e3ba532e6);
+        
+    
+        var popup_e303717bc34b13bba08d8d8b70376e4d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b81e3cd5b036f2df4f441162f8039a12 = $(`<div id="html_b81e3cd5b036f2df4f441162f8039a12" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/45.289, 6.9148" target=”_blank”>Val-Cenis</a></div>`)[0];
+                popup_e303717bc34b13bba08d8d8b70376e4d.setContent(html_b81e3cd5b036f2df4f441162f8039a12);
+            
+        
+
+        marker_ee98586a035f4131717b8433b6ff2649.bindPopup(popup_e303717bc34b13bba08d8d8b70376e4d)
+        ;
+
+        
+    
+    
+                marker_ee98586a035f4131717b8433b6ff2649.setIcon(beautify_icon_81a204f7267be9d6db6fba6e3ba532e6);
+            
+</script>
+</html>

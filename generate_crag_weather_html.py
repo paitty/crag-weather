@@ -464,26 +464,33 @@ def display_cities_on_map(html_filename):
     latitudes =[]
     longitudes =[]
     weather_color = []
+    weather_icon = []
     links = []
     for key in locations.keys():
         latitudes.append(str(locations[key]['location'][0])[:6])
         longitudes.append(str(locations[key]['location'][1])[:6])
         icon_color ="#004506" #green
+        icon_name ="sun"
         if 'Temp_style' in weather[key].keys():
-            icon_color ="#D60A0A" #red               
+            icon_color ="#D60A0A" #red
+            icon_name ="sun"
         if 'Wind_style' in weather[key].keys():
-            icon_color ="#525252" #grey                 
+            icon_color ="#525252" #grey
+            icon_name ="wind"
         if 'Rain_style' in weather[key].keys():
             icon_color ="#0D00C8" #blue
+            icon_name ="cloud-rain"
         weather_color.append(icon_color)
+        weather_icon.append(icon_name)
         yr_link = 'https://www.yr.no/en/forecast/daily-table/'+str(locations[key]['location'][0])[:6]+", "+str(locations[key]['location'][1])[:6]
         link = '<a href="'+yr_link+'" target=”_blank”>'+key+'</a>'
         links.append(link)
-    
+
     df = pd.DataFrame({'Properties':links,
                         'Latitude':latitudes,
                         'Longitude':longitudes,
-                        'Weather':weather_color})
+                        'Weather':weather_color,
+                        'Icon':weather_icon})
 
     if type_activity=='climbing':
         center = [45.37789272618172, 15.445964471005263]
@@ -495,10 +502,11 @@ def display_cities_on_map(html_filename):
     for i in range(0,len(df)):
         point_location=[df.iloc[i]['Latitude'], df.iloc[i]['Longitude']]
         icon_color = df.iloc[i]['Weather']
+        icon_name = df.iloc[i]['Icon']
         #print(df.iloc[i]['Properties'])
         folium.Marker(
         location=point_location,
-        icon=plugins.BeautifyIcon(icon="arrow-down", icon_shape="marker", border_color=icon_color, text_color=icon_color),
+        icon=plugins.BeautifyIcon(icon=icon_name, icon_shape="marker", border_color=icon_color, text_color=icon_color),
         popup=df.iloc[i]['Properties'],
         ).add_to(m)
     
