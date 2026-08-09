@@ -470,16 +470,16 @@ def display_cities_on_map(html_filename):
         latitudes.append(str(locations[key]['location'][0])[:6])
         longitudes.append(str(locations[key]['location'][1])[:6])
         icon_color ="#004506" #green
-        icon_name ="sun"
+        icon_name ="☀️"
         if 'Temp_style' in weather[key].keys():
             icon_color ="#D60A0A" #red
-            icon_name ="sun"
+            icon_name ="☀️"
         if 'Wind_style' in weather[key].keys():
             icon_color ="#525252" #grey
-            icon_name ="wind"
+            icon_name ="💨"
         if 'Rain_style' in weather[key].keys():
             icon_color ="#0D00C8" #blue
-            icon_name ="cloud-rain"
+            icon_name ="🌧️"
         weather_color.append(icon_color)
         weather_icon.append(icon_name)
         yr_link = 'https://www.yr.no/en/forecast/daily-table/'+str(locations[key]['location'][0])[:6]+", "+str(locations[key]['location'][1])[:6]
@@ -506,7 +506,7 @@ def display_cities_on_map(html_filename):
         #print(df.iloc[i]['Properties'])
         folium.Marker(
         location=point_location,
-        icon=plugins.BeautifyIcon(icon=icon_name, icon_shape="marker", border_color=icon_color, text_color=icon_color),
+        icon=plugins.BeautifyIcon(number=icon_name, icon_shape="marker", border_color=icon_color, text_color=icon_color),
         popup=df.iloc[i]['Properties'],
         ).add_to(m)
     
