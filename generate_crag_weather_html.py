@@ -604,6 +604,16 @@ for type_activity in ['skiing', 'climbing']:
                 width: 18px;
                 height: 18px;
             }}
+            .feature-btn {{
+                display: inline-block;
+                margin-top: 12px;
+                padding: 8px 14px;
+                background-color: #37474f;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 6px;
+                font-size: 0.85rem;
+            }}
             .table-wrapper {{
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
@@ -670,6 +680,8 @@ for type_activity in ['skiing', 'climbing']:
                 Score = distance (min) + 10 &times; rain (mm) + 20 &times; avg wind (m/s) &mdash; lower is better
             </p>
             {multipitch_filter_html}
+            <br>
+            <a class="feature-btn" href="https://github.com/paitty/crag-weather/issues/new?title=Feature+request%3A+&labels=enhancement" target="_blank">💡 Suggest a new feature</a>
         </div>
     </body>
     </html>
