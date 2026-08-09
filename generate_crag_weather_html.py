@@ -15,6 +15,15 @@ def get_next_weekday(startdate, weekday):
     t = timedelta((7 + weekday - d.weekday()) % 7)
     return (d + t).strftime('%Y-%m-%d')
 
+def get_reference_date():
+    # On Sundays, anchor on tomorrow (Monday) instead of today so that the
+    # upcoming Sat/Sun weekend stays together at the end of the week instead
+    # of being split across the first and last day of the display.
+    now = datetime.now()
+    if now.weekday() == 6:
+        now = now + timedelta(days=1)
+    return now
+
 def get_next_day(day,duration):
     """
     @startdate: given date, in format '2013-05-25'
@@ -34,7 +43,7 @@ def get_next_day(day,duration):
         day_num = 5
     if day=='Sun':
         day_num = 6
-    d = datetime.now()
+    d = get_reference_date()
     t = timedelta((7 + day_num - d.weekday()) % 7)
 
     start = (d+t).replace(hour=0, minute=0, second=0, microsecond=0)
@@ -43,7 +52,7 @@ def get_next_day(day,duration):
 
 def days_of_week_from_today():
     # datetime object containing current date and time
-    now = datetime.now()
+    now = get_reference_date()
     days_of_a_week = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
     days_of_the_week = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
     for i in range(7):
