@@ -80,6 +80,38 @@ def get_distance(key):
             f.write(json_pretty)
     return distance
 
+SYMBOL_SEVERITY = ['sun', 'cloud-sun', 'cloud', 'smog', 'cloud-rain',
+                    'cloud-showers-heavy', 'cloud-meatball', 'snowflake', 'cloud-bolt']
+
+def symbol_code_to_icon(symbol_code):
+    """Map a met.no symbol_code (e.g. 'lightrainshowersandthunder_day') to a
+    Font Awesome icon name representing that weather condition."""
+    base = symbol_code.split('_')[0] if symbol_code else ''
+    if 'thunder' in base:
+        return 'cloud-bolt'
+    if 'snow' in base:
+        return 'snowflake'
+    if 'sleet' in base:
+        return 'cloud-meatball'
+    if 'heavyrain' in base:
+        return 'cloud-showers-heavy'
+    if 'rain' in base:
+        return 'cloud-rain'
+    if 'fog' in base:
+        return 'smog'
+    if base == 'cloudy':
+        return 'cloud'
+    if base in ('fair', 'partlycloudy'):
+        return 'cloud-sun'
+    if base == 'clearsky':
+        return 'sun'
+    return 'cloud'
+
+def pick_worst_icon(icons):
+    if not icons:
+        return 'cloud'
+    return max(icons, key=SYMBOL_SEVERITY.index)
+
 def add_weather(location, start_date, end_date):
 
     headers = {'Accept':	'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -109,6 +141,7 @@ def add_weather(location, start_date, end_date):
     rain = 0
     min_wind =100
     max_wind = -100
+    icons = []
 
     while True:
         #TODO check if the datetime is our time
@@ -118,9 +151,12 @@ def add_weather(location, start_date, end_date):
             wind = yr_weather['properties']['timeseries'][i]['data']['instant']['details']['wind_speed']
             if 'next_1_hours' in yr_weather['properties']['timeseries'][i]['data']:
                 add_rain= yr_weather['properties']['timeseries'][i]['data']['next_1_hours']['details']['precipitation_amount']
+                symbol_code = yr_weather['properties']['timeseries'][i]['data']['next_1_hours']['summary']['symbol_code']
             else:
                 #TODO check if we dont miss anything like that
                 add_rain= yr_weather['properties']['timeseries'][i]['data']['next_6_hours']['details']['precipitation_amount']
+                symbol_code = yr_weather['properties']['timeseries'][i]['data']['next_6_hours']['summary']['symbol_code']
+            icons.append(symbol_code_to_icon(symbol_code))
             #if location[0] == 44.30403029180178:
             #    print(datetime_object.replace(tzinfo=None))
             #    if 'next_1_hours' in yr_weather['properties']['timeseries'][i]['data']:
@@ -136,7 +172,7 @@ def add_weather(location, start_date, end_date):
         if datetime_object.replace(tzinfo=None)>=end_date:
             break
         i=i+1
-    return min_temp, max_temp, rain, min_wind, max_wind
+    return min_temp, max_temp, rain, min_wind, max_wind, pick_worst_icon(icons)
 
 def add_snow(location):
     
@@ -289,9 +325,10 @@ def create_weather():
     
     for key in locations.keys():
         location = locations[key]['location']
-        min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
+        min_temp, max_temp, rain, min_wind, max_wind, icon = add_weather(location, start_date, end_date)
         snow_mountain, snow_valley, open = add_snow(key)
         weather[key]={}
+        weather[key]['Icon']=icon
         weather[key]['Temp']=str(int(min_temp))+"/"+str(int(max_temp))+"°"
         weather[key]['Rain']=str(int(rain))+" mm"
         weather[key]['Snow_mountain']=snow_mountain
@@ -316,7 +353,7 @@ def create_day_style():
         day_start_date, day_end_date = get_next_day(day,24)
         for key in locations.keys():
             location = locations[key]['location']
-            min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, day_start_date, day_end_date)
+            min_temp, max_temp, rain, min_wind, max_wind, _ = add_weather(location, day_start_date, day_end_date)
             climbing_day_style[day][key]={}
             if rain>3:
                 climbing_day_style[day][key]['Rain_style']='bold'
@@ -464,26 +501,29 @@ def display_cities_on_map(html_filename):
     latitudes =[]
     longitudes =[]
     weather_color = []
+    weather_icon = []
     links = []
     for key in locations.keys():
         latitudes.append(str(locations[key]['location'][0])[:6])
         longitudes.append(str(locations[key]['location'][1])[:6])
         icon_color ="#004506" #green
         if 'Temp_style' in weather[key].keys():
-            icon_color ="#D60A0A" #red               
+            icon_color ="#D60A0A" #red
         if 'Wind_style' in weather[key].keys():
-            icon_color ="#525252" #grey                 
+            icon_color ="#525252" #grey
         if 'Rain_style' in weather[key].keys():
             icon_color ="#0D00C8" #blue
         weather_color.append(icon_color)
+        weather_icon.append(weather[key].get('Icon', 'cloud'))
         yr_link = 'https://www.yr.no/en/forecast/daily-table/'+str(locations[key]['location'][0])[:6]+", "+str(locations[key]['location'][1])[:6]
         link = '<a href="'+yr_link+'" target=”_blank”>'+key+'</a>'
         links.append(link)
-    
+
     df = pd.DataFrame({'Properties':links,
                         'Latitude':latitudes,
                         'Longitude':longitudes,
-                        'Weather':weather_color})
+                        'Weather':weather_color,
+                        'Icon':weather_icon})
 
     if type_activity=='climbing':
         center = [45.37789272618172, 15.445964471005263]
@@ -495,10 +535,11 @@ def display_cities_on_map(html_filename):
     for i in range(0,len(df)):
         point_location=[df.iloc[i]['Latitude'], df.iloc[i]['Longitude']]
         icon_color = df.iloc[i]['Weather']
+        icon_name = df.iloc[i]['Icon']
         #print(df.iloc[i]['Properties'])
         folium.Marker(
         location=point_location,
-        icon=plugins.BeautifyIcon(icon="arrow-down", icon_shape="marker", border_color=icon_color, text_color=icon_color),
+        icon=plugins.BeautifyIcon(icon=icon_name, icon_shape="marker", border_color=icon_color, text_color=icon_color),
         popup=df.iloc[i]['Properties'],
         ).add_to(m)
     
