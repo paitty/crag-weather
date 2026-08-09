@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html>
  <head>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <style type="text/css">
-   .myTable { background-color:#eee;border-collapse:collapse; }
-            .myTable tr:nth-child(2n) {background-color:#ccc;}
-            .myTable td, .myTable th { padding:5px;border:1px solid #000; }
+   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 10px 0;
+                border-radius: 10px;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+            }
+            .myTable { background-color:#f7f7f7;border-collapse:collapse;font-size:14px;white-space:nowrap; }
+            .myTable tr:nth-child(2n) {background-color:#e9e9e9;}
+            .myTable td, .myTable th { padding:10px 12px;border:1px solid #ddd; }
+            .myTable th {
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                background-color: #37474f;
+                color: #fff;
+                border-color: #263238;
+            }
+            .myTable td:first-child, .myTable th:first-child {
+                position: sticky;
+                left: 0;
+                z-index: 1;
+            }
+            .myTable th:first-child { z-index: 3; }
+            .myTable tr:nth-child(odd) td:first-child { background-color: #f7f7f7; }
+            .myTable tr:nth-child(2n) td:first-child { background-color: #e9e9e9; }
   </style>
   <title>
    Skiing Weather
@@ -41,7 +66,7 @@
   <p>
    Weekend 15-16/08/2026
    <br/>
-   Updated on 09/08/2026 18:08:25
+   Updated on 09/08/2026 18:42:30
    <br/>
    Based on yr.no API
    <br/>
@@ -49,1450 +74,1452 @@
   </p>
   Show only multi-pitch routes
   <input id="hideClosedCheckbox" onchange="searchTable()" type="checkbox"/>
-  <table class="myTable" id="myTable2">
-   <tr>
-    <th>
-     Crag
-    </th>
-    <th>
-     Mon
-    </th>
-    <th>
-     Tue
-    </th>
-    <th>
-     Wed
-    </th>
-    <th>
-     Thu
-    </th>
-    <th>
-     Fri
-    </th>
-    <th>
-     Sat
-    </th>
-    <th>
-     Sun
-    </th>
-    <th>
-     Temp
-    </th>
-    <th>
-     Rain
-    </th>
-    <th>
-     Wind
-    </th>
-    <th>
-     Snow_mountain
-    </th>
-    <th>
-     Snow_valley
-    </th>
-    <th>
-     Open
-    </th>
-    <th>
-     Distance
-    </th>
-    <th>
-     Yr.no
-    </th>
-    <th>
-     Windy
-    </th>
-    <th>
-     Bergfex
-    </th>
-    <th>
-     Maps
-    </th>
-    <th>
-     Waze
-    </th>
-   </tr>
-   <tr>
-    <td>
-     Sljeme
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     16/29°
-    </td>
-    <td>
-     0 mm
-    </td>
-    <td>
-     0-2 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     30 min
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/45.898, 15.946" target="_blank">
+  <div class="table-wrapper">
+   <table class="myTable" id="myTable2">
+    <tr>
+     <th>
+      Crag
+     </th>
+     <th>
+      Mon
+     </th>
+     <th>
+      Tue
+     </th>
+     <th>
+      Wed
+     </th>
+     <th>
+      Thu
+     </th>
+     <th>
+      Fri
+     </th>
+     <th>
+      Sat
+     </th>
+     <th>
+      Sun
+     </th>
+     <th>
+      Temp
+     </th>
+     <th>
+      Rain
+     </th>
+     <th>
+      Wind
+     </th>
+     <th>
+      Snow_mountain
+     </th>
+     <th>
+      Snow_valley
+     </th>
+     <th>
+      Open
+     </th>
+     <th>
+      Distance
+     </th>
+     <th>
       Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/45.898/15.946" target="_blank">
+     </th>
+     <th>
       Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/sljeme" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/45.898,15.946" target="_blank">
+     </th>
+     <th>
+      Bergfex
+     </th>
+     <th>
       Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=45.898,15.946" target="_blank">
+     </th>
+     <th>
       Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Mariborsko-Pohorje
-    </td>
-    <td>
-     <img src="hot.PNG" width="20"/>
-    </td>
-    <td>
-     <img src="hot.PNG" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="hot.PNG" width="20"/>
-    </td>
-    <td style="font-weight:bold">
-     19/32°
-    </td>
-    <td>
-     0 mm
-    </td>
-    <td>
-     0-4 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     1h20m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.533, 15.599" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.533/15.599" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/mariborsko-pohorje" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.533,15.599" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.533,15.599" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Celimbasa
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     15/27°
-    </td>
-    <td>
-     0 mm
-    </td>
-    <td>
-     0-4 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     1h30m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/45.308, 14.860" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/45.308/14.860" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/celimbasa" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/45.308,14.860" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=45.308,14.860" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Rogla
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     13/27°
-    </td>
-    <td>
-     0 mm
-    </td>
-    <td>
-     0-2 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     2h0m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.454, 15.333" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.454/15.333" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/rogla" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.454,15.333" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.454,15.333" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Zelenica
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     11/24°
-    </td>
-    <td>
-     0 mm
-    </td>
-    <td>
-     0-3 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     2h10m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.428, 14.233" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.428/14.233" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/zelenica" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.428,14.233" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.428,14.233" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Krvavec
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     13/25°
-    </td>
-    <td>
-     0 mm
-    </td>
-    <td>
-     0-2 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     2h30m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.296, 14.520" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.296/14.520" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/krvavec" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.296,14.520" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.296,14.520" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Kranjska-Gora
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     15/30°
-    </td>
-    <td>
-     0 mm
-    </td>
-    <td>
-     0-3 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     2h30m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.484, 13.779" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.484/13.779" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/kranjska-gora" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.484,13.779" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.484,13.779" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Vogel
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     13/23°
-    </td>
-    <td>
-     0 mm
-    </td>
-    <td>
-     0-3 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     2h40m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.263, 13.840" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.263/13.840" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/vogel" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.263,13.840" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.263,13.840" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Velika Planina
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     13/24°
-    </td>
-    <td>
-     0 mm
-    </td>
-    <td>
-     0-3 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     2h50m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.298, 14.642" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.298/14.642" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/velikaplanina" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.298,14.642" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.298,14.642" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Bad Kleinkirchheim
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     14/25°
-    </td>
-    <td>
-     0 mm
-    </td>
-    <td>
-     0-2 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     3h10m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.812, 13.798" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.812/13.798" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/badkleinkirchheim" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.812,13.798" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.812,13.798" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Nassfeld
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     12/25°
-    </td>
-    <td>
-     0 mm
-    </td>
-    <td>
-     0-2 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     3h20m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.566, 13.277" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.566/13.277" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/nassfeld" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.566,13.277" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.566,13.277" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Gerlitzen-Alpe
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     12/26°
-    </td>
-    <td>
-     0 mm
-    </td>
-    <td>
-     0-2 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     3h20m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.693, 13.916" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.693/13.916" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/gerlitzen-alpe" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.693,13.916" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.693,13.916" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Katschberg
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     11/23°
-    </td>
-    <td>
-     1 mm
-    </td>
-    <td>
-     0-2 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     3h20m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/47.058, 13.615" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/47.058/13.615" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/katschberg" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/47.058,13.615" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=47.058,13.615" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Turracher Hoehe
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     10/22°
-    </td>
-    <td>
-     0 mm
-    </td>
-    <td>
-     0-3 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     3h30m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.914, 13.875" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.914/13.875" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/turracherhoehe" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.914,13.875" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.914,13.875" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Goldeck
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     10/23°
-    </td>
-    <td>
-     0 mm
-    </td>
-    <td>
-     0-2 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     4h10m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.759, 13.458" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.759/13.458" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/goldeck" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.759,13.458" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.759,13.458" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Obertauern
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     9/22°
-    </td>
-    <td>
-     1 mm
-    </td>
-    <td>
-     0-3 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     3h50m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/47.252, 13.547" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/47.252/13.547" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/obertauern" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/47.252,13.547" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=47.252,13.547" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Moelltaler Gletscher
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     13/24°
-    </td>
-    <td>
-     4 mm
-    </td>
-    <td>
-     0-2 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     3h40m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.980, 13.051" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.980/13.051" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/moelltalergletscher" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.980,13.051" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.980,13.051" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Kronplatz
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     13/27°
-    </td>
-    <td style="font-weight:bold">
-     6 mm
-    </td>
-    <td>
-     0-1 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     5h0m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.746, 12.011" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.746/12.011" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/kronplatz" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.746,12.011" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.746,12.011" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Kaunertal
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     3/11°
-    </td>
-    <td style="font-weight:bold">
-     9 mm
-    </td>
-    <td>
-     0-1 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     8h30m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/46.850, 10.705" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/46.850/10.705" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/kaunertal" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/46.850,10.705" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=46.850,10.705" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     Val-Cenis
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     <img src="check-mark.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td style="background-color:#bbb;">
-     <img src="cloud-with-rain.png" width="20"/>
-    </td>
-    <td>
-     12/21°
-    </td>
-    <td style="font-weight:bold">
-     13 mm
-    </td>
-    <td>
-     0-1 m/s
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-     9h0m
-    </td>
-    <td>
-     <a href="https://www.yr.no/en/forecast/daily-table/45.289, 6.9148" target="_blank">
-      Yr.no
-     </a>
-    </td>
-    <td>
-     <a href="https://www.windy.com/45.289/6.9148" target="_blank">
-      Windy
-     </a>
-    </td>
-    <td>
-     <a href="https://www.bergfex.com/val-cenis" target="_blank">
-      bergfex
-     </a>
-    </td>
-    <td>
-     <a href="https://www.google.com/maps/place/45.289,6.9148" target="_blank">
-      Maps
-     </a>
-    </td>
-    <td>
-     <a href="waze://?ll=45.289,6.9148" target="_blank">
-      Waze
-     </a>
-    </td>
-   </tr>
-  </table>
+     </th>
+    </tr>
+    <tr>
+     <td>
+      Sljeme
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      16/29°
+     </td>
+     <td>
+      0 mm
+     </td>
+     <td>
+      0-2 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      30 min
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/45.898, 15.946" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/45.898/15.946" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/sljeme" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/45.898,15.946" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=45.898,15.946" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Mariborsko-Pohorje
+     </td>
+     <td>
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td style="font-weight:bold">
+      19/32°
+     </td>
+     <td>
+      0 mm
+     </td>
+     <td>
+      0-4 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      1h20m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.533, 15.599" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.533/15.599" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/mariborsko-pohorje" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.533,15.599" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.533,15.599" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Celimbasa
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      15/27°
+     </td>
+     <td>
+      0 mm
+     </td>
+     <td>
+      0-4 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      1h30m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/45.308, 14.860" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/45.308/14.860" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/celimbasa" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/45.308,14.860" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=45.308,14.860" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Rogla
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      13/27°
+     </td>
+     <td>
+      0 mm
+     </td>
+     <td>
+      0-2 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      2h0m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.454, 15.333" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.454/15.333" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/rogla" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.454,15.333" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.454,15.333" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Zelenica
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      11/24°
+     </td>
+     <td>
+      0 mm
+     </td>
+     <td>
+      0-3 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      2h10m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.428, 14.233" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.428/14.233" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/zelenica" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.428,14.233" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.428,14.233" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Krvavec
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      13/25°
+     </td>
+     <td>
+      0 mm
+     </td>
+     <td>
+      0-2 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      2h30m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.296, 14.520" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.296/14.520" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/krvavec" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.296,14.520" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.296,14.520" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Kranjska-Gora
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      15/30°
+     </td>
+     <td>
+      0 mm
+     </td>
+     <td>
+      0-3 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      2h30m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.484, 13.779" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.484/13.779" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/kranjska-gora" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.484,13.779" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.484,13.779" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Vogel
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      13/23°
+     </td>
+     <td>
+      0 mm
+     </td>
+     <td>
+      0-3 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      2h40m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.263, 13.840" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.263/13.840" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/vogel" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.263,13.840" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.263,13.840" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Velika Planina
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      13/24°
+     </td>
+     <td>
+      0 mm
+     </td>
+     <td>
+      0-3 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      2h50m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.298, 14.642" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.298/14.642" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/velikaplanina" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.298,14.642" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.298,14.642" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Bad Kleinkirchheim
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      14/25°
+     </td>
+     <td>
+      0 mm
+     </td>
+     <td>
+      0-2 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      3h10m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.812, 13.798" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.812/13.798" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/badkleinkirchheim" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.812,13.798" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.812,13.798" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Nassfeld
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      12/25°
+     </td>
+     <td>
+      0 mm
+     </td>
+     <td>
+      0-2 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      3h20m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.566, 13.277" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.566/13.277" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/nassfeld" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.566,13.277" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.566,13.277" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Gerlitzen-Alpe
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      12/26°
+     </td>
+     <td>
+      0 mm
+     </td>
+     <td>
+      0-2 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      3h20m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.693, 13.916" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.693/13.916" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/gerlitzen-alpe" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.693,13.916" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.693,13.916" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Katschberg
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      11/23°
+     </td>
+     <td>
+      1 mm
+     </td>
+     <td>
+      0-2 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      3h20m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/47.058, 13.615" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/47.058/13.615" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/katschberg" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/47.058,13.615" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=47.058,13.615" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Turracher Hoehe
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      10/22°
+     </td>
+     <td>
+      0 mm
+     </td>
+     <td>
+      0-3 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      3h30m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.914, 13.875" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.914/13.875" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/turracherhoehe" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.914,13.875" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.914,13.875" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Goldeck
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      10/23°
+     </td>
+     <td>
+      0 mm
+     </td>
+     <td>
+      0-2 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      4h10m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.759, 13.458" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.759/13.458" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/goldeck" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.759,13.458" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.759,13.458" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Obertauern
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      9/22°
+     </td>
+     <td>
+      1 mm
+     </td>
+     <td>
+      0-3 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      3h50m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/47.252, 13.547" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/47.252/13.547" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/obertauern" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/47.252,13.547" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=47.252,13.547" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Moelltaler Gletscher
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      13/24°
+     </td>
+     <td>
+      4 mm
+     </td>
+     <td>
+      0-2 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      3h40m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.980, 13.051" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.980/13.051" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/moelltalergletscher" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.980,13.051" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.980,13.051" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Kronplatz
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      13/27°
+     </td>
+     <td style="font-weight:bold">
+      6 mm
+     </td>
+     <td>
+      0-1 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      5h0m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.746, 12.011" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.746/12.011" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/kronplatz" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.746,12.011" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.746,12.011" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Kaunertal
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      3/11°
+     </td>
+     <td style="font-weight:bold">
+      9 mm
+     </td>
+     <td>
+      0-1 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      8h30m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.850, 10.705" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.850/10.705" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/kaunertal" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.850,10.705" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.850,10.705" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Val-Cenis
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      12/21°
+     </td>
+     <td style="font-weight:bold">
+      13 mm
+     </td>
+     <td>
+      0-1 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+      9h0m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/45.289, 6.9148" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/45.289/6.9148" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/val-cenis" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/45.289,6.9148" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=45.289,6.9148" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+   </table>
+  </div>
   <br/>
   <div class="container">
    <iframe frameborder="0" height="500" id="iframe1" name="iframe1" src=" skiing_detail_footprint.html" width="800">
