@@ -486,7 +486,7 @@ def display_cities_on_map(html_filename):
         icon_name ="✅"
         if 'Temp_style' in weather[key].keys():
             icon_color ="#D60A0A" #red
-            icon_name ="☀️"
+            icon_name ="🌡️"
         if 'Wind_style' in weather[key].keys():
             icon_color ="#525252" #grey
             icon_name ="💨"
