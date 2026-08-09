@@ -470,7 +470,7 @@ def display_cities_on_map(html_filename):
         latitudes.append(str(locations[key]['location'][0])[:6])
         longitudes.append(str(locations[key]['location'][1])[:6])
         icon_color ="#004506" #green
-        icon_name ="☀️"
+        icon_name ="✅"
         if 'Temp_style' in weather[key].keys():
             icon_color ="#D60A0A" #red
             icon_name ="☀️"
