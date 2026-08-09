@@ -186,10 +186,14 @@ def add_snow(location):
 def createTable():
     days_of_the_week = days_of_week_from_today()
 
+    table_wrapper = soup.new_tag("div")
+    table_wrapper.attrs['class'] = 'table-wrapper'
+    soup.html.body.append(table_wrapper)
+
     new_table=soup.new_tag("table")
     new_table.attrs['class']='myTable'
     new_table.attrs['id']='myTable2'
-    soup.html.body.append(new_table)
+    table_wrapper.append(new_table)
     display_table = soup.html.body.find_all("table")[-1]
 
     if type_activity=='climbing':
@@ -551,10 +555,35 @@ for type_activity in ['skiing', 'climbing']:
     HTML_header = f"""<!DOCTYPE html>
     <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style type="text/css">
-            .myTable {{ background-color:#eee;border-collapse:collapse; }}
-            .myTable tr:nth-child(2n) {{background-color:#ccc;}}
-            .myTable td, .myTable th {{ padding:5px;border:1px solid #000; }}
+            body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }}
+            .table-wrapper {{
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 10px 0;
+                border-radius: 10px;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+            }}
+            .myTable {{ background-color:#f7f7f7;border-collapse:collapse;font-size:14px;white-space:nowrap; }}
+            .myTable tr:nth-child(2n) {{background-color:#e9e9e9;}}
+            .myTable td, .myTable th {{ padding:10px 12px;border:1px solid #ddd; }}
+            .myTable th {{
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                background-color: #37474f;
+                color: #fff;
+                border-color: #263238;
+            }}
+            .myTable td:first-child, .myTable th:first-child {{
+                position: sticky;
+                left: 0;
+                z-index: 1;
+            }}
+            .myTable th:first-child {{ z-index: 3; }}
+            .myTable tr:nth-child(odd) td:first-child {{ background-color: #f7f7f7; }}
+            .myTable tr:nth-child(2n) td:first-child {{ background-color: #e9e9e9; }}
         </style>
         <title>{type_activity.capitalize()} Weather</title>
         <script>
