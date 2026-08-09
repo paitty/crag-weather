@@ -547,17 +547,63 @@ for type_activity in ['skiing', 'climbing']:
 
     sorted_by_score = sort_by_score()
 
-    # dd/mm/YY H:M:S
+    # dd/mm/YY H:M
     now2 = datetime.now() + timedelta(hours=2)
-    header_now_date_time = now2.strftime("%d/%m/%Y %H:%M:%S")
+    header_now_date_time = now2.strftime("%d/%m/%Y %H:%M")
     header_next_weekend = get_next_weekend_short()
+
+    multipitch_filter_html = ""
+    if type_activity == 'climbing':
+        multipitch_filter_html = """<label class="filter-label">
+            <input type="checkbox" id="hideClosedCheckbox" onchange="searchTable()">
+            Show only multi-pitch routes
+        </label>"""
 
     HTML_header = f"""<!DOCTYPE html>
     <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style type="text/css">
-            body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }}
+            body {{
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                margin: 0;
+                padding: 14px 16px;
+                background-color: #fafafa;
+                color: #263238;
+            }}
+            .header-card {{
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+                padding: 16px 20px;
+                margin-bottom: 14px;
+            }}
+            .header-card h1 {{
+                margin: 0 0 8px 0;
+                font-size: 1.4rem;
+            }}
+            .header-card h1 .top-pick {{
+                color: #37474f;
+                border-bottom: 3px solid #37474f;
+            }}
+            .header-card p {{
+                margin: 0;
+                color: #555;
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }}
+            .filter-label {{
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                margin-top: 12px;
+                font-size: 0.9rem;
+                cursor: pointer;
+            }}
+            .filter-label input {{
+                width: 18px;
+                height: 18px;
+            }}
             .table-wrapper {{
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
@@ -612,17 +658,19 @@ for type_activity in ['skiing', 'climbing']:
         </script>
     </head>
     <body>
-        <h1>Let's go {type_activity} in {sorted_by_score[0]}!</h1>
-        <p>
-            Weekend {header_next_weekend}
-            <br>
-            Updated on {header_now_date_time}
-            <br>
-            Based on yr.no API
-            <br>
-            Score = Distance + 10 x rain + 20 x avg wind
-        </p>
-        Show only multi-pitch routes <input type="checkbox" id="hideClosedCheckbox" onchange="searchTable()">
+        <div class="header-card">
+            <h1>Let's go {type_activity} in <span class="top-pick">{sorted_by_score[0]}</span>!</h1>
+            <p>
+                Weekend {header_next_weekend}
+                <br>
+                Updated on {header_now_date_time}
+                <br>
+                Based on yr.no API
+                <br>
+                Score = distance (min) + 10 &times; rain (mm) + 20 &times; avg wind (m/s) &mdash; lower is better
+            </p>
+            {multipitch_filter_html}
+        </div>
     </body>
     </html>
     """
