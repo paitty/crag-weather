@@ -70,6 +70,11 @@
                 background-color: #37474f;
                 color: #fff;
                 border-color: #263238;
+                cursor: pointer;
+                user-select: none;
+            }
+            .myTable th:hover {
+                background-color: #455a64;
             }
             .myTable td:first-child, .myTable th:first-child {
                 position: sticky;
@@ -106,6 +111,50 @@
                     }
                 }
             }
+
+            let currentSortCol = null;
+            let currentSortAsc = true;
+
+            function sortTable(colIndex) {
+                let table = document.getElementById('myTable2');
+                let tbody = table.tBodies[0] || table;
+                let headerRow = table.rows[0];
+
+                if (currentSortCol === colIndex) {
+                    currentSortAsc = !currentSortAsc;
+                } else {
+                    currentSortCol = colIndex;
+                    currentSortAsc = true;
+                }
+
+                let rows = Array.from(tbody.rows).slice(1);
+                rows.sort((rowA, rowB) => {
+                    let cellA = rowA.cells[colIndex];
+                    let cellB = rowB.cells[colIndex];
+                    let rawA = cellA.getAttribute('data-sort');
+                    let rawB = cellB.getAttribute('data-sort');
+                    let numA = rawA !== null ? parseFloat(rawA) : parseFloat(cellA.textContent);
+                    let numB = rawB !== null ? parseFloat(rawB) : parseFloat(cellB.textContent);
+                    let comparison;
+                    if (!isNaN(numA) && !isNaN(numB)) {
+                        comparison = numA - numB;
+                    } else {
+                        comparison = cellA.textContent.trim().localeCompare(cellB.textContent.trim());
+                    }
+                    return currentSortAsc ? comparison : -comparison;
+                });
+
+                rows.forEach(row => tbody.appendChild(row));
+
+                for (let i = 0; i < headerRow.cells.length; i++) {
+                    let indicator = headerRow.cells[i].querySelector('.sort-indicator');
+                    if (indicator) { indicator.remove(); }
+                }
+                let newIndicator = document.createElement('span');
+                newIndicator.className = 'sort-indicator';
+                newIndicator.textContent = currentSortAsc ? ' ▲' : ' ▼';
+                headerRow.cells[colIndex].appendChild(newIndicator);
+            }
   </script>
  </head>
  <body>
@@ -120,7 +169,7 @@
    <p>
     Weekend 15-16/08/2026
     <br/>
-    Updated on 12/08/2026 14:40
+    Updated on 13/08/2026 10:04
     <br/>
     Based on yr.no API
     <br/>
@@ -138,58 +187,58 @@
   <div class="table-wrapper">
    <table class="myTable" id="myTable2">
     <tr>
-     <th>
+     <th onclick="sortTable(0)">
       Crag
      </th>
-     <th>
-      Wed
-     </th>
-     <th>
+     <th onclick="sortTable(1)">
       Thu
      </th>
-     <th>
+     <th onclick="sortTable(2)">
       Fri
      </th>
-     <th>
+     <th onclick="sortTable(3)">
       Sat
      </th>
-     <th>
+     <th onclick="sortTable(4)">
       Sun
      </th>
-     <th>
+     <th onclick="sortTable(5)">
       Mon
      </th>
-     <th>
+     <th onclick="sortTable(6)">
       Tue
      </th>
-     <th>
+     <th onclick="sortTable(7)">
+      Wed
+     </th>
+     <th onclick="sortTable(8)">
       Temp
      </th>
-     <th>
+     <th onclick="sortTable(9)">
       Rain
      </th>
-     <th>
+     <th onclick="sortTable(10)">
       Wind
      </th>
-     <th>
+     <th onclick="sortTable(11)">
       Distance
      </th>
-     <th>
+     <th onclick="sortTable(12)">
       Yr.no
      </th>
-     <th>
+     <th onclick="sortTable(13)">
       Windy
      </th>
-     <th>
+     <th onclick="sortTable(14)">
       plezanje.net
      </th>
-     <th>
+     <th onclick="sortTable(15)">
       theCrag
      </th>
-     <th>
+     <th onclick="sortTable(16)">
       Maps
      </th>
-     <th>
+     <th onclick="sortTable(17)">
       Waze
      </th>
     </tr>
@@ -203,31 +252,31 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
+     <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
      <td style="background-color:#bbb;">
       <img src="hot.PNG" width="20"/>
      </td>
-     <td style="background-color:#bbb;">
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
       <img src="hot.PNG" width="20"/>
      </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
+     <td data-sort="25.95" style="font-weight:bold">
+      17/34°
      </td>
-     <td style="font-weight:bold">
-      19/34°
-     </td>
-     <td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
+     <td data-sort="1.8">
       0-3 m/s
      </td>
-     <td>
+     <td data-sort="37.27833333333333">
       30 min
      </td>
      <td>
@@ -263,142 +312,6 @@
     </tr>
     <tr>
      <td>
-      Damelj
-     </td>
-     <td>
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td style="font-weight:bold">
-      17/35°
-     </td>
-     <td>
-      0 mm
-     </td>
-     <td>
-      0-2 m/s
-     </td>
-     <td>
-      1h0m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/45.434, 15.188" target="_blank">
-       Yr.no
-      </a>
-     </td>
-     <td>
-      <a href="https://www.windy.com/45.434/15.188" target="_blank">
-       Windy
-      </a>
-     </td>
-     <td>
-      <a href="https://plezanje.net/plezalisce/damelj" target="_blank">
-       plezanje.net
-      </a>
-     </td>
-     <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Damelj" target="_blank">
-       theCrag
-      </a>
-     </td>
-     <td>
-      <a href="https://www.google.com/maps/place/45.434,15.188" target="_blank">
-       Maps
-      </a>
-     </td>
-     <td>
-      <a href="waze://?ll=45.434,15.188" target="_blank">
-       Waze
-      </a>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Luknja
-     </td>
-     <td>
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="font-weight:bold">
-      19/35°
-     </td>
-     <td>
-      0 mm
-     </td>
-     <td>
-      0-2 m/s
-     </td>
-     <td>
-      1h10m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/45.817, 15.096" target="_blank">
-       Yr.no
-      </a>
-     </td>
-     <td>
-      <a href="https://www.windy.com/45.817/15.096" target="_blank">
-       Windy
-      </a>
-     </td>
-     <td>
-      <a href="https://plezanje.net/plezalisce/luknja" target="_blank">
-       plezanje.net
-      </a>
-     </td>
-     <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Luknja" target="_blank">
-       theCrag
-      </a>
-     </td>
-     <td>
-      <a href="https://www.google.com/maps/place/45.817,15.096" target="_blank">
-       Maps
-      </a>
-     </td>
-     <td>
-      <a href="waze://?ll=45.817,15.096" target="_blank">
-       Waze
-      </a>
-     </td>
-    </tr>
-    <tr>
-     <td>
       Armesko
      </td>
      <td>
@@ -407,9 +320,6 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
@@ -420,18 +330,21 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="font-weight:bold">
-      18/33°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="24.95">
+      15/34°
+     </td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
+     <td data-sort="1.75">
       0-3 m/s
      </td>
-     <td>
+     <td data-sort="55.63333333333333">
       50 min
      </td>
      <td>
@@ -475,31 +388,31 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
      <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
-      18/30°
+     <td data-sort="23.0">
+      15/30°
      </td>
-     <td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
-      0-3 m/s
+     <td data-sort="1.35">
+      0-2 m/s
      </td>
-     <td>
+     <td data-sort="70.67666666666668">
       1h10m
      </td>
      <td>
@@ -535,10 +448,75 @@
     </tr>
     <tr>
      <td>
-      Podgorje
+      Damelj
      </td>
      <td>
       <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="25.35" style="font-weight:bold">
+      15/35°
+     </td>
+     <td data-sort="0.5">
+      0 mm
+     </td>
+     <td data-sort="1.95">
+      0-3 m/s
+     </td>
+     <td data-sort="66.705">
+      1h0m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/45.434, 15.188" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/45.434/15.188" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://plezanje.net/plezalisce/damelj" target="_blank">
+       plezanje.net
+      </a>
+     </td>
+     <td>
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Damelj" target="_blank">
+       theCrag
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/45.434,15.188" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=45.434,15.188" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Podgorje
      </td>
      <td>
       <img src="check-mark.png" width="20"/>
@@ -556,18 +534,21 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      16/31°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
+     <td data-sort="24.400000000000002">
+      16/32°
+     </td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
-      0-4 m/s
+     <td data-sort="1.8">
+      0-3 m/s
      </td>
-     <td>
+     <td data-sort="76.59166666666667">
       1h10m
      </td>
      <td>
@@ -603,10 +584,75 @@
     </tr>
     <tr>
      <td>
-      Povceno
+      Luknja
+     </td>
+     <td>
+      <img src="hot.PNG" width="20"/>
      </td>
      <td>
       <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="26.599999999999998" style="font-weight:bold">
+      17/35°
+     </td>
+     <td data-sort="0.0">
+      0 mm
+     </td>
+     <td data-sort="2.0">
+      0-3 m/s
+     </td>
+     <td data-sort="72.60666666666665">
+      1h10m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/45.817, 15.096" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/45.817/15.096" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://plezanje.net/plezalisce/luknja" target="_blank">
+       plezanje.net
+      </a>
+     </td>
+     <td>
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Luknja" target="_blank">
+       theCrag
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/45.817,15.096" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=45.817,15.096" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Povceno
      </td>
      <td>
       <img src="check-mark.png" width="20"/>
@@ -624,18 +670,21 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="font-weight:bold">
-      18/32°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="25.950000000000003" style="font-weight:bold">
+      18/33°
+     </td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
-      0-4 m/s
+     <td data-sort="1.8">
+      0-3 m/s
      </td>
-     <td>
+     <td data-sort="86.21666666666667">
       1h20m
      </td>
      <td>
@@ -674,9 +723,6 @@
       Golubinjak
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
       <img src="wind-leaf.png" width="20"/>
      </td>
      <td>
@@ -689,21 +735,24 @@
       <img src="check-mark.png" width="20"/>
      </td>
      <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
       <img src="check-mark.png" width="20"/>
      </td>
      <td>
-      15/27°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="21.6">
+      14/28°
+     </td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
+     <td data-sort="2.6">
       0-4 m/s
      </td>
-     <td>
+     <td data-sort="86.67166666666667">
       1h20m
      </td>
      <td>
@@ -739,10 +788,7 @@
     </tr>
     <tr>
      <td>
-      Pruh
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
+      Kotecnik
      </td>
      <td>
       <img src="check-mark.png" width="20"/>
@@ -760,47 +806,50 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      16/33°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
+     <td data-sort="24.05">
+      14/33°
+     </td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
-      0-4 m/s
+     <td data-sort="1.6500000000000001">
+      0-2 m/s
+     </td>
+     <td data-sort="111.03999999999999">
+      1h50m
      </td>
      <td>
-      1h30m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/46.689, 15.601" target="_blank">
+      <a href="https://www.yr.no/en/forecast/daily-table/46.202, 15.181" target="_blank">
        Yr.no
       </a>
      </td>
      <td>
-      <a href="https://www.windy.com/46.689/15.601" target="_blank">
+      <a href="https://www.windy.com/46.202/15.181" target="_blank">
        Windy
       </a>
      </td>
      <td>
-      <a href="https://plezanje.net/plezalisce/pruh" target="_blank">
+      <a href="https://plezanje.net/plezalisce/kotecnik" target="_blank">
        plezanje.net
       </a>
      </td>
      <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Pruh" target="_blank">
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Kotecnik" target="_blank">
        theCrag
       </a>
      </td>
      <td>
-      <a href="https://www.google.com/maps/place/46.689,15.601" target="_blank">
+      <a href="https://www.google.com/maps/place/46.202,15.181" target="_blank">
        Maps
       </a>
      </td>
      <td>
-      <a href="waze://?ll=46.689,15.601" target="_blank">
+      <a href="waze://?ll=46.202,15.181" target="_blank">
        Waze
       </a>
      </td>
@@ -815,13 +864,13 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
      <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
      <td>
@@ -830,16 +879,16 @@
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
-      16/29°
+     <td data-sort="23.2">
+      15/31°
      </td>
-     <td>
+     <td data-sort="0.7">
       0 mm
      </td>
-     <td>
-      0-4 m/s
+     <td data-sort="2.15">
+      0-3 m/s
      </td>
-     <td>
+     <td data-sort="99.02833333333334">
       1h30m
      </td>
      <td>
@@ -883,31 +932,31 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="hot.PNG" width="20"/>
+     </td>
      <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
-      16/31°
+     <td data-sort="24.5">
+      15/33°
      </td>
-     <td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
+     <td data-sort="2.2">
       0-3 m/s
      </td>
-     <td>
+     <td data-sort="107.10166666666667">
       1h40m
      </td>
      <td>
@@ -943,10 +992,7 @@
     </tr>
     <tr>
      <td>
-      Buncove skale
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
+      Pruh
      </td>
      <td>
       <img src="check-mark.png" width="20"/>
@@ -964,18 +1010,157 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="font-weight:bold">
-      19/31°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="23.900000000000002">
+      15/32°
+     </td>
+     <td data-sort="0.3">
       0 mm
      </td>
-     <td>
-      1-3 m/s
+     <td data-sort="2.8000000000000003">
+      0-4 m/s
+     </td>
+     <td data-sort="98.06166666666667">
+      1h30m
      </td>
      <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.689, 15.601" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.689/15.601" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://plezanje.net/plezalisce/pruh" target="_blank">
+       plezanje.net
+      </a>
+     </td>
+     <td>
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Pruh" target="_blank">
+       theCrag
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.689,15.601" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.689,15.601" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr type="multipitch">
+     <td>
+      Kamenjak
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="22.5">
+      15/29°
+     </td>
+     <td data-sort="0.0">
+      0 mm
+     </td>
+     <td data-sort="2.1999999999999997">
+      0-4 m/s
+     </td>
+     <td data-sort="114.18833333333333">
+      1h50m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/45.373, 14.557" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/45.373/14.557" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://plezanje.net/plezalisce/kamenjak" target="_blank">
+       plezanje.net
+      </a>
+     </td>
+     <td>
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Kamenjak" target="_blank">
+       theCrag
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/45.383,14.559" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=45.383,14.559" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Buncove skale
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="25.25" style="font-weight:bold">
+      19/31°
+     </td>
+     <td data-sort="3.2">
+      3 mm
+     </td>
+     <td data-sort="2.1999999999999997">
+      0-4 m/s
+     </td>
+     <td data-sort="105.40333333333334">
       1h40m
      </td>
      <td>
@@ -1011,10 +1196,7 @@
     </tr>
     <tr>
      <td>
-      Kotecnik
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
+      Kompanj
      </td>
      <td>
       <img src="check-mark.png" width="20"/>
@@ -1032,115 +1214,50 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      16/32°
-     </td>
-     <td>
-      0 mm
-     </td>
-     <td>
-      0-3 m/s
-     </td>
-     <td>
-      1h50m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/46.202, 15.181" target="_blank">
-       Yr.no
-      </a>
-     </td>
-     <td>
-      <a href="https://www.windy.com/46.202/15.181" target="_blank">
-       Windy
-      </a>
-     </td>
-     <td>
-      <a href="https://plezanje.net/plezalisce/kotecnik" target="_blank">
-       plezanje.net
-      </a>
-     </td>
-     <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Kotecnik" target="_blank">
-       theCrag
-      </a>
-     </td>
-     <td>
-      <a href="https://www.google.com/maps/place/46.202,15.181" target="_blank">
-       Maps
-      </a>
-     </td>
-     <td>
-      <a href="waze://?ll=46.202,15.181" target="_blank">
-       Waze
-      </a>
-     </td>
-    </tr>
-    <tr type="multipitch">
-     <td>
-      Kamenjak
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
+     <td data-sort="23.5">
+      15/31°
      </td>
-     <td>
-      16/29°
-     </td>
-     <td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
+     <td data-sort="1.7000000000000002">
       0-3 m/s
      </td>
-     <td>
-      1h50m
+     <td data-sort="151.89666666666665">
+      2h30m
      </td>
      <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/45.373, 14.557" target="_blank">
+      <a href="https://www.yr.no/en/forecast/daily-table/45.392, 14.075" target="_blank">
        Yr.no
       </a>
      </td>
      <td>
-      <a href="https://www.windy.com/45.373/14.557" target="_blank">
+      <a href="https://www.windy.com/45.392/14.075" target="_blank">
        Windy
       </a>
      </td>
      <td>
-      <a href="https://plezanje.net/plezalisce/kamenjak" target="_blank">
+      <a href="https://plezanje.net/plezalisce/kompanj" target="_blank">
        plezanje.net
       </a>
      </td>
      <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Kamenjak" target="_blank">
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Kompanj" target="_blank">
        theCrag
       </a>
      </td>
      <td>
-      <a href="https://www.google.com/maps/place/45.383,14.559" target="_blank">
+      <a href="https://www.google.com/maps/place/45.392,14.075" target="_blank">
        Maps
       </a>
      </td>
      <td>
-      <a href="waze://?ll=45.383,14.559" target="_blank">
+      <a href="waze://?ll=45.392,14.075" target="_blank">
        Waze
       </a>
      </td>
@@ -1153,33 +1270,33 @@
       <img src="wind-leaf.png" width="20"/>
      </td>
      <td>
-      <img src="wind-leaf.png" width="20"/>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
-      18/30°
+     <td data-sort="23.85">
+      17/30°
      </td>
-     <td>
-      2 mm
+     <td data-sort="0.0">
+      0 mm
      </td>
-     <td>
-      0-3 m/s
+     <td data-sort="2.9000000000000004">
+      0-5 m/s
      </td>
-     <td>
+     <td data-sort="129.01333333333335">
       2h0m
      </td>
      <td>
@@ -1213,74 +1330,6 @@
       </a>
      </td>
     </tr>
-    <tr type="multipitch">
-     <td>
-      Dabarski Kukovi
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      16/27°
-     </td>
-     <td>
-      0 mm
-     </td>
-     <td>
-      0-3 m/s
-     </td>
-     <td>
-      2h40m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/44.565, 15.118" target="_blank">
-       Yr.no
-      </a>
-     </td>
-     <td>
-      <a href="https://www.windy.com/44.565/15.118" target="_blank">
-       Windy
-      </a>
-     </td>
-     <td>
-      <a href="https://plezanje.net/plezalisce/dabarski-kukovi" target="_blank">
-       plezanje.net
-      </a>
-     </td>
-     <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Dabarski Kukovi" target="_blank">
-       theCrag
-      </a>
-     </td>
-     <td>
-      <a href="https://www.google.com/maps/place/44.565,15.118" target="_blank">
-       Maps
-      </a>
-     </td>
-     <td>
-      <a href="waze://?ll=44.565,15.118" target="_blank">
-       Waze
-      </a>
-     </td>
-    </tr>
     <tr>
      <td>
       Vela Pesa
@@ -1291,31 +1340,31 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
      <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
-      14/27°
+     <td data-sort="20.75">
+      13/27°
      </td>
-     <td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
-      0-3 m/s
+     <td data-sort="2.0999999999999996">
+      0-4 m/s
      </td>
-     <td>
+     <td data-sort="147.64666666666665">
       2h20m
      </td>
      <td>
@@ -1351,107 +1400,39 @@
     </tr>
     <tr>
      <td>
-      Kompanj
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      16/30°
-     </td>
-     <td>
-      0 mm
-     </td>
-     <td>
-      0-3 m/s
-     </td>
-     <td>
-      2h30m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/45.392, 14.075" target="_blank">
-       Yr.no
-      </a>
-     </td>
-     <td>
-      <a href="https://www.windy.com/45.392/14.075" target="_blank">
-       Windy
-      </a>
-     </td>
-     <td>
-      <a href="https://plezanje.net/plezalisce/kompanj" target="_blank">
-       plezanje.net
-      </a>
-     </td>
-     <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Kompanj" target="_blank">
-       theCrag
-      </a>
-     </td>
-     <td>
-      <a href="https://www.google.com/maps/place/45.392,14.075" target="_blank">
-       Maps
-      </a>
-     </td>
-     <td>
-      <a href="waze://?ll=45.392,14.075" target="_blank">
-       Waze
-      </a>
-     </td>
-    </tr>
-    <tr>
-     <td>
       Vela Draga
      </td>
      <td>
-      <img src="wind-leaf.png" width="20"/>
+      <img src="hot.PNG" width="20"/>
      </td>
      <td>
-      <img src="wind-leaf.png" width="20"/>
+      <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="wind-leaf.png" width="20"/>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
      </td>
      <td style="background-color:#bbb;">
       <img src="hot.PNG" width="20"/>
      </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td style="font-weight:bold">
-      19/30°
+     <td data-sort="24.35">
+      17/31°
      </td>
-     <td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
+     <td data-sort="2.95">
       0-5 m/s
      </td>
-     <td>
+     <td data-sort="139.525">
       2h10m
      </td>
      <td>
@@ -1487,10 +1468,7 @@
     </tr>
     <tr type="multipitch">
      <td>
-      Obli Kuk (Prezid)
-     </td>
-     <td>
-      <img src="hot.PNG" width="20"/>
+      Dabarski Kukovi
      </td>
      <td>
       <img src="check-mark.png" width="20"/>
@@ -1505,63 +1483,63 @@
       <img src="check-mark.png" width="20"/>
      </td>
      <td>
-      <img src="cloud-with-rain.png" width="20"/>
+      <img src="check-mark.png" width="20"/>
      </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      16/29°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
+     <td data-sort="21.5">
+      14/28°
+     </td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
-      0-4 m/s
+     <td data-sort="2.05">
+      0-3 m/s
      </td>
-     <td>
+     <td data-sort="163.85166666666666">
       2h40m
      </td>
      <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/44.244, 15.803" target="_blank">
+      <a href="https://www.yr.no/en/forecast/daily-table/44.565, 15.118" target="_blank">
        Yr.no
       </a>
      </td>
      <td>
-      <a href="https://www.windy.com/44.244/15.803" target="_blank">
+      <a href="https://www.windy.com/44.565/15.118" target="_blank">
        Windy
       </a>
      </td>
      <td>
-      <a href="https://plezanje.net/plezalisce/obli-kuk-prezid" target="_blank">
+      <a href="https://plezanje.net/plezalisce/dabarski-kukovi" target="_blank">
        plezanje.net
       </a>
      </td>
      <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Obli Kuk (Prezid)" target="_blank">
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Dabarski Kukovi" target="_blank">
        theCrag
       </a>
      </td>
      <td>
-      <a href="https://www.google.com/maps/place/44.244,15.803" target="_blank">
+      <a href="https://www.google.com/maps/place/44.565,15.118" target="_blank">
        Maps
       </a>
      </td>
      <td>
-      <a href="waze://?ll=44.244,15.803" target="_blank">
+      <a href="waze://?ll=44.565,15.118" target="_blank">
        Waze
       </a>
      </td>
     </tr>
     <tr type="multipitch">
      <td>
-      Paklenica
+      Strogir
      </td>
      <td>
       <img src="hot.PNG" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
      </td>
      <td>
       <img src="check-mark.png" width="20"/>
@@ -1570,7 +1548,10 @@
       <img src="check-mark.png" width="20"/>
      </td>
      <td style="background-color:#bbb;">
-      <img src="hot.PNG" width="20"/>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
      </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
@@ -1578,45 +1559,45 @@
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
-      19/30°
+     <td data-sort="24.25">
+      20/27°
      </td>
-     <td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
-      0-2 m/s
+     <td data-sort="2.0500000000000003">
+      0-3 m/s
+     </td>
+     <td data-sort="164.57999999999998">
+      2h40m
      </td>
      <td>
-      3h0m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/44.304, 15.471" target="_blank">
+      <a href="https://www.yr.no/en/forecast/daily-table/44.709, 14.931" target="_blank">
        Yr.no
       </a>
      </td>
      <td>
-      <a href="https://www.windy.com/44.304/15.471" target="_blank">
+      <a href="https://www.windy.com/44.709/14.931" target="_blank">
        Windy
       </a>
      </td>
      <td>
-      <a href="https://plezanje.net/plezalisce/paklenica" target="_blank">
+      <a href="https://plezanje.net/plezalisce/strogir" target="_blank">
        plezanje.net
       </a>
      </td>
      <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Paklenica" target="_blank">
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Strogir" target="_blank">
        theCrag
       </a>
      </td>
      <td>
-      <a href="https://www.google.com/maps/place/44.304,15.471" target="_blank">
+      <a href="https://www.google.com/maps/place/44.709,14.931" target="_blank">
        Maps
       </a>
      </td>
      <td>
-      <a href="waze://?ll=44.304,15.471" target="_blank">
+      <a href="waze://?ll=44.709,14.931" target="_blank">
        Waze
       </a>
      </td>
@@ -1631,31 +1612,31 @@
      <td>
       <img src="hot.PNG" width="20"/>
      </td>
+     <td style="background-color:#bbb;">
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="hot.PNG" width="20"/>
+     </td>
      <td>
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="hot.PNG" width="20"/>
+      <img src="check-mark.png" width="20"/>
      </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td style="font-weight:bold">
-      17/32°
+     <td data-sort="25.049999999999997" style="font-weight:bold">
+      16/33°
      </td>
-     <td>
-      2 mm
+     <td data-sort="0.0">
+      0 mm
      </td>
-     <td>
-      0-2 m/s
+     <td data-sort="2.3">
+      0-4 m/s
      </td>
-     <td>
+     <td data-sort="164.26833333333335">
       2h40m
      </td>
      <td>
@@ -1699,9 +1680,6 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
@@ -1715,15 +1693,18 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      6/16°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
-      2 mm
+     <td data-sort="11.850000000000001">
+      6/17°
      </td>
-     <td>
-      0-3 m/s
+     <td data-sort="1.8">
+      1 mm
      </td>
-     <td>
+     <td data-sort="1.65">
+      0-2 m/s
+     </td>
+     <td data-sort="159.27833333333334">
       2h30m
      </td>
      <td>
@@ -1759,13 +1740,10 @@
     </tr>
     <tr type="multipitch">
      <td>
-      Strogir
+      Obli Kuk (Prezid)
      </td>
      <td>
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td>
-      <img src="hot.PNG" width="20"/>
+      <img src="wind-leaf.png" width="20"/>
      </td>
      <td>
       <img src="check-mark.png" width="20"/>
@@ -1777,71 +1755,74 @@
       <img src="check-mark.png" width="20"/>
      </td>
      <td>
-      <img src="cloud-with-rain.png" width="20"/>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
      </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
-      21/27°
+     <td data-sort="21.7">
+      13/29°
      </td>
-     <td>
-      2 mm
+     <td data-sort="0.0">
+      0 mm
      </td>
-     <td>
-      0-3 m/s
+     <td data-sort="2.4499999999999997">
+      0-4 m/s
      </td>
-     <td>
+     <td data-sort="168.82333333333332">
       2h40m
      </td>
      <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/44.709, 14.931" target="_blank">
+      <a href="https://www.yr.no/en/forecast/daily-table/44.244, 15.803" target="_blank">
        Yr.no
       </a>
      </td>
      <td>
-      <a href="https://www.windy.com/44.709/14.931" target="_blank">
+      <a href="https://www.windy.com/44.244/15.803" target="_blank">
        Windy
       </a>
      </td>
      <td>
-      <a href="https://plezanje.net/plezalisce/strogir" target="_blank">
+      <a href="https://plezanje.net/plezalisce/obli-kuk-prezid" target="_blank">
        plezanje.net
       </a>
      </td>
      <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Strogir" target="_blank">
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Obli Kuk (Prezid)" target="_blank">
        theCrag
       </a>
      </td>
      <td>
-      <a href="https://www.google.com/maps/place/44.709,14.931" target="_blank">
+      <a href="https://www.google.com/maps/place/44.244,15.803" target="_blank">
        Maps
       </a>
      </td>
      <td>
-      <a href="waze://?ll=44.709,14.931" target="_blank">
+      <a href="waze://?ll=44.244,15.803" target="_blank">
        Waze
       </a>
      </td>
     </tr>
-    <tr>
+    <tr type="multipitch">
      <td>
-      Karin
+      Paklenica
      </td>
      <td>
-      <img src="wind-leaf.png" width="20"/>
+      <img src="hot.PNG" width="20"/>
      </td>
      <td>
-      <img src="wind-leaf.png" width="20"/>
+      <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="wind-leaf.png" width="20"/>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
      </td>
      <td style="background-color:#bbb;">
       <img src="hot.PNG" width="20"/>
      </td>
-     <td style="background-color:#bbb;">
+     <td>
       <img src="hot.PNG" width="20"/>
      </td>
      <td>
@@ -1850,45 +1831,45 @@
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td style="font-weight:bold">
-      21/32°
+     <td data-sort="24.95">
+      18/31°
      </td>
-     <td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
+     <td data-sort="2.5">
       0-4 m/s
      </td>
-     <td>
-      3h10m
+     <td data-sort="183.82999999999998">
+      3h0m
      </td>
      <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/44.136, 15.647" target="_blank">
+      <a href="https://www.yr.no/en/forecast/daily-table/44.304, 15.471" target="_blank">
        Yr.no
       </a>
      </td>
      <td>
-      <a href="https://www.windy.com/44.136/15.647" target="_blank">
+      <a href="https://www.windy.com/44.304/15.471" target="_blank">
        Windy
       </a>
      </td>
      <td>
-      <a href="https://plezanje.net/plezalisce/karin" target="_blank">
+      <a href="https://plezanje.net/plezalisce/paklenica" target="_blank">
        plezanje.net
       </a>
      </td>
      <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Karin" target="_blank">
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Paklenica" target="_blank">
        theCrag
       </a>
      </td>
      <td>
-      <a href="https://www.google.com/maps/place/44.136,15.647" target="_blank">
+      <a href="https://www.google.com/maps/place/44.304,15.471" target="_blank">
        Maps
       </a>
      </td>
      <td>
-      <a href="waze://?ll=44.136,15.647" target="_blank">
+      <a href="waze://?ll=44.304,15.471" target="_blank">
        Waze
       </a>
      </td>
@@ -1903,31 +1884,31 @@
      <td>
       <img src="wind-leaf.png" width="20"/>
      </td>
+     <td style="background-color:#bbb;">
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
      <td>
       <img src="wind-leaf.png" width="20"/>
      </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
+     <td data-sort="25.55" style="font-weight:bold">
+      22/28°
      </td>
-     <td>
-      22/26°
+     <td data-sort="0.0">
+      0 mm
      </td>
-     <td>
-      4 mm
+     <td data-sort="4.449999999999999">
+      0-8 m/s
      </td>
-     <td>
-      0-7 m/s
-     </td>
-     <td>
+     <td data-sort="152.37666666666667">
       2h30m
      </td>
      <td>
@@ -1963,78 +1944,7 @@
     </tr>
     <tr>
      <td>
-      Maltatal
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      16/26°
-     </td>
-     <td style="font-weight:bold">
-      6 mm
-     </td>
-     <td>
-      0-2 m/s
-     </td>
-     <td>
-      3h20m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/46.987, 13.463" target="_blank">
-       Yr.no
-      </a>
-     </td>
-     <td>
-      <a href="https://www.windy.com/46.987/13.463" target="_blank">
-       Windy
-      </a>
-     </td>
-     <td>
-      <a href="https://plezanje.net/plezalisce/maltatal" target="_blank">
-       plezanje.net
-      </a>
-     </td>
-     <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Maltatal" target="_blank">
-       theCrag
-      </a>
-     </td>
-     <td>
-      <a href="https://www.google.com/maps/place/46.987,13.463" target="_blank">
-       Maps
-      </a>
-     </td>
-     <td>
-      <a href="waze://?ll=46.987,13.463" target="_blank">
-       Waze
-      </a>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Cikola
-     </td>
-     <td>
-      <img src="hot.PNG" width="20"/>
+      Karin
      </td>
      <td>
       <img src="wind-leaf.png" width="20"/>
@@ -2049,186 +1959,53 @@
       <img src="hot.PNG" width="20"/>
      </td>
      <td>
-      <img src="cloud-with-rain.png" width="20"/>
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="hot.PNG" width="20"/>
      </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td style="font-weight:bold">
-      21/32°
+     <td data-sort="26.0" style="font-weight:bold">
+      18/33°
      </td>
-     <td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
+     <td data-sort="2.5500000000000003">
       0-4 m/s
      </td>
-     <td>
-      3h50m
+     <td data-sort="196.01833333333335">
+      3h10m
      </td>
      <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/43.839, 16.050" target="_blank">
+      <a href="https://www.yr.no/en/forecast/daily-table/44.136, 15.647" target="_blank">
        Yr.no
       </a>
      </td>
      <td>
-      <a href="https://www.windy.com/43.839/16.050" target="_blank">
+      <a href="https://www.windy.com/44.136/15.647" target="_blank">
        Windy
       </a>
      </td>
      <td>
-      <a href="https://plezanje.net/plezalisce/cikola" target="_blank">
+      <a href="https://plezanje.net/plezalisce/karin" target="_blank">
        plezanje.net
       </a>
      </td>
      <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Cikola" target="_blank">
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Karin" target="_blank">
        theCrag
       </a>
      </td>
      <td>
-      <a href="https://www.google.com/maps/place/43.839,16.050" target="_blank">
+      <a href="https://www.google.com/maps/place/44.136,15.647" target="_blank">
        Maps
       </a>
      </td>
      <td>
-      <a href="waze://?ll=43.839,16.050" target="_blank">
-       Waze
-      </a>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Zlarin
-     </td>
-     <td>
-      <img src="wind-leaf.png" width="20"/>
-     </td>
-     <td>
-      <img src="wind-leaf.png" width="20"/>
-     </td>
-     <td>
-      <img src="wind-leaf.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td style="font-weight:bold">
-      24/31°
-     </td>
-     <td>
-      0 mm
-     </td>
-     <td>
-      1-5 m/s
-     </td>
-     <td>
-      3h40m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/43.685, 15.840" target="_blank">
-       Yr.no
-      </a>
-     </td>
-     <td>
-      <a href="https://www.windy.com/43.685/15.840" target="_blank">
-       Windy
-      </a>
-     </td>
-     <td>
-      <a href="https://plezanje.net/plezalisce/zlarin" target="_blank">
-       plezanje.net
-      </a>
-     </td>
-     <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Zlarin" target="_blank">
-       theCrag
-      </a>
-     </td>
-     <td>
-      <a href="https://www.google.com/maps/place/43.685,15.840" target="_blank">
-       Maps
-      </a>
-     </td>
-     <td>
-      <a href="waze://?ll=43.685,15.840" target="_blank">
-       Waze
-      </a>
-     </td>
-    </tr>
-    <tr type="multipitch">
-     <td>
-      Omis
-     </td>
-     <td>
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td>
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td>
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td style="font-weight:bold">
-      20/31°
-     </td>
-     <td>
-      0 mm
-     </td>
-     <td>
-      0-3 m/s
-     </td>
-     <td>
-      4h40m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/43.450, 16.696" target="_blank">
-       Yr.no
-      </a>
-     </td>
-     <td>
-      <a href="https://www.windy.com/43.450/16.696" target="_blank">
-       Windy
-      </a>
-     </td>
-     <td>
-      <a href="https://plezanje.net/plezalisce/omis" target="_blank">
-       plezanje.net
-      </a>
-     </td>
-     <td>
-      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Omis" target="_blank">
-       theCrag
-      </a>
-     </td>
-     <td>
-      <a href="https://www.google.com/maps/place/43.450,16.696" target="_blank">
-       Maps
-      </a>
-     </td>
-     <td>
-      <a href="waze://?ll=43.450,16.696" target="_blank">
+      <a href="waze://?ll=44.136,15.647" target="_blank">
        Waze
       </a>
      </td>
@@ -2238,36 +2015,36 @@
       Rovinj
      </td>
      <td>
-      <img src="hot.PNG" width="20"/>
+      <img src="wind-leaf.png" width="20"/>
      </td>
      <td>
       <img src="wind-leaf.png" width="20"/>
      </td>
-     <td>
-      <img src="hot.PNG" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="hot.PNG" width="20"/>
      </td>
      <td style="background-color:#bbb;">
-      <img src="cloud-with-rain.png" width="20"/>
+      <img src="hot.PNG" width="20"/>
      </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="font-weight:bold">
-      25/30°
-     </td>
-     <td style="font-weight:bold">
-      8 mm
+      <img src="hot.PNG" width="20"/>
      </td>
      <td>
-      0-6 m/s
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
+     <td data-sort="28.700000000000003" style="font-weight:bold">
+      25/31°
+     </td>
+     <td data-sort="0.0">
+      0 mm
+     </td>
+     <td data-sort="3.2">
+      0-5 m/s
+     </td>
+     <td data-sort="192.595">
       3h10m
      </td>
      <td>
@@ -2303,12 +2080,281 @@
     </tr>
     <tr>
      <td>
+      Zlarin
+     </td>
+     <td>
+      <img src="wind-leaf.png" width="20"/>
+     </td>
+     <td>
+      <img src="wind-leaf.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="wind-leaf.png" width="20"/>
+     </td>
+     <td data-sort="27.700000000000003" style="font-weight:bold">
+      23/31°
+     </td>
+     <td data-sort="0.0">
+      0 mm
+     </td>
+     <td data-sort="2.8499999999999996">
+      0-5 m/s
+     </td>
+     <td data-sort="225.46166666666667">
+      3h40m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/43.685, 15.840" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/43.685/15.840" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://plezanje.net/plezalisce/zlarin" target="_blank">
+       plezanje.net
+      </a>
+     </td>
+     <td>
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Zlarin" target="_blank">
+       theCrag
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/43.685,15.840" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=43.685,15.840" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Cikola
+     </td>
+     <td>
+      <img src="wind-leaf.png" width="20"/>
+     </td>
+     <td>
+      <img src="wind-leaf.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="26.55" style="font-weight:bold">
+      20/33°
+     </td>
+     <td data-sort="0.0">
+      0 mm
+     </td>
+     <td data-sort="2.75">
+      0-5 m/s
+     </td>
+     <td data-sort="233.64833333333334">
+      3h50m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/43.839, 16.050" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/43.839/16.050" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://plezanje.net/plezalisce/cikola" target="_blank">
+       plezanje.net
+      </a>
+     </td>
+     <td>
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Cikola" target="_blank">
+       theCrag
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/43.839,16.050" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=43.839,16.050" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr type="multipitch">
+     <td>
+      Omis
+     </td>
+     <td>
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="24.9">
+      18/31°
+     </td>
+     <td data-sort="0.2">
+      0 mm
+     </td>
+     <td data-sort="2.2">
+      0-4 m/s
+     </td>
+     <td data-sort="282.0316666666667">
+      4h40m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/43.450, 16.696" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/43.450/16.696" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://plezanje.net/plezalisce/omis" target="_blank">
+       plezanje.net
+      </a>
+     </td>
+     <td>
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Omis" target="_blank">
+       theCrag
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/43.450,16.696" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=43.450,16.696" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Maltatal
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="21.05">
+      14/27°
+     </td>
+     <td data-sort="14.4" style="font-weight:bold">
+      14 mm
+     </td>
+     <td data-sort="1.4000000000000001">
+      0-2 m/s
+     </td>
+     <td data-sort="200.55">
+      3h20m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.987, 13.463" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.987/13.463" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://plezanje.net/plezalisce/maltatal" target="_blank">
+       plezanje.net
+      </a>
+     </td>
+     <td>
+      <a href="https://www.thecrag.com/en/climbing/world/search?only=areas&amp;S=Maltatal" target="_blank">
+       theCrag
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.987,13.463" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.987,13.463" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
       Vela Stiniva
      </td>
      <td>
-      <img src="wind-leaf.png" width="20"/>
-     </td>
-     <td>
       <img src="hot.PNG" width="20"/>
      </td>
      <td>
@@ -2321,21 +2367,24 @@
       <img src="hot.PNG" width="20"/>
      </td>
      <td>
-      <img src="cloud-with-rain.png" width="20"/>
+      <img src="hot.PNG" width="20"/>
      </td>
      <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td style="font-weight:bold">
-      23/29°
+      <img src="hot.PNG" width="20"/>
      </td>
      <td>
+      <img src="wind-leaf.png" width="20"/>
+     </td>
+     <td data-sort="27.4" style="font-weight:bold">
+      24/30°
+     </td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
-      1-4 m/s
+     <td data-sort="3.15">
+      0-5 m/s
      </td>
-     <td>
+     <td data-sort="443.0133333333333">
       7h20m
      </td>
      <td>
@@ -2374,14 +2423,11 @@
       Glova od Bure
      </td>
      <td>
+      <img src="hot.PNG" width="20"/>
+     </td>
+     <td>
       <img src="wind-leaf.png" width="20"/>
      </td>
-     <td>
-      <img src="hot.PNG" width="20"/>
-     </td>
-     <td>
-      <img src="hot.PNG" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="hot.PNG" width="20"/>
      </td>
@@ -2389,21 +2435,24 @@
       <img src="hot.PNG" width="20"/>
      </td>
      <td>
-      <img src="cloud-with-rain.png" width="20"/>
+      <img src="hot.PNG" width="20"/>
      </td>
      <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td style="font-weight:bold">
-      22/32°
+      <img src="hot.PNG" width="20"/>
      </td>
      <td>
+      <img src="wind-leaf.png" width="20"/>
+     </td>
+     <td data-sort="27.349999999999998" style="font-weight:bold">
+      21/32°
+     </td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
+     <td data-sort="2.45">
       0-4 m/s
      </td>
-     <td>
+     <td data-sort="497.185">
       8h10m
      </td>
      <td>

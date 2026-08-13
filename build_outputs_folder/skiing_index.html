@@ -70,6 +70,11 @@
                 background-color: #37474f;
                 color: #fff;
                 border-color: #263238;
+                cursor: pointer;
+                user-select: none;
+            }
+            .myTable th:hover {
+                background-color: #455a64;
             }
             .myTable td:first-child, .myTable th:first-child {
                 position: sticky;
@@ -106,6 +111,50 @@
                     }
                 }
             }
+
+            let currentSortCol = null;
+            let currentSortAsc = true;
+
+            function sortTable(colIndex) {
+                let table = document.getElementById('myTable2');
+                let tbody = table.tBodies[0] || table;
+                let headerRow = table.rows[0];
+
+                if (currentSortCol === colIndex) {
+                    currentSortAsc = !currentSortAsc;
+                } else {
+                    currentSortCol = colIndex;
+                    currentSortAsc = true;
+                }
+
+                let rows = Array.from(tbody.rows).slice(1);
+                rows.sort((rowA, rowB) => {
+                    let cellA = rowA.cells[colIndex];
+                    let cellB = rowB.cells[colIndex];
+                    let rawA = cellA.getAttribute('data-sort');
+                    let rawB = cellB.getAttribute('data-sort');
+                    let numA = rawA !== null ? parseFloat(rawA) : parseFloat(cellA.textContent);
+                    let numB = rawB !== null ? parseFloat(rawB) : parseFloat(cellB.textContent);
+                    let comparison;
+                    if (!isNaN(numA) && !isNaN(numB)) {
+                        comparison = numA - numB;
+                    } else {
+                        comparison = cellA.textContent.trim().localeCompare(cellB.textContent.trim());
+                    }
+                    return currentSortAsc ? comparison : -comparison;
+                });
+
+                rows.forEach(row => tbody.appendChild(row));
+
+                for (let i = 0; i < headerRow.cells.length; i++) {
+                    let indicator = headerRow.cells[i].querySelector('.sort-indicator');
+                    if (indicator) { indicator.remove(); }
+                }
+                let newIndicator = document.createElement('span');
+                newIndicator.className = 'sort-indicator';
+                newIndicator.textContent = currentSortAsc ? ' ▲' : ' ▼';
+                headerRow.cells[colIndex].appendChild(newIndicator);
+            }
   </script>
  </head>
  <body>
@@ -120,7 +169,7 @@
    <p>
     Weekend 15-16/08/2026
     <br/>
-    Updated on 12/08/2026 14:39
+    Updated on 13/08/2026 10:02
     <br/>
     Based on yr.no API
     <br/>
@@ -134,73 +183,70 @@
   <div class="table-wrapper">
    <table class="myTable" id="myTable2">
     <tr>
-     <th>
+     <th onclick="sortTable(0)">
       Crag
      </th>
-     <th>
-      Wed
-     </th>
-     <th>
+     <th onclick="sortTable(1)">
       Thu
      </th>
-     <th>
+     <th onclick="sortTable(2)">
       Fri
      </th>
-     <th>
+     <th onclick="sortTable(3)">
       Sat
      </th>
-     <th>
+     <th onclick="sortTable(4)">
       Sun
      </th>
-     <th>
+     <th onclick="sortTable(5)">
       Mon
      </th>
-     <th>
+     <th onclick="sortTable(6)">
       Tue
      </th>
-     <th>
+     <th onclick="sortTable(7)">
+      Wed
+     </th>
+     <th onclick="sortTable(8)">
       Temp
      </th>
-     <th>
+     <th onclick="sortTable(9)">
       Rain
      </th>
-     <th>
+     <th onclick="sortTable(10)">
       Wind
      </th>
-     <th>
+     <th onclick="sortTable(11)">
       Snow_mountain
      </th>
-     <th>
+     <th onclick="sortTable(12)">
       Snow_valley
      </th>
-     <th>
+     <th onclick="sortTable(13)">
       Open
      </th>
-     <th>
+     <th onclick="sortTable(14)">
       Distance
      </th>
-     <th>
+     <th onclick="sortTable(15)">
       Yr.no
      </th>
-     <th>
+     <th onclick="sortTable(16)">
       Windy
      </th>
-     <th>
+     <th onclick="sortTable(17)">
       Bergfex
      </th>
-     <th>
+     <th onclick="sortTable(18)">
       Maps
      </th>
-     <th>
+     <th onclick="sortTable(19)">
       Waze
      </th>
     </tr>
     <tr>
      <td>
       Sljeme
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
      </td>
      <td>
       <img src="check-mark.png" width="20"/>
@@ -218,16 +264,19 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      15/28°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
+     <td data-sort="21.55">
+      13/29°
+     </td>
+     <td data-sort="0.0">
       0 mm
      </td>
-     <td>
-      0-2 m/s
+     <td data-sort="1.65">
+      0-3 m/s
      </td>
      <td>
      </td>
@@ -235,7 +284,7 @@
      </td>
      <td>
      </td>
-     <td>
+     <td data-sort="35.23833333333334">
       30 min
      </td>
      <td>
@@ -274,9 +323,6 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
@@ -287,15 +333,18 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="font-weight:bold">
-      20/31°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="25.6" style="font-weight:bold">
+      19/31°
+     </td>
+     <td data-sort="0.5">
       0 mm
      </td>
-     <td>
+     <td data-sort="2.3">
       0-4 m/s
      </td>
      <td>
@@ -304,7 +353,7 @@
      </td>
      <td>
      </td>
-     <td>
+     <td data-sort="88.29666666666667">
       1h20m
      </td>
      <td>
@@ -338,9 +387,6 @@
       Celimbasa
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
       <img src="wind-leaf.png" width="20"/>
      </td>
      <td>
@@ -356,15 +402,18 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      15/25°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
-      0 mm
+     <td data-sort="20.4">
+      14/26°
      </td>
-     <td>
+     <td data-sort="1.0">
+      1 mm
+     </td>
+     <td data-sort="2.45">
       0-4 m/s
      </td>
      <td>
@@ -373,7 +422,7 @@
      </td>
      <td>
      </td>
-     <td>
+     <td data-sort="93.5">
       1h30m
      </td>
      <td>
@@ -412,9 +461,6 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
@@ -425,24 +471,27 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      13/26°
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="20.549999999999997">
+      13/27°
+     </td>
+     <td data-sort="1.5">
+      1 mm
+     </td>
+     <td data-sort="1.7999999999999998">
+      0-3 m/s
      </td>
      <td>
-      0 mm
-     </td>
-     <td>
-      1-3 m/s
      </td>
      <td>
      </td>
      <td>
      </td>
-     <td>
-     </td>
-     <td>
+     <td data-sort="125.82">
       2h0m
      </td>
      <td>
@@ -481,9 +530,6 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
@@ -494,15 +540,18 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      10/22°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
+     <td data-sort="16.35">
+      9/23°
+     </td>
+     <td data-sort="0.5">
       0 mm
      </td>
-     <td>
+     <td data-sort="1.9500000000000002">
       0-3 m/s
      </td>
      <td>
@@ -511,7 +560,7 @@
      </td>
      <td>
      </td>
-     <td>
+     <td data-sort="138.91333333333333">
       2h10m
      </td>
      <td>
@@ -550,9 +599,6 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
@@ -563,16 +609,19 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      13/23°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
+     <td data-sort="18.65">
+      12/24°
+     </td>
+     <td data-sort="0.1">
       0 mm
      </td>
-     <td>
-      0-3 m/s
+     <td data-sort="1.6">
+      0-2 m/s
      </td>
      <td>
      </td>
@@ -580,7 +629,7 @@
      </td>
      <td>
      </td>
-     <td>
+     <td data-sort="152.09666666666666">
       2h30m
      </td>
      <td>
@@ -619,9 +668,6 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
@@ -632,24 +678,27 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      15/28°
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="22.4">
+      14/29°
+     </td>
+     <td data-sort="2.1">
+      2 mm
+     </td>
+     <td data-sort="1.65">
+      0-2 m/s
      </td>
      <td>
-      1 mm
-     </td>
-     <td>
-      0-3 m/s
      </td>
      <td>
      </td>
      <td>
      </td>
-     <td>
-     </td>
-     <td>
+     <td data-sort="155.59">
       2h30m
      </td>
      <td>
@@ -688,9 +737,6 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
@@ -701,15 +747,18 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      12/22°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
+     <td data-sort="18.05">
+      12/23°
+     </td>
+     <td data-sort="0.2">
       0 mm
      </td>
-     <td>
+     <td data-sort="1.7">
       0-3 m/s
      </td>
      <td>
@@ -718,7 +767,7 @@
      </td>
      <td>
      </td>
-     <td>
+     <td data-sort="174.11">
       2h50m
      </td>
      <td>
@@ -757,9 +806,6 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
@@ -770,15 +816,18 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      13/21°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
-      3 mm
+     <td data-sort="18.25">
+      13/22°
      </td>
-     <td>
+     <td data-sort="1.4">
+      1 mm
+     </td>
+     <td data-sort="1.7">
       0-3 m/s
      </td>
      <td>
@@ -787,7 +836,7 @@
      </td>
      <td>
      </td>
-     <td>
+     <td data-sort="167.29500000000002">
       2h40m
      </td>
      <td>
@@ -818,144 +867,6 @@
     </tr>
     <tr>
      <td>
-      Bad Kleinkirchheim
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      13/25°
-     </td>
-     <td>
-      0 mm
-     </td>
-     <td>
-      0-3 m/s
-     </td>
-     <td>
-     </td>
-     <td>
-     </td>
-     <td>
-     </td>
-     <td>
-      3h10m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/46.812, 13.798" target="_blank">
-       Yr.no
-      </a>
-     </td>
-     <td>
-      <a href="https://www.windy.com/46.812/13.798" target="_blank">
-       Windy
-      </a>
-     </td>
-     <td>
-      <a href="https://www.bergfex.com/badkleinkirchheim" target="_blank">
-       bergfex
-      </a>
-     </td>
-     <td>
-      <a href="https://www.google.com/maps/place/46.812,13.798" target="_blank">
-       Maps
-      </a>
-     </td>
-     <td>
-      <a href="waze://?ll=46.812,13.798" target="_blank">
-       Waze
-      </a>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Gerlitzen-Alpe
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      11/24°
-     </td>
-     <td>
-      0 mm
-     </td>
-     <td>
-      0-3 m/s
-     </td>
-     <td>
-     </td>
-     <td>
-     </td>
-     <td>
-     </td>
-     <td>
-      3h20m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/46.693, 13.916" target="_blank">
-       Yr.no
-      </a>
-     </td>
-     <td>
-      <a href="https://www.windy.com/46.693/13.916" target="_blank">
-       Windy
-      </a>
-     </td>
-     <td>
-      <a href="https://www.bergfex.com/gerlitzen-alpe" target="_blank">
-       bergfex
-      </a>
-     </td>
-     <td>
-      <a href="https://www.google.com/maps/place/46.693,13.916" target="_blank">
-       Maps
-      </a>
-     </td>
-     <td>
-      <a href="waze://?ll=46.693,13.916" target="_blank">
-       Waze
-      </a>
-     </td>
-    </tr>
-    <tr>
-     <td>
       Nassfeld
      </td>
      <td>
@@ -964,9 +875,6 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
@@ -977,15 +885,18 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      11/23°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
-      2 mm
+     <td data-sort="17.5">
+      10/24°
      </td>
-     <td>
+     <td data-sort="1.9000000000000001">
+      1 mm
+     </td>
+     <td data-sort="1.4000000000000001">
       0-2 m/s
      </td>
      <td>
@@ -994,7 +905,7 @@
      </td>
      <td>
      </td>
-     <td>
+     <td data-sort="203.65166666666667">
       3h20m
      </td>
      <td>
@@ -1025,6 +936,351 @@
     </tr>
     <tr>
      <td>
+      Gerlitzen-Alpe
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="17.35">
+      10/24°
+     </td>
+     <td data-sort="2.0">
+      2 mm
+     </td>
+     <td data-sort="1.5999999999999999">
+      0-2 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td data-sort="204.52333333333334">
+      3h20m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.693, 13.916" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.693/13.916" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/gerlitzen-alpe" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.693,13.916" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.693,13.916" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Obertauern
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="15.85">
+      8/23°
+     </td>
+     <td data-sort="4.6000000000000005">
+      4 mm
+     </td>
+     <td data-sort="1.5">
+      0-2 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td data-sort="231.60833333333332">
+      3h50m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/47.252, 13.547" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/47.252/13.547" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/obertauern" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/47.252,13.547" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=47.252,13.547" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Bad Kleinkirchheim
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="18.950000000000003">
+      13/24°
+     </td>
+     <td data-sort="8.8" style="font-weight:bold">
+      8 mm
+     </td>
+     <td data-sort="1.6">
+      0-2 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td data-sort="193.50666666666666">
+      3h10m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.812, 13.798" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.812/13.798" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/badkleinkirchheim" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.812,13.798" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.812,13.798" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Moelltaler Gletscher
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="18.45">
+      12/24°
+     </td>
+     <td data-sort="7.300000000000001" style="font-weight:bold">
+      7 mm
+     </td>
+     <td data-sort="1.1500000000000001">
+      0-2 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td data-sort="222.88833333333332">
+      3h40m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.980, 13.051" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.980/13.051" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/moelltalergletscher" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.980,13.051" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.980,13.051" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Goldeck
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td style="background-color:#bbb;">
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="16.25">
+      8/23°
+     </td>
+     <td data-sort="3.5999999999999996">
+      3 mm
+     </td>
+     <td data-sort="1.4500000000000002">
+      0-2 m/s
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td data-sort="254.215">
+      4h10m
+     </td>
+     <td>
+      <a href="https://www.yr.no/en/forecast/daily-table/46.759, 13.458" target="_blank">
+       Yr.no
+      </a>
+     </td>
+     <td>
+      <a href="https://www.windy.com/46.759/13.458" target="_blank">
+       Windy
+      </a>
+     </td>
+     <td>
+      <a href="https://www.bergfex.com/goldeck" target="_blank">
+       bergfex
+      </a>
+     </td>
+     <td>
+      <a href="https://www.google.com/maps/place/46.759,13.458" target="_blank">
+       Maps
+      </a>
+     </td>
+     <td>
+      <a href="waze://?ll=46.759,13.458" target="_blank">
+       Waze
+      </a>
+     </td>
+    </tr>
+    <tr>
+     <td>
       Turracher Hoehe
      </td>
      <td>
@@ -1033,9 +1289,6 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
@@ -1046,24 +1299,27 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      9/21°
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="15.85">
+      10/21°
+     </td>
+     <td data-sort="9.799999999999999" style="font-weight:bold">
+      9 mm
+     </td>
+     <td data-sort="1.45">
+      0-2 m/s
      </td>
      <td>
-      3 mm
-     </td>
-     <td>
-      0-3 m/s
      </td>
      <td>
      </td>
      <td>
      </td>
-     <td>
-     </td>
-     <td>
+     <td data-sort="211.75333333333336">
       3h30m
      </td>
      <td>
@@ -1102,9 +1358,6 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
@@ -1118,12 +1371,15 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      10/23°
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td style="font-weight:bold">
-      6 mm
+     <td data-sort="17.2">
+      9/24°
      </td>
-     <td>
+     <td data-sort="12.399999999999999" style="font-weight:bold">
+      12 mm
+     </td>
+     <td data-sort="1.75">
       0-3 m/s
      </td>
      <td>
@@ -1132,7 +1388,7 @@
      </td>
      <td>
      </td>
-     <td>
+     <td data-sort="201.29666666666665">
       3h20m
      </td>
      <td>
@@ -1163,213 +1419,6 @@
     </tr>
     <tr>
      <td>
-      Goldeck
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      10/22°
-     </td>
-     <td>
-      2 mm
-     </td>
-     <td>
-      0-2 m/s
-     </td>
-     <td>
-     </td>
-     <td>
-     </td>
-     <td>
-     </td>
-     <td>
-      4h10m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/46.759, 13.458" target="_blank">
-       Yr.no
-      </a>
-     </td>
-     <td>
-      <a href="https://www.windy.com/46.759/13.458" target="_blank">
-       Windy
-      </a>
-     </td>
-     <td>
-      <a href="https://www.bergfex.com/goldeck" target="_blank">
-       bergfex
-      </a>
-     </td>
-     <td>
-      <a href="https://www.google.com/maps/place/46.759,13.458" target="_blank">
-       Maps
-      </a>
-     </td>
-     <td>
-      <a href="waze://?ll=46.759,13.458" target="_blank">
-       Waze
-      </a>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Moelltaler Gletscher
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      13/24°
-     </td>
-     <td style="font-weight:bold">
-      6 mm
-     </td>
-     <td>
-      0-2 m/s
-     </td>
-     <td>
-     </td>
-     <td>
-     </td>
-     <td>
-     </td>
-     <td>
-      3h40m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/46.980, 13.051" target="_blank">
-       Yr.no
-      </a>
-     </td>
-     <td>
-      <a href="https://www.windy.com/46.980/13.051" target="_blank">
-       Windy
-      </a>
-     </td>
-     <td>
-      <a href="https://www.bergfex.com/moelltalergletscher" target="_blank">
-       bergfex
-      </a>
-     </td>
-     <td>
-      <a href="https://www.google.com/maps/place/46.980,13.051" target="_blank">
-       Maps
-      </a>
-     </td>
-     <td>
-      <a href="waze://?ll=46.980,13.051" target="_blank">
-       Waze
-      </a>
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Obertauern
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td style="background-color:#bbb;">
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
-     <td>
-      9/22°
-     </td>
-     <td style="font-weight:bold">
-      9 mm
-     </td>
-     <td>
-      0-2 m/s
-     </td>
-     <td>
-     </td>
-     <td>
-     </td>
-     <td>
-     </td>
-     <td>
-      3h50m
-     </td>
-     <td>
-      <a href="https://www.yr.no/en/forecast/daily-table/47.252, 13.547" target="_blank">
-       Yr.no
-      </a>
-     </td>
-     <td>
-      <a href="https://www.windy.com/47.252/13.547" target="_blank">
-       Windy
-      </a>
-     </td>
-     <td>
-      <a href="https://www.bergfex.com/obertauern" target="_blank">
-       bergfex
-      </a>
-     </td>
-     <td>
-      <a href="https://www.google.com/maps/place/47.252,13.547" target="_blank">
-       Maps
-      </a>
-     </td>
-     <td>
-      <a href="waze://?ll=47.252,13.547" target="_blank">
-       Waze
-      </a>
-     </td>
-    </tr>
-    <tr>
-     <td>
       Kronplatz
      </td>
      <td>
@@ -1378,9 +1427,6 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
@@ -1388,27 +1434,30 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
-     <td>
       <img src="check-mark.png" width="20"/>
      </td>
      <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td>
+      <img src="cloud-with-rain.png" width="20"/>
+     </td>
+     <td data-sort="20.549999999999997">
       13/27°
      </td>
-     <td style="font-weight:bold">
-      28 mm
+     <td data-sort="10.799999999999999" style="font-weight:bold">
+      10 mm
      </td>
-     <td>
-      0-1 m/s
-     </td>
-     <td>
-     </td>
-     <td>
+     <td data-sort="1.75">
+      0-3 m/s
      </td>
      <td>
      </td>
      <td>
+     </td>
+     <td>
+     </td>
+     <td data-sort="306.9183333333333">
       5h0m
      </td>
      <td>
@@ -1447,9 +1496,6 @@
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      <img src="check-mark.png" width="20"/>
-     </td>
      <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
@@ -1457,27 +1503,30 @@
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
+      <img src="check-mark.png" width="20"/>
+     </td>
+     <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
-     <td>
-      2/12°
+     <td data-sort="8.1">
+      3/12°
      </td>
-     <td style="font-weight:bold">
-      9 mm
+     <td data-sort="4.1">
+      4 mm
      </td>
-     <td>
-      0-3 m/s
-     </td>
-     <td>
+     <td data-sort="1.6">
+      0-2 m/s
      </td>
      <td>
      </td>
      <td>
      </td>
      <td>
+     </td>
+     <td data-sort="519.95">
       8h30m
      </td>
      <td>
@@ -1511,20 +1560,17 @@
       Val-Cenis
      </td>
      <td>
-      <img src="check-mark.png" width="20"/>
+      <img src="cloud-with-rain.png" width="20"/>
      </td>
      <td>
       <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td>
+     <td style="background-color:#bbb;">
       <img src="check-mark.png" width="20"/>
      </td>
      <td style="background-color:#bbb;">
       <img src="cloud-with-rain.png" width="20"/>
      </td>
-     <td style="background-color:#bbb;">
-      <img src="cloud-with-rain.png" width="20"/>
-     </td>
      <td>
       <img src="check-mark.png" width="20"/>
      </td>
@@ -1532,21 +1578,24 @@
       <img src="check-mark.png" width="20"/>
      </td>
      <td>
-      8/20°
+      <img src="check-mark.png" width="20"/>
      </td>
-     <td style="font-weight:bold">
-      17 mm
+     <td data-sort="16.5">
+      11/21°
      </td>
-     <td>
-      0-1 m/s
+     <td data-sort="5.3">
+      5 mm
      </td>
-     <td>
-     </td>
-     <td>
-     </td>
-     <td>
+     <td data-sort="2.0">
+      0-3 m/s
      </td>
      <td>
+     </td>
+     <td>
+     </td>
+     <td>
+     </td>
+     <td data-sort="546.4233333333334">
       9h0m
      </td>
      <td>
