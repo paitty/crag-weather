@@ -205,9 +205,10 @@ def createTable():
     
     new_header = soup.new_tag("tr")
     display_table.append(new_header)
-    for col in table_names:
+    for col_index, col in enumerate(table_names):
         new_column_header = soup.new_tag("th")
         new_column_header.string=col
+        new_column_header.attrs['onclick'] = f'sortTable({col_index})'
         display_table.tr.append(new_column_header)
 
     for key in sorted_by_score:
@@ -268,6 +269,7 @@ def createTable():
             elif col == 'Distance':
                 #TODO find better way to store distance
                 distance = get_distance(key)
+                new_tag.attrs['data-sort'] = str(distance)
                 total_minutes=int(int(distance)/10)*10
                 minutes=total_minutes%60
                 hours=(total_minutes-minutes)/60
@@ -293,6 +295,8 @@ def createTable():
             else:
                 if col+'_style' in weather[key].keys():
                     new_tag.attrs['style']="font-weight:bold"
+                if col+'_sort' in weather[key].keys():
+                    new_tag.attrs['data-sort'] = str(weather[key][col+'_sort'])
                 new_tag.string=str(weather[key][col])
             last_line.append(new_tag)
 
@@ -306,13 +310,16 @@ def create_weather():
         snow_mountain, snow_valley, open = add_snow(key)
         weather[key]={}
         weather[key]['Temp']=str(int(min_temp))+"/"+str(int(max_temp))+"°"
+        weather[key]['Temp_sort']=(min_temp+max_temp)/2
         weather[key]['Rain']=str(int(rain))+" mm"
+        weather[key]['Rain_sort']=rain
         weather[key]['Snow_mountain']=snow_mountain
         weather[key]['Snow_valley']=snow_valley
         weather[key]['Open']=open
         if rain>6:
             weather[key]['Rain_style']='bold'
         weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
+        weather[key]['Wind_sort']=(min_wind+max_wind)/2
         if (min_wind+max_wind)/2>5:
             weather[key]['Wind_style']='bold'
         if (min_temp+max_temp)>50:
@@ -631,6 +638,11 @@ for type_activity in ['skiing', 'climbing']:
                 background-color: #37474f;
                 color: #fff;
                 border-color: #263238;
+                cursor: pointer;
+                user-select: none;
+            }}
+            .myTable th:hover {{
+                background-color: #455a64;
             }}
             .myTable td:first-child, .myTable th:first-child {{
                 position: sticky;
@@ -664,6 +676,50 @@ for type_activity in ['skiing', 'climbing']:
                         rows[i].style.display = '';
                     }}
                 }}
+            }}
+
+            let currentSortCol = null;
+            let currentSortAsc = true;
+
+            function sortTable(colIndex) {{
+                let table = document.getElementById('myTable2');
+                let tbody = table.tBodies[0] || table;
+                let headerRow = table.rows[0];
+
+                if (currentSortCol === colIndex) {{
+                    currentSortAsc = !currentSortAsc;
+                }} else {{
+                    currentSortCol = colIndex;
+                    currentSortAsc = true;
+                }}
+
+                let rows = Array.from(tbody.rows).slice(1);
+                rows.sort((rowA, rowB) => {{
+                    let cellA = rowA.cells[colIndex];
+                    let cellB = rowB.cells[colIndex];
+                    let rawA = cellA.getAttribute('data-sort');
+                    let rawB = cellB.getAttribute('data-sort');
+                    let numA = rawA !== null ? parseFloat(rawA) : parseFloat(cellA.textContent);
+                    let numB = rawB !== null ? parseFloat(rawB) : parseFloat(cellB.textContent);
+                    let comparison;
+                    if (!isNaN(numA) && !isNaN(numB)) {{
+                        comparison = numA - numB;
+                    }} else {{
+                        comparison = cellA.textContent.trim().localeCompare(cellB.textContent.trim());
+                    }}
+                    return currentSortAsc ? comparison : -comparison;
+                }});
+
+                rows.forEach(row => tbody.appendChild(row));
+
+                for (let i = 0; i < headerRow.cells.length; i++) {{
+                    let indicator = headerRow.cells[i].querySelector('.sort-indicator');
+                    if (indicator) {{ indicator.remove(); }}
+                }}
+                let newIndicator = document.createElement('span');
+                newIndicator.className = 'sort-indicator';
+                newIndicator.textContent = currentSortAsc ? ' ▲' : ' ▼';
+                headerRow.cells[colIndex].appendChild(newIndicator);
             }}
         </script>
     </head>
