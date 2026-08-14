@@ -575,6 +575,14 @@ for type_activity in ['skiing', 'climbing']:
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style type="text/css">
+            *, *::before, *::after {{
+                box-sizing: border-box;
+            }}
+            html, body {{
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }}
             body {{
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 margin: 0;
@@ -626,6 +634,7 @@ for type_activity in ['skiing', 'climbing']:
                 font-size: 0.85rem;
             }}
             .table-wrapper {{
+                width: 100%;
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
                 margin: 10px 0;
