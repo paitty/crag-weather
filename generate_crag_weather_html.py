@@ -324,9 +324,13 @@ def create_weather():
             weather[key]['Wind_style']='bold'
         if (min_temp+max_temp)>50:
             weather[key]['Temp_style']='bold'
-        weather[key]['Score'] = get_distance(key)
+        avg_temp = weather[key]['Temp_sort']
+        avg_wind = weather[key]['Wind_sort']
+        weather[key]['Score'] = 0.5*get_distance(key)
         weather[key]['Score']+=10*rain
-        weather[key]['Score']+=20*(min_wind+max_wind)/2
+        weather[key]['Score']+=20*avg_wind
+        weather[key]['Score']+=5*max_wind
+        weather[key]['Score']+=15*max(0, avg_temp-25)
     return weather
 
 def create_day_style():
@@ -733,7 +737,7 @@ for type_activity in ['skiing', 'climbing']:
                 <br>
                 Based on yr.no API
                 <br>
-                Score = distance (min) + 10 &times; rain (mm) + 20 &times; avg wind (m/s) &mdash; lower is better
+                Score = 0.5 &times; distance (min) + 10 &times; rain (mm) + 20 &times; avg wind (m/s) + 5 &times; max wind (m/s) + 15 &times; heat above 25&deg; &mdash; lower is better
             </p>
             {multipitch_filter_html}
             <br>
