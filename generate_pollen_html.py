@@ -67,12 +67,15 @@ def generate_pollen_table():
                     if date in pollen_table[col].keys():
                         value = float(pollen_table[col][date])
                         if value<2.0:
-                            new_tag['bgcolor']='green'
+                            badge_class='pollen-low'
                         elif value < 6.0:
-                            new_tag['bgcolor']='orange'
+                            badge_class='pollen-medium'
                         else:
-                            new_tag['bgcolor']='red'
-                        new_tag.string=pollen_table[col][date].replace(".",",")
+                            badge_class='pollen-high'
+                        badge = soup.new_tag('span')
+                        badge.attrs['class'] = 'pollen-badge '+badge_class
+                        badge.string = pollen_table[col][date].replace(".",",")
+                        new_tag.append(badge)
                     else:
                         new_tag.string=""
                 last_line.append(new_tag)
@@ -198,33 +201,71 @@ def generate_pollen_table():
     HTML_DOC = """<!DOCTYPE html>
     <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style type="text/css">
+            *, *::before, *::after {
+                box-sizing: border-box;
+            }
+            html, body {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                margin: 0;
+                padding: 14px 16px;
+                background-color: #fafafa;
+                color: #263238;
+            }
             .table-wrapper {
                 width: 100%;
                 max-height: 70vh;
                 overflow: auto;
                 -webkit-overflow-scrolling: touch;
                 margin: 10px 0;
+                border-radius: 10px;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.2);
             }
-            .myTable { background-color:#eee;border-collapse:collapse; }
-
-            .myTable td, .myTable th { padding:5px;border:1px solid #000; }
-
+            .myTable {
+                background-color: #f7f7f7;
+                border-collapse: collapse;
+                font-size: 14px;
+                white-space: nowrap;
+            }
+            .myTable tr:nth-child(even) { background-color: #e9e9e9; }
+            .myTable td, .myTable th { padding: 10px 12px; border: 1px solid #ddd; }
+            .myTable th {
+                background-color: #37474f;
+                color: #fff;
+                border-color: #263238;
+            }
             .myTable tr:first-child th {
                 position: sticky;
                 top: 0;
                 z-index: 2;
-                background-color: #eee;
             }
             .myTable tr td:first-child, .myTable tr th:first-child {
                 position: sticky;
                 left: 0;
                 z-index: 1;
-                background-color: #eee;
+                font-weight: bold;
             }
-            .myTable tr:first-child th:first-child {
-                z-index: 3;
+            .myTable tr:nth-child(odd) td:first-child { background-color: #f7f7f7; }
+            .myTable tr:nth-child(even) td:first-child { background-color: #e9e9e9; }
+            .myTable tr:first-child th:first-child { z-index: 3; }
+            .pollen-badge {
+                display: inline-block;
+                min-width: 34px;
+                padding: 3px 10px;
+                border-radius: 12px;
+                color: #fff;
+                font-weight: 600;
+                text-align: center;
             }
+            .pollen-low { background-color: #2e7d32; }
+            .pollen-medium { background-color: #f57c00; }
+            .pollen-high { background-color: #c62828; }
         </style>
         <title>Pollen in Zagreb</title>
     </head>
