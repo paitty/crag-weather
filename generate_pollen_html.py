@@ -67,15 +67,12 @@ def generate_pollen_table():
                     if date in pollen_table[col].keys():
                         value = float(pollen_table[col][date])
                         if value<2.0:
-                            badge_class='pollen-low'
+                            new_tag.attrs['class']='pollen-low'
                         elif value < 6.0:
-                            badge_class='pollen-medium'
+                            new_tag.attrs['class']='pollen-medium'
                         else:
-                            badge_class='pollen-high'
-                        badge = soup.new_tag('span')
-                        badge.attrs['class'] = 'pollen-badge '+badge_class
-                        badge.string = pollen_table[col][date].replace(".",",")
-                        new_tag.append(badge)
+                            new_tag.attrs['class']='pollen-high'
+                        new_tag.string=pollen_table[col][date].replace(".",",")
                     else:
                         new_tag.string=""
                 last_line.append(new_tag)
@@ -230,7 +227,6 @@ def generate_pollen_table():
             .myTable {
                 background-color: #f7f7f7;
                 border-collapse: collapse;
-                font-size: 14px;
                 white-space: nowrap;
             }
             .myTable tr:nth-child(even) { background-color: #e9e9e9; }
@@ -254,18 +250,9 @@ def generate_pollen_table():
             .myTable tr:nth-child(odd) td:first-child { background-color: #f7f7f7; }
             .myTable tr:nth-child(even) td:first-child { background-color: #e9e9e9; }
             .myTable tr:first-child th:first-child { z-index: 3; }
-            .pollen-badge {
-                display: inline-block;
-                min-width: 34px;
-                padding: 3px 10px;
-                border-radius: 12px;
-                color: #fff;
-                font-weight: 600;
-                text-align: center;
-            }
-            .pollen-low { background-color: #2e7d32; }
-            .pollen-medium { background-color: #f57c00; }
-            .pollen-high { background-color: #c62828; }
+            .pollen-low { background-color: #2e7d32; color: #fff; }
+            .pollen-medium { background-color: #f57c00; color: #fff; }
+            .pollen-high { background-color: #c62828; color: #fff; }
         </style>
         <title>Pollen in Zagreb</title>
     </head>
