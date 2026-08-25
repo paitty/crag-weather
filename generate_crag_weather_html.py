@@ -635,7 +635,8 @@ for type_activity in ['skiing', 'climbing']:
             }}
             .table-wrapper {{
                 width: 100%;
-                overflow-x: auto;
+                max-height: 70vh;
+                overflow: auto;
                 -webkit-overflow-scrolling: touch;
                 margin: 10px 0;
                 border-radius: 10px;
