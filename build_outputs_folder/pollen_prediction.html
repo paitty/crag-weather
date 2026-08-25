@@ -2,9 +2,31 @@
 <html>
  <head>
   <style type="text/css">
-   .myTable { background-color:#eee;border-collapse:collapse; }
+   .table-wrapper {
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 10px 0;
+            }
+            .myTable { background-color:#eee;border-collapse:collapse; }
 
             .myTable td, .myTable th { padding:5px;border:1px solid #000; }
+
+            .myTable tr:first-child th {
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                background-color: #eee;
+            }
+            .myTable tr td:first-child, .myTable tr th:first-child {
+                position: sticky;
+                left: 0;
+                z-index: 1;
+                background-color: #eee;
+            }
+            .myTable tr:first-child th:first-child {
+                z-index: 3;
+            }
   </style>
   <title>
    Pollen in Zagreb
@@ -31,7 +53,7 @@
   </p>
   <br/>
   <p>
-   Today - High: Koprive Ambrozija - Medium: - Low: Trave Trputac
+   Today - High: - Medium: Koprive Ambrozija - Low: Trave Trputac
   </p>
   <p>
    Tomorrow - High: Ambrozija - Medium: Koprive - Low: Trave Trputac
@@ -6656,6 +6678,20 @@
      Low
     </td>
    </tr>
+   <tr>
+    <td>
+     25/08/2026
+    </td>
+    <td>
+     Low
+    </td>
+    <td>
+     Low
+    </td>
+    <td>
+     Low
+    </td>
+   </tr>
   </table>
   <p>
    Koprive
@@ -10721,6 +10757,20 @@
      Med
     </td>
    </tr>
+   <tr>
+    <td>
+     25/08/2026
+    </td>
+    <td>
+     Med
+    </td>
+    <td>
+     Med
+    </td>
+    <td>
+     Med
+    </td>
+   </tr>
   </table>
   <p>
    Hrast
@@ -14528,6 +14578,20 @@
    <tr>
     <td>
      24/08/2026
+    </td>
+    <td>
+     Low
+    </td>
+    <td>
+     Low
+    </td>
+    <td>
+     Low
+    </td>
+   </tr>
+   <tr>
+    <td>
+     25/08/2026
     </td>
     <td>
      Low
@@ -21724,6 +21788,20 @@
     </td>
     <td>
      High
+    </td>
+    <td>
+     High
+    </td>
+    <td>
+     High
+    </td>
+   </tr>
+   <tr>
+    <td>
+     25/08/2026
+    </td>
+    <td>
+     Med
     </td>
     <td>
      High

@@ -2351,6 +2351,11 @@
       "p-niska",
       "p-niska",
       "p-niska"
+    ],
+    "25/08/2026": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
     ]
   },
   "Koprive": {
@@ -3798,6 +3803,11 @@
       "p-visoka",
       "p-umjerena",
       "p-umjerena"
+    ],
+    "25/08/2026": [
+      "p-umjerena",
+      "p-umjerena",
+      "p-umjerena"
     ]
   },
   "Hrast": {
@@ -5149,6 +5159,11 @@
       "p-niska"
     ],
     "24/08/2026": [
+      "p-niska",
+      "p-niska",
+      "p-niska"
+    ],
+    "25/08/2026": [
       "p-niska",
       "p-niska",
       "p-niska"
@@ -7695,6 +7710,11 @@
     ],
     "24/08/2026": [
       "p-visoka",
+      "p-visoka",
+      "p-visoka"
+    ],
+    "25/08/2026": [
+      "p-umjerena",
       "p-visoka",
       "p-visoka"
     ]
