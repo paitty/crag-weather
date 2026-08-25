@@ -8,10 +8,14 @@ import pandas as pd
 
 def generate_pollen_table():
     def createPollenTable():
+        table_wrapper = soup.new_tag("div")
+        table_wrapper.attrs['class'] = 'table-wrapper'
+        soup.html.body.append(table_wrapper)
+
         new_table=soup.new_tag("table")
         new_table.attrs['class']='myTable'
         new_table.attrs['id']='myTable2'
-        soup.html.body.append(new_table)
+        table_wrapper.append(new_table)
         display_table = soup.html.body.find_all("table")[-1]
 
         table_names=list(pollen_table.keys())
@@ -195,9 +199,31 @@ def generate_pollen_table():
     <html>
     <head>
         <style type="text/css">
+            .table-wrapper {
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 10px 0;
+            }
             .myTable { background-color:#eee;border-collapse:collapse; }
 
             .myTable td, .myTable th { padding:5px;border:1px solid #000; }
+
+            .myTable tr:first-child th {
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                background-color: #eee;
+            }
+            .myTable tr td:first-child, .myTable tr th:first-child {
+                position: sticky;
+                left: 0;
+                z-index: 1;
+                background-color: #eee;
+            }
+            .myTable tr:first-child th:first-child {
+                z-index: 3;
+            }
         </style>
         <title>Pollen in Zagreb</title>
     </head>
