@@ -6,7 +6,9 @@ on:
       - main
   schedule:
   # * is a special character in YAML so you have to quote this string
-    - cron:  '0 12 * * *'
+  # Avoid the top of the hour - GitHub Actions documents that exact-hour
+  # schedules are more likely to be delayed or dropped under high load.
+    - cron:  '7 12 * * *'
   workflow_dispatch:
 
 permissions:
