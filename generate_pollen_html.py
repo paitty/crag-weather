@@ -38,7 +38,7 @@ def generate_pollen_table():
             new_date = new_date.strftime("%Y%m%d")
             date_num_list = date_num_list+[new_date]
         
-        sorted_date_num_list=sorted(date_num_list)
+        sorted_date_num_list=sorted(date_num_list, reverse=True)
 
         sorted_date_list=[]
         for date in sorted_date_num_list:
@@ -228,6 +228,7 @@ def generate_pollen_table():
                 background-color: #f7f7f7;
                 border-collapse: collapse;
                 white-space: nowrap;
+                font-size: 12px;
             }
             .myTable tr:nth-child(even) { background-color: #e9e9e9; }
             .myTable td, .myTable th { padding: 10px 12px; border: 1px solid #ddd; }
