@@ -176,39 +176,77 @@ def add_weather(location, start_date, end_date):
         i=i+1
     return min_temp, max_temp, rain, min_wind, max_wind
 
-def add_snow(location):
-    
+SNOW_CACHE_FILE = 'skiing-snow.json'
+SNOW_FRESHNESS_HOURS = 20
+
+def load_snow_cache():
+    try:
+        with open(SNOW_CACHE_FILE) as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+def save_snow_cache(snow_cache):
+    with open(SNOW_CACHE_FILE, 'w') as f:
+        json_pretty = json.dumps(snow_cache, indent=2)
+        f.write(json_pretty)
+
+def add_snow(key):
+
     snow_mountain=''
     snow_valley=''
     opening_status=''
-    
-    if type_activity == 'skiing':
-        headers={'User-Agent': 'Mozilla/5.0'}
-        
-        url = 'https://www.bergfex.com/'+location.replace('(','').replace(')','').replace(' ','').lower()
-        r= requests.get(url, headers=headers)
-        print(r.text[:1000])
-        soup = BeautifulSoup(r.text, "html.parser")
-        
-        for snow_height_tag in soup.find_all("div", class_="tw-pl-4"):
-            if snow_height_tag.h3.text == 'Snow depth':
-                snow_mountain = snow_height_tag.div.find_all('span')[1].text
-                snow_valley = snow_height_tag.div.find_all('span')[3].text
 
-        for parent_div in soup.find_all('div', {'class': 'tw-flex tw-justify-start tw-items-center tw-gap-3'}):
-            s= parent_div.contents[1]['x-bind']
-            opening_status = s.split("'")[1]
-            if opening_status == 'Closed':
-                parent_div2 = parent_div.contents[3].find_all('div')
-                parent_div3 = parent_div2[1].find_all('span')
-                s= parent_div3[1].text
-                opening_status = s.split(" - ")[0]
-        
-        #for opening in soup.find_all("div", class_="tw-flex tw-justify-start tw-items-center tw-gap-3"):    
-        #   s= opening.div['x-bind']
-        #   opening_status = s.split("'")[1]
-        #   if opening_status not in ['Open']:
-        #       opening_status = "closed"
+    if type_activity == 'skiing':
+        snow_cache = load_snow_cache()
+        cached = snow_cache.get(key)
+
+        is_fresh = False
+        if cached and 'fetched_at' in cached:
+            fetched_time = datetime.fromisoformat(cached['fetched_at'])
+            is_fresh = (datetime.now() - fetched_time) < timedelta(hours=SNOW_FRESHNESS_HOURS)
+
+        if is_fresh:
+            snow_mountain = cached.get('Snow_mountain', '')
+            snow_valley = cached.get('Snow_valley', '')
+            opening_status = cached.get('Open', '')
+        else:
+            headers={'User-Agent': 'Mozilla/5.0'}
+
+            url = 'https://www.bergfex.com/'+key.replace('(','').replace(')','').replace(' ','').lower()
+            try:
+                r= requests.get(url, headers=headers)
+                soup = BeautifulSoup(r.text, "html.parser")
+
+                for snow_height_tag in soup.find_all("div", class_="tw-pl-4"):
+                    if snow_height_tag.h3.text == 'Snow depth':
+                        snow_mountain = snow_height_tag.div.find_all('span')[1].text
+                        snow_valley = snow_height_tag.div.find_all('span')[3].text
+
+                for parent_div in soup.find_all('div', {'class': 'tw-flex tw-justify-start tw-items-center tw-gap-3'}):
+                    s= parent_div.contents[1]['x-bind']
+                    opening_status = s.split("'")[1]
+                    if opening_status == 'Closed':
+                        parent_div2 = parent_div.contents[3].find_all('div')
+                        parent_div3 = parent_div2[1].find_all('span')
+                        s= parent_div3[1].text
+                        opening_status = s.split(" - ")[0]
+            except Exception:
+                pass
+
+            if snow_mountain or snow_valley or opening_status:
+                snow_cache[key] = {
+                    'Snow_mountain': snow_mountain,
+                    'Snow_valley': snow_valley,
+                    'Open': opening_status,
+                    'fetched_at': datetime.now().isoformat(),
+                }
+                save_snow_cache(snow_cache)
+            elif cached:
+                # bergfex request failed or was rate-limited - fall back to last known values
+                snow_mountain = cached.get('Snow_mountain', '')
+                snow_valley = cached.get('Snow_valley', '')
+                opening_status = cached.get('Open', '')
 
     return snow_mountain, snow_valley, opening_status
 
