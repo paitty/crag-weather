@@ -158,5 +158,26 @@
     ],
     "Distance": 546.4233333333334,
     "country": "FR"
+  },
+  "Valmeinier": {
+    "location": [
+      45.154,
+      6.517
+    ],
+    "country": "FR"
+  },
+  "Montgenevre": {
+    "location": [
+      44.932,
+      6.723
+    ],
+    "country": "FR"
+  },
+  "Puy-Saint-Vincent": {
+    "location": [
+      44.806,
+      6.512
+    ],
+    "country": "FR"
   }
 }
