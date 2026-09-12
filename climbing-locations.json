@@ -4,56 +4,64 @@
       46.68913,
       15.6017
     ],
-    "Distance": 98.06166666666667
+    "Distance": 98.06166666666667,
+    "country": "SI"
   },
   "Podgorje": {
     "location": [
       46.06838,
       15.34521
     ],
-    "Distance": 76.59166666666667
+    "Distance": 76.59166666666667,
+    "country": "SI"
   },
   "Hvar Velika Stiniva": {
     "location": [
       43.1559083,
       16.8142514
     ],
-    "Distance": 443.0133333333333
+    "Distance": 443.0133333333333,
+    "country": "HR"
   },
   "Glova od Bure": {
     "location": [
       43.1765629,
       16.4585917
     ],
-    "Distance": 497.185
+    "Distance": 497.185,
+    "country": "HR"
   },
   "Povceno": {
     "location": [
       46.13135978126145,
       15.211601760984792
     ],
-    "Distance": 86.21666666666667
+    "Distance": 86.21666666666667,
+    "country": "SI"
   },
   "Orlovska stena": {
     "location": [
       45.50936,
       14.77404
     ],
-    "Distance": 107.10166666666667
+    "Distance": 107.10166666666667,
+    "country": "HR"
   },
   "Karin": {
     "location": [
       44.13634,
       15.647626
     ],
-    "Distance": 196.01833333333335
+    "Distance": 196.01833333333335,
+    "country": "HR"
   },
   "Damelj": {
     "location": [
       45.43466210293423,
       15.188912731350054
     ],
-    "Distance": 66.705
+    "Distance": 66.705,
+    "country": "HR"
   },
   "Klek": {
     "location": [
@@ -61,70 +69,80 @@
       15.144628291121766
     ],
     "type": "multipitch",
-    "Distance": 99.02833333333334
+    "Distance": 99.02833333333334,
+    "country": "HR"
   },
   "Kamena Vrata": {
     "location": [
       45.39972405394324,
       13.939248258514727
     ],
-    "Distance": 164.26833333333335
+    "Distance": 164.26833333333335,
+    "country": "HR"
   },
   "Cikola": {
     "location": [
       43.839518265891584,
       16.050287973126096
     ],
-    "Distance": 233.64833333333334
+    "Distance": 233.64833333333334,
+    "country": "HR"
   },
   "Kotecnik": {
     "location": [
       46.20201515126367,
       15.181263566875257
     ],
-    "Distance": 111.03999999999999
+    "Distance": 111.03999999999999,
+    "country": "SI"
   },
   "Triglav, north wall": {
     "location": [
       46.384787,
       13.834237
     ],
-    "Distance": 159.27833333333334
+    "Distance": 159.27833333333334,
+    "country": "SI"
   },
   "Maltatal": {
     "location": [
       46.98765002672199,
       13.463359813371637
     ],
-    "Distance": 200.55
+    "Distance": 200.55,
+    "country": "AT"
   },
   "Buncove skale": {
     "location": [
       46.45162683075884,
       15.54656945799347
     ],
-    "Distance": 105.40333333333334
+    "Distance": 105.40333333333334,
+    "country": "SI"
   },
   "Armesko": {
     "location": [
       46.01410458164806,
       15.49086069248549
     ],
-    "Distance": 55.63333333333333
+    "Distance": 55.63333333333333,
+    "country": "SI"
   },
   "Golubinjak": {
     "location": [
       45.357079,
       14.7641592
     ],
-    "Distance": 86.67166666666667
+    "Distance": 86.67166666666667,
+    "country": "HR"
   },
   "Luknja": {
     "location": [
       45.81763408714249,
       15.096150932138356
     ],
-    "Distance": 72.60666666666665
+    "Distance": 72.60666666666665,
+    "country": "SI"
   },
   "Paklenica": {
     "location": [
@@ -132,7 +150,8 @@
       15.471336205027894
     ],
     "Distance": 183.82999999999998,
-    "type": "multipitch"
+    "type": "multipitch",
+    "country": "HR"
   },
   "Rovinj": {
     "location": [
@@ -143,7 +162,8 @@
       45.06802850053686,
       13.638182857602043
     ],
-    "Distance": 192.595
+    "Distance": 192.595,
+    "country": "HR"
   },
   "Kamenjak": {
     "location": [
@@ -155,35 +175,40 @@
       14.559083205325695
     ],
     "Distance": 114.18833333333333,
-    "type": "multipitch"
+    "type": "multipitch",
+    "country": "HR"
   },
   "Kalnik": {
     "location": [
       46.133085536274585,
       16.463962791804395
     ],
-    "Distance": 70.67666666666668
+    "Distance": 70.67666666666668,
+    "country": "HR"
   },
   "Okic": {
     "location": [
       45.748875068813156,
       15.706496254222547
     ],
-    "Distance": 37.27833333333333
+    "Distance": 37.27833333333333,
+    "country": "HR"
   },
   "Vela Pesa": {
     "location": [
       45.40555647963526,
       14.536577281433075
     ],
-    "Distance": 147.64666666666665
+    "Distance": 147.64666666666665,
+    "country": "HR"
   },
   "Kompanj": {
     "location": [
       45.39222332829936,
       14.07526191008747
     ],
-    "Distance": 151.89666666666665
+    "Distance": 151.89666666666665,
+    "country": "HR"
   },
   "Omis": {
     "location": [
@@ -191,7 +216,8 @@
       16.696190988140245
     ],
     "Distance": 282.0316666666667,
-    "type": "multipitch"
+    "type": "multipitch",
+    "country": "HR"
   },
   "Obli Kuk (Prezid)": {
     "location": [
@@ -199,7 +225,8 @@
       15.803868545148426
     ],
     "Distance": 168.82333333333332,
-    "type": "multipitch"
+    "type": "multipitch",
+    "country": "HR"
   },
   "Klamarusa": {
     "location": [
@@ -207,7 +234,8 @@
       14.713420522318547
     ],
     "Distance": 129.01333333333335,
-    "type": "multipitch"
+    "type": "multipitch",
+    "country": "HR"
   },
   "Dabarski Kukovi": {
     "location": [
@@ -215,14 +243,16 @@
       15.1180140370689
     ],
     "Distance": 163.85166666666666,
-    "type": "multipitch"
+    "type": "multipitch",
+    "country": "HR"
   },
   "Zlarin": {
     "location": [
       43.685094081020814,
       15.840036775632049
     ],
-    "Distance": 225.46166666666667
+    "Distance": 225.46166666666667,
+    "country": "HR"
   },
   "Strogir": {
     "location": [
@@ -230,20 +260,23 @@
       14.931604432719622
     ],
     "Distance": 164.57999999999998,
-    "type": "multipitch"
+    "type": "multipitch",
+    "country": "HR"
   },
   "Vela Draga": {
     "location": [
       45.31581239894506,
       14.167332503041193
     ],
-    "Distance": 139.525
+    "Distance": 139.525,
+    "country": "HR"
   },
   "Portafortuna": {
     "location": [
       45.01845813203996,
       14.679828452494796
     ],
-    "Distance": 152.37666666666667
+    "Distance": 152.37666666666667,
+    "country": "HR"
   }
 }
