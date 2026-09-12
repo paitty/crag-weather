@@ -89,6 +89,35 @@ def get_distance(key):
             f.write(json_pretty)
     return distance
 
+def get_country_code(location):
+    headers = {'User-Agent': 'Mozilla/5.0', 'sitename': 'https://github.com/paitty/crag-weather.git'}
+    url = "https://nominatim.openstreetmap.org/reverse?lat="+str(location[0])+"&lon="+str(location[1])+"&format=jsonv2"
+    r = requests.get(url, headers=headers)
+    country_code = r.json()['address']['country_code'].upper()
+    return country_code
+
+def get_country(key):
+    if 'country' in locations[key].keys():
+        country = locations[key]['country']
+    else:
+        country = get_country_code(locations[key]['location'])
+        locations[key]['country'] = country
+        with open(location_file, 'w') as f:
+            json_pretty = json.dumps(locations, indent=2)
+            f.write(json_pretty)
+    return country
+
+COUNTRY_FLAGS = {
+    'HR': '🇭🇷',
+    'SI': '🇸🇮',
+    'AT': '🇦🇹',
+    'IT': '🇮🇹',
+    'FR': '🇫🇷',
+}
+
+def get_flag(key):
+    return COUNTRY_FLAGS.get(get_country(key), '')
+
 def add_weather(location, start_date, end_date):
 
     headers = {'Accept':	'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -223,7 +252,8 @@ def createTable():
         for col in table_names:
             new_tag=soup.new_tag('td')
             if col == 'Crag':
-                new_tag.string=key
+                flag = get_flag(key)
+                new_tag.string=(flag+' '+key) if flag else key
             elif col == 'Yr.no':
                 new_link=soup.new_tag('a')
                 new_link.string='Yr.no'

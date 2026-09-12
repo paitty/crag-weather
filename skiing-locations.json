@@ -4,139 +4,159 @@
       45.30878398055162,
       14.860938867283023
     ],
-    "Distance": 93.5
+    "Distance": 93.5,
+    "country": "HR"
   },
   "Obertauern": {
     "location": [
       47.252151514135114,
       13.54731287506858
     ],
-    "Distance": 231.60833333333332
+    "Distance": 231.60833333333332,
+    "country": "AT"
   },
   "Zelenica": {
     "location": [
       46.4288174,
       14.2337289
     ],
-    "Distance": 138.91333333333333
+    "Distance": 138.91333333333333,
+    "country": "SI"
   },
   "Nassfeld": {
     "location": [
       46.566804807541054,
       13.277076953352879
     ],
-    "Distance": 203.65166666666667
+    "Distance": 203.65166666666667,
+    "country": "AT"
   },
   "Mariborsko-Pohorje": {
     "location": [
       46.533012591790374,
       15.599708185157835
     ],
-    "Distance": 88.29666666666667
+    "Distance": 88.29666666666667,
+    "country": "SI"
   },
   "Kronplatz": {
     "location": [
       46.746863366357296,
       12.011013912762216
     ],
-    "Distance": 306.9183333333333
+    "Distance": 306.9183333333333,
+    "country": "IT"
   },
   "Kaunertal": {
     "location": [
       46.850903851308985,
       10.705811717326887
     ],
-    "Distance": 519.95
+    "Distance": 519.95,
+    "country": "AT"
   },
   "Goldeck": {
     "location": [
       46.759063354970316,
       13.458435423902976
     ],
-    "Distance": 254.215
+    "Distance": 254.215,
+    "country": "AT"
   },
   "Katschberg": {
     "location": [
       47.05849725750337,
       13.615250470510752
     ],
-    "Distance": 201.29666666666665
+    "Distance": 201.29666666666665,
+    "country": "AT"
   },
   "Bad Kleinkirchheim": {
     "location": [
       46.81228382984216,
       13.798555103537398
     ],
-    "Distance": 193.50666666666666
+    "Distance": 193.50666666666666,
+    "country": "AT"
   },
   "Turracher Hoehe": {
     "location": [
       46.91422400972158,
       13.87506426370242
     ],
-    "Distance": 211.75333333333336
+    "Distance": 211.75333333333336,
+    "country": "AT"
   },
   "Gerlitzen-Alpe": {
     "location": [
       46.69399580052134,
       13.916246599890195
     ],
-    "Distance": 204.52333333333334
+    "Distance": 204.52333333333334,
+    "country": "AT"
   },
   "Vogel": {
     "location": [
       46.26352095593961,
       13.840090475197755
     ],
-    "Distance": 167.29500000000002
+    "Distance": 167.29500000000002,
+    "country": "SI"
   },
   "Rogla": {
     "location": [
       46.45419610250392,
       15.333133124787942
     ],
-    "Distance": 125.82
+    "Distance": 125.82,
+    "country": "SI"
   },
   "Velika Planina": {
     "location": [
       46.29874264140434,
       14.642770166727011
     ],
-    "Distance": 174.11
+    "Distance": 174.11,
+    "country": "SI"
   },
   "Kranjska-Gora": {
     "location": [
       46.48463736279437,
       13.7797101146335
     ],
-    "Distance": 155.59
+    "Distance": 155.59,
+    "country": "SI"
   },
   "Krvavec": {
     "location": [
       46.29648008798461,
       14.5206859431647
     ],
-    "Distance": 152.09666666666666
+    "Distance": 152.09666666666666,
+    "country": "SI"
   },
   "Sljeme": {
     "location": [
       45.8988435233244,
       15.946966578038898
     ],
-    "Distance": 35.23833333333334
+    "Distance": 35.23833333333334,
+    "country": "HR"
   },
   "Moelltaler Gletscher": {
     "location": [
       46.98040661501648,
       13.051287599468099
     ],
-    "Distance": 222.88833333333332
+    "Distance": 222.88833333333332,
+    "country": "AT"
   },
   "Val-Cenis": {
     "location": [
       45.28990443329893,
       6.914850962442778
     ],
-    "Distance": 546.4233333333334
+    "Distance": 546.4233333333334,
+    "country": "FR"
   }
 }
