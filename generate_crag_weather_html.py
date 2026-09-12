@@ -178,6 +178,8 @@ def add_weather(location, start_date, end_date):
 
 SNOW_CACHE_FILE = 'skiing-snow.json'
 SNOW_FRESHNESS_HOURS = 20
+SNOW_STALE_HOURS = 30
+SNOW_STALE_ICON = '⚠️'
 
 def load_snow_cache():
     try:
@@ -196,6 +198,7 @@ def add_snow(key):
     snow_mountain=''
     snow_valley=''
     opening_status=''
+    snow_stale=False
 
     if type_activity == 'skiing':
         snow_cache = load_snow_cache()
@@ -235,12 +238,13 @@ def add_snow(key):
                 pass
 
             if snow_mountain or snow_valley or opening_status:
-                snow_cache[key] = {
+                cached = {
                     'Snow_mountain': snow_mountain,
                     'Snow_valley': snow_valley,
                     'Open': opening_status,
                     'fetched_at': datetime.now().isoformat(),
                 }
+                snow_cache[key] = cached
                 save_snow_cache(snow_cache)
             elif cached:
                 # bergfex request failed or was rate-limited - fall back to last known values
@@ -248,7 +252,11 @@ def add_snow(key):
                 snow_valley = cached.get('Snow_valley', '')
                 opening_status = cached.get('Open', '')
 
-    return snow_mountain, snow_valley, opening_status
+        if cached and 'fetched_at' in cached:
+            fetched_time = datetime.fromisoformat(cached['fetched_at'])
+            snow_stale = (datetime.now() - fetched_time) > timedelta(hours=SNOW_STALE_HOURS)
+
+    return snow_mountain, snow_valley, opening_status, snow_stale
 
 def createTable():
     days_of_the_week = days_of_week_from_today()
@@ -365,7 +373,13 @@ def createTable():
                     new_tag.attrs['style']="font-weight:bold"
                 if col+'_sort' in weather[key].keys():
                     new_tag.attrs['data-sort'] = str(weather[key][col+'_sort'])
-                new_tag.string=str(weather[key][col])
+                new_tag.append(str(weather[key][col]))
+                if col in ('Snow_mountain', 'Snow_valley') and weather[key].get('Snow_stale'):
+                    stale_icon = soup.new_tag('span')
+                    stale_icon.attrs['class'] = 'stale-icon'
+                    stale_icon.attrs['title'] = 'Snow data may be outdated - bergfex request has been failing for over '+str(SNOW_STALE_HOURS)+'h'
+                    stale_icon.string = SNOW_STALE_ICON
+                    new_tag.append(stale_icon)
             last_line.append(new_tag)
 
 def create_weather():
@@ -375,7 +389,7 @@ def create_weather():
     for key in locations.keys():
         location = locations[key]['location']
         min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
-        snow_mountain, snow_valley, open = add_snow(key)
+        snow_mountain, snow_valley, open, snow_stale = add_snow(key)
         weather[key]={}
         weather[key]['Temp']=str(int(min_temp))+"/"+str(int(max_temp))+"°"
         weather[key]['Temp_sort']=(min_temp+max_temp)/2
@@ -384,6 +398,7 @@ def create_weather():
         weather[key]['Snow_mountain']=snow_mountain
         weather[key]['Snow_valley']=snow_valley
         weather[key]['Open']=open
+        weather[key]['Snow_stale']=snow_stale
         if rain>6:
             weather[key]['Rain_style']='bold'
         weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
@@ -701,6 +716,16 @@ for type_activity in ['skiing', 'climbing']:
                 border-radius: 6px;
                 font-size: 0.85rem;
             }}
+            .stale-icon {{
+                font-size: 0.55em;
+                vertical-align: super;
+                margin-left: 2px;
+            }}
+            .stale-legend {{
+                font-size: 0.8rem;
+                color: #555;
+                margin-top: 8px;
+            }}
             .table-wrapper {{
                 width: 100%;
                 max-height: 70vh;
@@ -828,6 +853,12 @@ for type_activity in ['skiing', 'climbing']:
     soup = BeautifulSoup(HTML_header, "html.parser")
 
     createTable()
+
+    if type_activity == 'skiing':
+        stale_legend = soup.new_tag('p')
+        stale_legend.attrs['class'] = 'stale-legend'
+        stale_legend.string = SNOW_STALE_ICON+' snow data may be outdated - bergfex request has been failing for over '+str(SNOW_STALE_HOURS)+'h'
+        soup.body.append(stale_legend)
 
     HTML_footer = """   <br> <div class="container">
     <iframe id="iframe1" name="iframe1" frameborder="0"  
