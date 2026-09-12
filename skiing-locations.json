@@ -164,20 +164,23 @@
       45.154,
       6.517
     ],
-    "country": "FR"
+    "country": "FR",
+    "Distance": 636.87
   },
   "Montgenevre": {
     "location": [
       44.932,
       6.723
     ],
-    "country": "FR"
+    "country": "FR",
+    "Distance": 548.775
   },
   "Puy-Saint-Vincent": {
     "location": [
       44.806,
       6.512
     ],
-    "country": "FR"
+    "country": "FR",
+    "Distance": 632.39
   }
 }
