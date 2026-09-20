@@ -6,6 +6,105 @@ import folium
 import folium.plugins as plugins
 import pandas as pd
 
+def generate_ambrozija_graph_svg(ambrozija_history):
+    readings = {}
+    for date_str, value_str in ambrozija_history.items():
+        try:
+            readings[datetime.strptime(date_str, "%d/%m/%Y")] = float(value_str)
+        except ValueError:
+            continue
+
+    if not readings:
+        return "<p>No ambrozija history available yet.</p>"
+
+    first_day = min(readings)
+    last_day = max(readings)
+    total_days = (last_day - first_day).days
+
+    # Fill in every calendar day (not just days with a reading) as 0, so the
+    # off-season gap is shown as a flat line at zero instead of being
+    # skipped - this keeps the x-axis representing actual elapsed time.
+    dates = [first_day + timedelta(days=i) for i in range(total_days + 1)]
+    values = [readings.get(d, 0.0) for d in dates]
+    has_reading = [d in readings for d in dates]
+    n = len(dates)
+
+    width, height = 900, 420
+    margin_left, margin_right, margin_top, margin_bottom = 50, 20, 20, 40
+    plot_width = width - margin_left - margin_right
+    plot_height = height - margin_top - margin_bottom
+
+    max_value = max(max(values) * 1.15, 6.5)
+
+    # dates/values now cover every calendar day (missing days filled with 0
+    # above), so spacing by index is equivalent to spacing by elapsed time.
+    def x_for(i):
+        return margin_left + (i / max(n - 1, 1)) * plot_width
+
+    def y_for(v):
+        return margin_top + plot_height - (v / max_value) * plot_height
+
+    line_points = " ".join(f"{x_for(i):.1f},{y_for(v):.1f}" for i, v in enumerate(values))
+
+    circles = "".join(
+        f'<circle cx="{x_for(i):.1f}" cy="{y_for(v):.1f}" r="3" fill="#37474f">'
+        f'<title>{dates[i].strftime("%d/%m/%Y")}: {v}</title></circle>'
+        for i, v in enumerate(values)
+        if has_reading[i]
+    )
+
+    def threshold_line(v, color, label):
+        y = y_for(v)
+        return (f'<line x1="{margin_left}" y1="{y:.1f}" x2="{width-margin_right}" y2="{y:.1f}" '
+                f'stroke="{color}" stroke-width="1" stroke-dasharray="4,4" opacity="0.6"/>'
+                f'<text x="{width-margin_right}" y="{y-4:.1f}" font-size="11" fill="{color}" text-anchor="end">{label}</text>')
+
+    thresholds = ""
+    if max_value > 2:
+        thresholds += threshold_line(2, "#f57c00", "Medium (2)")
+    if max_value > 6:
+        thresholds += threshold_line(6, "#c62828", "High (6)")
+
+    # One tick per calendar month change, plus the most recent reading,
+    # labelled "DD/MM/YY", shown horizontally.
+    tick_indices = []
+    last_month = None
+    for i, d in enumerate(dates):
+        month_key = (d.year, d.month)
+        if month_key != last_month:
+            tick_indices.append(i)
+            last_month = month_key
+    if tick_indices[-1] != n - 1:
+        tick_indices.append(n - 1)
+
+    def anchor_for(i):
+        if i == 0:
+            return 'start'
+        if i == n - 1:
+            return 'end'
+        return 'middle'
+
+    x_ticks = "".join(
+        f'<text x="{x_for(i):.1f}" y="{height-margin_bottom+16}" font-size="11" fill="#555" text-anchor="{anchor_for(i)}">{dates[i].strftime("%d/%m/%y")}</text>'
+        for i in tick_indices
+    )
+
+    y_tick_values = [0, max_value/2, max_value]
+    y_ticks = "".join(
+        f'<text x="{margin_left-8}" y="{y_for(v)+4:.1f}" font-size="11" fill="#555" text-anchor="end">{v:.1f}</text>'
+        for v in y_tick_values
+    )
+
+    return f'''<svg viewBox="0 0 {width} {height}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+        <line x1="{margin_left}" y1="{margin_top}" x2="{margin_left}" y2="{height-margin_bottom}" stroke="#999"/>
+        <line x1="{margin_left}" y1="{height-margin_bottom}" x2="{width-margin_right}" y2="{height-margin_bottom}" stroke="#999"/>
+        {thresholds}
+        <polyline points="{line_points}" fill="none" stroke="#37474f" stroke-width="2"/>
+        {circles}
+        {x_ticks}
+        {y_ticks}
+    </svg>'''
+
 def generate_pollen_table():
     def createPollenTable():
         table_wrapper = soup.new_tag("div")
@@ -266,6 +365,8 @@ def generate_pollen_table():
             <a href="pollen_prediction.html">Pollen prediction table</a>
             <br>
             <a href="ambrozija_map.html">Ambrozija map</a>
+            <br>
+            <a href="ambrozija_graph.html">Ambrozija graph</a>
         </p>
         <br>
     </body>
@@ -279,7 +380,20 @@ def generate_pollen_table():
     html = soup.prettify("utf-8")
     with open("build_outputs_folder/pollen.html", "wb") as file:
         file.write(html)
-    
+
+    soup = BeautifulSoup(HTML_DOC, "html.parser")
+
+    graph_heading = soup.new_tag('h2')
+    graph_heading.string = 'Ambrozija level over time (Zagreb)'
+    soup.body.append(graph_heading)
+
+    graph_svg = BeautifulSoup(generate_ambrozija_graph_svg(pollen_table.get('Ambrozija', {})), "html.parser")
+    soup.body.append(graph_svg)
+
+    html = soup.prettify("utf-8")
+    with open("build_outputs_folder/ambrozija_graph.html", "wb") as file:
+        file.write(html)
+
     soup = BeautifulSoup(HTML_DOC, "html.parser")
 
     day_names = ['Today', 'Tomorrow', 'Overmorrow']
