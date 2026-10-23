@@ -502,6 +502,11 @@ def generate_pollen_table():
         pollen_value = []
         links = []
         for key in pollen_locations.keys():
+            if key not in pollen_table:
+                # Pliva didn't return a usable reading for this city this
+                # run (site hiccup/block/layout change) - skip it rather
+                # than crashing the whole build over one missing city.
+                continue
             latitudes.append(str(pollen_locations[key]['location'][0])[:6])
             longitudes.append(str(pollen_locations[key]['location'][1])[:6])
             location_number = pollen_locations[key]['number']
@@ -539,7 +544,7 @@ def generate_pollen_table():
             #print(df.iloc[i]['Properties'])
             folium.Marker(
             location=point_location,
-            icon=plugins.BeautifyIcon(icon=df.iloc[i]['Pollen_Values'], icon_shape="marker", border_color=icon_color, text_color=icon_color),
+            icon=plugins.BeautifyIcon(icon=str(df.iloc[i]['Pollen_Values']), icon_shape="marker", border_color=icon_color, text_color=icon_color),
             popup=df.iloc[i]['Pollen_Links'],
             ).add_to(m)
         m.save(html_filename)
