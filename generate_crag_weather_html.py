@@ -1,4 +1,5 @@
 import json
+import time
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta
 import requests
@@ -139,8 +140,18 @@ def add_weather(location, start_date, end_date):
     #example call
     #https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=45.434&lon=15.188
     url = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat="+str(location[0])[:6]+"&lon="+str(location[1])[:6]
-    r= requests.get(url, headers=headers)
-    yr_weather=r.json()
+    # met.no occasionally returns an empty/non-JSON body for a single request
+    # (rate limiting, transient hiccup) - retry a couple of times before
+    # giving up, rather than crashing the entire build over one location.
+    for attempt in range(3):
+        r = requests.get(url, headers=headers)
+        try:
+            yr_weather = r.json()
+            break
+        except ValueError:
+            if attempt == 2:
+                raise
+            time.sleep(2)
     i=0
     min_temp = 100
     max_temp = -100
