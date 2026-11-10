@@ -245,24 +245,40 @@ def fetch_skiresort(key):
     report['last_snowfall'] = last_snow[0] if last_snow else ''
     print(f'[snow] {key}: {report}')
     if report['is_open'] is None and mountain is None:
-        return None  # page layout not recognised
+        report['no_report'] = True  # small resorts without a snow report on skiresort.com
     return report
 
-def fetch_model_snow_depth(key, elevation=None):
-    """Open-Meteo modelled snow depth (cm) at the resort coordinates. Estimate, not a measurement."""
-    lat, lon = locations[key]['location']
-    url = f'https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=snow_depth'
-    if elevation:
-        url += f'&elevation={elevation}'
-    try:
-        r = requests.get(url, timeout=20)
-        depth_m = r.json()['current']['snow_depth']
-        return round(depth_m * 100) if depth_m is not None else None
-    except Exception as e:
-        print(f'[snow] {key}: open-meteo failed: {e}')
-        return None
+_model_snow_cache = None
+
+def fetch_model_snow_depth(key):
+    """Open-Meteo modelled snow depth (cm) at the resort coordinates. Estimate, not a measurement.
+    One batched request for all resorts (cached for the run), with retries."""
+    global _model_snow_cache
+    if _model_snow_cache is None:
+        _model_snow_cache = {}
+        keys = list(locations.keys())
+        lats = ','.join(str(locations[k]['location'][0]) for k in keys)
+        lons = ','.join(str(locations[k]['location'][1]) for k in keys)
+        url = f'https://api.open-meteo.com/v1/forecast?latitude={lats}&longitude={lons}&current=snow_depth'
+        for attempt in range(3):
+            try:
+                r = requests.get(url, timeout=60)
+                data = r.json()
+                if isinstance(data, dict):
+                    data = [data]
+                for k, item in zip(keys, data):
+                    depth_m = item.get('current', {}).get('snow_depth')
+                    _model_snow_cache[k] = round(depth_m * 100) if depth_m is not None else None
+                print(f'[snow] open-meteo: {_model_snow_cache}')
+                break
+            except Exception as e:
+                print(f'[snow] open-meteo attempt {attempt+1} failed: {e}')
+                time.sleep(5)
+    return _model_snow_cache.get(key)
 
 def format_open(report):
+    if report.get('no_report'):
+        return 'no report'
     if report.get('is_open'):
         return '✅ ' + report['lifts'] + ' lifts' if report.get('lifts') else '✅ open'
     if report.get('season_start'):
@@ -296,7 +312,7 @@ def add_snow(key):
             print(f'[snow] {key}: skiresort failed: {e}')
         if report:
             if report['mountain_cm'] is None:
-                report['model_cm'] = fetch_model_snow_depth(key, report.get('mountain_elev'))
+                report['model_cm'] = fetch_model_snow_depth(key)
             report['fetched_at'] = datetime.now().isoformat()
             snow_cache[key] = report
             save_snow_cache(snow_cache)
