@@ -5,7 +5,8 @@
       14.860938867283023
     ],
     "Distance": 93.5,
-    "country": "HR"
+    "country": "HR",
+    "skiresort": "celimbasa"
   },
   "Obertauern": {
     "location": [
@@ -13,7 +14,8 @@
       13.54731287506858
     ],
     "Distance": 231.60833333333332,
-    "country": "AT"
+    "country": "AT",
+    "skiresort": "obertauern"
   },
   "Zelenica": {
     "location": [
@@ -21,7 +23,8 @@
       14.2337289
     ],
     "Distance": 138.91333333333333,
-    "country": "SI"
+    "country": "SI",
+    "skiresort": "zelenica"
   },
   "Nassfeld": {
     "location": [
@@ -29,7 +32,8 @@
       13.277076953352879
     ],
     "Distance": 203.65166666666667,
-    "country": "AT"
+    "country": "AT",
+    "skiresort": "nassfeld-hermagor"
   },
   "Mariborsko-Pohorje": {
     "location": [
@@ -37,7 +41,8 @@
       15.599708185157835
     ],
     "Distance": 88.29666666666667,
-    "country": "SI"
+    "country": "SI",
+    "skiresort": "mariborsko-pohorje-maribor"
   },
   "Kronplatz": {
     "location": [
@@ -45,7 +50,8 @@
       12.011013912762216
     ],
     "Distance": 306.9183333333333,
-    "country": "IT"
+    "country": "IT",
+    "skiresort": "kronplatz-plan-de-corones"
   },
   "Kaunertal": {
     "location": [
@@ -53,7 +59,8 @@
       10.705811717326887
     ],
     "Distance": 519.95,
-    "country": "AT"
+    "country": "AT",
+    "skiresort": "kaunertal-glacier-kaunertaler-gletscher"
   },
   "Goldeck": {
     "location": [
@@ -61,7 +68,8 @@
       13.458435423902976
     ],
     "Distance": 254.215,
-    "country": "AT"
+    "country": "AT",
+    "skiresort": "goldeck-spittal-an-der-drau"
   },
   "Katschberg": {
     "location": [
@@ -69,7 +77,8 @@
       13.615250470510752
     ],
     "Distance": 201.29666666666665,
-    "country": "AT"
+    "country": "AT",
+    "skiresort": "katschberg"
   },
   "Bad Kleinkirchheim": {
     "location": [
@@ -77,7 +86,8 @@
       13.798555103537398
     ],
     "Distance": 193.50666666666666,
-    "country": "AT"
+    "country": "AT",
+    "skiresort": "bad-kleinkirchheim"
   },
   "Turracher Hoehe": {
     "location": [
@@ -85,7 +95,8 @@
       13.87506426370242
     ],
     "Distance": 211.75333333333336,
-    "country": "AT"
+    "country": "AT",
+    "skiresort": "turracher-hoehe"
   },
   "Gerlitzen-Alpe": {
     "location": [
@@ -93,7 +104,8 @@
       13.916246599890195
     ],
     "Distance": 204.52333333333334,
-    "country": "AT"
+    "country": "AT",
+    "skiresort": "gerlitzen"
   },
   "Vogel": {
     "location": [
@@ -101,7 +113,8 @@
       13.840090475197755
     ],
     "Distance": 167.29500000000002,
-    "country": "SI"
+    "country": "SI",
+    "skiresort": "vogel-bohinj"
   },
   "Rogla": {
     "location": [
@@ -109,7 +122,8 @@
       15.333133124787942
     ],
     "Distance": 125.82,
-    "country": "SI"
+    "country": "SI",
+    "skiresort": "rogla"
   },
   "Velika Planina": {
     "location": [
@@ -117,7 +131,8 @@
       14.642770166727011
     ],
     "Distance": 174.11,
-    "country": "SI"
+    "country": "SI",
+    "skiresort": "velika-planina"
   },
   "Kranjska-Gora": {
     "location": [
@@ -125,7 +140,8 @@
       13.7797101146335
     ],
     "Distance": 155.59,
-    "country": "SI"
+    "country": "SI",
+    "skiresort": "kranjska-gora"
   },
   "Krvavec": {
     "location": [
@@ -133,7 +149,8 @@
       14.5206859431647
     ],
     "Distance": 152.09666666666666,
-    "country": "SI"
+    "country": "SI",
+    "skiresort": "krvavec"
   },
   "Sljeme": {
     "location": [
@@ -141,7 +158,8 @@
       15.946966578038898
     ],
     "Distance": 35.23833333333334,
-    "country": "HR"
+    "country": "HR",
+    "skiresort": "sljeme-medvednica-zagreb"
   },
   "Moelltaler Gletscher": {
     "location": [
@@ -149,7 +167,8 @@
       13.051287599468099
     ],
     "Distance": 222.88833333333332,
-    "country": "AT"
+    "country": "AT",
+    "skiresort": "moelltal-glacier-moelltaler-gletscher"
   },
   "Val-Cenis": {
     "location": [
@@ -157,7 +176,8 @@
       6.914850962442778
     ],
     "Distance": 546.4233333333334,
-    "country": "FR"
+    "country": "FR",
+    "skiresort": "val-cenis-lanslevillard-lanslebourg-termignon"
   },
   "Valmeinier": {
     "location": [
@@ -165,7 +185,8 @@
       6.517
     ],
     "country": "FR",
-    "Distance": 636.87
+    "Distance": 636.87,
+    "skiresort": "galibier-thabor-valmeinier-valloire"
   },
   "Montgenevre": {
     "location": [
@@ -173,7 +194,8 @@
       6.723
     ],
     "country": "FR",
-    "Distance": 548.775
+    "Distance": 548.775,
+    "skiresort": "via-lattea-sestriere-sauze-doulx-san-sicario-claviere-montgenevre"
   },
   "Puy-Saint-Vincent": {
     "location": [
@@ -181,6 +203,7 @@
       6.512
     ],
     "country": "FR",
-    "Distance": 632.39
+    "Distance": 632.39,
+    "skiresort": "puy-saint-vincent"
   }
 }
