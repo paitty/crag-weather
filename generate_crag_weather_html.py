@@ -1,4 +1,5 @@
 import json
+import re
 import time
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta
@@ -191,12 +192,14 @@ SNOW_CACHE_FILE = 'skiing-snow.json'
 SNOW_FRESHNESS_HOURS = 20
 SNOW_STALE_HOURS = 30
 SNOW_STALE_ICON = '⚠️'
+SNOW_REPORT_OLD_DAYS = 2
+SKIRESORT_URL = 'https://www.skiresort.com/en/ski-resort/{}/snow-report/'
 
 def load_snow_cache():
     try:
         with open(SNOW_CACHE_FILE) as f:
             return json.load(f)
-    except FileNotFoundError:
+    except (FileNotFoundError, json.JSONDecodeError):
         return {}
 
 def save_snow_cache(snow_cache):
@@ -204,70 +207,141 @@ def save_snow_cache(snow_cache):
         json_pretty = json.dumps(snow_cache, indent=2)
         f.write(json_pretty)
 
-def add_snow(key):
+def skiresort_url(key):
+    slug = locations[key].get('skiresort')
+    return SKIRESORT_URL.format(slug) if slug else None
 
-    snow_mountain=''
-    snow_valley=''
-    opening_status=''
-    snow_stale=False
+def _first(pattern, text):
+    m = re.search(pattern, text)
+    return m.groups() if m else None
 
-    if type_activity == 'skiing':
-        snow_cache = load_snow_cache()
-        cached = snow_cache.get(key)
+def fetch_skiresort(key):
+    """Scrape the skiresort.com snow report page. Returns a dict, or None on failure."""
+    url = skiresort_url(key)
+    if not url:
+        return None
+    headers = {'User-Agent': 'Mozilla/5.0 (compatible; crag-weather/1.0)', 'Accept-Language': 'en'}
+    r = requests.get(url, headers=headers, timeout=20)
+    print(f'[snow] {key}: {url} -> HTTP {r.status_code}')
+    if r.status_code != 200:
+        return None
+    text = ' '.join(BeautifulSoup(r.text, 'html.parser').get_text(' ').split())
 
-        is_fresh = False
-        if cached and 'fetched_at' in cached:
-            fetched_time = datetime.fromisoformat(cached['fetched_at'])
-            is_fresh = (datetime.now() - fetched_time) < timedelta(hours=SNOW_FRESHNESS_HOURS)
+    report = {'source': 'skiresort'}
+    status = _first(r'Ski resort (open|closed)', text)
+    report['is_open'] = (status[0] == 'open') if status else None
+    mountain = _first(r'(\d+|-) cm Mountain \((\d[\d.,]*) m\)', text)
+    base = _first(r'(\d+|-) cm Base \((\d[\d.,]*) m\)', text)
+    report['mountain_cm'] = int(mountain[0]) if mountain and mountain[0] != '-' else None
+    report['base_cm'] = int(base[0]) if base and base[0] != '-' else None
+    report['mountain_elev'] = int(mountain[1].replace('.', '').replace(',', '')) if mountain else None
+    lifts = _first(r'(\d+) of (\d+) lifts', text)
+    report['lifts'] = f'{lifts[0]}/{lifts[1]}' if lifts else ''
+    start = _first(r'Planned start of season: (\d{1,2} \w{3} \d{4})', text)
+    report['season_start'] = start[0] if start else ''
+    updated = _first(r'Updated on: (\d{1,2} \w{3} \d{4})', text)
+    report['updated'] = updated[0] if updated else ''
+    last_snow = _first(r'Last snowfall: (\d{1,2} \w{3} \d{4})', text)
+    report['last_snowfall'] = last_snow[0] if last_snow else ''
+    print(f'[snow] {key}: {report}')
+    if report['is_open'] is None and mountain is None:
+        report['no_report'] = True  # small resorts without a snow report on skiresort.com
+    return report
 
-        if is_fresh:
-            snow_mountain = cached.get('Snow_mountain', '')
-            snow_valley = cached.get('Snow_valley', '')
-            opening_status = cached.get('Open', '')
-        else:
-            headers={'User-Agent': 'Mozilla/5.0'}
+_model_snow_cache = None
 
-            url = 'https://www.bergfex.com/'+key.replace('(','').replace(')','').replace(' ','').lower()
+def fetch_model_snow_depth(key):
+    """Open-Meteo modelled snow depth (cm) at the resort coordinates. Estimate, not a measurement.
+    One batched request for all resorts (cached for the run), with retries."""
+    global _model_snow_cache
+    if _model_snow_cache is None:
+        _model_snow_cache = {}
+        keys = list(locations.keys())
+        lats = ','.join(str(locations[k]['location'][0]) for k in keys)
+        lons = ','.join(str(locations[k]['location'][1]) for k in keys)
+        url = f'https://api.open-meteo.com/v1/forecast?latitude={lats}&longitude={lons}&current=snow_depth'
+        for attempt in range(3):
             try:
-                r= requests.get(url, headers=headers)
-                soup = BeautifulSoup(r.text, "html.parser")
+                r = requests.get(url, timeout=60)
+                data = r.json()
+                if isinstance(data, dict):
+                    data = [data]
+                for k, item in zip(keys, data):
+                    depth_m = item.get('current', {}).get('snow_depth')
+                    _model_snow_cache[k] = round(depth_m * 100) if depth_m is not None else None
+                print(f'[snow] open-meteo: {_model_snow_cache}')
+                break
+            except Exception as e:
+                print(f'[snow] open-meteo attempt {attempt+1} failed: {e}')
+                time.sleep(5)
+    return _model_snow_cache.get(key)
 
-                for snow_height_tag in soup.find_all("div", class_="tw-pl-4"):
-                    if snow_height_tag.h3.text == 'Snow depth':
-                        snow_mountain = snow_height_tag.div.find_all('span')[1].text
-                        snow_valley = snow_height_tag.div.find_all('span')[3].text
+def format_open(report):
+    if report.get('no_report'):
+        return 'no report'
+    if report.get('is_open'):
+        return '✅ ' + report['lifts'] + ' lifts' if report.get('lifts') else '✅ open'
+    if report.get('season_start'):
+        try:
+            d = datetime.strptime(report['season_start'], '%d %b %Y')
+            if d.date() > datetime.now().date():
+                return 'opens ' + d.strftime('%-d %b')
+        except ValueError:
+            pass
+    return 'closed'
 
-                for parent_div in soup.find_all('div', {'class': 'tw-flex tw-justify-start tw-items-center tw-gap-3'}):
-                    s= parent_div.contents[1]['x-bind']
-                    opening_status = s.split("'")[1]
-                    if opening_status == 'Closed':
-                        parent_div2 = parent_div.contents[3].find_all('div')
-                        parent_div3 = parent_div2[1].find_all('span')
-                        s= parent_div3[1].text
-                        opening_status = s.split(" - ")[0]
-            except Exception:
-                pass
+def add_snow(key):
+    """Returns a dict with display values for the snow columns."""
+    result = {'Snow_mountain': '', 'Snow_valley': '', 'Open': '', 'Snow_report': '',
+              'Snow_stale': False, 'Snow_estimate': False, 'Snow_old': False}
+    if type_activity != 'skiing':
+        return result
 
-            if snow_mountain or snow_valley or opening_status:
-                cached = {
-                    'Snow_mountain': snow_mountain,
-                    'Snow_valley': snow_valley,
-                    'Open': opening_status,
-                    'fetched_at': datetime.now().isoformat(),
-                }
-                snow_cache[key] = cached
-                save_snow_cache(snow_cache)
-            elif cached:
-                # bergfex request failed or was rate-limited - fall back to last known values
-                snow_mountain = cached.get('Snow_mountain', '')
-                snow_valley = cached.get('Snow_valley', '')
-                opening_status = cached.get('Open', '')
+    snow_cache = load_snow_cache()
+    cached = snow_cache.get(key)
+    is_fresh = False
+    if cached and 'fetched_at' in cached and cached.get('source') == 'skiresort':
+        fetched_time = datetime.fromisoformat(cached['fetched_at'])
+        is_fresh = (datetime.now() - fetched_time) < timedelta(hours=SNOW_FRESHNESS_HOURS)
 
-        if cached and 'fetched_at' in cached:
-            fetched_time = datetime.fromisoformat(cached['fetched_at'])
-            snow_stale = (datetime.now() - fetched_time) > timedelta(hours=SNOW_STALE_HOURS)
+    if not is_fresh:
+        report = None
+        try:
+            report = fetch_skiresort(key)
+        except Exception as e:
+            print(f'[snow] {key}: skiresort failed: {e}')
+        if report:
+            if report['mountain_cm'] is None:
+                report['model_cm'] = fetch_model_snow_depth(key)
+            report['fetched_at'] = datetime.now().isoformat()
+            snow_cache[key] = report
+            save_snow_cache(snow_cache)
+            cached = report
+        # on failure keep the last known values (cached) and flag them as stale below
 
-    return snow_mountain, snow_valley, opening_status, snow_stale
+    if not cached or cached.get('source') != 'skiresort':
+        return result
+
+    if cached.get('mountain_cm') is not None:
+        result['Snow_mountain'] = f"{cached['mountain_cm']} cm"
+    elif cached.get('model_cm') is not None:
+        result['Snow_mountain'] = f"~{cached['model_cm']} cm"
+        result['Snow_estimate'] = True
+    if cached.get('base_cm') is not None:
+        result['Snow_valley'] = f"{cached['base_cm']} cm"
+    result['Open'] = format_open(cached)
+
+    if cached.get('updated'):
+        try:
+            d = datetime.strptime(cached['updated'], '%d %b %Y')
+            result['Snow_report'] = d.strftime('%-d %b')
+            result['Snow_old'] = (datetime.now() - d) > timedelta(days=SNOW_REPORT_OLD_DAYS)
+        except ValueError:
+            result['Snow_report'] = cached['updated']
+
+    fetched_time = datetime.fromisoformat(cached['fetched_at'])
+    result['Snow_stale'] = (datetime.now() - fetched_time) > timedelta(hours=SNOW_STALE_HOURS)
+    return result
 
 def createTable():
     days_of_the_week = days_of_week_from_today()
@@ -285,7 +359,7 @@ def createTable():
     if type_activity=='climbing':
         table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Distance','Yr.no','Windy','plezanje.net','theCrag','Maps','Waze']
     elif type_activity=='skiing':
-        table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Snow_mountain','Snow_valley','Open','Distance','Yr.no','Windy','Bergfex','Maps','Waze']
+        table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Snow_mountain','Snow_valley','Open','Snow_report','Distance','Yr.no','Windy','Snow report','Maps','Waze']
     
     
     
@@ -329,10 +403,10 @@ def createTable():
                 new_link.attrs['href'] = 'https://plezanje.net/plezalisce/'+key.replace('(','').replace(')','').replace(' ','-').lower()
                 new_link.attrs['target'] = '_blank'
                 new_tag.append(new_link)
-            elif col == 'Bergfex':
+            elif col == 'Snow report':
                 new_link=soup.new_tag('a')
-                new_link.string='bergfex'
-                new_link.attrs['href'] = 'https://www.bergfex.com/'+key.replace('(','').replace(')','').replace(' ','').lower()
+                new_link.string='skiresort'
+                new_link.attrs['href'] = skiresort_url(key) or ''
                 new_link.attrs['target'] = '_blank'
                 new_tag.append(new_link)
             elif col == 'theCrag':
@@ -385,10 +459,16 @@ def createTable():
                 if col+'_sort' in weather[key].keys():
                     new_tag.attrs['data-sort'] = str(weather[key][col+'_sort'])
                 new_tag.append(str(weather[key][col]))
+                if col == 'Snow_mountain' and weather[key].get('Snow_estimate'):
+                    new_tag.attrs['style'] = 'color:#888;font-style:italic'
+                    new_tag.attrs['title'] = 'Model estimate (Open-Meteo) - the resort is not reporting a snow depth'
+                if col in ('Snow_mountain', 'Snow_valley', 'Snow_report') and weather[key].get('Snow_old'):
+                    new_tag.attrs['style'] = 'color:#888'
+                    new_tag.attrs['title'] = 'Resort report is more than '+str(SNOW_REPORT_OLD_DAYS)+' days old'
                 if col in ('Snow_mountain', 'Snow_valley') and weather[key].get('Snow_stale'):
                     stale_icon = soup.new_tag('span')
                     stale_icon.attrs['class'] = 'stale-icon'
-                    stale_icon.attrs['title'] = 'Snow data may be outdated - bergfex request has been failing for over '+str(SNOW_STALE_HOURS)+'h'
+                    stale_icon.attrs['title'] = 'Snow data may be outdated - the skiresort.com request has been failing for over '+str(SNOW_STALE_HOURS)+'h'
                     stale_icon.string = SNOW_STALE_ICON
                     new_tag.append(stale_icon)
             last_line.append(new_tag)
@@ -400,16 +480,15 @@ def create_weather():
     for key in locations.keys():
         location = locations[key]['location']
         min_temp, max_temp, rain, min_wind, max_wind = add_weather(location, start_date, end_date)
-        snow_mountain, snow_valley, open, snow_stale = add_snow(key)
+        snow = add_snow(key)
         weather[key]={}
         weather[key]['Temp']=str(int(min_temp))+"/"+str(int(max_temp))+"°"
         weather[key]['Temp_sort']=(min_temp+max_temp)/2
         weather[key]['Rain']=str(int(rain))+" mm"
         weather[key]['Rain_sort']=rain
-        weather[key]['Snow_mountain']=snow_mountain
-        weather[key]['Snow_valley']=snow_valley
-        weather[key]['Open']=open
-        weather[key]['Snow_stale']=snow_stale
+        weather[key].update(snow)
+        if snow['Snow_mountain']:
+            weather[key]['Snow_mountain_sort']=int(re.sub(r'[^0-9]','',snow['Snow_mountain']) or 0)
         if rain>6:
             weather[key]['Rain_style']='bold'
         weather[key]['Wind']=str(int(min_wind))+"-"+str(int(max_wind))+" m/s"
@@ -868,7 +947,7 @@ for type_activity in ['skiing', 'climbing']:
     if type_activity == 'skiing':
         stale_legend = soup.new_tag('p')
         stale_legend.attrs['class'] = 'stale-legend'
-        stale_legend.string = SNOW_STALE_ICON+' snow data may be outdated - bergfex request has been failing for over '+str(SNOW_STALE_HOURS)+'h'
+        stale_legend.string = 'Snow data from skiresort.com. Grey italic ~ = model estimate (Open-Meteo) when the resort reports no depth. '+SNOW_STALE_ICON+' = skiresort.com fetch failing for over '+str(SNOW_STALE_HOURS)+'h'
         soup.body.append(stale_legend)
 
     HTML_footer = """   <br> <div class="container">
