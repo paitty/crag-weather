@@ -191,7 +191,7 @@ SNOW_CACHE_FILE = 'skiing-snow.json'
 SNOW_FRESHNESS_HOURS = 20
 SNOW_STALE_HOURS = 30
 SNOW_STALE_ICON = '⚠️'
-DEFAULT_RATING = 3
+DEFAULT_RATING = 0
 
 def load_snow_cache():
     try:
