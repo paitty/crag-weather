@@ -194,7 +194,7 @@ SNOW_STALE_HOURS = 30
 SNOW_STALE_ICON = '⚠️'
 SNOW_REPORT_OLD_DAYS = 2
 SKIRESORT_URL = 'https://www.skiresort.com/en/ski-resort/{}/snow-report/'
-DEFAULT_RATING = 3
+DEFAULT_RATING = 0
 
 def load_snow_cache():
     try:
