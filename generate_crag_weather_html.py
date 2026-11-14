@@ -194,6 +194,7 @@ SNOW_STALE_HOURS = 30
 SNOW_STALE_ICON = '⚠️'
 SNOW_REPORT_OLD_DAYS = 2
 SKIRESORT_URL = 'https://www.skiresort.com/en/ski-resort/{}/snow-report/'
+DEFAULT_RATING = 3
 
 def load_snow_cache():
     try:
@@ -357,9 +358,9 @@ def createTable():
     display_table = soup.html.body.find_all("table")[-1]
 
     if type_activity=='climbing':
-        table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Distance','Yr.no','Windy','plezanje.net','theCrag','Maps','Waze']
+        table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Distance','Yr.no','Windy','plezanje.net','theCrag','Maps','Waze','Rating']
     elif type_activity=='skiing':
-        table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Snow_mountain','Snow_valley','Open','Snow_report','Distance','Yr.no','Windy','Snow report','Maps','Waze']
+        table_names=['Crag']+days_of_the_week+['Temp','Rain','Wind','Snow_mountain','Snow_valley','Open','Snow_report','Distance','Yr.no','Windy','Snow report','Maps','Waze','Rating']
     
     
     
@@ -375,6 +376,7 @@ def createTable():
         new_line = soup.new_tag("tr")
         if 'type' in locations[key].keys():
             new_line.attrs['type']=locations[key]['type']
+        new_line.attrs['data-score'] = str(weather[key]['Score'])
         display_table.append(new_line)
         last_line=display_table.find_all("tr")[-1]
         destination = 'location'
@@ -385,6 +387,23 @@ def createTable():
             if col == 'Crag':
                 flag = get_flag(key)
                 new_tag.string=(flag+' '+key) if flag else key
+            elif col == 'Rating':
+                new_tag.attrs['class'] = 'rating-cell'
+                new_tag.attrs['data-sort'] = str(DEFAULT_RATING)
+                star_widget = soup.new_tag('div')
+                star_widget.attrs['class'] = 'star-rating'
+                star_widget.attrs['data-spot'] = key
+                for star_value in range(1, 6):
+                    star_span = soup.new_tag('span')
+                    star_span.attrs['data-value'] = str(star_value)
+                    if star_value <= DEFAULT_RATING:
+                        star_span.attrs['class'] = 'star filled'
+                        star_span.string = '★'
+                    else:
+                        star_span.attrs['class'] = 'star'
+                        star_span.string = '☆'
+                    star_widget.append(star_span)
+                new_tag.append(star_widget)
             elif col == 'Yr.no':
                 new_link=soup.new_tag('a')
                 new_link.string='Yr.no'
@@ -849,6 +868,23 @@ for type_activity in ['skiing', 'climbing']:
             .myTable th:first-child {{ z-index: 3; }}
             .myTable tr:nth-child(odd) td:first-child {{ background-color: #f7f7f7; }}
             .myTable tr:nth-child(2n) td:first-child {{ background-color: #e9e9e9; }}
+            td.rating-cell {{
+                padding-left: 6px;
+                padding-right: 6px;
+            }}
+            .star-rating {{
+                display: inline-flex;
+                user-select: none;
+            }}
+            .star-rating .star {{
+                cursor: pointer;
+                font-size: 13px;
+                line-height: 1;
+                color: #bbb;
+            }}
+            .star-rating .star.filled {{
+                color: #f5a623;
+            }}
         </style>
         <title>{type_activity.capitalize()} Weather</title>
         <script>
@@ -918,6 +954,80 @@ for type_activity in ['skiing', 'climbing']:
                 newIndicator.textContent = currentSortAsc ? ' ▲' : ' ▼';
                 headerRow.cells[colIndex].appendChild(newIndicator);
             }}
+
+            const RATING_NAMESPACE = '{type_activity}';
+            const DEFAULT_RATING = {DEFAULT_RATING};
+
+            function ratingStorageKey(spot) {{
+                return 'crag-weather-rating:' + RATING_NAMESPACE + ':' + spot;
+            }}
+
+            function getRating(spot) {{
+                let stored = localStorage.getItem(ratingStorageKey(spot));
+                return stored === null ? DEFAULT_RATING : parseInt(stored, 10);
+            }}
+
+            function setRating(spot, value) {{
+                localStorage.setItem(ratingStorageKey(spot), String(value));
+            }}
+
+            function renderStars(widget, value) {{
+                widget.querySelectorAll('.star').forEach(function(star) {{
+                    let starValue = parseInt(star.getAttribute('data-value'), 10);
+                    let filled = starValue <= value;
+                    star.textContent = filled ? '★' : '☆';
+                    star.classList.toggle('filled', filled);
+                }});
+                widget.closest('td').setAttribute('data-sort', value);
+            }}
+
+            function initRatings() {{
+                document.querySelectorAll('.star-rating').forEach(function(widget) {{
+                    let spot = widget.getAttribute('data-spot');
+                    renderStars(widget, getRating(spot));
+                    widget.querySelectorAll('.star').forEach(function(star) {{
+                        star.addEventListener('click', function() {{
+                            let newValue = parseInt(star.getAttribute('data-value'), 10);
+                            if (newValue === getRating(spot)) {{ newValue = 0; }}
+                            setRating(spot, newValue);
+                            renderStars(widget, newValue);
+                            recomputeRanking();
+                        }});
+                    }});
+                }});
+                recomputeRanking();
+            }}
+
+            // Each star shaves this many points off a spot's weather score
+            // (lower score is better) - comparable to the wind/heat terms in
+            // the formula, enough to meaningfully move a favorite up without
+            // overriding genuinely bad weather.
+            const RATING_SCORE_WEIGHT = 20;
+
+            function combinedScore(row) {{
+                let baseScore = parseFloat(row.getAttribute('data-score'));
+                let widget = row.querySelector('.star-rating');
+                let rating = widget ? getRating(widget.getAttribute('data-spot')) : 0;
+                return baseScore - RATING_SCORE_WEIGHT * rating;
+            }}
+
+            function recomputeRanking() {{
+                let table = document.getElementById('myTable2');
+                let tbody = table.tBodies[0] || table;
+                let rows = Array.from(tbody.rows).slice(1);
+                rows.sort(function(rowA, rowB) {{
+                    return combinedScore(rowA) - combinedScore(rowB);
+                }});
+                rows.forEach(row => tbody.appendChild(row));
+
+                let topPick = document.querySelector('.top-pick');
+                let topWidget = rows.length > 0 ? rows[0].querySelector('.star-rating') : null;
+                if (topPick && topWidget) {{
+                    topPick.textContent = topWidget.getAttribute('data-spot');
+                }}
+            }}
+
+            document.addEventListener('DOMContentLoaded', initRatings);
         </script>
     </head>
     <body>
@@ -930,7 +1040,7 @@ for type_activity in ['skiing', 'climbing']:
                 <br>
                 Based on yr.no API
                 <br>
-                Score = 0.5 &times; distance (min) + 10 &times; rain (mm) + 20 &times; avg wind (m/s) + 5 &times; max wind (m/s) + 15 &times; heat above 25&deg; &mdash; lower is better
+                Score = 0.5 &times; distance (min) + 10 &times; rain (mm) + 20 &times; avg wind (m/s) + 5 &times; max wind (m/s) + 15 &times; heat above 25&deg; &minus; 20 &times; your rating &mdash; lower is better
             </p>
             {multipitch_filter_html}
             <br>
