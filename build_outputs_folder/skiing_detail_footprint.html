@@ -3,13 +3,12 @@
 <head>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
@@ -17,10 +16,11 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_85014cde13de2187f66251de674b3679 {
+                #map_81a17e595f29df9cdc7aa0b84f87329f {
                     position: relative;
-                    width: 100.0%;
-                    height: 100.0%;
+                    width: 100.0vw;
+                    height: 100.0vh;
+
                     left: 0.0%;
                     top: 0.0%;
                 }
@@ -35,14 +35,218 @@
             }
             </style>
 
-            <style>#map {
-                position:absolute;
-                top:0;
-                bottom:0;
-                right:0;
-                left:0;
-                }
-            </style>
+            <style>/*
+ * Glyphicons Halflings -- the icon font used by folium's default Awesome Markers
+ * (Icon(prefix="glyphicon")). Extracted from Bootstrap 3's glyphicon rules only.
+ *
+ * folium previously loaded netdna's bootstrap-glyphicons.css, which despite its
+ * name ships a full Bootstrap-3 base stylesheet (normalize reset + global `body`
+ * rules) that leaked onto the host page (GH-1820). This file provides just the
+ * @font-face and .glyphicon/.glyphicon-* rules needed for the markers, with no
+ * page-wide side effects. Font files are served from jsDelivr.
+ */
+@font-face{font-family:'Glyphicons Halflings';src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot');src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.woff') format('woff'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');}.glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:normal;line-height:1;-webkit-font-smoothing:antialiased;}
+.glyphicon-asterisk:before{content:"\2a";}
+.glyphicon-plus:before{content:"\2b";}
+.glyphicon-euro:before{content:"\20ac";}
+.glyphicon-minus:before{content:"\2212";}
+.glyphicon-cloud:before{content:"\2601";}
+.glyphicon-envelope:before{content:"\2709";}
+.glyphicon-pencil:before{content:"\270f";}
+.glyphicon-glass:before{content:"\e001";}
+.glyphicon-music:before{content:"\e002";}
+.glyphicon-search:before{content:"\e003";}
+.glyphicon-heart:before{content:"\e005";}
+.glyphicon-star:before{content:"\e006";}
+.glyphicon-star-empty:before{content:"\e007";}
+.glyphicon-user:before{content:"\e008";}
+.glyphicon-film:before{content:"\e009";}
+.glyphicon-th-large:before{content:"\e010";}
+.glyphicon-th:before{content:"\e011";}
+.glyphicon-th-list:before{content:"\e012";}
+.glyphicon-ok:before{content:"\e013";}
+.glyphicon-remove:before{content:"\e014";}
+.glyphicon-zoom-in:before{content:"\e015";}
+.glyphicon-zoom-out:before{content:"\e016";}
+.glyphicon-off:before{content:"\e017";}
+.glyphicon-signal:before{content:"\e018";}
+.glyphicon-cog:before{content:"\e019";}
+.glyphicon-trash:before{content:"\e020";}
+.glyphicon-home:before{content:"\e021";}
+.glyphicon-file:before{content:"\e022";}
+.glyphicon-time:before{content:"\e023";}
+.glyphicon-road:before{content:"\e024";}
+.glyphicon-download-alt:before{content:"\e025";}
+.glyphicon-download:before{content:"\e026";}
+.glyphicon-upload:before{content:"\e027";}
+.glyphicon-inbox:before{content:"\e028";}
+.glyphicon-play-circle:before{content:"\e029";}
+.glyphicon-repeat:before{content:"\e030";}
+.glyphicon-refresh:before{content:"\e031";}
+.glyphicon-list-alt:before{content:"\e032";}
+.glyphicon-flag:before{content:"\e034";}
+.glyphicon-headphones:before{content:"\e035";}
+.glyphicon-volume-off:before{content:"\e036";}
+.glyphicon-volume-down:before{content:"\e037";}
+.glyphicon-volume-up:before{content:"\e038";}
+.glyphicon-qrcode:before{content:"\e039";}
+.glyphicon-barcode:before{content:"\e040";}
+.glyphicon-tag:before{content:"\e041";}
+.glyphicon-tags:before{content:"\e042";}
+.glyphicon-book:before{content:"\e043";}
+.glyphicon-print:before{content:"\e045";}
+.glyphicon-font:before{content:"\e047";}
+.glyphicon-bold:before{content:"\e048";}
+.glyphicon-italic:before{content:"\e049";}
+.glyphicon-text-height:before{content:"\e050";}
+.glyphicon-text-width:before{content:"\e051";}
+.glyphicon-align-left:before{content:"\e052";}
+.glyphicon-align-center:before{content:"\e053";}
+.glyphicon-align-right:before{content:"\e054";}
+.glyphicon-align-justify:before{content:"\e055";}
+.glyphicon-list:before{content:"\e056";}
+.glyphicon-indent-left:before{content:"\e057";}
+.glyphicon-indent-right:before{content:"\e058";}
+.glyphicon-facetime-video:before{content:"\e059";}
+.glyphicon-picture:before{content:"\e060";}
+.glyphicon-map-marker:before{content:"\e062";}
+.glyphicon-adjust:before{content:"\e063";}
+.glyphicon-tint:before{content:"\e064";}
+.glyphicon-edit:before{content:"\e065";}
+.glyphicon-share:before{content:"\e066";}
+.glyphicon-check:before{content:"\e067";}
+.glyphicon-move:before{content:"\e068";}
+.glyphicon-step-backward:before{content:"\e069";}
+.glyphicon-fast-backward:before{content:"\e070";}
+.glyphicon-backward:before{content:"\e071";}
+.glyphicon-play:before{content:"\e072";}
+.glyphicon-pause:before{content:"\e073";}
+.glyphicon-stop:before{content:"\e074";}
+.glyphicon-forward:before{content:"\e075";}
+.glyphicon-fast-forward:before{content:"\e076";}
+.glyphicon-step-forward:before{content:"\e077";}
+.glyphicon-eject:before{content:"\e078";}
+.glyphicon-chevron-left:before{content:"\e079";}
+.glyphicon-chevron-right:before{content:"\e080";}
+.glyphicon-plus-sign:before{content:"\e081";}
+.glyphicon-minus-sign:before{content:"\e082";}
+.glyphicon-remove-sign:before{content:"\e083";}
+.glyphicon-ok-sign:before{content:"\e084";}
+.glyphicon-question-sign:before{content:"\e085";}
+.glyphicon-info-sign:before{content:"\e086";}
+.glyphicon-screenshot:before{content:"\e087";}
+.glyphicon-remove-circle:before{content:"\e088";}
+.glyphicon-ok-circle:before{content:"\e089";}
+.glyphicon-ban-circle:before{content:"\e090";}
+.glyphicon-arrow-left:before{content:"\e091";}
+.glyphicon-arrow-right:before{content:"\e092";}
+.glyphicon-arrow-up:before{content:"\e093";}
+.glyphicon-arrow-down:before{content:"\e094";}
+.glyphicon-share-alt:before{content:"\e095";}
+.glyphicon-resize-full:before{content:"\e096";}
+.glyphicon-resize-small:before{content:"\e097";}
+.glyphicon-exclamation-sign:before{content:"\e101";}
+.glyphicon-gift:before{content:"\e102";}
+.glyphicon-leaf:before{content:"\e103";}
+.glyphicon-eye-open:before{content:"\e105";}
+.glyphicon-eye-close:before{content:"\e106";}
+.glyphicon-warning-sign:before{content:"\e107";}
+.glyphicon-plane:before{content:"\e108";}
+.glyphicon-random:before{content:"\e110";}
+.glyphicon-comment:before{content:"\e111";}
+.glyphicon-magnet:before{content:"\e112";}
+.glyphicon-chevron-up:before{content:"\e113";}
+.glyphicon-chevron-down:before{content:"\e114";}
+.glyphicon-retweet:before{content:"\e115";}
+.glyphicon-shopping-cart:before{content:"\e116";}
+.glyphicon-folder-close:before{content:"\e117";}
+.glyphicon-folder-open:before{content:"\e118";}
+.glyphicon-resize-vertical:before{content:"\e119";}
+.glyphicon-resize-horizontal:before{content:"\e120";}
+.glyphicon-hdd:before{content:"\e121";}
+.glyphicon-bullhorn:before{content:"\e122";}
+.glyphicon-certificate:before{content:"\e124";}
+.glyphicon-thumbs-up:before{content:"\e125";}
+.glyphicon-thumbs-down:before{content:"\e126";}
+.glyphicon-hand-right:before{content:"\e127";}
+.glyphicon-hand-left:before{content:"\e128";}
+.glyphicon-hand-up:before{content:"\e129";}
+.glyphicon-hand-down:before{content:"\e130";}
+.glyphicon-circle-arrow-right:before{content:"\e131";}
+.glyphicon-circle-arrow-left:before{content:"\e132";}
+.glyphicon-circle-arrow-up:before{content:"\e133";}
+.glyphicon-circle-arrow-down:before{content:"\e134";}
+.glyphicon-globe:before{content:"\e135";}
+.glyphicon-tasks:before{content:"\e137";}
+.glyphicon-filter:before{content:"\e138";}
+.glyphicon-fullscreen:before{content:"\e140";}
+.glyphicon-dashboard:before{content:"\e141";}
+.glyphicon-heart-empty:before{content:"\e143";}
+.glyphicon-link:before{content:"\e144";}
+.glyphicon-phone:before{content:"\e145";}
+.glyphicon-usd:before{content:"\e148";}
+.glyphicon-gbp:before{content:"\e149";}
+.glyphicon-sort:before{content:"\e150";}
+.glyphicon-sort-by-alphabet:before{content:"\e151";}
+.glyphicon-sort-by-alphabet-alt:before{content:"\e152";}
+.glyphicon-sort-by-order:before{content:"\e153";}
+.glyphicon-sort-by-order-alt:before{content:"\e154";}
+.glyphicon-sort-by-attributes:before{content:"\e155";}
+.glyphicon-sort-by-attributes-alt:before{content:"\e156";}
+.glyphicon-unchecked:before{content:"\e157";}
+.glyphicon-expand:before{content:"\e158";}
+.glyphicon-collapse-down:before{content:"\e159";}
+.glyphicon-collapse-up:before{content:"\e160";}
+.glyphicon-log-in:before{content:"\e161";}
+.glyphicon-flash:before{content:"\e162";}
+.glyphicon-log-out:before{content:"\e163";}
+.glyphicon-new-window:before{content:"\e164";}
+.glyphicon-record:before{content:"\e165";}
+.glyphicon-save:before{content:"\e166";}
+.glyphicon-open:before{content:"\e167";}
+.glyphicon-saved:before{content:"\e168";}
+.glyphicon-import:before{content:"\e169";}
+.glyphicon-export:before{content:"\e170";}
+.glyphicon-send:before{content:"\e171";}
+.glyphicon-floppy-disk:before{content:"\e172";}
+.glyphicon-floppy-saved:before{content:"\e173";}
+.glyphicon-floppy-remove:before{content:"\e174";}
+.glyphicon-floppy-save:before{content:"\e175";}
+.glyphicon-floppy-open:before{content:"\e176";}
+.glyphicon-credit-card:before{content:"\e177";}
+.glyphicon-transfer:before{content:"\e178";}
+.glyphicon-cutlery:before{content:"\e179";}
+.glyphicon-header:before{content:"\e180";}
+.glyphicon-compressed:before{content:"\e181";}
+.glyphicon-earphone:before{content:"\e182";}
+.glyphicon-phone-alt:before{content:"\e183";}
+.glyphicon-tower:before{content:"\e184";}
+.glyphicon-stats:before{content:"\e185";}
+.glyphicon-sd-video:before{content:"\e186";}
+.glyphicon-hd-video:before{content:"\e187";}
+.glyphicon-subtitles:before{content:"\e188";}
+.glyphicon-sound-stereo:before{content:"\e189";}
+.glyphicon-sound-dolby:before{content:"\e190";}
+.glyphicon-sound-5-1:before{content:"\e191";}
+.glyphicon-sound-6-1:before{content:"\e192";}
+.glyphicon-sound-7-1:before{content:"\e193";}
+.glyphicon-copyright-mark:before{content:"\e194";}
+.glyphicon-registration-mark:before{content:"\e195";}
+.glyphicon-cloud-download:before{content:"\e197";}
+.glyphicon-cloud-upload:before{content:"\e198";}
+.glyphicon-tree-conifer:before{content:"\e199";}
+.glyphicon-tree-deciduous:before{content:"\e200";}
+.glyphicon-briefcase:before{content:"\1f4bc";}
+.glyphicon-calendar:before{content:"\1f4c5";}
+.glyphicon-pushpin:before{content:"\1f4cc";}
+.glyphicon-paperclip:before{content:"\1f4ce";}
+.glyphicon-camera:before{content:"\1f4f7";}
+.glyphicon-lock:before{content:"\1f512";}
+.glyphicon-bell:before{content:"\1f514";}
+.glyphicon-bookmark:before{content:"\1f516";}
+.glyphicon-fire:before{content:"\1f525";}
+.glyphicon-wrench:before{content:"\1f527";}
+</style>
 
             <script>
                 L_NO_TOUCH = false;
@@ -56,14 +260,14 @@
 <body>
     
     
-            <div class="folium-map" id="map_85014cde13de2187f66251de674b3679" ></div>
+            <div class="folium-map" id="map_81a17e595f29df9cdc7aa0b84f87329f" ></div>
         
 </body>
 <script>
     
     
-            var map_85014cde13de2187f66251de674b3679 = L.map(
-                "map_85014cde13de2187f66251de674b3679",
+            var map_81a17e595f29df9cdc7aa0b84f87329f = L.map(
+                "map_81a17e595f29df9cdc7aa0b84f87329f",
                 {
                     center: [46.53811886433177, 14.907210304159063],
                     crs: L.CRS.EPSG3857,
@@ -80,7 +284,7 @@
 
         
     
-            var tile_layer_bc12b756a6669e703dd5a088e55646f7 = L.tileLayer(
+            var tile_layer_4a09b92c3c869842fc2b677ed5a958f3 = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -97,361 +301,433 @@
             );
         
     
-            tile_layer_bc12b756a6669e703dd5a088e55646f7.addTo(map_85014cde13de2187f66251de674b3679);
+            tile_layer_4a09b92c3c869842fc2b677ed5a958f3.addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var marker_1c38798979c2db5e3d790142c0bda2a2 = L.marker(
+            var marker_35cdce86a5068b072445bd3b938ca2c6 = L.marker(
                 [45.308, 14.86],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_f879bc41adc96234da8aed639dc143af = new L.BeautifyIcon.icon(
+            var beautify_icon_f2b6c602fbac76d2c2e32cdf102e1d79 = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_1c38798979c2db5e3d790142c0bda2a2.setIcon(beautify_icon_f879bc41adc96234da8aed639dc143af);
+            marker_35cdce86a5068b072445bd3b938ca2c6.setIcon(beautify_icon_f2b6c602fbac76d2c2e32cdf102e1d79);
         
     
-        var popup_e5e0914cf5b11febd6f69553c0940c49 = L.popup({
+        var popup_77740476796a4aa34b4195e2f3a3ef4c = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_9cf859500fc837dfe108fb733a79cd28 = $(`<div id="html_9cf859500fc837dfe108fb733a79cd28" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/45.308, 14.860" target=”_blank”>Celimbasa</a></div>`)[0];
-                popup_e5e0914cf5b11febd6f69553c0940c49.setContent(html_9cf859500fc837dfe108fb733a79cd28);
+                var html_84d06886ff3568d1069763e868744d9f = $(`<div id="html_84d06886ff3568d1069763e868744d9f" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/45.308, 14.860" target=”_blank”>Celimbasa</a></div>`)[0];
+                popup_77740476796a4aa34b4195e2f3a3ef4c.setContent(html_84d06886ff3568d1069763e868744d9f);
             
         
 
-        marker_1c38798979c2db5e3d790142c0bda2a2.bindPopup(popup_e5e0914cf5b11febd6f69553c0940c49)
+        marker_35cdce86a5068b072445bd3b938ca2c6.bindPopup(popup_77740476796a4aa34b4195e2f3a3ef4c)
         ;
 
         
     
     
-                marker_1c38798979c2db5e3d790142c0bda2a2.setIcon(beautify_icon_f879bc41adc96234da8aed639dc143af);
+                {
+                    const element = marker_35cdce86a5068b072445bd3b938ca2c6.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_35cdce86a5068b072445bd3b938ca2c6.setIcon(beautify_icon_f2b6c602fbac76d2c2e32cdf102e1d79);
             
     
-            var marker_2f134859633b3156bf07ddbc66520cfb = L.marker(
+            var marker_113b6cf3b81aab7a02f8f853937c3a21 = L.marker(
                 [47.252, 13.547],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_0cf256f6fd797412aeb6c2bbe4ac2116 = new L.BeautifyIcon.icon(
+            var beautify_icon_c60d03aa1eca271c755157e1b6625376 = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_2f134859633b3156bf07ddbc66520cfb.setIcon(beautify_icon_0cf256f6fd797412aeb6c2bbe4ac2116);
+            marker_113b6cf3b81aab7a02f8f853937c3a21.setIcon(beautify_icon_c60d03aa1eca271c755157e1b6625376);
         
     
-        var popup_04369c65252a8cc5006a15fb628d3f8b = L.popup({
+        var popup_96bafbc1c55193ba93f83164dfa0734e = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_b5fd541fb587420d5bf557e3341ea521 = $(`<div id="html_b5fd541fb587420d5bf557e3341ea521" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/47.252, 13.547" target=”_blank”>Obertauern</a></div>`)[0];
-                popup_04369c65252a8cc5006a15fb628d3f8b.setContent(html_b5fd541fb587420d5bf557e3341ea521);
+                var html_b91a87661d0137e076015150ff6465e0 = $(`<div id="html_b91a87661d0137e076015150ff6465e0" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/47.252, 13.547" target=”_blank”>Obertauern</a></div>`)[0];
+                popup_96bafbc1c55193ba93f83164dfa0734e.setContent(html_b91a87661d0137e076015150ff6465e0);
             
         
 
-        marker_2f134859633b3156bf07ddbc66520cfb.bindPopup(popup_04369c65252a8cc5006a15fb628d3f8b)
+        marker_113b6cf3b81aab7a02f8f853937c3a21.bindPopup(popup_96bafbc1c55193ba93f83164dfa0734e)
         ;
 
         
     
     
-                marker_2f134859633b3156bf07ddbc66520cfb.setIcon(beautify_icon_0cf256f6fd797412aeb6c2bbe4ac2116);
+                {
+                    const element = marker_113b6cf3b81aab7a02f8f853937c3a21.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_113b6cf3b81aab7a02f8f853937c3a21.setIcon(beautify_icon_c60d03aa1eca271c755157e1b6625376);
             
     
-            var marker_0c6c092c5353efacadc4ecf0b9e5608e = L.marker(
+            var marker_c89f62d459e33a37d21f87b8f1f07e5f = L.marker(
                 [46.428, 14.233],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_0775287b281104970dd3fc167d3a6a69 = new L.BeautifyIcon.icon(
+            var beautify_icon_f89b4660110b7fc1ccbee83ffc823bf4 = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_0c6c092c5353efacadc4ecf0b9e5608e.setIcon(beautify_icon_0775287b281104970dd3fc167d3a6a69);
+            marker_c89f62d459e33a37d21f87b8f1f07e5f.setIcon(beautify_icon_f89b4660110b7fc1ccbee83ffc823bf4);
         
     
-        var popup_9c15ffb80c3a391124cccc1ba6e20145 = L.popup({
+        var popup_f205495f2a64fa3a96dcc54cd48b90eb = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_6b819f13738a2212dfe79c2a8973552f = $(`<div id="html_6b819f13738a2212dfe79c2a8973552f" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.428, 14.233" target=”_blank”>Zelenica</a></div>`)[0];
-                popup_9c15ffb80c3a391124cccc1ba6e20145.setContent(html_6b819f13738a2212dfe79c2a8973552f);
+                var html_f22d6e2c531af6c2a712241887c4db00 = $(`<div id="html_f22d6e2c531af6c2a712241887c4db00" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.428, 14.233" target=”_blank”>Zelenica</a></div>`)[0];
+                popup_f205495f2a64fa3a96dcc54cd48b90eb.setContent(html_f22d6e2c531af6c2a712241887c4db00);
             
         
 
-        marker_0c6c092c5353efacadc4ecf0b9e5608e.bindPopup(popup_9c15ffb80c3a391124cccc1ba6e20145)
+        marker_c89f62d459e33a37d21f87b8f1f07e5f.bindPopup(popup_f205495f2a64fa3a96dcc54cd48b90eb)
         ;
 
         
     
     
-                marker_0c6c092c5353efacadc4ecf0b9e5608e.setIcon(beautify_icon_0775287b281104970dd3fc167d3a6a69);
+                {
+                    const element = marker_c89f62d459e33a37d21f87b8f1f07e5f.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_c89f62d459e33a37d21f87b8f1f07e5f.setIcon(beautify_icon_f89b4660110b7fc1ccbee83ffc823bf4);
             
     
-            var marker_2400a11ac05af9f0dd104b011af32242 = L.marker(
+            var marker_5ae94330580fb4f67fd14d554cb7a81b = L.marker(
                 [46.566, 13.277],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_39a158ba874e4e19a66eba292d7130a1 = new L.BeautifyIcon.icon(
+            var beautify_icon_cfe3276c21c22e972cc787169fb9eadf = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_2400a11ac05af9f0dd104b011af32242.setIcon(beautify_icon_39a158ba874e4e19a66eba292d7130a1);
+            marker_5ae94330580fb4f67fd14d554cb7a81b.setIcon(beautify_icon_cfe3276c21c22e972cc787169fb9eadf);
         
     
-        var popup_db497f5f884b13ac75b6a3e9e01baf96 = L.popup({
+        var popup_c58dbd7979e3d714d39bad254ac499b4 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_dfabd2ad378ce4c9d923ef0e7c4b874d = $(`<div id="html_dfabd2ad378ce4c9d923ef0e7c4b874d" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.566, 13.277" target=”_blank”>Nassfeld</a></div>`)[0];
-                popup_db497f5f884b13ac75b6a3e9e01baf96.setContent(html_dfabd2ad378ce4c9d923ef0e7c4b874d);
+                var html_fb242adf105cf6f3f8500e6dc21eed40 = $(`<div id="html_fb242adf105cf6f3f8500e6dc21eed40" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.566, 13.277" target=”_blank”>Nassfeld</a></div>`)[0];
+                popup_c58dbd7979e3d714d39bad254ac499b4.setContent(html_fb242adf105cf6f3f8500e6dc21eed40);
             
         
 
-        marker_2400a11ac05af9f0dd104b011af32242.bindPopup(popup_db497f5f884b13ac75b6a3e9e01baf96)
+        marker_5ae94330580fb4f67fd14d554cb7a81b.bindPopup(popup_c58dbd7979e3d714d39bad254ac499b4)
         ;
 
         
     
     
-                marker_2400a11ac05af9f0dd104b011af32242.setIcon(beautify_icon_39a158ba874e4e19a66eba292d7130a1);
+                {
+                    const element = marker_5ae94330580fb4f67fd14d554cb7a81b.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_5ae94330580fb4f67fd14d554cb7a81b.setIcon(beautify_icon_cfe3276c21c22e972cc787169fb9eadf);
             
     
-            var marker_d8e2823ab69c87026fa5ff8b8436bbad = L.marker(
+            var marker_88fe806a1acc897fd09c31c7851b7761 = L.marker(
                 [46.533, 15.599],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_528c9916df77ae197b4a2370f89c709d = new L.BeautifyIcon.icon(
+            var beautify_icon_3253d4e4553c1f8ae6dfbbcec9845727 = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_d8e2823ab69c87026fa5ff8b8436bbad.setIcon(beautify_icon_528c9916df77ae197b4a2370f89c709d);
+            marker_88fe806a1acc897fd09c31c7851b7761.setIcon(beautify_icon_3253d4e4553c1f8ae6dfbbcec9845727);
         
     
-        var popup_428ee53fe903b617ec8456e83bca66e6 = L.popup({
+        var popup_3456385905b11732b424afdf4dc83abf = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_cc023e79032f0d025ffe982c5fe27f24 = $(`<div id="html_cc023e79032f0d025ffe982c5fe27f24" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.533, 15.599" target=”_blank”>Mariborsko-Pohorje</a></div>`)[0];
-                popup_428ee53fe903b617ec8456e83bca66e6.setContent(html_cc023e79032f0d025ffe982c5fe27f24);
+                var html_e9fff12db16bf48f092a8126700c23a0 = $(`<div id="html_e9fff12db16bf48f092a8126700c23a0" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.533, 15.599" target=”_blank”>Mariborsko-Pohorje</a></div>`)[0];
+                popup_3456385905b11732b424afdf4dc83abf.setContent(html_e9fff12db16bf48f092a8126700c23a0);
             
         
 
-        marker_d8e2823ab69c87026fa5ff8b8436bbad.bindPopup(popup_428ee53fe903b617ec8456e83bca66e6)
+        marker_88fe806a1acc897fd09c31c7851b7761.bindPopup(popup_3456385905b11732b424afdf4dc83abf)
         ;
 
         
     
     
-                marker_d8e2823ab69c87026fa5ff8b8436bbad.setIcon(beautify_icon_528c9916df77ae197b4a2370f89c709d);
+                {
+                    const element = marker_88fe806a1acc897fd09c31c7851b7761.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_88fe806a1acc897fd09c31c7851b7761.setIcon(beautify_icon_3253d4e4553c1f8ae6dfbbcec9845727);
             
     
-            var marker_b2b95e0b25a1a1071c15c9555aa88e5d = L.marker(
+            var marker_eb1e2d2db45388df5ee149a26e2d7137 = L.marker(
                 [46.746, 12.011],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_6bf076ebe4e4892386c0ffe3a32094d0 = new L.BeautifyIcon.icon(
+            var beautify_icon_a8ea54f35224f6821f7ade6b3a817bf5 = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_b2b95e0b25a1a1071c15c9555aa88e5d.setIcon(beautify_icon_6bf076ebe4e4892386c0ffe3a32094d0);
+            marker_eb1e2d2db45388df5ee149a26e2d7137.setIcon(beautify_icon_a8ea54f35224f6821f7ade6b3a817bf5);
         
     
-        var popup_7f71a0b819d32f8c105871f0aaa5a242 = L.popup({
+        var popup_3bb7f94197568cadc358dfd25349bf2b = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_2aaa4f10fa6709f92bfdef9d517f8372 = $(`<div id="html_2aaa4f10fa6709f92bfdef9d517f8372" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.746, 12.011" target=”_blank”>Kronplatz</a></div>`)[0];
-                popup_7f71a0b819d32f8c105871f0aaa5a242.setContent(html_2aaa4f10fa6709f92bfdef9d517f8372);
+                var html_04831b60353ba3f94239902e9e8a0b1d = $(`<div id="html_04831b60353ba3f94239902e9e8a0b1d" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.746, 12.011" target=”_blank”>Kronplatz</a></div>`)[0];
+                popup_3bb7f94197568cadc358dfd25349bf2b.setContent(html_04831b60353ba3f94239902e9e8a0b1d);
             
         
 
-        marker_b2b95e0b25a1a1071c15c9555aa88e5d.bindPopup(popup_7f71a0b819d32f8c105871f0aaa5a242)
+        marker_eb1e2d2db45388df5ee149a26e2d7137.bindPopup(popup_3bb7f94197568cadc358dfd25349bf2b)
         ;
 
         
     
     
-                marker_b2b95e0b25a1a1071c15c9555aa88e5d.setIcon(beautify_icon_6bf076ebe4e4892386c0ffe3a32094d0);
+                {
+                    const element = marker_eb1e2d2db45388df5ee149a26e2d7137.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_eb1e2d2db45388df5ee149a26e2d7137.setIcon(beautify_icon_a8ea54f35224f6821f7ade6b3a817bf5);
             
     
-            var marker_f91b48786f94d16e93aacbc05cb1b285 = L.marker(
+            var marker_d6930d2b89cf0fabb73f4f59395a86ed = L.marker(
                 [46.85, 10.705],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_d38040adb511f47bdc7a484045c1ec54 = new L.BeautifyIcon.icon(
+            var beautify_icon_9b2858bb2bcc98544962162ac66a3f4f = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_f91b48786f94d16e93aacbc05cb1b285.setIcon(beautify_icon_d38040adb511f47bdc7a484045c1ec54);
+            marker_d6930d2b89cf0fabb73f4f59395a86ed.setIcon(beautify_icon_9b2858bb2bcc98544962162ac66a3f4f);
         
     
-        var popup_c2a3f2506c091a5bdb31c53f575a1132 = L.popup({
+        var popup_23b2d3d34a2b8a61ae5859fd26b93dbd = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_7767e13d60038774f9ecf6ee23e51b2a = $(`<div id="html_7767e13d60038774f9ecf6ee23e51b2a" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.850, 10.705" target=”_blank”>Kaunertal</a></div>`)[0];
-                popup_c2a3f2506c091a5bdb31c53f575a1132.setContent(html_7767e13d60038774f9ecf6ee23e51b2a);
+                var html_2cc2afd7185735f8d5b2b9284e6eaa9a = $(`<div id="html_2cc2afd7185735f8d5b2b9284e6eaa9a" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.850, 10.705" target=”_blank”>Kaunertal</a></div>`)[0];
+                popup_23b2d3d34a2b8a61ae5859fd26b93dbd.setContent(html_2cc2afd7185735f8d5b2b9284e6eaa9a);
             
         
 
-        marker_f91b48786f94d16e93aacbc05cb1b285.bindPopup(popup_c2a3f2506c091a5bdb31c53f575a1132)
+        marker_d6930d2b89cf0fabb73f4f59395a86ed.bindPopup(popup_23b2d3d34a2b8a61ae5859fd26b93dbd)
         ;
 
         
     
     
-                marker_f91b48786f94d16e93aacbc05cb1b285.setIcon(beautify_icon_d38040adb511f47bdc7a484045c1ec54);
+                {
+                    const element = marker_d6930d2b89cf0fabb73f4f59395a86ed.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_d6930d2b89cf0fabb73f4f59395a86ed.setIcon(beautify_icon_9b2858bb2bcc98544962162ac66a3f4f);
             
     
-            var marker_069a559a9e02ac8c84c64f6a6d0b94a8 = L.marker(
+            var marker_6073d48303a590df89c6ff77b5c55eb8 = L.marker(
                 [46.759, 13.458],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_f5bf55018e4fb1f8ab6d23dd45b4336c = new L.BeautifyIcon.icon(
+            var beautify_icon_149511621c3acaf487d8b31cfbe896c4 = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_069a559a9e02ac8c84c64f6a6d0b94a8.setIcon(beautify_icon_f5bf55018e4fb1f8ab6d23dd45b4336c);
+            marker_6073d48303a590df89c6ff77b5c55eb8.setIcon(beautify_icon_149511621c3acaf487d8b31cfbe896c4);
         
     
-        var popup_223ce19982e2397f5b1c98cf0f9b7d9d = L.popup({
+        var popup_0e0794625a251bd513918c55de58b5f6 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_2f1acdea3407c0d6760b240b2ac21c03 = $(`<div id="html_2f1acdea3407c0d6760b240b2ac21c03" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.759, 13.458" target=”_blank”>Goldeck</a></div>`)[0];
-                popup_223ce19982e2397f5b1c98cf0f9b7d9d.setContent(html_2f1acdea3407c0d6760b240b2ac21c03);
+                var html_02583bf756e5f754ebd03aeeef577e3e = $(`<div id="html_02583bf756e5f754ebd03aeeef577e3e" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.759, 13.458" target=”_blank”>Goldeck</a></div>`)[0];
+                popup_0e0794625a251bd513918c55de58b5f6.setContent(html_02583bf756e5f754ebd03aeeef577e3e);
             
         
 
-        marker_069a559a9e02ac8c84c64f6a6d0b94a8.bindPopup(popup_223ce19982e2397f5b1c98cf0f9b7d9d)
+        marker_6073d48303a590df89c6ff77b5c55eb8.bindPopup(popup_0e0794625a251bd513918c55de58b5f6)
         ;
 
         
     
     
-                marker_069a559a9e02ac8c84c64f6a6d0b94a8.setIcon(beautify_icon_f5bf55018e4fb1f8ab6d23dd45b4336c);
+                {
+                    const element = marker_6073d48303a590df89c6ff77b5c55eb8.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_6073d48303a590df89c6ff77b5c55eb8.setIcon(beautify_icon_149511621c3acaf487d8b31cfbe896c4);
             
     
-            var marker_44d34528bb18056f89cc2c7d2c7dd63c = L.marker(
+            var marker_100224baa591411f3237cc4c00a23ac8 = L.marker(
                 [47.058, 13.615],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_63528db1aeba0f4973a8369242a238cb = new L.BeautifyIcon.icon(
+            var beautify_icon_dda5615cd245bbe1473d0a6d498f44f6 = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
@@ -464,80 +740,98 @@
   "text": "\u2705",
 }
             )
-            marker_44d34528bb18056f89cc2c7d2c7dd63c.setIcon(beautify_icon_63528db1aeba0f4973a8369242a238cb);
+            marker_100224baa591411f3237cc4c00a23ac8.setIcon(beautify_icon_dda5615cd245bbe1473d0a6d498f44f6);
         
     
-        var popup_b0ff03f6f6168330cbf39315cf832d3a = L.popup({
+        var popup_1ae0e2017c4fc233d8f5b732000f77c3 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_d65ac567f436193d2639beb96f02c7b3 = $(`<div id="html_d65ac567f436193d2639beb96f02c7b3" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/47.058, 13.615" target=”_blank”>Katschberg</a></div>`)[0];
-                popup_b0ff03f6f6168330cbf39315cf832d3a.setContent(html_d65ac567f436193d2639beb96f02c7b3);
+                var html_a39ee51fad1baf753ce43002ac8ae40a = $(`<div id="html_a39ee51fad1baf753ce43002ac8ae40a" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/47.058, 13.615" target=”_blank”>Katschberg</a></div>`)[0];
+                popup_1ae0e2017c4fc233d8f5b732000f77c3.setContent(html_a39ee51fad1baf753ce43002ac8ae40a);
             
         
 
-        marker_44d34528bb18056f89cc2c7d2c7dd63c.bindPopup(popup_b0ff03f6f6168330cbf39315cf832d3a)
+        marker_100224baa591411f3237cc4c00a23ac8.bindPopup(popup_1ae0e2017c4fc233d8f5b732000f77c3)
         ;
 
         
     
     
-                marker_44d34528bb18056f89cc2c7d2c7dd63c.setIcon(beautify_icon_63528db1aeba0f4973a8369242a238cb);
+                {
+                    const element = marker_100224baa591411f3237cc4c00a23ac8.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_100224baa591411f3237cc4c00a23ac8.setIcon(beautify_icon_dda5615cd245bbe1473d0a6d498f44f6);
             
     
-            var marker_576a146258536d047975126638e453f2 = L.marker(
+            var marker_6f9d417d165564a4298e30b49620e7c6 = L.marker(
                 [46.812, 13.798],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_f3c8977ecce78892635fec13ad39f415 = new L.BeautifyIcon.icon(
+            var beautify_icon_e33fd10cbccd2070d6fc51211b4a6a1a = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_576a146258536d047975126638e453f2.setIcon(beautify_icon_f3c8977ecce78892635fec13ad39f415);
+            marker_6f9d417d165564a4298e30b49620e7c6.setIcon(beautify_icon_e33fd10cbccd2070d6fc51211b4a6a1a);
         
     
-        var popup_1405e94aab801790da18d2102a8b202f = L.popup({
+        var popup_b2f06e88f06fc15fd23bac249765b87c = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_01d9d93df37dcc358323f3932ca270a5 = $(`<div id="html_01d9d93df37dcc358323f3932ca270a5" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.812, 13.798" target=”_blank”>Bad Kleinkirchheim</a></div>`)[0];
-                popup_1405e94aab801790da18d2102a8b202f.setContent(html_01d9d93df37dcc358323f3932ca270a5);
+                var html_5c3934d75369989f40450886cb1b07ed = $(`<div id="html_5c3934d75369989f40450886cb1b07ed" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.812, 13.798" target=”_blank”>Bad Kleinkirchheim</a></div>`)[0];
+                popup_b2f06e88f06fc15fd23bac249765b87c.setContent(html_5c3934d75369989f40450886cb1b07ed);
             
         
 
-        marker_576a146258536d047975126638e453f2.bindPopup(popup_1405e94aab801790da18d2102a8b202f)
+        marker_6f9d417d165564a4298e30b49620e7c6.bindPopup(popup_b2f06e88f06fc15fd23bac249765b87c)
         ;
 
         
     
     
-                marker_576a146258536d047975126638e453f2.setIcon(beautify_icon_f3c8977ecce78892635fec13ad39f415);
+                {
+                    const element = marker_6f9d417d165564a4298e30b49620e7c6.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_6f9d417d165564a4298e30b49620e7c6.setIcon(beautify_icon_e33fd10cbccd2070d6fc51211b4a6a1a);
             
     
-            var marker_52b261bc70ecc5b1245629125b75ff10 = L.marker(
+            var marker_2e34c1d0d6b8f97ab8705234a398bade = L.marker(
                 [46.914, 13.875],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_c540afc29272b0ef6c7aaf3849c041c2 = new L.BeautifyIcon.icon(
+            var beautify_icon_87857720f0fc0eb922f70656799f4592 = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
@@ -550,295 +844,358 @@
   "text": "\u2705",
 }
             )
-            marker_52b261bc70ecc5b1245629125b75ff10.setIcon(beautify_icon_c540afc29272b0ef6c7aaf3849c041c2);
+            marker_2e34c1d0d6b8f97ab8705234a398bade.setIcon(beautify_icon_87857720f0fc0eb922f70656799f4592);
         
     
-        var popup_41e7ac946a229cf86a7dc7ff1f578cfd = L.popup({
+        var popup_8384ca3a0f06804f0ae2039f91f871a4 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_11165b1e447e60fc1541b464ff9af7ef = $(`<div id="html_11165b1e447e60fc1541b464ff9af7ef" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.914, 13.875" target=”_blank”>Turracher Hoehe</a></div>`)[0];
-                popup_41e7ac946a229cf86a7dc7ff1f578cfd.setContent(html_11165b1e447e60fc1541b464ff9af7ef);
+                var html_1f56231b7cc30dbaec1473e475091188 = $(`<div id="html_1f56231b7cc30dbaec1473e475091188" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.914, 13.875" target=”_blank”>Turracher Hoehe</a></div>`)[0];
+                popup_8384ca3a0f06804f0ae2039f91f871a4.setContent(html_1f56231b7cc30dbaec1473e475091188);
             
         
 
-        marker_52b261bc70ecc5b1245629125b75ff10.bindPopup(popup_41e7ac946a229cf86a7dc7ff1f578cfd)
+        marker_2e34c1d0d6b8f97ab8705234a398bade.bindPopup(popup_8384ca3a0f06804f0ae2039f91f871a4)
         ;
 
         
     
     
-                marker_52b261bc70ecc5b1245629125b75ff10.setIcon(beautify_icon_c540afc29272b0ef6c7aaf3849c041c2);
+                {
+                    const element = marker_2e34c1d0d6b8f97ab8705234a398bade.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_2e34c1d0d6b8f97ab8705234a398bade.setIcon(beautify_icon_87857720f0fc0eb922f70656799f4592);
             
     
-            var marker_7d8480bcdcc6f8f076203e57d9de28a2 = L.marker(
+            var marker_d982ce3acb1fae158a39d0107bf6bf07 = L.marker(
                 [46.693, 13.916],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_e880979c875aed4982080a3f3764404c = new L.BeautifyIcon.icon(
+            var beautify_icon_40514598e5c15b9c61203d9c600b781c = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_7d8480bcdcc6f8f076203e57d9de28a2.setIcon(beautify_icon_e880979c875aed4982080a3f3764404c);
+            marker_d982ce3acb1fae158a39d0107bf6bf07.setIcon(beautify_icon_40514598e5c15b9c61203d9c600b781c);
         
     
-        var popup_e1a43e988376b600eaf898cfc044f633 = L.popup({
+        var popup_69b8bfa2522c1a8fbd07f19e77945b03 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_e93ab63d6dbeebd5453256e635293d1c = $(`<div id="html_e93ab63d6dbeebd5453256e635293d1c" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.693, 13.916" target=”_blank”>Gerlitzen-Alpe</a></div>`)[0];
-                popup_e1a43e988376b600eaf898cfc044f633.setContent(html_e93ab63d6dbeebd5453256e635293d1c);
+                var html_219f25abc07a2ebfcb12c2c8b78cecf6 = $(`<div id="html_219f25abc07a2ebfcb12c2c8b78cecf6" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.693, 13.916" target=”_blank”>Gerlitzen-Alpe</a></div>`)[0];
+                popup_69b8bfa2522c1a8fbd07f19e77945b03.setContent(html_219f25abc07a2ebfcb12c2c8b78cecf6);
             
         
 
-        marker_7d8480bcdcc6f8f076203e57d9de28a2.bindPopup(popup_e1a43e988376b600eaf898cfc044f633)
+        marker_d982ce3acb1fae158a39d0107bf6bf07.bindPopup(popup_69b8bfa2522c1a8fbd07f19e77945b03)
         ;
 
         
     
     
-                marker_7d8480bcdcc6f8f076203e57d9de28a2.setIcon(beautify_icon_e880979c875aed4982080a3f3764404c);
+                {
+                    const element = marker_d982ce3acb1fae158a39d0107bf6bf07.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_d982ce3acb1fae158a39d0107bf6bf07.setIcon(beautify_icon_40514598e5c15b9c61203d9c600b781c);
             
     
-            var marker_7e7903a445131399079be97fed9f263a = L.marker(
+            var marker_159c1ab210ac417bee5cde870a00dc92 = L.marker(
                 [46.263, 13.84],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_d09f8fd0e843c1df5c34ce2302aa8d96 = new L.BeautifyIcon.icon(
+            var beautify_icon_c2df335749e83e04ef6775b0e91c69a1 = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_7e7903a445131399079be97fed9f263a.setIcon(beautify_icon_d09f8fd0e843c1df5c34ce2302aa8d96);
+            marker_159c1ab210ac417bee5cde870a00dc92.setIcon(beautify_icon_c2df335749e83e04ef6775b0e91c69a1);
         
     
-        var popup_0724bf73e9c0fd31b22ff439bd2ea2d1 = L.popup({
+        var popup_7c87a9234b589eff880b7f062557cf48 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_c8e184523b64dd1931ca7a7c964a4224 = $(`<div id="html_c8e184523b64dd1931ca7a7c964a4224" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.263, 13.840" target=”_blank”>Vogel</a></div>`)[0];
-                popup_0724bf73e9c0fd31b22ff439bd2ea2d1.setContent(html_c8e184523b64dd1931ca7a7c964a4224);
+                var html_f578920c5dfa9925d1228d0f149050d9 = $(`<div id="html_f578920c5dfa9925d1228d0f149050d9" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.263, 13.840" target=”_blank”>Vogel</a></div>`)[0];
+                popup_7c87a9234b589eff880b7f062557cf48.setContent(html_f578920c5dfa9925d1228d0f149050d9);
             
         
 
-        marker_7e7903a445131399079be97fed9f263a.bindPopup(popup_0724bf73e9c0fd31b22ff439bd2ea2d1)
+        marker_159c1ab210ac417bee5cde870a00dc92.bindPopup(popup_7c87a9234b589eff880b7f062557cf48)
         ;
 
         
     
     
-                marker_7e7903a445131399079be97fed9f263a.setIcon(beautify_icon_d09f8fd0e843c1df5c34ce2302aa8d96);
+                {
+                    const element = marker_159c1ab210ac417bee5cde870a00dc92.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_159c1ab210ac417bee5cde870a00dc92.setIcon(beautify_icon_c2df335749e83e04ef6775b0e91c69a1);
             
     
-            var marker_caa2f570e4f350739cf819954b1fd0c2 = L.marker(
+            var marker_e51fe48dd75a44e5ecf09dc2a0ffd656 = L.marker(
                 [46.454, 15.333],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_72bc264db1ca2f897f1d6f5344c65975 = new L.BeautifyIcon.icon(
+            var beautify_icon_006c7ad968215e324fcf6368904d11eb = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_caa2f570e4f350739cf819954b1fd0c2.setIcon(beautify_icon_72bc264db1ca2f897f1d6f5344c65975);
+            marker_e51fe48dd75a44e5ecf09dc2a0ffd656.setIcon(beautify_icon_006c7ad968215e324fcf6368904d11eb);
         
     
-        var popup_eff7ef530bc52e996a126b81b4255cdf = L.popup({
+        var popup_16ccd2fa49dc857e7c03e92e2ab7dfa4 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_164eb8a94d36286b4fdb73aad6bf8218 = $(`<div id="html_164eb8a94d36286b4fdb73aad6bf8218" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.454, 15.333" target=”_blank”>Rogla</a></div>`)[0];
-                popup_eff7ef530bc52e996a126b81b4255cdf.setContent(html_164eb8a94d36286b4fdb73aad6bf8218);
+                var html_a135aa87ece1ba85b40cadacf0f19d18 = $(`<div id="html_a135aa87ece1ba85b40cadacf0f19d18" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.454, 15.333" target=”_blank”>Rogla</a></div>`)[0];
+                popup_16ccd2fa49dc857e7c03e92e2ab7dfa4.setContent(html_a135aa87ece1ba85b40cadacf0f19d18);
             
         
 
-        marker_caa2f570e4f350739cf819954b1fd0c2.bindPopup(popup_eff7ef530bc52e996a126b81b4255cdf)
+        marker_e51fe48dd75a44e5ecf09dc2a0ffd656.bindPopup(popup_16ccd2fa49dc857e7c03e92e2ab7dfa4)
         ;
 
         
     
     
-                marker_caa2f570e4f350739cf819954b1fd0c2.setIcon(beautify_icon_72bc264db1ca2f897f1d6f5344c65975);
+                {
+                    const element = marker_e51fe48dd75a44e5ecf09dc2a0ffd656.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_e51fe48dd75a44e5ecf09dc2a0ffd656.setIcon(beautify_icon_006c7ad968215e324fcf6368904d11eb);
             
     
-            var marker_712f5307c1ca996c7b59c0fde21bd3d8 = L.marker(
+            var marker_5be67df207668a6fa9f8c80cccaab128 = L.marker(
                 [46.298, 14.642],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_2944c70c7b3833bd089843299135886d = new L.BeautifyIcon.icon(
+            var beautify_icon_abc37693c68e002f739901e54af4146f = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_712f5307c1ca996c7b59c0fde21bd3d8.setIcon(beautify_icon_2944c70c7b3833bd089843299135886d);
+            marker_5be67df207668a6fa9f8c80cccaab128.setIcon(beautify_icon_abc37693c68e002f739901e54af4146f);
         
     
-        var popup_357bbd8262f48f05c6f49337c296bbe5 = L.popup({
+        var popup_8eced36812bf1f6189365bc71472d690 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_5c7f758dd3ab2d92e40f5eba0f78cf2d = $(`<div id="html_5c7f758dd3ab2d92e40f5eba0f78cf2d" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.298, 14.642" target=”_blank”>Velika Planina</a></div>`)[0];
-                popup_357bbd8262f48f05c6f49337c296bbe5.setContent(html_5c7f758dd3ab2d92e40f5eba0f78cf2d);
+                var html_95dfb33dc64fba4e095a7f710e75d129 = $(`<div id="html_95dfb33dc64fba4e095a7f710e75d129" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.298, 14.642" target=”_blank”>Velika Planina</a></div>`)[0];
+                popup_8eced36812bf1f6189365bc71472d690.setContent(html_95dfb33dc64fba4e095a7f710e75d129);
             
         
 
-        marker_712f5307c1ca996c7b59c0fde21bd3d8.bindPopup(popup_357bbd8262f48f05c6f49337c296bbe5)
+        marker_5be67df207668a6fa9f8c80cccaab128.bindPopup(popup_8eced36812bf1f6189365bc71472d690)
         ;
 
         
     
     
-                marker_712f5307c1ca996c7b59c0fde21bd3d8.setIcon(beautify_icon_2944c70c7b3833bd089843299135886d);
+                {
+                    const element = marker_5be67df207668a6fa9f8c80cccaab128.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_5be67df207668a6fa9f8c80cccaab128.setIcon(beautify_icon_abc37693c68e002f739901e54af4146f);
             
     
-            var marker_7db977b41069a895a2d4f29017666a8e = L.marker(
+            var marker_48ee2236b28653c630ea816063652d49 = L.marker(
                 [46.484, 13.779],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_f4bde3cff77e67becffbfc550849a827 = new L.BeautifyIcon.icon(
+            var beautify_icon_492e3660b933889988c268a5883a314f = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_7db977b41069a895a2d4f29017666a8e.setIcon(beautify_icon_f4bde3cff77e67becffbfc550849a827);
+            marker_48ee2236b28653c630ea816063652d49.setIcon(beautify_icon_492e3660b933889988c268a5883a314f);
         
     
-        var popup_4bb648a5813d2a99d8a7056fe4fa5fd9 = L.popup({
+        var popup_b8fd99d32c08f3f1cdd9850daae76749 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_2e34c625014d21cccd1b98bd84e9d566 = $(`<div id="html_2e34c625014d21cccd1b98bd84e9d566" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.484, 13.779" target=”_blank”>Kranjska-Gora</a></div>`)[0];
-                popup_4bb648a5813d2a99d8a7056fe4fa5fd9.setContent(html_2e34c625014d21cccd1b98bd84e9d566);
+                var html_67d12028f162fc8ccb29e43f24c96fd9 = $(`<div id="html_67d12028f162fc8ccb29e43f24c96fd9" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.484, 13.779" target=”_blank”>Kranjska-Gora</a></div>`)[0];
+                popup_b8fd99d32c08f3f1cdd9850daae76749.setContent(html_67d12028f162fc8ccb29e43f24c96fd9);
             
         
 
-        marker_7db977b41069a895a2d4f29017666a8e.bindPopup(popup_4bb648a5813d2a99d8a7056fe4fa5fd9)
+        marker_48ee2236b28653c630ea816063652d49.bindPopup(popup_b8fd99d32c08f3f1cdd9850daae76749)
         ;
 
         
     
     
-                marker_7db977b41069a895a2d4f29017666a8e.setIcon(beautify_icon_f4bde3cff77e67becffbfc550849a827);
+                {
+                    const element = marker_48ee2236b28653c630ea816063652d49.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_48ee2236b28653c630ea816063652d49.setIcon(beautify_icon_492e3660b933889988c268a5883a314f);
             
     
-            var marker_da56919e0890ddcf8f24251aab1f6e15 = L.marker(
+            var marker_865f7d3c0f07a6267d3b64ee04c6631b = L.marker(
                 [46.296, 14.52],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_ea0dbe4b624591171f282e317d512e9a = new L.BeautifyIcon.icon(
+            var beautify_icon_c3b912eea6df0bae1d1fec821b1c8280 = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_da56919e0890ddcf8f24251aab1f6e15.setIcon(beautify_icon_ea0dbe4b624591171f282e317d512e9a);
+            marker_865f7d3c0f07a6267d3b64ee04c6631b.setIcon(beautify_icon_c3b912eea6df0bae1d1fec821b1c8280);
         
     
-        var popup_65492c3de62dfb62120a7af2edca735c = L.popup({
+        var popup_8a9ceb02a0e815a3b0964fdaea93602f = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_9faa0ab31a46dd633da66192c5ff19ec = $(`<div id="html_9faa0ab31a46dd633da66192c5ff19ec" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.296, 14.520" target=”_blank”>Krvavec</a></div>`)[0];
-                popup_65492c3de62dfb62120a7af2edca735c.setContent(html_9faa0ab31a46dd633da66192c5ff19ec);
+                var html_e0bd9a9b5359ea07e880c4c8c07a408f = $(`<div id="html_e0bd9a9b5359ea07e880c4c8c07a408f" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.296, 14.520" target=”_blank”>Krvavec</a></div>`)[0];
+                popup_8a9ceb02a0e815a3b0964fdaea93602f.setContent(html_e0bd9a9b5359ea07e880c4c8c07a408f);
             
         
 
-        marker_da56919e0890ddcf8f24251aab1f6e15.bindPopup(popup_65492c3de62dfb62120a7af2edca735c)
+        marker_865f7d3c0f07a6267d3b64ee04c6631b.bindPopup(popup_8a9ceb02a0e815a3b0964fdaea93602f)
         ;
 
         
     
     
-                marker_da56919e0890ddcf8f24251aab1f6e15.setIcon(beautify_icon_ea0dbe4b624591171f282e317d512e9a);
+                {
+                    const element = marker_865f7d3c0f07a6267d3b64ee04c6631b.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_865f7d3c0f07a6267d3b64ee04c6631b.setIcon(beautify_icon_c3b912eea6df0bae1d1fec821b1c8280);
             
     
-            var marker_e82b76666f5dc43a59eaff02b2a68a78 = L.marker(
+            var marker_dc6380e04054eb427b0ead15ee5751c6 = L.marker(
                 [45.898, 15.946],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_620c3dd83aa63b56e6582f703316b6c1 = new L.BeautifyIcon.icon(
+            var beautify_icon_9c61609989a7055bef90c4d50db19baa = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
@@ -851,80 +1208,98 @@
   "text": "\u2705",
 }
             )
-            marker_e82b76666f5dc43a59eaff02b2a68a78.setIcon(beautify_icon_620c3dd83aa63b56e6582f703316b6c1);
+            marker_dc6380e04054eb427b0ead15ee5751c6.setIcon(beautify_icon_9c61609989a7055bef90c4d50db19baa);
         
     
-        var popup_0ef088b9109d454117ac6e5f3b1bc541 = L.popup({
+        var popup_a3367a67997a97207812cd01108da9de = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_79368da2094ff6a67cb49fd734958129 = $(`<div id="html_79368da2094ff6a67cb49fd734958129" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/45.898, 15.946" target=”_blank”>Sljeme</a></div>`)[0];
-                popup_0ef088b9109d454117ac6e5f3b1bc541.setContent(html_79368da2094ff6a67cb49fd734958129);
+                var html_2286dbd2ab2c727f32bccfc87e5e52f9 = $(`<div id="html_2286dbd2ab2c727f32bccfc87e5e52f9" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/45.898, 15.946" target=”_blank”>Sljeme</a></div>`)[0];
+                popup_a3367a67997a97207812cd01108da9de.setContent(html_2286dbd2ab2c727f32bccfc87e5e52f9);
             
         
 
-        marker_e82b76666f5dc43a59eaff02b2a68a78.bindPopup(popup_0ef088b9109d454117ac6e5f3b1bc541)
+        marker_dc6380e04054eb427b0ead15ee5751c6.bindPopup(popup_a3367a67997a97207812cd01108da9de)
         ;
 
         
     
     
-                marker_e82b76666f5dc43a59eaff02b2a68a78.setIcon(beautify_icon_620c3dd83aa63b56e6582f703316b6c1);
+                {
+                    const element = marker_dc6380e04054eb427b0ead15ee5751c6.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_dc6380e04054eb427b0ead15ee5751c6.setIcon(beautify_icon_9c61609989a7055bef90c4d50db19baa);
             
     
-            var marker_64d25de27b46cc174e709cddc8eaf49c = L.marker(
+            var marker_9d8b32e20b7ec031b715c730e2fafc62 = L.marker(
                 [46.98, 13.051],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_b867d8fafe2c6114a1425a9a4efd7b60 = new L.BeautifyIcon.icon(
+            var beautify_icon_fdc6b453bd7acee812584dea933652ae = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
-  "borderColor": "#004506",
-  "textColor": "#004506",
+  "borderColor": "#0D00C8",
+  "textColor": "#0D00C8",
   "backgroundColor": "#FFF",
   "innerIconStyle": "",
   "spin": false,
   "isAlphaNumericIcon": true,
-  "text": "\u2705",
+  "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_64d25de27b46cc174e709cddc8eaf49c.setIcon(beautify_icon_b867d8fafe2c6114a1425a9a4efd7b60);
+            marker_9d8b32e20b7ec031b715c730e2fafc62.setIcon(beautify_icon_fdc6b453bd7acee812584dea933652ae);
         
     
-        var popup_d41471ae74b7e2bab3d75cba06053e6a = L.popup({
+        var popup_70a46007760b67f56860e48681b7c7c4 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_7d87603574ed886ec05f3febb9a692f8 = $(`<div id="html_7d87603574ed886ec05f3febb9a692f8" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.980, 13.051" target=”_blank”>Moelltaler Gletscher</a></div>`)[0];
-                popup_d41471ae74b7e2bab3d75cba06053e6a.setContent(html_7d87603574ed886ec05f3febb9a692f8);
+                var html_ca942b911ffd4bcff779f4d3c4b19eec = $(`<div id="html_ca942b911ffd4bcff779f4d3c4b19eec" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/46.980, 13.051" target=”_blank”>Moelltaler Gletscher</a></div>`)[0];
+                popup_70a46007760b67f56860e48681b7c7c4.setContent(html_ca942b911ffd4bcff779f4d3c4b19eec);
             
         
 
-        marker_64d25de27b46cc174e709cddc8eaf49c.bindPopup(popup_d41471ae74b7e2bab3d75cba06053e6a)
+        marker_9d8b32e20b7ec031b715c730e2fafc62.bindPopup(popup_70a46007760b67f56860e48681b7c7c4)
         ;
 
         
     
     
-                marker_64d25de27b46cc174e709cddc8eaf49c.setIcon(beautify_icon_b867d8fafe2c6114a1425a9a4efd7b60);
+                {
+                    const element = marker_9d8b32e20b7ec031b715c730e2fafc62.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_9d8b32e20b7ec031b715c730e2fafc62.setIcon(beautify_icon_fdc6b453bd7acee812584dea933652ae);
             
     
-            var marker_113d96deffdbd87f5c7995f007a874ad = L.marker(
+            var marker_feaad770fbdd651c00264ddb743de9af = L.marker(
                 [45.289, 6.9148],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_f35a4237f487416745aa11d58cf6167d = new L.BeautifyIcon.icon(
+            var beautify_icon_82c22b1740236038dfebc84ac0947418 = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
@@ -937,37 +1312,46 @@
   "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_113d96deffdbd87f5c7995f007a874ad.setIcon(beautify_icon_f35a4237f487416745aa11d58cf6167d);
+            marker_feaad770fbdd651c00264ddb743de9af.setIcon(beautify_icon_82c22b1740236038dfebc84ac0947418);
         
     
-        var popup_64c4cc26bba567a1780efb92e74ac63f = L.popup({
+        var popup_bfd1a83e4cc440ac56d711e473c6ae44 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_b8f0a2b03e975b3766fabe5bb07ad796 = $(`<div id="html_b8f0a2b03e975b3766fabe5bb07ad796" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/45.289, 6.9148" target=”_blank”>Val-Cenis</a></div>`)[0];
-                popup_64c4cc26bba567a1780efb92e74ac63f.setContent(html_b8f0a2b03e975b3766fabe5bb07ad796);
+                var html_810c70129c9fe62073ffcce04587df4f = $(`<div id="html_810c70129c9fe62073ffcce04587df4f" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/45.289, 6.9148" target=”_blank”>Val-Cenis</a></div>`)[0];
+                popup_bfd1a83e4cc440ac56d711e473c6ae44.setContent(html_810c70129c9fe62073ffcce04587df4f);
             
         
 
-        marker_113d96deffdbd87f5c7995f007a874ad.bindPopup(popup_64c4cc26bba567a1780efb92e74ac63f)
+        marker_feaad770fbdd651c00264ddb743de9af.bindPopup(popup_bfd1a83e4cc440ac56d711e473c6ae44)
         ;
 
         
     
     
-                marker_113d96deffdbd87f5c7995f007a874ad.setIcon(beautify_icon_f35a4237f487416745aa11d58cf6167d);
+                {
+                    const element = marker_feaad770fbdd651c00264ddb743de9af.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_feaad770fbdd651c00264ddb743de9af.setIcon(beautify_icon_82c22b1740236038dfebc84ac0947418);
             
     
-            var marker_0b4a8afee3a6ecdfceb46c6cdb9128d0 = L.marker(
+            var marker_eb90d613ba726c24d50dd53d58f89def = L.marker(
                 [45.154, 6.517],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_d34d8445b2b8810174c2e50f30b50b67 = new L.BeautifyIcon.icon(
+            var beautify_icon_113e9f0632b565d6ae9d0f2e379d1557 = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
@@ -980,37 +1364,46 @@
   "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_0b4a8afee3a6ecdfceb46c6cdb9128d0.setIcon(beautify_icon_d34d8445b2b8810174c2e50f30b50b67);
+            marker_eb90d613ba726c24d50dd53d58f89def.setIcon(beautify_icon_113e9f0632b565d6ae9d0f2e379d1557);
         
     
-        var popup_b02616449ad8c6c53d135b76c90af7b3 = L.popup({
+        var popup_5f931a9c068ed03268c0839e75cf2923 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_4d1fb0e73b3e8dc33275e9c99504032a = $(`<div id="html_4d1fb0e73b3e8dc33275e9c99504032a" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/45.154, 6.517" target=”_blank”>Valmeinier</a></div>`)[0];
-                popup_b02616449ad8c6c53d135b76c90af7b3.setContent(html_4d1fb0e73b3e8dc33275e9c99504032a);
+                var html_021b7d35dd2de2986c6a044e51937abd = $(`<div id="html_021b7d35dd2de2986c6a044e51937abd" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/45.154, 6.517" target=”_blank”>Valmeinier</a></div>`)[0];
+                popup_5f931a9c068ed03268c0839e75cf2923.setContent(html_021b7d35dd2de2986c6a044e51937abd);
             
         
 
-        marker_0b4a8afee3a6ecdfceb46c6cdb9128d0.bindPopup(popup_b02616449ad8c6c53d135b76c90af7b3)
+        marker_eb90d613ba726c24d50dd53d58f89def.bindPopup(popup_5f931a9c068ed03268c0839e75cf2923)
         ;
 
         
     
     
-                marker_0b4a8afee3a6ecdfceb46c6cdb9128d0.setIcon(beautify_icon_d34d8445b2b8810174c2e50f30b50b67);
+                {
+                    const element = marker_eb90d613ba726c24d50dd53d58f89def.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_eb90d613ba726c24d50dd53d58f89def.setIcon(beautify_icon_113e9f0632b565d6ae9d0f2e379d1557);
             
     
-            var marker_e5ba1dde6cc57e800fe588a0fb1685b0 = L.marker(
+            var marker_f99c1efd6b9f86568b07d5889849350c = L.marker(
                 [44.932, 6.723],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_853efe1143a3946c43448e1f44551345 = new L.BeautifyIcon.icon(
+            var beautify_icon_c232dc87a2a3b886302ea0953400327e = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
@@ -1023,37 +1416,46 @@
   "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_e5ba1dde6cc57e800fe588a0fb1685b0.setIcon(beautify_icon_853efe1143a3946c43448e1f44551345);
+            marker_f99c1efd6b9f86568b07d5889849350c.setIcon(beautify_icon_c232dc87a2a3b886302ea0953400327e);
         
     
-        var popup_bddcea80622e766c32df85fc730bcc93 = L.popup({
+        var popup_42314df95a861db02f280a715ce5bb4a = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_377ab6d4a0ad4dfd608602929c374ed6 = $(`<div id="html_377ab6d4a0ad4dfd608602929c374ed6" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/44.932, 6.723" target=”_blank”>Montgenevre</a></div>`)[0];
-                popup_bddcea80622e766c32df85fc730bcc93.setContent(html_377ab6d4a0ad4dfd608602929c374ed6);
+                var html_3bc6723dd5cca47c4509bda194b02e56 = $(`<div id="html_3bc6723dd5cca47c4509bda194b02e56" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/44.932, 6.723" target=”_blank”>Montgenevre</a></div>`)[0];
+                popup_42314df95a861db02f280a715ce5bb4a.setContent(html_3bc6723dd5cca47c4509bda194b02e56);
             
         
 
-        marker_e5ba1dde6cc57e800fe588a0fb1685b0.bindPopup(popup_bddcea80622e766c32df85fc730bcc93)
+        marker_f99c1efd6b9f86568b07d5889849350c.bindPopup(popup_42314df95a861db02f280a715ce5bb4a)
         ;
 
         
     
     
-                marker_e5ba1dde6cc57e800fe588a0fb1685b0.setIcon(beautify_icon_853efe1143a3946c43448e1f44551345);
+                {
+                    const element = marker_f99c1efd6b9f86568b07d5889849350c.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_f99c1efd6b9f86568b07d5889849350c.setIcon(beautify_icon_c232dc87a2a3b886302ea0953400327e);
             
     
-            var marker_017216a1599122b959144eb72f4965c0 = L.marker(
+            var marker_a748830403b814dcde14f5fcd0eea1bb = L.marker(
                 [44.806, 6.512],
                 {
 }
-            ).addTo(map_85014cde13de2187f66251de674b3679);
+            ).addTo(map_81a17e595f29df9cdc7aa0b84f87329f);
         
     
-            var beautify_icon_0bddaebe7c5055d6dfcbc1096a1f7c28 = new L.BeautifyIcon.icon(
+            var beautify_icon_7bffbe93de81bc26de3986fdfc118aa1 = new L.BeautifyIcon.icon(
                 {
   "iconShape": "marker",
   "borderWidth": 3,
@@ -1066,27 +1468,36 @@
   "text": "\ud83c\udf27\ufe0f",
 }
             )
-            marker_017216a1599122b959144eb72f4965c0.setIcon(beautify_icon_0bddaebe7c5055d6dfcbc1096a1f7c28);
+            marker_a748830403b814dcde14f5fcd0eea1bb.setIcon(beautify_icon_7bffbe93de81bc26de3986fdfc118aa1);
         
     
-        var popup_db053dc55d230944f9fda35aa70858d0 = L.popup({
+        var popup_291df3c550757e4d58891d87516dc177 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_33cee500d232ffc71009206523bf8f09 = $(`<div id="html_33cee500d232ffc71009206523bf8f09" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/44.806, 6.512" target=”_blank”>Puy-Saint-Vincent</a></div>`)[0];
-                popup_db053dc55d230944f9fda35aa70858d0.setContent(html_33cee500d232ffc71009206523bf8f09);
+                var html_39388e0df9f66773eae3ad453331e94c = $(`<div id="html_39388e0df9f66773eae3ad453331e94c" style="width: 100.0%; height: 100.0%;"><a href="https://www.yr.no/en/forecast/daily-table/44.806, 6.512" target=”_blank”>Puy-Saint-Vincent</a></div>`)[0];
+                popup_291df3c550757e4d58891d87516dc177.setContent(html_39388e0df9f66773eae3ad453331e94c);
             
         
 
-        marker_017216a1599122b959144eb72f4965c0.bindPopup(popup_db053dc55d230944f9fda35aa70858d0)
+        marker_a748830403b814dcde14f5fcd0eea1bb.bindPopup(popup_291df3c550757e4d58891d87516dc177)
         ;
 
         
     
     
-                marker_017216a1599122b959144eb72f4965c0.setIcon(beautify_icon_0bddaebe7c5055d6dfcbc1096a1f7c28);
+                {
+                    const element = marker_a748830403b814dcde14f5fcd0eea1bb.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_a748830403b814dcde14f5fcd0eea1bb.setIcon(beautify_icon_7bffbe93de81bc26de3986fdfc118aa1);
             
 </script>
 </html>
