@@ -11,20 +11,19 @@
     "last_snowfall": "",
     "no_report": true,
     "model_cm": 0,
-    "fetched_at": "2026-11-18T20:24:53.733705"
+    "fetched_at": "2026-11-19T20:28:39.555678"
   },
   "Obertauern": {
     "source": "skiresort",
     "is_open": false,
-    "mountain_cm": null,
-    "base_cm": null,
+    "mountain_cm": 25,
+    "base_cm": 10,
     "mountain_elev": 2313,
     "lifts": "0/26",
     "season_start": "20 Nov 2026",
-    "updated": "18 Nov 2026",
-    "last_snowfall": "",
-    "model_cm": 0,
-    "fetched_at": "2026-11-18T20:24:55.122388"
+    "updated": "19 Nov 2026",
+    "last_snowfall": "14 Nov 2026",
+    "fetched_at": "2026-11-19T20:28:41.169335"
   },
   "Zelenica": {
     "source": "skiresort",
@@ -37,8 +36,8 @@
     "updated": "",
     "last_snowfall": "",
     "no_report": true,
-    "model_cm": 0,
-    "fetched_at": "2026-11-18T20:24:56.186899"
+    "model_cm": 3,
+    "fetched_at": "2026-11-19T20:28:42.962347"
   },
   "Nassfeld": {
     "source": "skiresort",
@@ -48,10 +47,10 @@
     "mountain_elev": 2002,
     "lifts": "0/30",
     "season_start": "4 Dec 2026",
-    "updated": "17 Nov 2026",
+    "updated": "18 Nov 2026",
     "last_snowfall": "",
     "model_cm": 0,
-    "fetched_at": "2026-11-18T20:24:57.409241"
+    "fetched_at": "2026-11-19T20:28:44.401134"
   },
   "Mariborsko-Pohorje": {
     "source": "skiresort",
@@ -61,10 +60,10 @@
     "mountain_elev": 1327,
     "lifts": "0/13",
     "season_start": "4 Dec 2026",
-    "updated": "17 Nov 2026",
+    "updated": "18 Nov 2026",
     "last_snowfall": "",
     "model_cm": 0,
-    "fetched_at": "2026-11-18T20:24:58.930777"
+    "fetched_at": "2026-11-19T20:28:45.768532"
   },
   "Kronplatz": {
     "source": "skiresort",
@@ -74,10 +73,10 @@
     "mountain_elev": 2275,
     "lifts": "0/32",
     "season_start": "28 Nov 2026",
-    "updated": "17 Nov 2026",
+    "updated": "18 Nov 2026",
     "last_snowfall": "",
-    "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:00.640516"
+    "model_cm": 1,
+    "fetched_at": "2026-11-19T20:28:47.071677"
   },
   "Kaunertal": {
     "source": "skiresort",
@@ -87,9 +86,9 @@
     "mountain_elev": 3113,
     "lifts": "5/9",
     "season_start": "17 Oct 2026",
-    "updated": "18 Nov 2026",
+    "updated": "19 Nov 2026",
     "last_snowfall": "13 Nov 2026",
-    "fetched_at": "2026-11-18T20:25:01.804320"
+    "fetched_at": "2026-11-19T20:28:48.503192"
   },
   "Goldeck": {
     "source": "skiresort",
@@ -99,10 +98,10 @@
     "mountain_elev": 2142,
     "lifts": "0/6",
     "season_start": "4 Dec 2026",
-    "updated": "18 Nov 2026",
+    "updated": "19 Nov 2026",
     "last_snowfall": "",
-    "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:02.977212"
+    "model_cm": 5,
+    "fetched_at": "2026-11-19T20:28:49.862166"
   },
   "Katschberg": {
     "source": "skiresort",
@@ -112,10 +111,10 @@
     "mountain_elev": 2220,
     "lifts": "0/17",
     "season_start": "4 Dec 2026",
-    "updated": "17 Nov 2026",
+    "updated": "18 Nov 2026",
     "last_snowfall": "",
-    "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:05.341021"
+    "model_cm": 2,
+    "fetched_at": "2026-11-19T20:28:51.325599"
   },
   "Bad Kleinkirchheim": {
     "source": "skiresort",
@@ -125,23 +124,22 @@
     "mountain_elev": 2055,
     "lifts": "0/24",
     "season_start": "4 Dec 2026",
-    "updated": "17 Nov 2026",
+    "updated": "19 Nov 2026",
     "last_snowfall": "",
     "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:06.728259"
+    "fetched_at": "2026-11-19T20:28:52.758854"
   },
   "Turracher Hoehe": {
     "source": "skiresort",
     "is_open": false,
-    "mountain_cm": null,
-    "base_cm": null,
+    "mountain_cm": 30,
+    "base_cm": 20,
     "mountain_elev": 2205,
     "lifts": "0/15",
     "season_start": "21 Nov 2026",
-    "updated": "18 Nov 2026",
-    "last_snowfall": "",
-    "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:08.091701"
+    "updated": "19 Nov 2026",
+    "last_snowfall": "19 Nov 2026",
+    "fetched_at": "2026-11-19T20:28:54.007037"
   },
   "Gerlitzen-Alpe": {
     "source": "skiresort",
@@ -153,8 +151,8 @@
     "season_start": "4 Dec 2026",
     "updated": "07 Nov 2026",
     "last_snowfall": "",
-    "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:09.341244"
+    "model_cm": 1,
+    "fetched_at": "2026-11-19T20:28:55.227202"
   },
   "Vogel": {
     "source": "skiresort",
@@ -167,7 +165,7 @@
     "updated": "07 Nov 2026",
     "last_snowfall": "",
     "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:10.446135"
+    "fetched_at": "2026-11-19T20:28:56.562326"
   },
   "Rogla": {
     "source": "skiresort",
@@ -177,10 +175,10 @@
     "mountain_elev": 1517,
     "lifts": "0/12",
     "season_start": "5 Dec 2026",
-    "updated": "17 Nov 2026",
+    "updated": "18 Nov 2026",
     "last_snowfall": "",
     "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:11.597691"
+    "fetched_at": "2026-11-19T20:28:57.928388"
   },
   "Velika Planina": {
     "source": "skiresort",
@@ -194,7 +192,7 @@
     "last_snowfall": "",
     "no_report": true,
     "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:14.492333"
+    "fetched_at": "2026-11-19T20:29:00.689797"
   },
   "Kranjska-Gora": {
     "source": "skiresort",
@@ -204,10 +202,10 @@
     "mountain_elev": 1282,
     "lifts": "0/15",
     "season_start": "5 Dec 2026",
-    "updated": "17 Nov 2026",
+    "updated": "18 Nov 2026",
     "last_snowfall": "",
     "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:15.531316"
+    "fetched_at": "2026-11-19T20:29:01.937824"
   },
   "Krvavec": {
     "source": "skiresort",
@@ -220,7 +218,7 @@
     "updated": "07 Nov 2026",
     "last_snowfall": "",
     "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:16.722378"
+    "fetched_at": "2026-11-19T20:29:03.265164"
   },
   "Sljeme": {
     "source": "skiresort",
@@ -234,7 +232,7 @@
     "last_snowfall": "",
     "no_report": true,
     "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:19.872945"
+    "fetched_at": "2026-11-19T20:29:05.837305"
   },
   "Moelltaler Gletscher": {
     "source": "skiresort",
@@ -244,9 +242,9 @@
     "mountain_elev": 3122,
     "lifts": "4/8",
     "season_start": "10 Nov 2026",
-    "updated": "18 Nov 2026",
+    "updated": "19 Nov 2026",
     "last_snowfall": "03 Nov 2026",
-    "fetched_at": "2026-11-18T20:25:21.215583"
+    "fetched_at": "2026-11-19T20:29:07.040372"
   },
   "Val-Cenis": {
     "source": "skiresort",
@@ -256,10 +254,10 @@
     "mountain_elev": 2800,
     "lifts": "0/28",
     "season_start": "13 Dec 2026",
-    "updated": "17 Nov 2026",
+    "updated": "19 Nov 2026",
     "last_snowfall": "",
-    "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:22.393155"
+    "model_cm": 1,
+    "fetched_at": "2026-11-19T20:29:08.264842"
   },
   "Valmeinier": {
     "source": "skiresort",
@@ -269,10 +267,10 @@
     "mountain_elev": 2750,
     "lifts": "0/30",
     "season_start": "5 Dec 2026",
-    "updated": "17 Nov 2026",
+    "updated": "18 Nov 2026",
     "last_snowfall": "",
-    "model_cm": 10,
-    "fetched_at": "2026-11-18T20:25:23.451704"
+    "model_cm": 20,
+    "fetched_at": "2026-11-19T20:29:09.440038"
   },
   "Montgenevre": {
     "source": "skiresort",
@@ -282,10 +280,10 @@
     "mountain_elev": 2789,
     "lifts": "0/69",
     "season_start": "28 Nov 2026",
-    "updated": "17 Nov 2026",
+    "updated": "18 Nov 2026",
     "last_snowfall": "",
-    "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:24.523331"
+    "model_cm": 1,
+    "fetched_at": "2026-11-19T20:29:10.644217"
   },
   "Puy-Saint-Vincent": {
     "source": "skiresort",
@@ -295,9 +293,9 @@
     "mountain_elev": 2677,
     "lifts": "0/11",
     "season_start": "12 Dec 2026",
-    "updated": "18 Nov 2026",
+    "updated": "19 Nov 2026",
     "last_snowfall": "",
     "model_cm": 0,
-    "fetched_at": "2026-11-18T20:25:25.610359"
+    "fetched_at": "2026-11-19T20:29:12.163969"
   }
 }
