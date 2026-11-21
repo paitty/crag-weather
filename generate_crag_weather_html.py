@@ -1045,6 +1045,7 @@ for type_activity in ['skiing', 'climbing']:
             {multipitch_filter_html}
             <br>
             <a class="feature-btn" href="https://github.com/paitty/crag-weather/issues/new?title=Feature+request%3A+&labels=enhancement" target="_blank">💡 Suggest a new feature</a>
+            {'<a class="feature-btn" href="dryness.html">💧 Is the rock dry?</a>' if type_activity == 'climbing' else ''}
         </div>
     </body>
     </html>

@@ -34,6 +34,7 @@ jobs:
       - name: execute py script
         run: |
           python generate_crag_weather_html.py
+          python generate_dryness_html.py || echo "dryness page failed, keeping previous version"
           date > generated.txt
           git config user.name github-actions
           git config user.email github-actions@github.com

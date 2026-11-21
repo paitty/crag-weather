@@ -1,0 +1,30 @@
+{
+  "_help": "Per-crag profile for the dryness model (generate_dryness_html.py). Any crag missing here uses the defaults. aspect: N, NE, E, SE, S, SW, W, NW (which way the main wall faces). rock: limestone, granite, gneiss, conglomerate, sandstone. steep: true if the main routes overhang / are sheltered from direct rain. seeps: true if the crag is known to seep for days after heavy rain. Aspects for Podgorje, Damelj, Kotecnik, Buncove skale, Armesko and Luknja come from plezanje.net ('Usmerjenost').",
+  "_defaults": {
+    "aspect": null,
+    "rock": "limestone",
+    "steep": false,
+    "seeps": false
+  },
+  "Maltatal": {
+    "rock": "gneiss"
+  },
+  "Podgorje": {
+    "aspect": "SE"
+  },
+  "Damelj": {
+    "aspect": "SE"
+  },
+  "Kotecnik": {
+    "aspect": "S"
+  },
+  "Buncove skale": {
+    "aspect": "S"
+  },
+  "Armesko": {
+    "aspect": "SW"
+  },
+  "Luknja": {
+    "aspect": "E"
+  }
+}
